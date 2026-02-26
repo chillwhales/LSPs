@@ -29,30 +29,35 @@ import { isEqual } from "@chillwhales/utils";
  * ```
  */
 export function parseCompactBytesArray(data: Hex, address: Address): Hex[] {
-  const decoded = ERC725.decodeData(
-    [
-      {
-        keyName: "AddressPermissions:AllowedERC725YDataKeys:<address>",
-        dynamicKeyParts: address,
-        value: data,
-      },
-    ],
-    LSP6Schemas,
-  );
+  try {
+    const decoded = ERC725.decodeData(
+      [
+        {
+          keyName: "AddressPermissions:AllowedERC725YDataKeys:<address>",
+          dynamicKeyParts: address,
+          value: data,
+        },
+      ],
+      LSP6Schemas,
+    );
 
-  if (!decoded[0]) return [];
+    if (!decoded[0]) return [];
 
-  const value = decoded[0].value;
+    const value = decoded[0].value;
 
-  if (
-    !value ||
-    !Array.isArray(value) ||
-    !value.every((value) => typeof value === "string")
-  ) {
+    if (
+      !value ||
+      !Array.isArray(value) ||
+      !value.every((value) => typeof value === "string")
+    ) {
+      return [];
+    }
+
+    return value.filter((value): value is Hex => isHex(value));
+  } catch {
+    // If ERC725.decodeData throws (malformed data, null pointers, etc.), return empty array
     return [];
   }
-
-  return value.filter((value): value is Hex => isHex(value));
 }
 
 /**
@@ -81,20 +86,22 @@ export function parseAllowedCalls(data: Hex, address: Address): AllowedCall[] {
       LSP6Schemas,
     );
 
-    if (!decoded[0]) return [];
+    if (!decoded || !decoded[0] || !decoded[0].value) return [];
 
     const value = decoded[0].value;
 
-    if (!value || !Array.isArray(value)) {
+    if (!Array.isArray(value)) {
       return [];
     }
 
-    // Filter and validate each tuple before processing
-    return value
-      .filter((call): call is [Hex, string, Hex, Hex] => {
+    const results: AllowedCall[] = [];
+    
+    // Process each entry with individual error handling
+    for (const call of value) {
+      try {
         // Validate that each entry is an array with exactly 4 elements
         if (!Array.isArray(call) || call.length !== 4) {
-          return false;
+          continue;
         }
 
         const [callTypes, addressValue, interfaceId, functionSelector] = call;
@@ -106,37 +113,37 @@ export function parseAllowedCalls(data: Hex, address: Address): AllowedCall[] {
           typeof interfaceId !== "string" ||
           typeof functionSelector !== "string"
         ) {
-          return false;
+          continue;
         }
 
         // Validate hex values
         if (!isHex(callTypes) || !isHex(interfaceId) || !isHex(functionSelector)) {
-          return false;
+          continue;
         }
 
         // Validate address format (should be a valid hex string that can be parsed by getAddress)
         if (!addressValue.startsWith("0x") || addressValue.length !== 42) {
-          return false;
+          continue;
         }
 
-        return true;
-      })
-      .map((call) => {
-        try {
-          return {
-            callTypes: call[0],
-            address: getAddress(call[1]), // This is now safe because we validated the address format above
-            interfaceId: call[2],
-            functionSelector: call[3],
-          };
-        } catch {
-          // If getAddress still throws (e.g., invalid checksum), skip this entry
-          return null;
-        }
-      })
-      .filter((call): call is AllowedCall => call !== null);
+        // Try to create the AllowedCall object
+        const allowedCall: AllowedCall = {
+          callTypes: callTypes,
+          address: getAddress(addressValue), // This may throw if address is invalid
+          interfaceId: interfaceId,
+          functionSelector: functionSelector,
+        };
+        
+        results.push(allowedCall);
+      } catch {
+        // Skip this entry if any validation or processing fails
+        continue;
+      }
+    }
+
+    return results;
   } catch {
-    // If ERC725.decodeData throws, return empty array
+    // If ERC725.decodeData or any other operation throws, return empty array
     return [];
   }
 }
