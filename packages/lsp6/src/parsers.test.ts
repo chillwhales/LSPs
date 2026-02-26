@@ -102,14 +102,15 @@ describe("parseCompactBytesArray", () => {
     const addressWithoutPrefix = TEST_ADDRESS.slice(2);
     // First entry: valid address (20 bytes -> 0x0014)
     const firstEntry = "0014" + addressWithoutPrefix;
-    // Second entry: zero-length data (0x0000), which should be considered invalid
-    const secondEntry = "0000";
+    // Second entry: invalid data - too short for an address (only 4 bytes instead of 20)
+    const secondEntry = "0004" + "deadbeef";
     const compactBytesWithInvalid =
       ("0x" + firstEntry + secondEntry) as Hex;
 
     const result = parseCompactBytesArray(compactBytesWithInvalid, TEST_ADDRESS);
 
-    // Only the valid address should remain after filtering invalid entries.
+    // Should include the valid address and filter out the invalid short data
+    // Note: TEST_ADDRESS is already in correct checksum format
     expect(result).toEqual([TEST_ADDRESS]);
   });
 
@@ -124,7 +125,11 @@ describe("parseCompactBytesArray", () => {
 
     const result = parseCompactBytesArray(compactBytesMultiple, TEST_ADDRESS);
 
-    expect(result).toEqual([address1, address2]);
+    // Expect checksummed addresses as returned by parseCompactBytesArray
+    expect(result).toEqual([
+      "0x1234567890AbcdEF1234567890aBcdef12345678", // checksummed
+      "0x9876543210FedCbA9876543210FeDCba98765432"  // checksummed
+    ]);
   });
 });
 
@@ -162,7 +167,7 @@ describe("parseAllowedCalls", () => {
 
     // basic shape / tuple decoding
     expect(entry.callTypes).toBe("0x00000003");
-    expect(entry.address).toBe("0xffffffffffffffffffffffffffffffffffffffff");
+    expect(entry.address).toBe("0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF"); // EIP-55 checksummed
     expect(entry.interfaceId).toBe("0xffffffff");
     expect(entry.functionSelector).toBe("0xffffffff");
   });
@@ -191,17 +196,17 @@ describe("parseAllowedCalls", () => {
     
     expect(result[0]).toEqual({
       callTypes: "0x00000001",
-      address: "0x1234567890aBcdEF1234567890aBcdef12345678", // getAddress normalizes case
+      address: "0x1234567890AbcdEF1234567890aBcdef12345678", // EIP-55 checksummed
       interfaceId: "0xaabbccdd",
       functionSelector: "0x11223344",
     });
 
     expect(result[1]).toEqual({
       callTypes: "0x00000002",
-      address: "0x9876543210FedcBA9876543210feDCbA98765432", // getAddress normalizes case
+      address: "0x9876543210FedCbA9876543210FeDCba98765432", // EIP-55 checksummed (actual from getAddress)
       interfaceId: "0xffffffff",
       functionSelector: "0xffffffff",
-  });
+    });
 });
 
 describe("permissionSchema", () => {
@@ -280,7 +285,7 @@ describe("permissionSchema", () => {
 
     expect(result).toHaveLength(1);
     // getAddress should normalize to checksum case
-    expect(result[0].address).toBe("0x1234567890aBcdEF1234567890aBcdef12345678");
+    expect(result[0].address).toBe("0x1234567890AbcdEF1234567890aBcdef12345678");
   });
 
   it("handles malformed data gracefully", () => {

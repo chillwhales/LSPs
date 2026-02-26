@@ -1,8 +1,11 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { getImageUrl, getAssetDisplayName } from "./asset-utils";
-import type { Image } from "@chillwhales/lsp2";
+import { VERIFICATION_METHODS, type Image } from "@chillwhales/lsp2";
 
-const verification = { data: "0x", method: "keccak256(bytes)" as const };
+const verification = {
+  data: "0x",
+  method: VERIFICATION_METHODS.HASH_KECCAK256_BYTES,
+};
 
 function makeImage(url: string, size = 100): Image {
   return { url, width: size, height: size, verification };
@@ -74,10 +77,12 @@ describe("getAssetDisplayName", () => {
   });
 
   it("handles various metadata properties", () => {
-    expect(getAssetDisplayName({ 
-      name: "My Token", 
-      description: "A test token",
-      category: "collectible" 
-    })).toBe("My Token");
+    expect(
+      getAssetDisplayName({
+        name: "My Token",
+        description: "A test token",
+        category: "collectible",
+      }),
+    ).toBe("My Token");
   });
 });
