@@ -95,7 +95,7 @@ export function parseAllowedCalls(data: Hex, address: Address): AllowedCall[] {
     }
 
     const results: AllowedCall[] = [];
-    
+
     // Process each entry with individual error handling
     for (const call of value) {
       try {
@@ -117,7 +117,11 @@ export function parseAllowedCalls(data: Hex, address: Address): AllowedCall[] {
         }
 
         // Validate hex values
-        if (!isHex(callTypes) || !isHex(interfaceId) || !isHex(functionSelector)) {
+        if (
+          !isHex(callTypes) ||
+          !isHex(interfaceId) ||
+          !isHex(functionSelector)
+        ) {
           continue;
         }
 
@@ -133,7 +137,7 @@ export function parseAllowedCalls(data: Hex, address: Address): AllowedCall[] {
           interfaceId: interfaceId,
           functionSelector: functionSelector,
         };
-        
+
         results.push(allowedCall);
       } catch {
         // Skip this entry if any validation or processing fails
