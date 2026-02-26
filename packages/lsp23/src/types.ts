@@ -1,31 +1,27 @@
-import type { Address, Hex } from "viem";
+/**
+ * LSP23 Inferred Types
+ *
+ * TypeScript types inferred from LSP23 Zod schemas.
+ */
+
+import { z } from "zod";
+import {
+  universalProfileInitStructSchema,
+  keyManagerInitStructSchema,
+  deployParamsSchema,
+} from "./schemas";
 
 /**
  * Initialization struct for Universal Profile deployment via LSP23.
  */
-export interface UniversalProfileInitStruct {
-  salt: string;
-  fundingAmount: bigint;
-  implementationContract: Address;
-  initializationCalldata: Hex;
-}
+export type UniversalProfileInitStruct = z.infer<typeof universalProfileInitStructSchema>;
 
 /**
  * Initialization struct for Key Manager deployment via LSP23.
  */
-export interface KeyManagerInitStruct {
-  fundingAmount: bigint;
-  implementationContract: Address;
-  addPrimaryContractAddress: boolean;
-  initializationCalldata: Hex;
-  extraInitializationParams: Hex;
-}
+export type KeyManagerInitStruct = z.infer<typeof keyManagerInitStructSchema>;
 
 /**
  * Complete deployment parameters for LSP23 Linked Contracts Factory.
  */
-export interface DeployParams {
-  universalProfileInitStruct: UniversalProfileInitStruct;
-  keyManagerInitStruct: KeyManagerInitStruct;
-  initializeEncodedBytes: Hex;
-}
+export type DeployParams = z.infer<typeof deployParamsSchema>;

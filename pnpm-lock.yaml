@@ -29,15 +29,18 @@ importers:
 
   packages/lsp23:
     dependencies:
+      '@chillwhales/lsp2':
+        specifier: workspace:*
+        version: link:../lsp2
       '@erc725/erc725.js':
         specifier: ^0.28.2
         version: 0.28.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       '@lukso/universalprofile-contracts':
         specifier: ^0.15.5
         version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
-      viem:
-        specifier: ^2.0.0
-        version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
+      zod:
+        specifier: ^3.24.1
+        version: 3.25.76
     devDependencies:
       typescript:
         specifier: ^5.9.3
@@ -45,6 +48,9 @@ importers:
       unbuild:
         specifier: ^3.6.1
         version: 3.6.1(typescript@5.9.3)
+      viem:
+        specifier: ^2.0.0
+        version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
         specifier: ^4.0.17
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
