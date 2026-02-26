@@ -57,35 +57,27 @@ describe("getImageUrl", () => {
 });
 
 describe("getAssetDisplayName", () => {
-  it("returns tokenName when present", () => {
-    expect(getAssetDisplayName({ tokenName: "MyToken", name: "Asset" })).toBe(
-      "MyToken",
-    );
-  });
-
-  it("falls back to name when no tokenName", () => {
+  it("returns name when present", () => {
     expect(getAssetDisplayName({ name: "Asset" })).toBe("Asset");
   });
 
-  it("falls back to name when tokenName is null", () => {
-    expect(getAssetDisplayName({ tokenName: null, name: "Asset" })).toBe(
-      "Asset",
-    );
-  });
-
-  it("returns Digital Asset when neither present", () => {
+  it("returns Digital Asset when name is not present", () => {
     expect(getAssetDisplayName({})).toBe("Digital Asset");
   });
 
-  it("returns Digital Asset when both null", () => {
-    expect(getAssetDisplayName({ tokenName: null, name: null })).toBe(
-      "Digital Asset",
-    );
+  it("returns Digital Asset when name is null", () => {
+    expect(getAssetDisplayName({ name: null })).toBe("Digital Asset");
   });
 
-  it("prefers tokenName over name", () => {
-    expect(getAssetDisplayName({ tokenName: "Token", name: "Name" })).toBe(
-      "Token",
-    );
+  it("returns Digital Asset when name is empty string", () => {
+    expect(getAssetDisplayName({ name: "" })).toBe("Digital Asset");
+  });
+
+  it("handles various metadata properties", () => {
+    expect(getAssetDisplayName({ 
+      name: "My Token", 
+      description: "A test token",
+      category: "collectible" 
+    })).toBe("My Token");
   });
 });

@@ -48,9 +48,9 @@ export function getImageUrl(options: {
 
 /**
  * Get display name for Digital Asset.
- * Prefers tokenName, falls back to name, then 'Digital Asset'.
+ * Uses name, falls back to 'Digital Asset'.
  *
- * @param metadata - Object with optional name and tokenName fields
+ * @param metadata - Object with optional name field
  * @returns Display name string
  */
 export function getAssetDisplayName(metadata: LSP4Metadata): string {
