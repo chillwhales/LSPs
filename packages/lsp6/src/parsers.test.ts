@@ -111,8 +111,8 @@ describe("parseCompactBytesArray", () => {
     const result = parseCompactBytesArray(compactBytesMultiple, TEST_ADDRESS);
 
     // Both entries are valid hex strings for ERC725Y data keys
-    // parseCompactBytesArray returns the raw hex strings from ERC725 decoding
-    expect(result).toEqual([TEST_ADDRESS.toLowerCase(), "0xdeadbeef"]);
+    // parseCompactBytesArray returns the raw hex strings from ERC725 decoding (preserves original casing)
+    expect(result).toEqual([TEST_ADDRESS, "0xdeadbeef"]);
   });
 
   it("decodes multiple valid entries from a compact bytes array", () => {
