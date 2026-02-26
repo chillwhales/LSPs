@@ -1,0 +1,14 @@
+{
+  "name": "@chillwhales/lsps",
+  "private": true,
+  "description": "LUKSO Standards Packages — TypeScript implementations of LSP standards",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "clean": "pnpm -r clean"
+  },
+  "packageManager": "pnpm@10.28.1",
+  "engines": {
+    "node": ">=18"
+  }
+}
