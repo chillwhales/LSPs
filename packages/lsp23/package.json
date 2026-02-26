@@ -1,0 +1,44 @@
+{
+  "name": "@chillwhales/lsp23",
+  "version": "0.1.0",
+  "description": "LSP23 Linked Contracts Factory — deployment encoding utilities for Universal Profile creation on LUKSO",
+  "author": "b00ste",
+  "license": "MIT",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "build:watch": "unbuild --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@chillwhales/lsp2": "workspace:*",
+    "@erc725/erc725.js": "^0.28.2",
+    "@lukso/universalprofile-contracts": "^0.15.5",
+    "zod": "^3.24.1"
+  },
+  "peerDependencies": {
+    "viem": "^2.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "unbuild": "^3.6.1",
+    "vitest": "^4.0.17",
+    "viem": "^2.0.0"
+  },
+  "packageManager": "pnpm@10.30.2"
+}
