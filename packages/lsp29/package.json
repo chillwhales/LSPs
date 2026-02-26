@@ -1,0 +1,41 @@
+{
+  "name": "@chillwhales/lsp29",
+  "version": "0.1.0",
+  "description": "LSP29 Encrypted Assets standard — schemas, types, constants, and encode/decode utilities for encrypted content on Universal Profiles",
+  "author": "b00ste",
+  "license": "MIT",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "build:watch": "unbuild --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "peerDependencies": {
+    "viem": "^2.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "unbuild": "^3.6.1",
+    "viem": "^2.0.0",
+    "vitest": "^4.0.17"
+  },
+  "packageManager": "pnpm@10.28.1"
+}
