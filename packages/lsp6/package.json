@@ -1,0 +1,40 @@
+{
+  "name": "@chillwhales/lsp6",
+  "version": "0.1.0",
+  "description": "LSP6 Key Manager — permission schemas, key builders, and CompactBytesArray/AllowedCalls parsers",
+  "author": "b00ste",
+  "license": "MIT",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "build:watch": "unbuild --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@erc725/erc725.js": "^0.28.2",
+    "@lukso/lsp6-contracts": "^0.15.5",
+    "viem": "^2.0.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "unbuild": "^3.6.1",
+    "vitest": "^4.0.17"
+  },
+  "packageManager": "pnpm@10.30.2"
+}
