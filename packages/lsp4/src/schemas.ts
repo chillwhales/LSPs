@@ -8,20 +8,13 @@
 
 import { z } from "zod";
 import { assetSchema, imageSchema, linkSchema } from "@chillwhales/lsp2";
-
-/**
- * Helper function to check if a string is numeric
- */
-function isNumeric(value: string): boolean {
-  if (typeof value !== "string") return false;
-  return !isNaN(value as unknown as number) && !isNaN(parseFloat(value));
-}
+import { isNumeric } from "@chillwhales/utils";
 
 /**
  * Asset attribute schema
  * Supports string, number, and boolean attribute types
  */
-export const attributesSchema = z.union([
+export const attributesSchema = z.discriminatedUnion("type", [
   z.object({
     key: z.string({ invalid_type_error: "Invalid value, not a string" }),
     value: z.string({ invalid_type_error: "Invalid value, not a string" }),

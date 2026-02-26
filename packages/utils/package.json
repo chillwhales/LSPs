@@ -1,7 +1,7 @@
 {
-  "name": "@chillwhales/lsp4",
+  "name": "@chillwhales/utils",
   "version": "0.1.0",
-  "description": "LSP4 Digital Asset Metadata — schemas, types, and utilities for LSP7/LSP8 token metadata on LUKSO",
+  "description": "Utility functions",
   "author": "b00ste",
   "license": "MIT",
   "main": "./dist/index.mjs",
@@ -24,11 +24,6 @@
     "clean": "rm -rf dist",
     "test": "vitest run",
     "test:watch": "vitest"
-  },
-  "dependencies": {
-    "@chillwhales/utils": "workspace:*",
-    "@chillwhales/lsp2": "workspace:*",
-    "zod": "^3.24.1"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

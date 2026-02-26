@@ -5,6 +5,7 @@
  */
 
 import type { Image } from "@chillwhales/lsp2";
+import { LSP4Metadata } from "./types";
 
 /**
  * Gets the best image URL from pre-extracted LSP4 Image objects.
@@ -52,9 +53,6 @@ export function getImageUrl(options: {
  * @param metadata - Object with optional name and tokenName fields
  * @returns Display name string
  */
-export function getAssetDisplayName(metadata: {
-  name?: string | null;
-  tokenName?: string | null;
-}): string {
-  return metadata.tokenName || metadata.name || "Digital Asset";
+export function getAssetDisplayName(metadata: LSP4Metadata): string {
+  return metadata.name || "Digital Asset";
 }
