@@ -20,7 +20,7 @@ export function isImageSchema(
 /**
  * Type guard for link schema
  */
-export function isLinksSchema(obj: unknown): obj is z.infer<typeof linkSchema> {
+export function isLinkSchema(obj: unknown): obj is z.infer<typeof linkSchema> {
   const { success } = linkSchema.safeParse(obj);
   return success;
 }
