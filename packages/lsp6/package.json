@@ -1,7 +1,7 @@
 {
-  "name": "@chillwhales/lsp4",
+  "name": "@chillwhales/lsp6",
   "version": "0.1.0",
-  "description": "LSP4 Digital Asset Metadata — schemas, types, and utilities for LSP7/LSP8 token metadata on LUKSO",
+  "description": "LSP6 Key Manager — permission schemas, key builders, and CompactBytesArray/AllowedCalls parsers",
   "author": "b00ste",
   "license": "MIT",
   "main": "./dist/index.mjs",
@@ -26,14 +26,19 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@erc725/erc725.js": "^0.28.2",
     "@chillwhales/utils": "workspace:*",
-    "@chillwhales/lsp2": "workspace:*",
+    "@lukso/lsp6-contracts": "^0.15.5",
     "zod": "^3.24.1"
+  },
+  "peerDependencies": {
+    "viem": "^2.0.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.17",
+    "viem": "^2.0.0"
   },
   "packageManager": "pnpm@10.30.2"
 }
