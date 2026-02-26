@@ -10,8 +10,8 @@
 import ERC725 from "@erc725/erc725.js";
 import LSP6Schemas from "@erc725/erc725.js/schemas/LSP6KeyManager.json";
 import { type Address, getAddress, type Hex, isHex } from "viem";
-
 import type { AllowedCall } from "./types";
+import { isEqual } from "@chillwhales/utils";
 
 /**
  * Parse a CompactBytesArray of bytes values using erc725.js
@@ -69,38 +69,76 @@ export function parseCompactBytesArray(data: Hex, address: Address): Hex[] {
  * ```
  */
 export function parseAllowedCalls(data: Hex, address: Address): AllowedCall[] {
-  const decoded = ERC725.decodeData(
-    [
-      {
-        keyName: "AddressPermissions:AllowedCalls:<address>",
-        dynamicKeyParts: address,
-        value: data,
-      },
-    ],
-    LSP6Schemas,
-  );
+  try {
+    const decoded = ERC725.decodeData(
+      [
+        {
+          keyName: "AddressPermissions:AllowedCalls:<address>",
+          dynamicKeyParts: address,
+          value: data,
+        },
+      ],
+      LSP6Schemas,
+    );
 
-  if (!decoded[0]) return [];
+    if (!decoded[0]) return [];
 
-  const value = decoded[0].value;
+    const value = decoded[0].value;
 
-  if (!value || !Array.isArray(value)) {
+    if (!value || !Array.isArray(value)) {
+      return [];
+    }
+
+    // Filter and validate each tuple before processing
+    return value
+      .filter((call): call is [Hex, string, Hex, Hex] => {
+        // Validate that each entry is an array with exactly 4 elements
+        if (!Array.isArray(call) || call.length !== 4) {
+          return false;
+        }
+
+        const [callTypes, addressValue, interfaceId, functionSelector] = call;
+
+        // Validate each element is a string
+        if (
+          typeof callTypes !== "string" ||
+          typeof addressValue !== "string" ||
+          typeof interfaceId !== "string" ||
+          typeof functionSelector !== "string"
+        ) {
+          return false;
+        }
+
+        // Validate hex values
+        if (!isHex(callTypes) || !isHex(interfaceId) || !isHex(functionSelector)) {
+          return false;
+        }
+
+        // Validate address format (should be a valid hex string that can be parsed by getAddress)
+        if (!addressValue.startsWith("0x") || addressValue.length !== 42) {
+          return false;
+        }
+
+        return true;
+      })
+      .map((call) => {
+        try {
+          return {
+            callTypes: call[0],
+            address: getAddress(call[1]), // This is now safe because we validated the address format above
+            interfaceId: call[2],
+            functionSelector: call[3],
+          };
+        } catch {
+          // If getAddress still throws (e.g., invalid checksum), skip this entry
+          return null;
+        }
+      })
+      .filter((call): call is AllowedCall => call !== null);
+  } catch {
+    // If ERC725.decodeData throws, return empty array
     return [];
   }
-
-  return value.map((call: [Hex, string, Hex, Hex]) => ({
-    callTypes: call[0],
-    address: getAddress(call[1]),
-    interfaceId: call[2],
-    functionSelector: call[3],
-  }));
-}
-
-/**
- * Case-insensitive hex string comparison
- */
-export function isHexEqual(a: Hex, b: Hex) {
-  return a.toLowerCase() === b.toLowerCase();
 }
 
 /**
@@ -147,8 +185,8 @@ export function allowedCallMatches(
   // Address: 0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF means "any address"
   const anyAddress = "0xffffffffffffffffffffffffffffffffffffffff";
   if (
-    !isHexEqual(current.address, anyAddress) &&
-    !isHexEqual(current.address, required.address)
+    !isEqual(current.address, anyAddress) &&
+    !isEqual(current.address, required.address)
   ) {
     return {
       isEqual: false,
@@ -159,16 +197,13 @@ export function allowedCallMatches(
     };
   }
 
-  const excessiveAllowedAddress = !isHexEqual(
-    current.address,
-    required.address,
-  );
+  const excessiveAllowedAddress = !isEqual(current.address, required.address);
 
   // Interface ID: 0xffffffff means "any interface"
   const anyInterface = "0xffffffff";
   if (
-    !isHexEqual(current.interfaceId, anyInterface) &&
-    !isHexEqual(current.interfaceId, required.interfaceId)
+    !isEqual(current.interfaceId, anyInterface) &&
+    !isEqual(current.interfaceId, required.interfaceId)
   ) {
     return {
       isEqual: false,
@@ -179,7 +214,7 @@ export function allowedCallMatches(
     };
   }
 
-  const excessiveAllowedInterfaceId = !isHexEqual(
+  const excessiveAllowedInterfaceId = !isEqual(
     current.interfaceId,
     required.interfaceId,
   );
@@ -187,8 +222,8 @@ export function allowedCallMatches(
   // Function selector: 0xffffffff means "any function"
   const anyFunction = "0xffffffff";
   if (
-    !isHexEqual(current.functionSelector, anyFunction) &&
-    !isHexEqual(current.functionSelector, required.functionSelector)
+    !isEqual(current.functionSelector, anyFunction) &&
+    !isEqual(current.functionSelector, required.functionSelector)
   ) {
     return {
       isEqual: false,
@@ -199,7 +234,7 @@ export function allowedCallMatches(
     };
   }
 
-  const excessiveAllowedFunction = !isHexEqual(
+  const excessiveAllowedFunction = !isEqual(
     current.functionSelector,
     required.functionSelector,
   );

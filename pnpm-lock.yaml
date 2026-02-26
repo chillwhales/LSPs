@@ -22,10 +22,10 @@ importers:
         version: 3.6.1(typescript@5.9.3)
       viem:
         specifier: ^2.0.0
-        version: 2.46.3(typescript@5.9.3)(zod@3.25.76)
+        version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
         specifier: ^4.0.17
-        version: 4.0.18(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/lsp29:
     dependencies:
@@ -63,7 +63,7 @@ importers:
         version: 3.6.1(typescript@5.9.3)
       vitest:
         specifier: ^4.0.17
-        version: 4.0.18(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/lsp30:
     dependencies:
@@ -80,31 +80,6 @@ importers:
       viem:
         specifier: ^2.0.0
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
-      vitest:
-        specifier: ^4.0.17
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
-
-  packages/lsp6:
-    dependencies:
-      '@erc725/erc725.js':
-        specifier: ^0.28.2
-        version: 0.28.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
-      '@lukso/lsp6-contracts':
-        specifier: ^0.15.5
-        version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
-      viem:
-        specifier: ^2.0.0
-        version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
-      zod:
-        specifier: ^3.24.1
-        version: 3.25.76
-    devDependencies:
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
-      unbuild:
-        specifier: ^3.6.1
-        version: 3.6.1(typescript@5.9.3)
       vitest:
         specifier: ^4.0.17
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
@@ -129,7 +104,35 @@ importers:
         version: 3.6.1(typescript@5.9.3)
       vitest:
         specifier: ^4.0.17
-        version: 4.0.18(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+
+  packages/lsp6:
+    dependencies:
+      '@chillwhales/utils':
+        specifier: workspace:*
+        version: link:../utils
+      '@erc725/erc725.js':
+        specifier: ^0.28.2
+        version: 0.28.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
+      '@lukso/lsp6-contracts':
+        specifier: ^0.15.5
+        version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      viem:
+        specifier: ^2.0.0
+        version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
+      zod:
+        specifier: ^3.24.1
+        version: 3.25.76
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      unbuild:
+        specifier: ^3.6.1
+        version: 3.6.1(typescript@5.9.3)
+      vitest:
+        specifier: ^4.0.17
+        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/utils:
     devDependencies:
@@ -141,7 +144,7 @@ importers:
         version: 3.6.1(typescript@5.9.3)
       vitest:
         specifier: ^4.0.17
-        version: 4.0.18(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
 packages:
 
@@ -3999,7 +4002,7 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.2.0
       '@types/keyv': 3.1.4
-      '@types/node': 12.20.55
+      '@types/node': 25.3.1
       '@types/responselike': 1.0.3
 
   '@types/chai@5.2.3':
@@ -4019,7 +4022,7 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 12.20.55
+      '@types/node': 25.3.1
 
   '@types/node@12.20.55': {}
 
@@ -4035,7 +4038,7 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 12.20.55
+      '@types/node': 25.3.1
 
   '@types/secp256k1@4.0.7':
     dependencies:

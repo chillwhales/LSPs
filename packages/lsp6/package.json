@@ -27,14 +27,18 @@
   },
   "dependencies": {
     "@erc725/erc725.js": "^0.28.2",
+    "@chillwhales/utils": "workspace:*",
     "@lukso/lsp6-contracts": "^0.15.5",
-    "viem": "^2.0.0",
     "zod": "^3.24.1"
+  },
+  "peerDependencies": {
+    "viem": "^2.0.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.17",
+    "viem": "^2.0.0"
   },
   "packageManager": "pnpm@10.30.2"
 }
