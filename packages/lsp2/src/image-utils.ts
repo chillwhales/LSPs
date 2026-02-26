@@ -33,7 +33,7 @@ export function findBestImage(
     return undefined;
   }
 
-  if (options?.width && options?.height) {
+  if (options?.width != null && options?.height != null) {
     return findClosestImage(images, options.width, options.height) ?? undefined;
   }
 
