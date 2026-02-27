@@ -39,21 +39,20 @@
 ## Code Style
 
 **Formatting:**
-- EditorConfig enforced (`.editorconfig`):
-  - 2-space indentation (spaces, not tabs)
+- Biome v2 enforced (`biome.json` at root):
+  - Tab indentation (Biome default)
+  - 80-character line width (Biome default)
+  - Double quotes for strings (Biome default)
+  - Trailing commas everywhere (Biome default)
   - LF line endings
-  - UTF-8 charset
-  - Trailing whitespace trimmed
-  - Final newline inserted
-- No Prettier or ESLint configured — formatting relies on EditorConfig only
-- Both single quotes and double quotes are used across the codebase (no enforced rule)
-  - `packages/lsp30`, `packages/lsp29`: single quotes in source files
-  - `packages/lsp2`, `packages/lsp6`, `packages/lsp23`: double quotes in source files
+- EditorConfig (`.editorconfig`) aligned with Biome: `indent_style = tab`
+- Scripts: `pnpm check` (lint+format check), `pnpm check:fix` (auto-fix)
 
 **Linting:**
-- No ESLint, Biome, or other linter configured
+- Biome v2 with `recommended` rule set — single root `biome.json` for all packages
+- `noExplicitAny` disabled in test files (`*.test.ts`) — `as any` is standard guard test pattern
 - TypeScript strict mode enabled (`"strict": true` in `tsconfig.base.json`)
-- Relies on TypeScript compiler for type checking
+- Zero warnings policy — all lint violations are errors
 
 ## Import Organization
 

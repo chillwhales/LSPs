@@ -12,9 +12,9 @@
  * LSP2 VerifiableURI verification methods
  */
 export enum VERIFICATION_METHODS {
-  HASH_KECCAK256_UTF8 = "keccak256(utf8)",
-  HASH_KECCAK256_BYTES = "keccak256(bytes)",
-  ECDSA = "ecdsa",
+	HASH_KECCAK256_UTF8 = "keccak256(utf8)",
+	HASH_KECCAK256_BYTES = "keccak256(bytes)",
+	ECDSA = "ecdsa",
 }
 
 // ============================================================================

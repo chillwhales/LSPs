@@ -7,7 +7,7 @@
  * @see LSP-30-MultiStorageURI.md for full specification
  */
 
-import type { Lsp30Backend, Lsp30Entry } from './types';
+import type { Lsp30Backend, Lsp30Entry } from "./types";
 
 // ============================================================================
 // Backend Selection
@@ -38,39 +38,39 @@ import type { Lsp30Backend, Lsp30Entry } from './types';
  * ```
  */
 export function selectBackend(
-  entries: Lsp30Entry[],
-  preference?: Lsp30Backend | Lsp30Backend[],
+	entries: Lsp30Entry[],
+	preference?: Lsp30Backend | Lsp30Backend[],
 ): Lsp30Entry[] {
-  // No preference or empty array → return copy in original order
-  if (!preference || (Array.isArray(preference) && preference.length === 0)) {
-    return [...entries];
-  }
+	// No preference or empty array → return copy in original order
+	if (!preference || (Array.isArray(preference) && preference.length === 0)) {
+		return [...entries];
+	}
 
-  // Normalize to array
-  const prefs = typeof preference === 'string' ? [preference] : preference;
+	// Normalize to array
+	const prefs = typeof preference === "string" ? [preference] : preference;
 
-  // Track which entries have been placed by their index
-  const placed = new Set<number>();
-  const result: Lsp30Entry[] = [];
+	// Track which entries have been placed by their index
+	const placed = new Set<number>();
+	const result: Lsp30Entry[] = [];
 
-  // Add entries in preference order
-  for (const pref of prefs) {
-    for (let i = 0; i < entries.length; i++) {
-      if (!placed.has(i) && entries[i].backend === pref) {
-        result.push(entries[i]);
-        placed.add(i);
-      }
-    }
-  }
+	// Add entries in preference order
+	for (const pref of prefs) {
+		for (let i = 0; i < entries.length; i++) {
+			if (!placed.has(i) && entries[i].backend === pref) {
+				result.push(entries[i]);
+				placed.add(i);
+			}
+		}
+	}
 
-  // Append remaining entries in original order
-  for (let i = 0; i < entries.length; i++) {
-    if (!placed.has(i)) {
-      result.push(entries[i]);
-    }
-  }
+	// Append remaining entries in original order
+	for (let i = 0; i < entries.length; i++) {
+		if (!placed.has(i)) {
+			result.push(entries[i]);
+		}
+	}
 
-  return result;
+	return result;
 }
 
 // ============================================================================
@@ -96,19 +96,21 @@ export function selectBackend(
  * ```
  */
 export function resolveUrl(entry: Lsp30Entry): string {
-  switch (entry.backend) {
-    case 'ipfs':
-      return `ipfs://${entry.cid}`;
-    case 's3':
-      return `https://${entry.bucket}.s3.${entry.region}.amazonaws.com/${encodeURIComponent(entry.key)}`;
-    case 'lumera':
-      return `lumera://${entry.actionId}`;
-    case 'arweave':
-      return `https://arweave.net/${entry.transactionId}`;
-    default: {
-      // Exhaustive check — TypeScript will error if a backend is added without handling
-      const _exhaustive: never = entry;
-      throw new Error(`Unknown backend: ${(_exhaustive as Lsp30Entry).backend}`);
-    }
-  }
+	switch (entry.backend) {
+		case "ipfs":
+			return `ipfs://${entry.cid}`;
+		case "s3":
+			return `https://${entry.bucket}.s3.${entry.region}.amazonaws.com/${encodeURIComponent(entry.key)}`;
+		case "lumera":
+			return `lumera://${entry.actionId}`;
+		case "arweave":
+			return `https://arweave.net/${entry.transactionId}`;
+		default: {
+			// Exhaustive check — TypeScript will error if a backend is added without handling
+			const _exhaustive: never = entry;
+			throw new Error(
+				`Unknown backend: ${(_exhaustive as Lsp30Entry).backend}`,
+			);
+		}
+	}
 }

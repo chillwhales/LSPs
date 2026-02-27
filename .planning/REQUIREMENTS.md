@@ -17,13 +17,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Code Quality
 
-- [ ] **QUAL-01**: All packages are linted by Biome from a single root configuration
-- [ ] **QUAL-02**: All packages are formatted by Biome from a single root configuration
-- [ ] **QUAL-03**: Pre-commit hook runs biome check before every commit
+- [x] **QUAL-01**: All packages are linted by Biome from a single root configuration
+- [x] **QUAL-02**: All packages are formatted by Biome from a single root configuration
+- [x] **QUAL-03**: Pre-commit hook runs biome check before every commit
 - [ ] **QUAL-04**: Unused dependencies and exports are detected via knip
 - [ ] **QUAL-05**: Monorepo package consistency is validated via sherif
 - [ ] **QUAL-06**: Only pnpm can be used as package manager (enforced via preinstall)
-- [ ] **QUAL-07**: All commits follow conventional commit format, enforced via commitlint
+- [x] **QUAL-07**: All commits follow conventional commit format, enforced via commitlint
 
 ### CI Pipeline
 
@@ -90,13 +90,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BUILD-03 | Phase 1 | Complete |
 | BUILD-04 | Phase 1 | Complete |
 | BUILD-05 | Phase 3 | Pending |
-| QUAL-01 | Phase 2 | Pending |
-| QUAL-02 | Phase 2 | Pending |
-| QUAL-03 | Phase 2 | Pending |
+| QUAL-01 | Phase 2 | Complete |
+| QUAL-02 | Phase 2 | Complete |
+| QUAL-03 | Phase 2 | Complete |
 | QUAL-04 | Phase 3 | Pending |
 | QUAL-05 | Phase 3 | Pending |
 | QUAL-06 | Phase 3 | Pending |
-| QUAL-07 | Phase 2 | Pending |
+| QUAL-07 | Phase 2 | Complete |
 | CI-01 | Phase 5 | Pending |
 | CI-02 | Phase 5 | Pending |
 | CI-03 | Phase 5 | Pending |
@@ -124,4 +124,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-27*
-*Last updated: 2026-02-27 — Phase 1 complete (BUILD-01..04 done)*
+*Last updated: 2026-02-27 — Phase 2 complete (QUAL-01, QUAL-02, QUAL-03, QUAL-07 done)*

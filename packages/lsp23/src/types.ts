@@ -4,18 +4,18 @@
  * TypeScript types inferred from LSP23 Zod schemas.
  */
 
-import { z } from "zod";
-import {
-  universalProfileInitStructSchema,
-  keyManagerInitStructSchema,
-  deployParamsSchema,
+import type { z } from "zod";
+import type {
+	deployParamsSchema,
+	keyManagerInitStructSchema,
+	universalProfileInitStructSchema,
 } from "./schemas";
 
 /**
  * Initialization struct for Universal Profile deployment via LSP23.
  */
 export type UniversalProfileInitStruct = z.infer<
-  typeof universalProfileInitStructSchema
+	typeof universalProfileInitStructSchema
 >;
 
 /**

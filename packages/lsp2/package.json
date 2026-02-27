@@ -1,42 +1,42 @@
 {
-  "name": "@chillwhales/lsp2",
-  "version": "0.1.0",
-  "description": "LSP2 ERC725Y JSON Schema — shared primitives, VerifiableURI encoding/decoding, and image utilities",
-  "author": "b00ste",
-  "license": "MIT",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "files": [
-    "dist",
-    "package.json"
-  ],
-  "scripts": {
-    "build": "unbuild",
-    "build:watch": "unbuild --watch",
-    "clean": "rm -rf dist",
-    "test": "vitest run",
-    "test:watch": "vitest"
-  },
-  "dependencies": {
-    "zod": "catalog:"
-  },
-  "peerDependencies": {
-    "viem": "catalog:"
-  },
-  "devDependencies": {
-    "@chillwhales/config": "workspace:*",
-    "typescript": "catalog:",
-    "unbuild": "catalog:",
-    "viem": "catalog:",
-    "vitest": "catalog:"
-  },
-  "packageManager": "pnpm@10.30.2"
+	"name": "@chillwhales/lsp2",
+	"version": "0.1.0",
+	"description": "LSP2 ERC725Y JSON Schema — shared primitives, VerifiableURI encoding/decoding, and image utilities",
+	"author": "b00ste",
+	"license": "MIT",
+	"main": "./dist/index.mjs",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"scripts": {
+		"build": "unbuild",
+		"build:watch": "unbuild --watch",
+		"clean": "rm -rf dist",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"zod": "catalog:"
+	},
+	"peerDependencies": {
+		"viem": "catalog:"
+	},
+	"devDependencies": {
+		"@chillwhales/config": "workspace:*",
+		"typescript": "catalog:",
+		"unbuild": "catalog:",
+		"viem": "catalog:",
+		"vitest": "catalog:"
+	},
+	"packageManager": "pnpm@10.30.2"
 }

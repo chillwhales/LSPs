@@ -7,7 +7,7 @@
  * @see https://docs.lukso.tech/standards/universal-profile/lsp3-profile-metadata
  */
 
+export { isLsp3ProfileSchema } from "./guards";
+export { getProfileDisplayName, getProfileImageUrl } from "./profile-utils";
 export { lsp3ProfileSchema } from "./schemas";
 export type { LSP3Profile } from "./types";
-export { isLsp3ProfileSchema } from "./guards";
-export { getProfileImageUrl, getProfileDisplayName } from "./profile-utils";

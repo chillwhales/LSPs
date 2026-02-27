@@ -23,7 +23,7 @@ import { LSP29DataKeys, MAPPING_SEPARATOR } from "./constants";
  * Computes the first 20 bytes of a keccak256 hash for use as mapping key suffix
  */
 function hashToFirst20Bytes(data: Hex): Hex {
-  return slice(keccak256(data), 0, 20);
+	return slice(keccak256(data), 0, 20);
 }
 
 // ============================================================================
@@ -54,15 +54,15 @@ function hashToFirst20Bytes(data: Hex): Hex {
  * ```
  */
 export function computeLsp29ArrayIndexKey(index: number | bigint): Hex {
-  const indexBigInt = BigInt(index);
-  if (indexBigInt < BigInt(0)) {
-    throw new Error("Index must be a non-negative integer");
-  }
+	const indexBigInt = BigInt(index);
+	if (indexBigInt < BigInt(0)) {
+		throw new Error("Index must be a non-negative integer");
+	}
 
-  return concat([
-    LSP29DataKeys["LSP29EncryptedAssets[]"].index,
-    toHex(indexBigInt, { size: 16 }),
-  ]);
+	return concat([
+		LSP29DataKeys["LSP29EncryptedAssets[]"].index,
+		toHex(indexBigInt, { size: 16 }),
+	]);
 }
 
 // ============================================================================
@@ -87,11 +87,11 @@ export function computeLsp29ArrayIndexKey(index: number | bigint): Hex {
  * ```
  */
 export function computeLsp29MapKey(contentId: string): Hex {
-  return concat([
-    LSP29DataKeys.LSP29EncryptedAssetsMap,
-    MAPPING_SEPARATOR,
-    hashToFirst20Bytes(toHex(contentId)),
-  ]);
+	return concat([
+		LSP29DataKeys.LSP29EncryptedAssetsMap,
+		MAPPING_SEPARATOR,
+		hashToFirst20Bytes(toHex(contentId)),
+	]);
 }
 
 /**
@@ -114,20 +114,20 @@ export function computeLsp29MapKey(contentId: string): Hex {
  * ```
  */
 export function computeLsp29MapKeyVersioned(
-  contentId: string,
-  revision: number,
+	contentId: string,
+	revision: number,
 ): Hex {
-  if (!Number.isInteger(revision) || revision < 1) {
-    throw new Error("Revision must be a positive integer (1 or greater)");
-  }
+	if (!Number.isInteger(revision) || revision < 1) {
+		throw new Error("Revision must be a positive integer (1 or greater)");
+	}
 
-  const packed = encodePacked(["string", "uint32"], [contentId, revision]);
+	const packed = encodePacked(["string", "uint32"], [contentId, revision]);
 
-  return concat([
-    LSP29DataKeys.LSP29EncryptedAssetsMap,
-    MAPPING_SEPARATOR,
-    hashToFirst20Bytes(packed),
-  ]);
+	return concat([
+		LSP29DataKeys.LSP29EncryptedAssetsMap,
+		MAPPING_SEPARATOR,
+		hashToFirst20Bytes(packed),
+	]);
 }
 
 /**
@@ -147,9 +147,9 @@ export function computeLsp29MapKeyVersioned(
  * ```
  */
 export function computeLsp29RevisionCountKey(contentId: string): Hex {
-  return concat([
-    LSP29DataKeys.LSP29EncryptedAssetRevisionCount,
-    MAPPING_SEPARATOR,
-    hashToFirst20Bytes(toHex(contentId)),
-  ]);
+	return concat([
+		LSP29DataKeys.LSP29EncryptedAssetRevisionCount,
+		MAPPING_SEPARATOR,
+		hashToFirst20Bytes(toHex(contentId)),
+	]);
 }

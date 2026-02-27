@@ -1,45 +1,45 @@
 {
-  "name": "@chillwhales/lsp6",
-  "version": "0.1.0",
-  "description": "LSP6 Key Manager — permission schemas, key builders, and CompactBytesArray/AllowedCalls parsers",
-  "author": "b00ste",
-  "license": "MIT",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "files": [
-    "dist",
-    "package.json"
-  ],
-  "scripts": {
-    "build": "unbuild",
-    "build:watch": "unbuild --watch",
-    "clean": "rm -rf dist",
-    "test": "vitest run",
-    "test:watch": "vitest"
-  },
-  "dependencies": {
-    "@erc725/erc725.js": "catalog:",
-    "@chillwhales/utils": "workspace:*",
-    "@lukso/lsp6-contracts": "catalog:",
-    "zod": "catalog:"
-  },
-  "peerDependencies": {
-    "viem": "catalog:"
-  },
-  "devDependencies": {
-    "@chillwhales/config": "workspace:*",
-    "typescript": "catalog:",
-    "unbuild": "catalog:",
-    "viem": "catalog:",
-    "vitest": "catalog:"
-  },
-  "packageManager": "pnpm@10.30.2"
+	"name": "@chillwhales/lsp6",
+	"version": "0.1.0",
+	"description": "LSP6 Key Manager — permission schemas, key builders, and CompactBytesArray/AllowedCalls parsers",
+	"author": "b00ste",
+	"license": "MIT",
+	"main": "./dist/index.mjs",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"scripts": {
+		"build": "unbuild",
+		"build:watch": "unbuild --watch",
+		"clean": "rm -rf dist",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"@erc725/erc725.js": "catalog:",
+		"@chillwhales/utils": "workspace:*",
+		"@lukso/lsp6-contracts": "catalog:",
+		"zod": "catalog:"
+	},
+	"peerDependencies": {
+		"viem": "catalog:"
+	},
+	"devDependencies": {
+		"@chillwhales/config": "workspace:*",
+		"typescript": "catalog:",
+		"unbuild": "catalog:",
+		"viem": "catalog:",
+		"vitest": "catalog:"
+	},
+	"packageManager": "pnpm@10.30.2"
 }

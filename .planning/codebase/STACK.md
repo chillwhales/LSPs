@@ -47,6 +47,7 @@
 - `@lukso/universalprofile-contracts` ^0.15.5 (installed: 0.15.5) - Universal Profile ABI (`universalProfileInitAbi`). Used in `lsp23`.
 
 **Dev-only:**
+- `@biomejs/biome` ^2.4.4 - Unified linter and formatter (replaces ESLint + Prettier)
 - `typescript` ^5.9.3 - Type checking (not used for build output, unbuild handles compilation)
 - `unbuild` ^3.6.1 - Build tool
 - `vitest` ^4.0.17 - Test runner
@@ -89,8 +90,12 @@ lsp30 (standalone, no internal deps)
 - Output formats: ESM + CJS with TypeScript declarations
 - Entry point: `src/index` (always)
 
+**Linting & Formatting:**
+- `biome.json` — Single root config for all packages. Recommended rules, VCS integration, noExplicitAny off for test files.
+- Scripts: `pnpm check` (lint+format check), `pnpm check:fix` (auto-fix)
+
 **Editor:**
-- `.editorconfig` — 2 spaces, LF line endings, UTF-8, trim trailing whitespace, final newline
+- `.editorconfig` — Tabs, LF line endings, UTF-8, trim trailing whitespace, final newline
 
 **Package Export Map:**
 Each package uses conditional exports in `package.json`:

@@ -8,8 +8,8 @@
  * @see LSP-29-EncryptedAssets.md for full specification
  */
 
-import { z } from "zod";
 import { addressSchema, imageSchema } from "@chillwhales/lsp2";
+import { z } from "zod";
 import { LSP29_METHODS, LSP29_PROVIDERS } from "./constants";
 
 // ============================================================================
@@ -21,32 +21,32 @@ import { LSP29_METHODS, LSP29_PROVIDERS } from "./constants";
  * Technical metadata about the encrypted file
  */
 export const lsp29FileSchema = z.object({
-  /** MIME type of the original file (e.g., "video/mp4") */
-  type: z.string({
-    required_error: "File type is required",
-    invalid_type_error: "File type must be a string",
-  }),
-  /** Original filename */
-  name: z.string({
-    required_error: "File name is required",
-    invalid_type_error: "File name must be a string",
-  }),
-  /** Original file size in bytes (before encryption) */
-  size: z.number({
-    required_error: "File size is required",
-    invalid_type_error: "File size must be a number",
-  }),
-  /** Unix timestamp (ms) of file's last modification */
-  lastModified: z
-    .number({
-      invalid_type_error: "File lastModified must be a number",
-    })
-    .optional(),
-  /** Hash of the original file content (SHA-256, hex) */
-  hash: z.string({
-    required_error: "File hash is required",
-    invalid_type_error: "File hash must be a string",
-  }),
+	/** MIME type of the original file (e.g., "video/mp4") */
+	type: z.string({
+		required_error: "File type is required",
+		invalid_type_error: "File type must be a string",
+	}),
+	/** Original filename */
+	name: z.string({
+		required_error: "File name is required",
+		invalid_type_error: "File name must be a string",
+	}),
+	/** Original file size in bytes (before encryption) */
+	size: z.number({
+		required_error: "File size is required",
+		invalid_type_error: "File size must be a number",
+	}),
+	/** Unix timestamp (ms) of file's last modification */
+	lastModified: z
+		.number({
+			invalid_type_error: "File lastModified must be a number",
+		})
+		.optional(),
+	/** Hash of the original file content (SHA-256, hex) */
+	hash: z.string({
+		required_error: "File hash is required",
+		invalid_type_error: "File hash must be a string",
+	}),
 });
 
 // ============================================================================
@@ -58,7 +58,7 @@ export const lsp29FileSchema = z.object({
  * Array of Content Identifiers (CIDs) for encrypted content chunks
  */
 export const lsp29IpfsChunksSchema = z.object({
-  cids: z.array(z.string().min(1)).min(1),
+	cids: z.array(z.string().min(1)).min(1),
 });
 
 /**
@@ -66,7 +66,7 @@ export const lsp29IpfsChunksSchema = z.object({
  * Array of Cascade action IDs for encrypted content chunks
  */
 export const lsp29LumeraChunksSchema = z.object({
-  actionIds: z.array(z.string().min(1)).min(1),
+	actionIds: z.array(z.string().min(1)).min(1),
 });
 
 /**
@@ -74,9 +74,9 @@ export const lsp29LumeraChunksSchema = z.object({
  * Array of S3 object keys plus bucket and region identifiers
  */
 export const lsp29S3ChunksSchema = z.object({
-  keys: z.array(z.string().min(1)).min(1),
-  bucket: z.string().min(1),
-  region: z.string().min(1),
+	keys: z.array(z.string().min(1)).min(1),
+	bucket: z.string().min(1),
+	region: z.string().min(1),
 });
 
 /**
@@ -84,7 +84,7 @@ export const lsp29S3ChunksSchema = z.object({
  * Array of Arweave transaction IDs for encrypted content chunks
  */
 export const lsp29ArweaveChunksSchema = z.object({
-  transactionIds: z.array(z.string().min(1)).min(1),
+	transactionIds: z.array(z.string().min(1)).min(1),
 });
 
 // ============================================================================
@@ -109,23 +109,23 @@ export const lsp29ArweaveChunksSchema = z.object({
  * ```
  */
 export const lsp29ChunksSchema = z
-  .object({
-    /** IPFS chunk references */
-    ipfs: lsp29IpfsChunksSchema.optional(),
-    /** Lumera/Pastel Cascade chunk references */
-    lumera: lsp29LumeraChunksSchema.optional(),
-    /** S3 chunk references */
-    s3: lsp29S3ChunksSchema.optional(),
-    /** Arweave chunk references */
-    arweave: lsp29ArweaveChunksSchema.optional(),
-    /** Initialization vector for symmetric encryption (base64) */
-    iv: z.string().min(1),
-    /** Total size of encrypted content in bytes */
-    totalSize: z.number().positive(),
-  })
-  .refine((data) => data.ipfs || data.lumera || data.s3 || data.arweave, {
-    message: "At least one storage backend must have chunk entries",
-  });
+	.object({
+		/** IPFS chunk references */
+		ipfs: lsp29IpfsChunksSchema.optional(),
+		/** Lumera/Pastel Cascade chunk references */
+		lumera: lsp29LumeraChunksSchema.optional(),
+		/** S3 chunk references */
+		s3: lsp29S3ChunksSchema.optional(),
+		/** Arweave chunk references */
+		arweave: lsp29ArweaveChunksSchema.optional(),
+		/** Initialization vector for symmetric encryption (base64) */
+		iv: z.string().min(1),
+		/** Total size of encrypted content in bytes */
+		totalSize: z.number().positive(),
+	})
+	.refine((data) => data.ipfs || data.lumera || data.s3 || data.arweave, {
+		message: "At least one storage backend must have chunk entries",
+	});
 
 // ============================================================================
 // Encryption Params Schemas (Discriminated Union)
@@ -136,17 +136,17 @@ export const lsp29ChunksSchema = z
  * Require holding a minimum balance of LSP7 tokens or LSP8 NFTs
  */
 export const lsp29DigitalAssetBalanceParamsSchema = z.object({
-  method: z.literal("digital-asset-balance"),
-  /** Digital asset contract address (LSP7 or LSP8) */
-  tokenAddress: addressSchema,
-  /** Required balance as string (for BigInt compatibility), must be > 0 */
-  requiredBalance: z.string().refine((val) => {
-    try {
-      return BigInt(val) > 0n;
-    } catch {
-      return false;
-    }
-  }, "Required balance must be a positive integer string"),
+	method: z.literal("digital-asset-balance"),
+	/** Digital asset contract address (LSP7 or LSP8) */
+	tokenAddress: addressSchema,
+	/** Required balance as string (for BigInt compatibility), must be > 0 */
+	requiredBalance: z.string().refine((val) => {
+		try {
+			return BigInt(val) > 0n;
+		} catch {
+			return false;
+		}
+	}, "Required balance must be a positive integer string"),
 });
 
 /**
@@ -154,11 +154,11 @@ export const lsp29DigitalAssetBalanceParamsSchema = z.object({
  * Require owning a specific LSP8 NFT by token ID
  */
 export const lsp29Lsp8OwnershipParamsSchema = z.object({
-  method: z.literal("lsp8-ownership"),
-  /** LSP8 token contract address */
-  tokenAddress: addressSchema,
-  /** Required token ID as string */
-  requiredTokenId: z.string().min(1),
+	method: z.literal("lsp8-ownership"),
+	/** LSP8 token contract address */
+	tokenAddress: addressSchema,
+	/** Required token ID as string */
+	requiredTokenId: z.string().min(1),
 });
 
 /**
@@ -166,9 +166,9 @@ export const lsp29Lsp8OwnershipParamsSchema = z.object({
  * Require following specific Universal Profiles on-chain
  */
 export const lsp29Lsp26FollowerParamsSchema = z.object({
-  method: z.literal("lsp26-follower"),
-  /** Array of Universal Profile addresses that must be followed */
-  followedAddresses: z.array(addressSchema).min(1),
+	method: z.literal("lsp26-follower"),
+	/** Array of Universal Profile addresses that must be followed */
+	followedAddresses: z.array(addressSchema).min(1),
 });
 
 /**
@@ -176,9 +176,9 @@ export const lsp29Lsp26FollowerParamsSchema = z.object({
  * Content unlocks after a specific date/time
  */
 export const lsp29TimeLockedParamsSchema = z.object({
-  method: z.literal("time-locked"),
-  /** Unix timestamp (seconds) when content becomes accessible */
-  unlockTimestamp: z.string().min(1),
+	method: z.literal("time-locked"),
+	/** Unix timestamp (seconds) when content becomes accessible */
+	unlockTimestamp: z.string().min(1),
 });
 
 /**
@@ -197,10 +197,10 @@ export const lsp29TimeLockedParamsSchema = z.object({
  * ```
  */
 export const lsp29EncryptionParamsSchema = z.discriminatedUnion("method", [
-  lsp29DigitalAssetBalanceParamsSchema,
-  lsp29Lsp8OwnershipParamsSchema,
-  lsp29Lsp26FollowerParamsSchema,
-  lsp29TimeLockedParamsSchema,
+	lsp29DigitalAssetBalanceParamsSchema,
+	lsp29Lsp8OwnershipParamsSchema,
+	lsp29Lsp26FollowerParamsSchema,
+	lsp29TimeLockedParamsSchema,
 ]);
 
 // ============================================================================
@@ -231,22 +231,22 @@ export const lsp29EncryptionParamsSchema = z.discriminatedUnion("method", [
  * ```
  */
 export const lsp29EncryptionSchema = z
-  .object({
-    /** Encryption provider network */
-    provider: z.enum(LSP29_PROVIDERS),
-    /** Access control method (provider-agnostic) */
-    method: z.enum(LSP29_METHODS),
-    /** Method-specific parameters for access control verification */
-    params: lsp29EncryptionParamsSchema,
-    /** Provider-native condition object (stored as-is for external interop) */
-    condition: z.unknown(),
-    /** Provider-specific encrypted key data */
-    encryptedKey: z.record(z.unknown()),
-  })
-  .refine((data) => data.method === data.params.method, {
-    message: "encryption.method must match encryption.params.method",
-    path: ["method"],
-  });
+	.object({
+		/** Encryption provider network */
+		provider: z.enum(LSP29_PROVIDERS),
+		/** Access control method (provider-agnostic) */
+		method: z.enum(LSP29_METHODS),
+		/** Method-specific parameters for access control verification */
+		params: lsp29EncryptionParamsSchema,
+		/** Provider-native condition object (stored as-is for external interop) */
+		condition: z.unknown(),
+		/** Provider-specific encrypted key data */
+		encryptedKey: z.record(z.unknown()),
+	})
+	.refine((data) => data.method === data.params.method, {
+		message: "encryption.method must match encryption.params.method",
+		path: ["method"],
+	});
 
 // ============================================================================
 // LSP29 Encrypted Asset Schema
@@ -260,40 +260,40 @@ export const lsp29EncryptionSchema = z
  * (provider-first encryption, per-backend chunks).
  */
 export const lsp29EncryptedAssetInnerSchema = z.object({
-  /** Schema version — 2.0.0 for new encryption + chunks structure */
-  version: z.literal("2.0.0"),
-  /** Unique content identifier chosen by creator */
-  id: z.string({
-    required_error: "ID is required",
-    invalid_type_error: "ID must be a string",
-  }),
-  /** Human-readable title for the content */
-  title: z.string({
-    required_error: "Title is required",
-    invalid_type_error: "Title must be a string",
-  }),
-  /** Human-readable description of the content */
-  description: z
-    .string({
-      invalid_type_error: "Description must be a string",
-    })
-    .optional(),
-  /** Version number starting at 1, incremented for each update */
-  revision: z
-    .number({
-      required_error: "Revision is required",
-      invalid_type_error: "Revision must be a number",
-    })
-    .int("Revision must be an integer")
-    .positive("Revision must be positive"),
-  /** Social feed images for content preview (LSP4 images format) */
-  images: z.array(z.array(imageSchema)),
-  /** Technical metadata about the encrypted file */
-  file: lsp29FileSchema,
-  /** Encryption metadata for decryption */
-  encryption: lsp29EncryptionSchema,
-  /** Chunked storage information */
-  chunks: lsp29ChunksSchema,
+	/** Schema version — 2.0.0 for new encryption + chunks structure */
+	version: z.literal("2.0.0"),
+	/** Unique content identifier chosen by creator */
+	id: z.string({
+		required_error: "ID is required",
+		invalid_type_error: "ID must be a string",
+	}),
+	/** Human-readable title for the content */
+	title: z.string({
+		required_error: "Title is required",
+		invalid_type_error: "Title must be a string",
+	}),
+	/** Human-readable description of the content */
+	description: z
+		.string({
+			invalid_type_error: "Description must be a string",
+		})
+		.optional(),
+	/** Version number starting at 1, incremented for each update */
+	revision: z
+		.number({
+			required_error: "Revision is required",
+			invalid_type_error: "Revision must be a number",
+		})
+		.int("Revision must be an integer")
+		.positive("Revision must be positive"),
+	/** Social feed images for content preview (LSP4 images format) */
+	images: z.array(z.array(imageSchema)),
+	/** Technical metadata about the encrypted file */
+	file: lsp29FileSchema,
+	/** Encryption metadata for decryption */
+	encryption: lsp29EncryptionSchema,
+	/** Chunked storage information */
+	chunks: lsp29ChunksSchema,
 });
 
 /**
@@ -303,5 +303,5 @@ export const lsp29EncryptedAssetInnerSchema = z.object({
  * following the LSP convention for typed metadata objects.
  */
 export const lsp29EncryptedAssetSchema = z.object({
-  LSP29EncryptedAsset: lsp29EncryptedAssetInnerSchema,
+	LSP29EncryptedAsset: lsp29EncryptedAssetInnerSchema,
 });

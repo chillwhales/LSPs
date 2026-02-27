@@ -24,7 +24,7 @@ import { type Address, concat, type Hex } from "viem";
  * ```
  */
 export function buildPermissionsKey(address: Address): Hex {
-  return concat([LSP6DataKeys["AddressPermissions:Permissions"], address]);
+	return concat([LSP6DataKeys["AddressPermissions:Permissions"], address]);
 }
 
 /**
@@ -40,10 +40,10 @@ export function buildPermissionsKey(address: Address): Hex {
  * ```
  */
 export function buildAllowedDataKeysKey(address: Address): Hex {
-  return concat([
-    LSP6DataKeys["AddressPermissions:AllowedERC725YDataKeys"],
-    address,
-  ]);
+	return concat([
+		LSP6DataKeys["AddressPermissions:AllowedERC725YDataKeys"],
+		address,
+	]);
 }
 
 /**
@@ -59,5 +59,5 @@ export function buildAllowedDataKeysKey(address: Address): Hex {
  * ```
  */
 export function buildAllowedCallsKey(address: Address): Hex {
-  return concat([LSP6DataKeys["AddressPermissions:AllowedCalls"], address]);
+	return concat([LSP6DataKeys["AddressPermissions:AllowedCalls"], address]);
 }

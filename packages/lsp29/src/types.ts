@@ -7,25 +7,29 @@
  * @see LSP-29-EncryptedAssets.md for full specification
  */
 
-import type { z } from 'zod';
+import type { z } from "zod";
 
-import type { LSP29_BACKENDS, LSP29_METHODS, LSP29_PROVIDERS } from './constants';
 import type {
-  lsp29ArweaveChunksSchema,
-  lsp29ChunksSchema,
-  lsp29DigitalAssetBalanceParamsSchema,
-  lsp29EncryptedAssetInnerSchema,
-  lsp29EncryptedAssetSchema,
-  lsp29EncryptionParamsSchema,
-  lsp29EncryptionSchema,
-  lsp29FileSchema,
-  lsp29IpfsChunksSchema,
-  lsp29Lsp26FollowerParamsSchema,
-  lsp29Lsp8OwnershipParamsSchema,
-  lsp29LumeraChunksSchema,
-  lsp29S3ChunksSchema,
-  lsp29TimeLockedParamsSchema,
-} from './schemas';
+	LSP29_BACKENDS,
+	LSP29_METHODS,
+	LSP29_PROVIDERS,
+} from "./constants";
+import type {
+	lsp29ArweaveChunksSchema,
+	lsp29ChunksSchema,
+	lsp29DigitalAssetBalanceParamsSchema,
+	lsp29EncryptedAssetInnerSchema,
+	lsp29EncryptedAssetSchema,
+	lsp29EncryptionParamsSchema,
+	lsp29EncryptionSchema,
+	lsp29FileSchema,
+	lsp29IpfsChunksSchema,
+	lsp29Lsp8OwnershipParamsSchema,
+	lsp29Lsp26FollowerParamsSchema,
+	lsp29LumeraChunksSchema,
+	lsp29S3ChunksSchema,
+	lsp29TimeLockedParamsSchema,
+} from "./schemas";
 
 // ============================================================================
 // Constant-Derived Types
@@ -42,8 +46,8 @@ export type LSP29Backend = (typeof LSP29_BACKENDS)[number];
 
 /** UI metadata for an encryption access control method */
 export interface EncryptionMethodMetadata {
-  label: string;
-  description: string;
+	label: string;
+	description: string;
 }
 
 // ============================================================================
@@ -77,13 +81,19 @@ export type LSP29Chunks = z.infer<typeof lsp29ChunksSchema>;
 // ============================================================================
 
 /** Digital Asset Balance access control parameters */
-export type LSP29DigitalAssetBalanceParams = z.infer<typeof lsp29DigitalAssetBalanceParamsSchema>;
+export type LSP29DigitalAssetBalanceParams = z.infer<
+	typeof lsp29DigitalAssetBalanceParamsSchema
+>;
 
 /** LSP8 NFT Ownership access control parameters */
-export type LSP29Lsp8OwnershipParams = z.infer<typeof lsp29Lsp8OwnershipParamsSchema>;
+export type LSP29Lsp8OwnershipParams = z.infer<
+	typeof lsp29Lsp8OwnershipParamsSchema
+>;
 
 /** LSP26 Follower access control parameters */
-export type LSP29Lsp26FollowerParams = z.infer<typeof lsp29Lsp26FollowerParamsSchema>;
+export type LSP29Lsp26FollowerParams = z.infer<
+	typeof lsp29Lsp26FollowerParamsSchema
+>;
 
 /** Time-Locked access control parameters */
 export type LSP29TimeLockedParams = z.infer<typeof lsp29TimeLockedParamsSchema>;
@@ -103,10 +113,15 @@ export type LSP29Encryption = z.infer<typeof lsp29EncryptionSchema>;
 // ============================================================================
 
 /** Inner encrypted asset metadata (without the LSP29EncryptedAsset wrapper) */
-export type LSP29EncryptedAssetInner = z.infer<typeof lsp29EncryptedAssetInnerSchema>;
+export type LSP29EncryptedAssetInner = z.infer<
+	typeof lsp29EncryptedAssetInnerSchema
+>;
 
 /** Root encrypted asset with LSP29EncryptedAsset wrapper key */
 export type LSP29EncryptedAsset = z.infer<typeof lsp29EncryptedAssetSchema>;
 
 /** Subset of asset fields needed for encryption/decryption operations */
-export type LSP29EncryptionData = Pick<LSP29EncryptedAssetInner, 'file' | 'encryption' | 'chunks'>;
+export type LSP29EncryptionData = Pick<
+	LSP29EncryptedAssetInner,
+	"file" | "encryption" | "chunks"
+>;

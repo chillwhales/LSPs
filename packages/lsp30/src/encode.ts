@@ -7,11 +7,15 @@
  * @see LSP-30-MultiStorageURI.md for full specification
  */
 
-import { type Hex, concat, keccak256, stringToHex } from 'viem';
+import { concat, type Hex, keccak256, stringToHex } from "viem";
 
-import { HASH_LENGTH_PREFIX, KECCAK256_BYTES_METHOD_ID, LSP30_RESERVED_PREFIX } from './constants';
-import { lsp30EntriesSchema } from './schemas';
-import type { Lsp30Entry } from './types';
+import {
+	HASH_LENGTH_PREFIX,
+	KECCAK256_BYTES_METHOD_ID,
+	LSP30_RESERVED_PREFIX,
+} from "./constants";
+import { lsp30EntriesSchema } from "./schemas";
+import type { Lsp30Entry } from "./types";
 
 // ============================================================================
 // Encoding Functions
@@ -31,7 +35,7 @@ import type { Lsp30Entry } from './types';
  * ```
  */
 export function computeContentHash(content: Uint8Array): Hex {
-  return keccak256(content);
+	return keccak256(content);
 }
 
 /**
@@ -59,25 +63,31 @@ export function computeContentHash(content: Uint8Array): Hex {
  * const encoded = encodeLsp30Uri(entries, hash);
  * ```
  */
-export function encodeLsp30Uri(entries: Lsp30Entry[], verificationHash: Hex): Hex {
-  // Validate entries (defense-in-depth — enforces min 2 + backend-specific fields)
-  lsp30EntriesSchema.parse(entries);
+export function encodeLsp30Uri(
+	entries: Lsp30Entry[],
+	verificationHash: Hex,
+): Hex {
+	// Validate entries (defense-in-depth — enforces min 2 + backend-specific fields)
+	lsp30EntriesSchema.parse(entries);
 
-  // Validate hash format: 0x + 64 hex chars = 66 chars total, all hex
-  if (typeof verificationHash !== 'string' || !/^0x[0-9a-fA-F]{64}$/.test(verificationHash)) {
-    throw new Error(
-      `Invalid verification hash: expected 0x-prefixed 64-char hex string, got ${String(verificationHash).slice(0, 20)}...`,
-    );
-  }
+	// Validate hash format: 0x + 64 hex chars = 66 chars total, all hex
+	if (
+		typeof verificationHash !== "string" ||
+		!/^0x[0-9a-fA-F]{64}$/.test(verificationHash)
+	) {
+		throw new Error(
+			`Invalid verification hash: expected 0x-prefixed 64-char hex string, got ${String(verificationHash).slice(0, 20)}...`,
+		);
+	}
 
-  // Encode entries as UTF-8 JSON hex
-  const entriesHex = stringToHex(JSON.stringify(entries));
+	// Encode entries as UTF-8 JSON hex
+	const entriesHex = stringToHex(JSON.stringify(entries));
 
-  return concat([
-    LSP30_RESERVED_PREFIX,
-    KECCAK256_BYTES_METHOD_ID,
-    HASH_LENGTH_PREFIX,
-    verificationHash,
-    entriesHex,
-  ]);
+	return concat([
+		LSP30_RESERVED_PREFIX,
+		KECCAK256_BYTES_METHOD_ID,
+		HASH_LENGTH_PREFIX,
+		verificationHash,
+		entriesHex,
+	]);
 }

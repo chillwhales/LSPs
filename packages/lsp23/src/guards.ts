@@ -6,37 +6,37 @@
 
 import type { z } from "zod";
 import {
-  universalProfileInitStructSchema,
-  keyManagerInitStructSchema,
-  deployParamsSchema,
+	deployParamsSchema,
+	keyManagerInitStructSchema,
+	universalProfileInitStructSchema,
 } from "./schemas";
 
 /**
  * Type guard for Universal Profile initialization struct
  */
 export function isUniversalProfileInitStruct(
-  obj: unknown,
+	obj: unknown,
 ): obj is z.infer<typeof universalProfileInitStructSchema> {
-  const { success } = universalProfileInitStructSchema.safeParse(obj);
-  return success;
+	const { success } = universalProfileInitStructSchema.safeParse(obj);
+	return success;
 }
 
 /**
  * Type guard for Key Manager initialization struct
  */
 export function isKeyManagerInitStruct(
-  obj: unknown,
+	obj: unknown,
 ): obj is z.infer<typeof keyManagerInitStructSchema> {
-  const { success } = keyManagerInitStructSchema.safeParse(obj);
-  return success;
+	const { success } = keyManagerInitStructSchema.safeParse(obj);
+	return success;
 }
 
 /**
  * Type guard for complete deployment parameters
  */
 export function isDeployParams(
-  obj: unknown,
+	obj: unknown,
 ): obj is z.infer<typeof deployParamsSchema> {
-  const { success } = deployParamsSchema.safeParse(obj);
-  return success;
+	const { success } = deployParamsSchema.safeParse(obj);
+	return success;
 }

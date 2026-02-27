@@ -6,8 +6,8 @@
  * @see LSP-29-EncryptedAssets.md for full specification
  */
 
-import { lsp29EncryptedAssetSchema } from './schemas';
-import type { LSP29EncryptedAsset } from './types';
+import { lsp29EncryptedAssetSchema } from "./schemas";
+import type { LSP29EncryptedAsset } from "./types";
 
 // ============================================================================
 // Decoding Functions
@@ -28,13 +28,13 @@ import type { LSP29EncryptedAsset } from './types';
  * ```
  */
 export function decodeLsp29Metadata(json: string): LSP29EncryptedAsset {
-  let parsed: unknown;
+	let parsed: unknown;
 
-  try {
-    parsed = JSON.parse(json);
-  } catch {
-    throw new Error('Invalid LSP29 metadata: failed to parse JSON');
-  }
+	try {
+		parsed = JSON.parse(json);
+	} catch {
+		throw new Error("Invalid LSP29 metadata: failed to parse JSON");
+	}
 
-  return lsp29EncryptedAssetSchema.parse(parsed);
+	return lsp29EncryptedAssetSchema.parse(parsed);
 }

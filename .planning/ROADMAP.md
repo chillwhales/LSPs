@@ -59,8 +59,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Biome configuration & codebase formatting (QUAL-01, QUAL-02)
-- [ ] 02-02-PLAN.md — Git hooks & commitlint enforcement (QUAL-03, QUAL-07)
+- [x] 02-01-PLAN.md — Biome configuration & codebase formatting (QUAL-01, QUAL-02)
+- [x] 02-02-PLAN.md — Git hooks & commitlint enforcement (QUAL-03, QUAL-07)
 
 ---
 
@@ -187,7 +187,7 @@ Plans:
 | Phase | Name | Requirements | Status |
 |-------|------|--------------|--------|
 | 1 | Build Hardening & Shared Configs | BUILD-01, BUILD-02, BUILD-03, BUILD-04 | ✅ Complete |
-| 2 | Code Quality — Biome & Git Hooks | QUAL-01, QUAL-02, QUAL-03, QUAL-07 | ⬚ Not Started |
+| 2 | Code Quality — Biome & Git Hooks | QUAL-01, QUAL-02, QUAL-03, QUAL-07 | ✅ Complete (2026-02-27) |
 | 3 | Dependency & Monorepo Hygiene | BUILD-05, QUAL-04, QUAL-05, QUAL-06 | ⬚ Not Started |
 | 4 | Testing & Coverage Infrastructure | TEST-01, TEST-02 | ⬚ Not Started |
 | 5 | CI Pipeline | CI-01, CI-02, CI-03, CI-04 | ⬚ Not Started |
@@ -197,4 +197,4 @@ Plans:
 
 ---
 *Roadmap created: 2026-02-27*
-*Last updated: 2026-02-27 — Phase 1 complete*
+*Last updated: 2026-02-27 — Phase 2 complete (Biome + Git Hooks)*

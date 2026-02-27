@@ -1,17 +1,33 @@
 {
-  "name": "@chillwhales/lsps",
-  "private": true,
-  "description": "LUKSO Standards Packages — TypeScript implementations of LSP standards",
-  "scripts": {
-    "build": "pnpm -r build",
-    "test": "vitest run",
-    "clean": "pnpm -r clean"
-  },
-  "devDependencies": {
-    "vitest": "catalog:"
-  },
-  "packageManager": "pnpm@10.30.2",
-  "engines": {
-    "node": ">=18"
-  }
+	"name": "@chillwhales/lsps",
+	"private": true,
+	"description": "LUKSO Standards Packages — TypeScript implementations of LSP standards",
+	"scripts": {
+		"build": "pnpm -r build",
+		"test": "vitest run",
+		"clean": "pnpm -r clean",
+		"check": "biome check",
+		"check:fix": "biome check --write",
+		"prepare": "simple-git-hooks"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "npx @biomejs/biome check --write --staged --files-ignore-unknown=true --no-errors-on-unmatched && git update-index --again",
+		"commit-msg": "npx commitlint --edit $1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.4",
+		"@commitlint/cli": "^20.4.2",
+		"@commitlint/config-conventional": "^20.4.2",
+		"simple-git-hooks": "^2.13.1",
+		"vitest": "catalog:"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"simple-git-hooks"
+		]
+	},
+	"packageManager": "pnpm@10.30.2",
+	"engines": {
+		"node": ">=18"
+	}
 }
