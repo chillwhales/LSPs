@@ -24,6 +24,7 @@
 		"@biomejs/biome": "^2.4.4",
 		"@commitlint/cli": "^20.4.2",
 		"@commitlint/config-conventional": "^20.4.2",
+		"@vitest/coverage-v8": "^4.0.18",
 		"knip": "^5.85.0",
 		"madge": "^8.0.0",
 		"only-allow": "^1.2.2",
