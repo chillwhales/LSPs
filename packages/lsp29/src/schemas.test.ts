@@ -112,7 +112,7 @@ describe("lsp29EncryptionSchema method consistency", () => {
 				id: "test",
 				title: "Test",
 				revision: 1,
-				createdAt: "2024-01-01T00:00:00.000Z",
+				images: [],
 				file: {
 					type: "text/plain",
 					name: "test.txt",
