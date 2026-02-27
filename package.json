@@ -6,8 +6,14 @@
 		"build": "pnpm -r build",
 		"test": "vitest run",
 		"clean": "pnpm -r clean",
-		"check": "biome check",
-		"check:fix": "biome check --write",
+		"preinstall": "npx only-allow pnpm",
+		"check:lint": "biome check",
+		"check:lint:fix": "biome check --write",
+		"knip": "knip",
+		"sherif": "sherif",
+		"madge": "node scripts/check-circular.mjs",
+		"deps:graph": "madge --image deps-graph.svg --extensions ts --ts-config ./packages/utils/tsconfig.json packages/*/src",
+		"check": "pnpm check:lint && pnpm sherif && pnpm knip && pnpm madge",
 		"prepare": "simple-git-hooks"
 	},
 	"simple-git-hooks": {
@@ -18,8 +24,15 @@
 		"@biomejs/biome": "^2.4.4",
 		"@commitlint/cli": "^20.4.2",
 		"@commitlint/config-conventional": "^20.4.2",
+		"knip": "^5.85.0",
+		"madge": "^8.0.0",
+		"only-allow": "^1.2.2",
+		"sherif": "^1.10.0",
 		"simple-git-hooks": "^2.13.1",
 		"vitest": "catalog:"
+	},
+	"sherif": {
+		"failOnWarnings": true
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
