@@ -16,8 +16,9 @@ Structural problems — circular dependencies, unused code, inconsistent package
 ### Existing violations strategy
 - Fix all existing violations before merging — clean slate from day one
 - Strict zero-tolerance going forward — every tool exits non-zero on any finding
-- Exceptions use inline ignore comments (not central config)
-- Every ignore comment must include a reason explaining why the exception exists
+- For code-level findings, exceptions use inline ignore comments (not central config)
+- Tool-level configuration exceptions (e.g., knip `ignoreDependencies` for non-importable/script-only deps like `simple-git-hooks`, or sherif ignores for well-understood false positives) are allowed but must be narrowly scoped and documented in the config
+- Every ignore (inline or config) must include a reason explaining why the exception exists
 
 ### knip configuration
 - Package entry points (main export files) mark public API as "used" — knip won't flag intentional public API without internal consumers

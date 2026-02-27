@@ -106,8 +106,8 @@ Knip auto-discovers workspaces from `pnpm-workspace.yaml`. The `packages/*` glob
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "workspaces": {
     ".": {
-      "entry": ["packages/*/src/index.ts"],
-      "project": ["packages/*/src/**/*.ts"],
+      "entry": [],
+      "project": [],
       "ignoreDependencies": ["simple-git-hooks"]
     },
     "packages/*": {
@@ -333,7 +333,7 @@ A cycle is inter-package if the files in the cycle span more than one `packages/
     "build": "pnpm -r build",
     "test": "vitest run",
     "clean": "pnpm -r clean",
-    "check": "pnpm check:lint && pnpm knip && pnpm sherif && pnpm madge",
+    "check": "pnpm check:lint && pnpm sherif && pnpm knip && pnpm madge",
     "check:lint": "biome check",
     "check:lint:fix": "biome check --write",
     "knip": "knip",
@@ -417,8 +417,8 @@ export const specialConfig = { /* ... */ };
 
 1. **madge Inter-Package Filtering Complexity**
    - What we know: madge doesn't natively distinguish inter-package vs intra-package cycles. The `--json` flag outputs cycle arrays that can be post-processed.
-   - What's unclear: Whether the current codebase has any intra-package cycles that would cause false positives in a naive `madge --circular` run. If there are none, the filtering script may be unnecessary initially.
-   - Recommendation: Run `madge --circular` first without filtering. If it reports only inter-package cycles (or none), skip the filtering script. Add it later if intra-package cycles appear and need to be excluded. **Planner should include a discovery step.**
+   - What's unclear: Whether the current codebase has any intra-package cycles that would need filtering out.
+   - Recommendation: Always run madge with the inter-package filtering script (per locked decision: "inter-package cycles only"). The filtering script should always be present regardless of current codebase state — future commits could introduce intra-package cycles that must be excluded. Validate that the filter correctly drops intra-package cycles during implementation.
 
 2. **knip and pnpm catalog: Protocol**
    - What we know: knip v5 supports pnpm workspaces. The `catalog:` protocol is relatively new (pnpm 9+).
