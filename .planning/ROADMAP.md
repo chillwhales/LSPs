@@ -76,6 +76,12 @@ Plans:
 - QUAL-05: Monorepo package consistency is validated via sherif
 - QUAL-06: Only pnpm can be used as package manager (enforced via preinstall)
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Install & configure knip, sherif, madge, only-allow; restructure scripts
+- [ ] 03-02-PLAN.md — Run all tools, fix violations, verify clean slate
+
 **Success Criteria:**
 1. Running a circular dependency check reports any inter-package cycles (and currently finds none, or documents known exceptions)
 2. Running `pnpm knip` identifies unused dependencies and unused exports across all packages
