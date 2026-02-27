@@ -79,7 +79,7 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Install & configure knip, sherif, madge, only-allow; restructure scripts
+- [x] 03-01-PLAN.md — Install & configure knip, sherif, madge, only-allow; restructure scripts
 - [ ] 03-02-PLAN.md — Run all tools, fix violations, verify clean slate
 
 **Success Criteria:**
@@ -194,7 +194,7 @@ Plans:
 |-------|------|--------------|--------|
 | 1 | Build Hardening & Shared Configs | BUILD-01, BUILD-02, BUILD-03, BUILD-04 | ✅ Complete |
 | 2 | Code Quality — Biome & Git Hooks | QUAL-01, QUAL-02, QUAL-03, QUAL-07 | ✅ Complete (2026-02-27) |
-| 3 | Dependency & Monorepo Hygiene | BUILD-05, QUAL-04, QUAL-05, QUAL-06 | ⬚ Not Started |
+| 3 | Dependency & Monorepo Hygiene | BUILD-05, QUAL-04, QUAL-05, QUAL-06 | 🔄 In Progress (1/2) |
 | 4 | Testing & Coverage Infrastructure | TEST-01, TEST-02 | ⬚ Not Started |
 | 5 | CI Pipeline | CI-01, CI-02, CI-03, CI-04 | ⬚ Not Started |
 | 6 | Package Metadata & Publish Readiness | PKG-01, PKG-02, PKG-03, PKG-04 | ⬚ Not Started |
@@ -203,4 +203,4 @@ Plans:
 
 ---
 *Roadmap created: 2026-02-27*
-*Last updated: 2026-02-27 — Phase 2 complete (Biome + Git Hooks)*
+*Last updated: 2026-02-27 — Phase 3 Plan 01 complete (Dependency hygiene tools installed)*
