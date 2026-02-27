@@ -1,0 +1,19 @@
+{
+	"$schema": "https://unpkg.com/knip@5/schema.json",
+	"workspaces": {
+		".": {
+			"entry": [],
+			"project": [],
+			"ignoreDependencies": ["simple-git-hooks"]
+		},
+		"packages/*": {
+			"entry": ["src/index.ts", "src/**/*.test.ts"],
+			"project": ["src/**/*.ts"]
+		},
+		"packages/config": {
+			"entry": ["src/build.ts", "src/vitest.ts"],
+			"project": ["src/**/*.ts"],
+			"includeEntryExports": true
+		}
+	}
+}
