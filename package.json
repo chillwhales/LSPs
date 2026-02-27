@@ -4,8 +4,11 @@
   "description": "LUKSO Standards Packages — TypeScript implementations of LSP standards",
   "scripts": {
     "build": "pnpm -r build",
-    "test": "pnpm -r test",
+    "test": "vitest run",
     "clean": "pnpm -r clean"
+  },
+  "devDependencies": {
+    "vitest": "catalog:"
   },
   "packageManager": "pnpm@10.30.2",
   "engines": {

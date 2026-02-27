@@ -33,7 +33,11 @@ catalogs:
 
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/config:
     devDependencies:

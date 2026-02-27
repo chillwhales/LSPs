@@ -1,8 +1,3 @@
-import { defineConfig } from 'vitest/config';
+import { createVitestConfig } from "@chillwhales/config/vitest";
 
-export default defineConfig({
-  test: {
-    globals: true,
-    environment: 'node',
-  },
-});
+export default createVitestConfig();
