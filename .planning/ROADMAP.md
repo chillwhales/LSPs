@@ -32,9 +32,9 @@ Transform the @chillwhales/* monorepo from working-but-fragile code into publish
 **Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Create @chillwhales/config package, pnpm catalogs, migrate all package.json
-- [ ] 01-02-PLAN.md — Replace build.config.ts with shared wrappers, fix warnings, enable failOnWarn
-- [ ] 01-03-PLAN.md — Replace vitest/tsconfig configs with shared wrappers, create root vitest config
+- [x] 01-01-PLAN.md — Create @chillwhales/config package, pnpm catalogs, migrate all package.json
+- [x] 01-02-PLAN.md — Replace build.config.ts with shared wrappers, fix warnings, enable failOnWarn
+- [x] 01-03-PLAN.md — Replace vitest/tsconfig configs with shared wrappers, create root vitest config
 
 ---
 
@@ -180,7 +180,7 @@ Plans:
 
 | Phase | Name | Requirements | Status |
 |-------|------|--------------|--------|
-| 1 | Build Hardening & Shared Configs | BUILD-01, BUILD-02, BUILD-03, BUILD-04 | ⬚ Not Started |
+| 1 | Build Hardening & Shared Configs | BUILD-01, BUILD-02, BUILD-03, BUILD-04 | ✅ Complete |
 | 2 | Code Quality — Biome & Git Hooks | QUAL-01, QUAL-02, QUAL-03, QUAL-07 | ⬚ Not Started |
 | 3 | Dependency & Monorepo Hygiene | BUILD-05, QUAL-04, QUAL-05, QUAL-06 | ⬚ Not Started |
 | 4 | Testing & Coverage Infrastructure | TEST-01, TEST-02 | ⬚ Not Started |
@@ -191,4 +191,4 @@ Plans:
 
 ---
 *Roadmap created: 2026-02-27*
-*Last updated: 2026-02-27*
+*Last updated: 2026-02-27 — Phase 1 complete*
