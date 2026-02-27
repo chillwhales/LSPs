@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Completed 04-01-PLAN.md (fix lsp29 test failures)
-last_updated: "2026-02-27T22:11:00.000Z"
-last_activity: 2026-02-27 — Completed 04-01-PLAN.md
+stopped_at: Completed 04-02-PLAN.md (coverage infrastructure)
+last_updated: "2026-02-27T22:17:00.000Z"
+last_activity: 2026-02-27 — Completed 04-02-PLAN.md
 progress:
   total_phases: 8
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 9
-  completed_plans: 8
+  completed_plans: 9
 ---
 
 # Project State: LSPs
@@ -19,16 +19,16 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 4 in progress. Plan 04-01 complete (lsp29 tests fixed). Plan 04-02 remaining (coverage infrastructure).
+**Current Focus:** Phase 4 complete. All 9 plans through Phase 4 done. Phase 5 (CI Pipeline) next.
 
 ## Current Position
 
 **Phase:** 4 of 8 (Testing & Coverage Infrastructure)
-**Plan:** 1 of 2 in phase
-**Status:** In progress
-**Last activity:** 2026-02-27 — Completed 04-01-PLAN.md
+**Plan:** 2 of 2 in phase (COMPLETE)
+**Status:** Phase complete
+**Last activity:** 2026-02-27 — Completed 04-02-PLAN.md
 
-**Progress:** ████░░░░ 3/8 phases complete (8/9 plans)
+**Progress:** █████░░░ 4/8 phases complete (9/9 plans)
 
 ## Phase Summary
 
@@ -37,7 +37,7 @@ progress:
 | 1 | Build Hardening & Shared Configs | ✅ Complete (3/3 plans) |
 | 2 | Code Quality — Biome & Git Hooks | ✅ Complete (2/2 plans) |
 | 3 | Dependency & Monorepo Hygiene | ✅ Complete (2/2 plans) |
-| 4 | Testing & Coverage Infrastructure | 🔧 In Progress (1/2 plans) |
+| 4 | Testing & Coverage Infrastructure | ✅ Complete (2/2 plans) |
 | 5 | CI Pipeline | ⬚ Not Started |
 | 6 | Package Metadata & Publish Readiness | ⬚ Not Started |
 | 7 | Release Automation | ⬚ Not Started |
@@ -47,11 +47,11 @@ progress:
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 8 |
+| Plans completed | 9 |
 | Plans total | 9 |
 | Plans with issues | 0 |
-| Requirements done | 12/31 |
-| Phases done | 3/8 |
+| Requirements done | 14/31 |
+| Phases done | 4/8 |
 
 ## Accumulated Context
 
@@ -83,6 +83,7 @@ progress:
 - knip: packages/config gets includeEntryExports (private), library packages don't (barrel exports are public API)
 - knip auto-detects entry points from package.json exports — redundant entries removed from knip.json
 - Zero unused deps/exports/files across all workspace packages — codebase was already clean
+- packages/config excluded from coverage — no testable logic (only defineProject/defineBuildConfig wrappers)
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
@@ -98,10 +99,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-02-27T22:11:00.000Z
-**Stopped at:** Completed 04-01-PLAN.md (fix lsp29 test failures)
-**Resume with:** `/gsd-execute-phase 4` (04-02 remaining)
+**Last session:** 2026-02-27T22:17:00.000Z
+**Stopped at:** Completed 04-02-PLAN.md (coverage infrastructure)
+**Resume with:** `/gsd-execute-phase 5` (CI Pipeline)
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-02-27T22:11:00Z*
+*Last updated: 2026-02-27T22:17:00Z*
