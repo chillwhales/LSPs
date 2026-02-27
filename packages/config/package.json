@@ -1,0 +1,16 @@
+{
+  "name": "@chillwhales/config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./build": "./src/build.ts",
+    "./vitest": "./src/vitest.ts",
+    "./tsconfig": "./tsconfig.base.json"
+  },
+  "devDependencies": {
+    "unbuild": "catalog:",
+    "vitest": "catalog:",
+    "typescript": "catalog:"
+  }
+}
