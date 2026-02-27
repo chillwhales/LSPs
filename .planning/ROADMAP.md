@@ -100,6 +100,12 @@ Plans:
 - TEST-01: Test coverage is measured via @vitest/coverage-v8
 - TEST-02: Minimum coverage thresholds are enforced (70-80%)
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Fix lsp29 test failures (missing images field, stale createdAt in fixtures)
+- [ ] 04-02-PLAN.md — Configure @vitest/coverage-v8, wire scripts, capture baseline
+
 **Success Criteria:**
 1. Running `pnpm test --coverage` produces a coverage report showing line, branch, function, and statement coverage per package
 2. If any package falls below the configured coverage threshold (70-80%), the test command exits with a non-zero code
