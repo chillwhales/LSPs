@@ -57,6 +57,9 @@ importers:
 
   packages/lsp29:
     dependencies:
+      '@chillwhales/lsp2':
+        specifier: workspace:*
+        version: link:../lsp2
       zod:
         specifier: ^3.24.1
         version: 3.25.76
