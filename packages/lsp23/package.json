@@ -27,18 +27,19 @@
   },
   "dependencies": {
     "@chillwhales/lsp2": "workspace:*",
-    "@erc725/erc725.js": "^0.28.2",
-    "@lukso/universalprofile-contracts": "^0.15.5",
-    "zod": "^3.24.1"
+    "@erc725/erc725.js": "catalog:",
+    "@lukso/universalprofile-contracts": "catalog:",
+    "zod": "catalog:"
   },
   "peerDependencies": {
-    "viem": "^2.0.0"
+    "viem": "catalog:"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "unbuild": "^3.6.1",
-    "vitest": "^4.0.17",
-    "viem": "^2.0.0"
+    "@chillwhales/config": "workspace:*",
+    "typescript": "catalog:",
+    "unbuild": "catalog:",
+    "viem": "catalog:",
+    "vitest": "catalog:"
   },
   "packageManager": "pnpm@10.30.2"
 }

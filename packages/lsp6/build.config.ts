@@ -1,11 +1,3 @@
-import { defineBuildConfig } from "unbuild";
+import { createBuildConfig } from "@chillwhales/config/build";
 
-export default defineBuildConfig({
-  entries: ["src/index"],
-  declaration: "compatible",
-  rollup: {
-    emitCJS: true,
-  },
-  clean: true,
-  failOnWarn: false,
-});
+export default createBuildConfig();

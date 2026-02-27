@@ -9,10 +9,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Build & Shared Configs
 
-- [ ] **BUILD-01**: All packages share a single build configuration source, eliminating duplicate build.config.ts files
-- [ ] **BUILD-02**: All packages share a single test configuration source, eliminating duplicate vitest.config.ts files
-- [ ] **BUILD-03**: Build process fails on warnings (failOnWarn: true) to surface hidden issues
-- [ ] **BUILD-04**: Dependency versions are centralized via pnpm catalogs in pnpm-workspace.yaml
+- [x] **BUILD-01**: All packages share a single build configuration source, eliminating duplicate build.config.ts files
+- [x] **BUILD-02**: All packages share a single test configuration source, eliminating duplicate vitest.config.ts files
+- [x] **BUILD-03**: Build process fails on warnings (failOnWarn: true) to surface hidden issues
+- [x] **BUILD-04**: Dependency versions are centralized via pnpm catalogs in pnpm-workspace.yaml
 - [ ] **BUILD-05**: Circular dependencies between packages are detected and reported
 
 ### Code Quality
@@ -85,10 +85,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BUILD-01 | Phase 1 | Pending |
-| BUILD-02 | Phase 1 | Pending |
-| BUILD-03 | Phase 1 | Pending |
-| BUILD-04 | Phase 1 | Pending |
+| BUILD-01 | Phase 1 | Complete |
+| BUILD-02 | Phase 1 | Complete |
+| BUILD-03 | Phase 1 | Complete |
+| BUILD-04 | Phase 1 | Complete |
 | BUILD-05 | Phase 3 | Pending |
 | QUAL-01 | Phase 2 | Pending |
 | QUAL-02 | Phase 2 | Pending |
@@ -124,4 +124,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-27*
-*Last updated: 2026-02-27 after roadmap creation (all 31 requirements mapped)*
+*Last updated: 2026-02-27 — Phase 1 complete (BUILD-01..04 done)*

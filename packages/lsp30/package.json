@@ -26,16 +26,17 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "zod": "^3.24.1"
+    "zod": "catalog:"
   },
   "peerDependencies": {
-    "viem": "^2.0.0"
+    "viem": "catalog:"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "unbuild": "^3.6.1",
-    "viem": "^2.0.0",
-    "vitest": "^4.0.17"
+    "@chillwhales/config": "workspace:*",
+    "typescript": "catalog:",
+    "unbuild": "catalog:",
+    "viem": "catalog:",
+    "vitest": "catalog:"
   },
   "packageManager": "pnpm@10.30.2"
 }

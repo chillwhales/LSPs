@@ -28,12 +28,13 @@
   "dependencies": {
     "@chillwhales/utils": "workspace:*",
     "@chillwhales/lsp2": "workspace:*",
-    "zod": "^3.24.1"
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "unbuild": "^3.6.1",
-    "vitest": "^4.0.17"
+    "@chillwhales/config": "workspace:*",
+    "typescript": "catalog:",
+    "unbuild": "catalog:",
+    "vitest": "catalog:"
   },
   "packageManager": "pnpm@10.30.2"
 }

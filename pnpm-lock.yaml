@@ -4,27 +4,73 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@erc725/erc725.js':
+      specifier: ^0.28.2
+      version: 0.28.2
+    '@lukso/lsp6-contracts':
+      specifier: ^0.15.5
+      version: 0.15.5
+    '@lukso/universalprofile-contracts':
+      specifier: ^0.15.5
+      version: 0.15.5
+    typescript:
+      specifier: ^5.9.3
+      version: 5.9.3
+    unbuild:
+      specifier: ^3.6.1
+      version: 3.6.1
+    viem:
+      specifier: ^2.0.0
+      version: 2.46.3
+    vitest:
+      specifier: ^4.0.17
+      version: 4.0.18
+    zod:
+      specifier: ^3.24.1
+      version: 3.25.76
+
 importers:
 
-  .: {}
+  .:
+    devDependencies:
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+
+  packages/config:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      unbuild:
+        specifier: 'catalog:'
+        version: 3.6.1(typescript@5.9.3)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/lsp2:
     dependencies:
       zod:
-        specifier: ^3.24.1
+        specifier: 'catalog:'
         version: 3.25.76
     devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
       typescript:
-        specifier: ^5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
       unbuild:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1(typescript@5.9.3)
       viem:
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
-        specifier: ^4.0.17
+        specifier: 'catalog:'
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/lsp23:
@@ -33,26 +79,29 @@ importers:
         specifier: workspace:*
         version: link:../lsp2
       '@erc725/erc725.js':
-        specifier: ^0.28.2
+        specifier: 'catalog:'
         version: 0.28.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       '@lukso/universalprofile-contracts':
-        specifier: ^0.15.5
+        specifier: 'catalog:'
         version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
       zod:
-        specifier: ^3.24.1
+        specifier: 'catalog:'
         version: 3.25.76
     devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
       typescript:
-        specifier: ^5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
       unbuild:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1(typescript@5.9.3)
       viem:
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
-        specifier: ^4.0.17
+        specifier: 'catalog:'
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/lsp29:
@@ -61,20 +110,23 @@ importers:
         specifier: workspace:*
         version: link:../lsp2
       zod:
-        specifier: ^3.24.1
+        specifier: 'catalog:'
         version: 3.25.76
     devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
       typescript:
-        specifier: ^5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
       unbuild:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1(typescript@5.9.3)
       viem:
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
-        specifier: ^4.0.17
+        specifier: 'catalog:'
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/lsp3:
@@ -83,36 +135,42 @@ importers:
         specifier: workspace:*
         version: link:../lsp2
       zod:
-        specifier: ^3.24.1
+        specifier: 'catalog:'
         version: 3.25.76
     devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
       typescript:
-        specifier: ^5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
       unbuild:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1(typescript@5.9.3)
       vitest:
-        specifier: ^4.0.17
+        specifier: 'catalog:'
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/lsp30:
     dependencies:
       zod:
-        specifier: ^3.24.1
+        specifier: 'catalog:'
         version: 3.25.76
     devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
       typescript:
-        specifier: ^5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
       unbuild:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1(typescript@5.9.3)
       viem:
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
-        specifier: ^4.0.17
+        specifier: 'catalog:'
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/lsp4:
@@ -124,17 +182,20 @@ importers:
         specifier: workspace:*
         version: link:../utils
       zod:
-        specifier: ^3.24.1
+        specifier: 'catalog:'
         version: 3.25.76
     devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
       typescript:
-        specifier: ^5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
       unbuild:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1(typescript@5.9.3)
       vitest:
-        specifier: ^4.0.17
+        specifier: 'catalog:'
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/lsp6:
@@ -143,38 +204,44 @@ importers:
         specifier: workspace:*
         version: link:../utils
       '@erc725/erc725.js':
-        specifier: ^0.28.2
+        specifier: 'catalog:'
         version: 0.28.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       '@lukso/lsp6-contracts':
-        specifier: ^0.15.5
+        specifier: 'catalog:'
         version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
       zod:
-        specifier: ^3.24.1
+        specifier: 'catalog:'
         version: 3.25.76
     devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
       typescript:
-        specifier: ^5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
       unbuild:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1(typescript@5.9.3)
       viem:
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
-        specifier: ^4.0.17
+        specifier: 'catalog:'
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
   packages/utils:
     devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
       typescript:
-        specifier: ^5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
       unbuild:
-        specifier: ^3.6.1
+        specifier: 'catalog:'
         version: 3.6.1(typescript@5.9.3)
       vitest:
-        specifier: ^4.0.17
+        specifier: 'catalog:'
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
 packages:
