@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Phase 4 planned (2 plans created, ready for execution)
-last_updated: "2026-02-27T21:55:00.000Z"
-last_activity: 2026-02-27 — Phase 4 planned (04-01, 04-02)
+stopped_at: Completed 04-01-PLAN.md (fix lsp29 test failures)
+last_updated: "2026-02-27T22:11:00.000Z"
+last_activity: 2026-02-27 — Completed 04-01-PLAN.md
 progress:
   total_phases: 8
   completed_phases: 3
   total_plans: 9
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Project State: LSPs
@@ -19,16 +19,16 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 4 planned. 2 plans ready for execution (04-01: fix lsp29 tests, 04-02: coverage infrastructure).
+**Current Focus:** Phase 4 in progress. Plan 04-01 complete (lsp29 tests fixed). Plan 04-02 remaining (coverage infrastructure).
 
 ## Current Position
 
 **Phase:** 4 of 8 (Testing & Coverage Infrastructure)
-**Plan:** 0 of 2 in phase
-**Status:** Planned, ready for execution
-**Last activity:** 2026-02-27 — Phase 4 planned (04-01, 04-02)
+**Plan:** 1 of 2 in phase
+**Status:** In progress
+**Last activity:** 2026-02-27 — Completed 04-01-PLAN.md
 
-**Progress:** ███░░░░░ 3/8 phases complete (7/9 plans)
+**Progress:** ████░░░░ 3/8 phases complete (8/9 plans)
 
 ## Phase Summary
 
@@ -37,7 +37,7 @@ progress:
 | 1 | Build Hardening & Shared Configs | ✅ Complete (3/3 plans) |
 | 2 | Code Quality — Biome & Git Hooks | ✅ Complete (2/2 plans) |
 | 3 | Dependency & Monorepo Hygiene | ✅ Complete (2/2 plans) |
-| 4 | Testing & Coverage Infrastructure | 📋 Planned (0/2 plans) |
+| 4 | Testing & Coverage Infrastructure | 🔧 In Progress (1/2 plans) |
 | 5 | CI Pipeline | ⬚ Not Started |
 | 6 | Package Metadata & Publish Readiness | ⬚ Not Started |
 | 7 | Release Automation | ⬚ Not Started |
@@ -47,7 +47,7 @@ progress:
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 7 |
+| Plans completed | 8 |
 | Plans total | 9 |
 | Plans with issues | 0 |
 | Requirements done | 12/31 |
@@ -87,7 +87,7 @@ progress:
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
 - Phase 8 (External Extraction): Must audit marketplace and lsp-indexer repos — needs phase research
-- Pre-existing: 10 test failures in @chillwhales/lsp29 (Zod schema: images field required but missing in fixtures)
+- ~~Pre-existing: 10 test failures in @chillwhales/lsp29~~ — RESOLVED in 04-01 (fixtures aligned with Zod schema)
 - Pre-existing: Vitest v4 configs fail to load on Node v20 (ESM compat issue) — tests only run on Node v24+
 
 ### Pending TODOs
@@ -98,10 +98,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-02-27T21:55:00.000Z
-**Stopped at:** Phase 4 planned (2 plans created, ready for execution)
-**Resume with:** `/gsd-execute-phase 4`
+**Last session:** 2026-02-27T22:11:00.000Z
+**Stopped at:** Completed 04-01-PLAN.md (fix lsp29 test failures)
+**Resume with:** `/gsd-execute-phase 4` (04-02 remaining)
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-02-27T18:52:09Z*
+*Last updated: 2026-02-27T22:11:00Z*
