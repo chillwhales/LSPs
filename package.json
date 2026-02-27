@@ -5,6 +5,7 @@
 	"scripts": {
 		"build": "pnpm -r build",
 		"test": "vitest run",
+		"test:coverage": "vitest run --coverage",
 		"clean": "pnpm -r clean",
 		"preinstall": "npx only-allow pnpm",
 		"check:lint": "biome check",
