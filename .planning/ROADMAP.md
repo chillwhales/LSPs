@@ -60,7 +60,7 @@ Plans:
 
 Plans:
 - [x] 02-01-PLAN.md — Biome configuration & codebase formatting (QUAL-01, QUAL-02)
-- [ ] 02-02-PLAN.md — Git hooks & commitlint enforcement (QUAL-03, QUAL-07)
+- [x] 02-02-PLAN.md — Git hooks & commitlint enforcement (QUAL-03, QUAL-07)
 
 ---
 
@@ -197,4 +197,4 @@ Plans:
 
 ---
 *Roadmap created: 2026-02-27*
-*Last updated: 2026-02-27 — Phase 2 Plan 1 complete (Biome)*
+*Last updated: 2026-02-27 — Phase 2 complete (Biome + Git Hooks)*
