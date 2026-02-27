@@ -1,2 +1,12 @@
 packages:
   - packages/*
+
+catalog:
+  typescript: ^5.9.3
+  unbuild: ^3.6.1
+  vitest: ^4.0.17
+  zod: ^3.24.1
+  viem: ^2.0.0
+  "@erc725/erc725.js": ^0.28.2
+  "@lukso/lsp6-contracts": ^0.15.5
+  "@lukso/universalprofile-contracts": ^0.15.5
