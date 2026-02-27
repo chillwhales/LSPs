@@ -4,13 +4,13 @@
  * TypeScript types inferred from LSP2 Zod schemas.
  */
 
-import { z } from "zod";
-import {
-  verificationSchema,
-  imageSchema,
-  assetSchema,
-  linkSchema,
-  tagSchema,
+import type { z } from "zod";
+import type {
+	assetSchema,
+	imageSchema,
+	linkSchema,
+	tagSchema,
+	verificationSchema,
 } from "./schemas";
 
 export type Verification = z.infer<typeof verificationSchema>;

@@ -1,20 +1,20 @@
 {
-  "name": "@chillwhales/lsps",
-  "private": true,
-  "description": "LUKSO Standards Packages — TypeScript implementations of LSP standards",
-  "scripts": {
-    "build": "pnpm -r build",
-    "test": "vitest run",
-    "clean": "pnpm -r clean",
-    "check": "biome check",
-    "check:fix": "biome check --write"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.4.4",
-    "vitest": "catalog:"
-  },
-  "packageManager": "pnpm@10.30.2",
-  "engines": {
-    "node": ">=18"
-  }
+	"name": "@chillwhales/lsps",
+	"private": true,
+	"description": "LUKSO Standards Packages — TypeScript implementations of LSP standards",
+	"scripts": {
+		"build": "pnpm -r build",
+		"test": "vitest run",
+		"clean": "pnpm -r clean",
+		"check": "biome check",
+		"check:fix": "biome check --write"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.4",
+		"vitest": "catalog:"
+	},
+	"packageManager": "pnpm@10.30.2",
+	"engines": {
+		"node": ">=18"
+	}
 }

@@ -8,8 +8,8 @@
  */
 
 export * from "./constants";
+export * from "./guards";
+export * from "./image-utils";
 export * from "./schemas";
 export * from "./types";
-export * from "./guards";
 export * from "./verifiable-uri";
-export * from "./image-utils";

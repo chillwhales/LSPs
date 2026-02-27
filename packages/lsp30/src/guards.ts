@@ -6,9 +6,9 @@
  * @see LSP-30-MultiStorageURI.md for full specification
  */
 
-import { type Hex, slice } from 'viem';
+import { type Hex, slice } from "viem";
 
-import { LSP30_RESERVED_PREFIX, MIN_LSP30_URI_LENGTH } from './constants';
+import { LSP30_RESERVED_PREFIX, MIN_LSP30_URI_LENGTH } from "./constants";
 
 // ============================================================================
 // Type Guards
@@ -33,14 +33,14 @@ import { LSP30_RESERVED_PREFIX, MIN_LSP30_URI_LENGTH } from './constants';
  * ```
  */
 export function isLsp30Uri(value: Hex): boolean {
-  if (value.length < MIN_LSP30_URI_LENGTH) {
-    return false;
-  }
+	if (value.length < MIN_LSP30_URI_LENGTH) {
+		return false;
+	}
 
-  try {
-    const reservedPrefix = slice(value, 0, 2);
-    return reservedPrefix === LSP30_RESERVED_PREFIX;
-  } catch {
-    return false;
-  }
+	try {
+		const reservedPrefix = slice(value, 0, 2);
+		return reservedPrefix === LSP30_RESERVED_PREFIX;
+	} catch {
+		return false;
+	}
 }

@@ -1,40 +1,40 @@
 {
-  "name": "@chillwhales/lsp4",
-  "version": "0.1.0",
-  "description": "LSP4 Digital Asset Metadata — schemas, types, and utilities for LSP7/LSP8 token metadata on LUKSO",
-  "author": "b00ste",
-  "license": "MIT",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "files": [
-    "dist",
-    "package.json"
-  ],
-  "scripts": {
-    "build": "unbuild",
-    "build:watch": "unbuild --watch",
-    "clean": "rm -rf dist",
-    "test": "vitest run",
-    "test:watch": "vitest"
-  },
-  "dependencies": {
-    "@chillwhales/utils": "workspace:*",
-    "@chillwhales/lsp2": "workspace:*",
-    "zod": "catalog:"
-  },
-  "devDependencies": {
-    "@chillwhales/config": "workspace:*",
-    "typescript": "catalog:",
-    "unbuild": "catalog:",
-    "vitest": "catalog:"
-  },
-  "packageManager": "pnpm@10.30.2"
+	"name": "@chillwhales/lsp4",
+	"version": "0.1.0",
+	"description": "LSP4 Digital Asset Metadata — schemas, types, and utilities for LSP7/LSP8 token metadata on LUKSO",
+	"author": "b00ste",
+	"license": "MIT",
+	"main": "./dist/index.mjs",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"scripts": {
+		"build": "unbuild",
+		"build:watch": "unbuild --watch",
+		"clean": "rm -rf dist",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"@chillwhales/utils": "workspace:*",
+		"@chillwhales/lsp2": "workspace:*",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@chillwhales/config": "workspace:*",
+		"typescript": "catalog:",
+		"unbuild": "catalog:",
+		"vitest": "catalog:"
+	},
+	"packageManager": "pnpm@10.30.2"
 }

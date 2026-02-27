@@ -1,4 +1,4 @@
-import { LSP6PermissionName, PERMISSIONS } from "@lukso/lsp6-contracts";
+import { type LSP6PermissionName, PERMISSIONS } from "@lukso/lsp6-contracts";
 import { z } from "zod";
 
 /**
@@ -8,8 +8,8 @@ import { z } from "zod";
  * @see https://docs.lukso.tech/standards/universal-profile/lsp6-key-manager
  */
 const permissionKeys = Object.keys(PERMISSIONS) as [
-  LSP6PermissionName,
-  ...LSP6PermissionName[],
+	LSP6PermissionName,
+	...LSP6PermissionName[],
 ];
 
 export const permissionSchema = z.enum(permissionKeys);

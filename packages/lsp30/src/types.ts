@@ -8,19 +8,19 @@
  * @see LSP-30-MultiStorageURI.md for full specification
  */
 
-import type { Hex } from 'viem';
-import type { z } from 'zod';
+import type { Hex } from "viem";
+import type { z } from "zod";
 
-import type { LSP30_BACKENDS } from './constants';
+import type { LSP30_BACKENDS } from "./constants";
 import type {
-  lsp30ArweaveEntrySchema,
-  lsp30EntriesSchema,
-  lsp30EntrySchema,
-  lsp30IpfsEntrySchema,
-  lsp30LumeraEntrySchema,
-  lsp30S3EntrySchema,
-  lsp30UriDataSchema,
-} from './schemas';
+	lsp30ArweaveEntrySchema,
+	lsp30EntriesSchema,
+	lsp30EntrySchema,
+	lsp30IpfsEntrySchema,
+	lsp30LumeraEntrySchema,
+	lsp30S3EntrySchema,
+	lsp30UriDataSchema,
+} from "./schemas";
 
 // ============================================================================
 // Backend Type
@@ -63,10 +63,10 @@ export type Lsp30UriData = z.infer<typeof lsp30UriDataSchema>;
  * Used by parseLsp30Uri (implemented in Plan 02)
  */
 export interface ParsedLsp30Uri {
-  /** Verification method (4 bytes, e.g., 0x8019f9b1 for keccak256(bytes)) */
-  verificationMethod: Hex;
-  /** Verification data (keccak256 hash of content bytes) */
-  verificationData: Hex;
-  /** Decoded and validated storage entries */
-  entries: Lsp30Entry[];
+	/** Verification method (4 bytes, e.g., 0x8019f9b1 for keccak256(bytes)) */
+	verificationMethod: Hex;
+	/** Verification data (keccak256 hash of content bytes) */
+	verificationData: Hex;
+	/** Decoded and validated storage entries */
+	entries: Lsp30Entry[];
 }

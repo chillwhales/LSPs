@@ -29,28 +29,28 @@ const BYTES_REGEX = /^0x[0-9a-fA-F]*$/;
  * Validates an Ethereum address (0x... format)
  */
 export const addressSchema = z
-  .string({
-    invalid_type_error: "Invalid value, not a string",
-  })
-  .regex(EVM_ADDRESS_REGEX, "Invalid value, not an Address");
+	.string({
+		invalid_type_error: "Invalid value, not a string",
+	})
+	.regex(EVM_ADDRESS_REGEX, "Invalid value, not an Address");
 
 /**
  * Validates a 32-byte hex string (0x + 64 chars)
  */
 export const bytes32Schema = z
-  .string({
-    invalid_type_error: "Invalid value, not a string",
-  })
-  .regex(BYTES32_REGEX, "Invalid value, not 32 bytes hex");
+	.string({
+		invalid_type_error: "Invalid value, not a string",
+	})
+	.regex(BYTES32_REGEX, "Invalid value, not 32 bytes hex");
 
 /**
  * Validates any hex string (0x...)
  */
 export const bytesSchema = z
-  .string({
-    invalid_type_error: "Invalid value, not a string",
-  })
-  .regex(BYTES_REGEX, "Invalid value, not hex");
+	.string({
+		invalid_type_error: "Invalid value, not a string",
+	})
+	.regex(BYTES_REGEX, "Invalid value, not hex");
 
 // ============================================================================
 // LUKSO Standard Primitives (LSP2/LSP3/LSP4)
@@ -60,58 +60,58 @@ export const bytesSchema = z
  * Verification data schema for LSP2 ERC725YJSONSchema
  */
 export const verificationSchema = z.discriminatedUnion("method", [
-  z.object({
-    data: bytes32Schema,
-    method: z.enum([
-      VERIFICATION_METHODS.HASH_KECCAK256_BYTES,
-      VERIFICATION_METHODS.HASH_KECCAK256_UTF8,
-    ]),
-  }),
-  z.object({
-    method: z.enum([VERIFICATION_METHODS.ECDSA]),
-    /** Signer address */
-    data: addressSchema,
-    /** URL where the signature can be retrieved */
-    source: z.string().url("Invalid value, not a URL"),
-  }),
+	z.object({
+		data: bytes32Schema,
+		method: z.enum([
+			VERIFICATION_METHODS.HASH_KECCAK256_BYTES,
+			VERIFICATION_METHODS.HASH_KECCAK256_UTF8,
+		]),
+	}),
+	z.object({
+		method: z.enum([VERIFICATION_METHODS.ECDSA]),
+		/** Signer address */
+		data: addressSchema,
+		/** URL where the signature can be retrieved */
+		source: z.string().url("Invalid value, not a URL"),
+	}),
 ]);
 
 /**
  * Image metadata schema (LSP3/LSP4)
  */
 export const imageSchema = z.object({
-  url: z
-    .string({ invalid_type_error: "Invalid value, not a string" })
-    .url("Invalid value, not a URL"),
-  width: z.number({ invalid_type_error: "Invalid value, not a number" }),
-  height: z.number({ invalid_type_error: "Invalid value, not a number" }),
-  verification: verificationSchema,
+	url: z
+		.string({ invalid_type_error: "Invalid value, not a string" })
+		.url("Invalid value, not a URL"),
+	width: z.number({ invalid_type_error: "Invalid value, not a number" }),
+	height: z.number({ invalid_type_error: "Invalid value, not a number" }),
+	verification: verificationSchema,
 });
 
 /**
  * Asset metadata schema (LSP3/LSP4)
  */
 export const assetSchema = z.object({
-  url: z
-    .string({ invalid_type_error: "Invalid value, not a string" })
-    .url("Invalid value, not a URL"),
-  fileType: z.string({ invalid_type_error: "Invalid value, not a string" }),
-  verification: verificationSchema,
+	url: z
+		.string({ invalid_type_error: "Invalid value, not a string" })
+		.url("Invalid value, not a URL"),
+	fileType: z.string({ invalid_type_error: "Invalid value, not a string" }),
+	verification: verificationSchema,
 });
 
 /**
  * Link schema (LSP3/LSP4)
  */
 export const linkSchema = z.object({
-  title: z.string({ invalid_type_error: "Invalid value, not a string" }),
-  url: z
-    .string({ invalid_type_error: "Invalid value, not a string" })
-    .url("Invalid value, not a URL"),
+	title: z.string({ invalid_type_error: "Invalid value, not a string" }),
+	url: z
+		.string({ invalid_type_error: "Invalid value, not a string" })
+		.url("Invalid value, not a URL"),
 });
 
 /**
  * Tag schema (LSP3/LSP4)
  */
 export const tagSchema = z.string({
-  invalid_type_error: "Invalid value, not a string",
+	invalid_type_error: "Invalid value, not a string",
 });

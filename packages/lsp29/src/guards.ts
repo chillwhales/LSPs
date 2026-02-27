@@ -6,8 +6,8 @@
  * @see LSP-29-EncryptedAssets.md for full specification
  */
 
-import { lsp29EncryptedAssetSchema } from './schemas';
-import type { LSP29EncryptedAsset } from './types';
+import { lsp29EncryptedAssetSchema } from "./schemas";
+import type { LSP29EncryptedAsset } from "./types";
 
 // ============================================================================
 // Type Guards
@@ -32,5 +32,5 @@ import type { LSP29EncryptedAsset } from './types';
  * ```
  */
 export function isLsp29Asset(data: unknown): data is LSP29EncryptedAsset {
-  return lsp29EncryptedAssetSchema.safeParse(data).success;
+	return lsp29EncryptedAssetSchema.safeParse(data).success;
 }

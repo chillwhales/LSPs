@@ -8,7 +8,7 @@
  */
 
 export * from "./constants";
+export * from "./deploy";
+export * from "./guards";
 export * from "./schemas";
 export * from "./types";
-export * from "./guards";
-export * from "./deploy";

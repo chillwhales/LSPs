@@ -5,7 +5,7 @@
  */
 
 import type { Image } from "@chillwhales/lsp2";
-import { LSP4Metadata } from "./types";
+import type { LSP4Metadata } from "./types";
 
 /**
  * Gets the best image URL from pre-extracted LSP4 Image objects.
@@ -26,24 +26,24 @@ import { LSP4Metadata } from "./types";
  * ```
  */
 export function getImageUrl(options: {
-  image?: Image | null;
-  icon?: Image | null;
-  preferIcon?: boolean;
-  parseUrl: (url: string) => string;
+	image?: Image | null;
+	icon?: Image | null;
+	preferIcon?: boolean;
+	parseUrl: (url: string) => string;
 }): string | undefined {
-  const { image, icon, preferIcon = false, parseUrl } = options;
-  const primary = preferIcon ? icon : image;
-  const fallback = preferIcon ? image : icon;
+	const { image, icon, preferIcon = false, parseUrl } = options;
+	const primary = preferIcon ? icon : image;
+	const fallback = preferIcon ? image : icon;
 
-  if (primary?.url) {
-    return parseUrl(primary.url);
-  }
+	if (primary?.url) {
+		return parseUrl(primary.url);
+	}
 
-  if (fallback?.url) {
-    return parseUrl(fallback.url);
-  }
+	if (fallback?.url) {
+		return parseUrl(fallback.url);
+	}
 
-  return undefined;
+	return undefined;
 }
 
 /**
@@ -54,5 +54,5 @@ export function getImageUrl(options: {
  * @returns Display name string
  */
 export function getAssetDisplayName(metadata: LSP4Metadata): string {
-  return metadata.name || "Digital Asset";
+	return metadata.name || "Digital Asset";
 }

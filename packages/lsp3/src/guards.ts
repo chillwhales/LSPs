@@ -11,8 +11,8 @@ import { lsp3ProfileSchema } from "./schemas";
  * Type guard for LSP3 profile schema
  */
 export function isLsp3ProfileSchema(
-  obj: unknown,
+	obj: unknown,
 ): obj is z.infer<typeof lsp3ProfileSchema> {
-  const { success } = lsp3ProfileSchema.safeParse(obj);
-  return success;
+	const { success } = lsp3ProfileSchema.safeParse(obj);
+	return success;
 }

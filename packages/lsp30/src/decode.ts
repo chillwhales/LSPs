@@ -7,15 +7,15 @@
  * @see LSP-30-MultiStorageURI.md for full specification
  */
 
-import { type Hex, hexToString, keccak256, slice } from 'viem';
+import { type Hex, hexToString, keccak256, slice } from "viem";
 
 import {
-  KECCAK256_BYTES_METHOD_ID,
-  LSP30_RESERVED_PREFIX,
-  MIN_LSP30_URI_LENGTH,
-} from './constants';
-import { lsp30EntriesSchema } from './schemas';
-import type { Lsp30Entry, ParsedLsp30Uri } from './types';
+	KECCAK256_BYTES_METHOD_ID,
+	LSP30_RESERVED_PREFIX,
+	MIN_LSP30_URI_LENGTH,
+} from "./constants";
+import { lsp30EntriesSchema } from "./schemas";
+import type { Lsp30Entry, ParsedLsp30Uri } from "./types";
 
 // ============================================================================
 // Parsing Functions
@@ -37,47 +37,47 @@ import type { Lsp30Entry, ParsedLsp30Uri } from './types';
  * ```
  */
 export function parseLsp30Uri(value: Hex): ParsedLsp30Uri {
-  // Check minimum length
-  if (value.length < MIN_LSP30_URI_LENGTH) {
-    throw new Error(
-      `Invalid LSP30 URI: value too short (${value.length} chars, minimum ${MIN_LSP30_URI_LENGTH})`,
-    );
-  }
+	// Check minimum length
+	if (value.length < MIN_LSP30_URI_LENGTH) {
+		throw new Error(
+			`Invalid LSP30 URI: value too short (${value.length} chars, minimum ${MIN_LSP30_URI_LENGTH})`,
+		);
+	}
 
-  // Validate reserved prefix at bytes 0-1
-  const reservedPrefix = slice(value, 0, 2);
-  if (reservedPrefix !== LSP30_RESERVED_PREFIX) {
-    throw new Error(
-      `Invalid LSP30 URI: expected prefix ${LSP30_RESERVED_PREFIX}, got ${reservedPrefix}`,
-    );
-  }
+	// Validate reserved prefix at bytes 0-1
+	const reservedPrefix = slice(value, 0, 2);
+	if (reservedPrefix !== LSP30_RESERVED_PREFIX) {
+		throw new Error(
+			`Invalid LSP30 URI: expected prefix ${LSP30_RESERVED_PREFIX}, got ${reservedPrefix}`,
+		);
+	}
 
-  // Extract verification method at bytes 2-5
-  const verificationMethod = slice(value, 2, 6);
+	// Extract verification method at bytes 2-5
+	const verificationMethod = slice(value, 2, 6);
 
-  // Extract hash length at bytes 6-7
-  const hashLengthHex = slice(value, 6, 8);
-  const hashLength = parseInt(hashLengthHex.slice(2), 16);
+	// Extract hash length at bytes 6-7
+	const hashLengthHex = slice(value, 6, 8);
+	const hashLength = parseInt(hashLengthHex.slice(2), 16);
 
-  // Extract verification data (hash) at bytes 8 to 8+hashLength
-  const verificationData = slice(value, 8, 8 + hashLength);
+	// Extract verification data (hash) at bytes 8 to 8+hashLength
+	const verificationData = slice(value, 8, 8 + hashLength);
 
-  // Extract remaining bytes → entries JSON
-  const entriesHex = slice(value, 8 + hashLength);
-  let entries: Lsp30Entry[];
+	// Extract remaining bytes → entries JSON
+	const entriesHex = slice(value, 8 + hashLength);
+	let entries: Lsp30Entry[];
 
-  try {
-    const entriesJson = hexToString(entriesHex);
-    entries = JSON.parse(entriesJson);
-  } catch {
-    throw new Error('Invalid LSP30 URI: entries portion contains invalid JSON');
-  }
+	try {
+		const entriesJson = hexToString(entriesHex);
+		entries = JSON.parse(entriesJson);
+	} catch {
+		throw new Error("Invalid LSP30 URI: entries portion contains invalid JSON");
+	}
 
-  return {
-    verificationMethod,
-    verificationData,
-    entries,
-  };
+	return {
+		verificationMethod,
+		verificationData,
+		entries,
+	};
 }
 
 // ============================================================================
@@ -104,32 +104,32 @@ export function parseLsp30Uri(value: Hex): ParsedLsp30Uri {
  * ```
  */
 export function decodeLsp30Uri(
-  value: Hex,
-  content: Uint8Array,
+	value: Hex,
+	content: Uint8Array,
 ): { entries: Lsp30Entry[]; verificationData: Hex } {
-  // 1. Parse the URI structure
-  const parsed = parseLsp30Uri(value);
+	// 1. Parse the URI structure
+	const parsed = parseLsp30Uri(value);
 
-  // 2. Verify verification method
-  if (parsed.verificationMethod !== KECCAK256_BYTES_METHOD_ID) {
-    throw new Error(
-      `Unsupported verification method: ${parsed.verificationMethod}. Expected ${KECCAK256_BYTES_METHOD_ID} (keccak256(bytes))`,
-    );
-  }
+	// 2. Verify verification method
+	if (parsed.verificationMethod !== KECCAK256_BYTES_METHOD_ID) {
+		throw new Error(
+			`Unsupported verification method: ${parsed.verificationMethod}. Expected ${KECCAK256_BYTES_METHOD_ID} (keccak256(bytes))`,
+		);
+	}
 
-  // 3. Compute hash of provided content and verify
-  const computedHash = keccak256(content);
-  if (computedHash.toLowerCase() !== parsed.verificationData.toLowerCase()) {
-    throw new Error(
-      `LSP30 hash mismatch: content hash ${computedHash} does not match verification data ${parsed.verificationData}`,
-    );
-  }
+	// 3. Compute hash of provided content and verify
+	const computedHash = keccak256(content);
+	if (computedHash.toLowerCase() !== parsed.verificationData.toLowerCase()) {
+		throw new Error(
+			`LSP30 hash mismatch: content hash ${computedHash} does not match verification data ${parsed.verificationData}`,
+		);
+	}
 
-  // 4. Validate entries through Zod schema
-  const validatedEntries = lsp30EntriesSchema.parse(parsed.entries);
+	// 4. Validate entries through Zod schema
+	const validatedEntries = lsp30EntriesSchema.parse(parsed.entries);
 
-  return {
-    entries: validatedEntries,
-    verificationData: parsed.verificationData,
-  };
+	return {
+		entries: validatedEntries,
+		verificationData: parsed.verificationData,
+	};
 }

@@ -4,8 +4,8 @@
  * Pure functions for working with LSP3 profile metadata.
  */
 
-import type { LSP3Profile } from "./types";
 import { findBestImage, type ImageSize } from "@chillwhales/lsp2";
+import type { LSP3Profile } from "./types";
 
 /**
  * Extract profile image URL from Universal Profile metadata.
@@ -26,15 +26,15 @@ import { findBestImage, type ImageSize } from "@chillwhales/lsp2";
  * ```
  */
 export function getProfileImageUrl(
-  metadata: LSP3Profile,
-  parseUrl: (url: string) => string,
-  options?: Partial<ImageSize>,
+	metadata: LSP3Profile,
+	parseUrl: (url: string) => string,
+	options?: Partial<ImageSize>,
 ): string | undefined {
-  const profileImage = findBestImage(metadata.profileImage, options);
-  if (profileImage?.url) {
-    return parseUrl(profileImage.url);
-  }
-  return undefined;
+	const profileImage = findBestImage(metadata.profileImage, options);
+	if (profileImage?.url) {
+		return parseUrl(profileImage.url);
+	}
+	return undefined;
 }
 
 /**
@@ -45,5 +45,5 @@ export function getProfileImageUrl(
  * @returns Display name string
  */
 export function getProfileDisplayName(metadata: LSP3Profile): string {
-  return metadata.name || "Anonymous";
+	return metadata.name || "Anonymous";
 }

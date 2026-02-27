@@ -1,7 +1,7 @@
 import type { Address, Hex } from "viem";
-import { z } from "zod";
+import type { z } from "zod";
 
-import { permissionSchema } from "./schemas";
+import type { permissionSchema } from "./schemas";
 
 /**
  * LSP6 Permission name type
@@ -15,8 +15,8 @@ export type LSP6Permission = z.infer<typeof permissionSchema>;
  * @see https://docs.lukso.tech/standards/universal-profile/lsp6-key-manager#allowed-calls
  */
 export interface AllowedCall {
-  callTypes: Hex;
-  address: Address;
-  interfaceId: Hex;
-  functionSelector: Hex;
+	callTypes: Hex;
+	address: Address;
+	interfaceId: Hex;
+	functionSelector: Hex;
 }

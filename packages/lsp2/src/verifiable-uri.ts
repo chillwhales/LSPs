@@ -8,34 +8,41 @@
  */
 
 import {
-  HASH_LENGTH_PREFIX,
-  KECCAK256_BYTES_METHOD_ID,
-  MIN_VERIFIABLE_URI_LENGTH,
-  RESERVED_PREFIX,
+	concat,
+	type Hex,
+	hexToString,
+	keccak256,
+	slice,
+	stringToHex,
+} from "viem";
+import type { z } from "zod";
+import {
+	HASH_LENGTH_PREFIX,
+	KECCAK256_BYTES_METHOD_ID,
+	MIN_VERIFIABLE_URI_LENGTH,
+	RESERVED_PREFIX,
 } from "./constants";
-import { concat, Hex, hexToString, keccak256, slice, stringToHex } from "viem";
-import { z } from "zod";
 
 /**
  * Parsed components of a VerifiableURI
  */
 export interface ParsedVerifiableUri {
-  /** Verification method ID (e.g., 0x6f357c6a for keccak256(bytes)) */
-  verificationMethod: Hex;
-  /** Verification hash (32 bytes) */
-  verificationData: Hex;
-  /** The URL pointing to the content (e.g., ipfs://Qm...) */
-  url: string;
+	/** Verification method ID (e.g., 0x6f357c6a for keccak256(bytes)) */
+	verificationMethod: Hex;
+	/** Verification hash (32 bytes) */
+	verificationData: Hex;
+	/** The URL pointing to the content (e.g., ipfs://Qm...) */
+	url: string;
 }
 
 /**
  * Result of decoding a VerifiableURI
  */
 export interface DecodedVerifiableUri<T> {
-  /** The parsed and validated data */
-  data: T;
-  /** The URL extracted from the VerifiableURI */
-  url: string;
+	/** The parsed and validated data */
+	data: T;
+	/** The URL extracted from the VerifiableURI */
+	url: string;
 }
 
 /**
@@ -62,17 +69,17 @@ export interface DecodedVerifiableUri<T> {
  * ```
  */
 export function encodeVerifiableUri<T>(data: T, ipfsUrl: string): Hex {
-  const jsonString = JSON.stringify(data);
-  const verificationHash = keccak256(stringToHex(jsonString));
-  const urlHex = stringToHex(ipfsUrl);
+	const jsonString = JSON.stringify(data);
+	const verificationHash = keccak256(stringToHex(jsonString));
+	const urlHex = stringToHex(ipfsUrl);
 
-  return concat([
-    RESERVED_PREFIX,
-    KECCAK256_BYTES_METHOD_ID,
-    HASH_LENGTH_PREFIX,
-    verificationHash,
-    urlHex,
-  ]);
+	return concat([
+		RESERVED_PREFIX,
+		KECCAK256_BYTES_METHOD_ID,
+		HASH_LENGTH_PREFIX,
+		verificationHash,
+		urlHex,
+	]);
 }
 
 // ============================================================================
@@ -97,34 +104,34 @@ export function encodeVerifiableUri<T>(data: T, ipfsUrl: string): Hex {
  * ```
  */
 export function parseVerifiableUri(value: Hex): ParsedVerifiableUri {
-  if (value.length < MIN_VERIFIABLE_URI_LENGTH) {
-    throw new Error(
-      `Invalid VerifiableURI: value too short (${value.length} chars, minimum ${MIN_VERIFIABLE_URI_LENGTH})`,
-    );
-  }
+	if (value.length < MIN_VERIFIABLE_URI_LENGTH) {
+		throw new Error(
+			`Invalid VerifiableURI: value too short (${value.length} chars, minimum ${MIN_VERIFIABLE_URI_LENGTH})`,
+		);
+	}
 
-  const reservedPrefix = slice(value, 0, 2);
-  if (reservedPrefix !== RESERVED_PREFIX) {
-    throw new Error(
-      `Invalid VerifiableURI: expected reserved prefix ${RESERVED_PREFIX}, got ${reservedPrefix}`,
-    );
-  }
+	const reservedPrefix = slice(value, 0, 2);
+	if (reservedPrefix !== RESERVED_PREFIX) {
+		throw new Error(
+			`Invalid VerifiableURI: expected reserved prefix ${RESERVED_PREFIX}, got ${reservedPrefix}`,
+		);
+	}
 
-  const verificationMethod = slice(value, 2, 6);
+	const verificationMethod = slice(value, 2, 6);
 
-  const hashLengthHex = slice(value, 6, 8);
-  const hashLength = parseInt(hashLengthHex.slice(2), 16);
+	const hashLengthHex = slice(value, 6, 8);
+	const hashLength = parseInt(hashLengthHex.slice(2), 16);
 
-  const verificationData = slice(value, 8, 8 + hashLength);
+	const verificationData = slice(value, 8, 8 + hashLength);
 
-  const urlHex = slice(value, 8 + hashLength);
-  const url = hexToString(urlHex);
+	const urlHex = slice(value, 8 + hashLength);
+	const url = hexToString(urlHex);
 
-  return {
-    verificationMethod,
-    verificationData,
-    url,
-  };
+	return {
+		verificationMethod,
+		verificationData,
+		url,
+	};
 }
 
 // ============================================================================
@@ -159,50 +166,50 @@ export function parseVerifiableUri(value: Hex): ParsedVerifiableUri {
  * ```
  */
 export function decodeVerifiableUri<T>(
-  verifiableUriValue: Hex,
-  jsonContent: string,
-  schema?: z.ZodSchema<T>,
+	verifiableUriValue: Hex,
+	jsonContent: string,
+	schema?: z.ZodSchema<T>,
 ): DecodedVerifiableUri<T> {
-  // 1. Parse the VerifiableURI to get components
-  const { verificationMethod, verificationData, url } =
-    parseVerifiableUri(verifiableUriValue);
+	// 1. Parse the VerifiableURI to get components
+	const { verificationMethod, verificationData, url } =
+		parseVerifiableUri(verifiableUriValue);
 
-  // 2. Verify the verification method is supported
-  if (verificationMethod !== KECCAK256_BYTES_METHOD_ID) {
-    throw new Error(
-      `Unsupported verification method: ${verificationMethod}. Expected ${KECCAK256_BYTES_METHOD_ID} (keccak256(bytes))`,
-    );
-  }
+	// 2. Verify the verification method is supported
+	if (verificationMethod !== KECCAK256_BYTES_METHOD_ID) {
+		throw new Error(
+			`Unsupported verification method: ${verificationMethod}. Expected ${KECCAK256_BYTES_METHOD_ID} (keccak256(bytes))`,
+		);
+	}
 
-  // 3. Compute hash of the provided JSON content
-  const computedHash = keccak256(stringToHex(jsonContent));
+	// 3. Compute hash of the provided JSON content
+	const computedHash = keccak256(stringToHex(jsonContent));
 
-  // 4. Verify hash matches
-  if (computedHash.toLowerCase() !== verificationData.toLowerCase()) {
-    throw new Error(
-      `VerifiableURI hash mismatch: content hash ${computedHash} does not match verification data ${verificationData}`,
-    );
-  }
+	// 4. Verify hash matches
+	if (computedHash.toLowerCase() !== verificationData.toLowerCase()) {
+		throw new Error(
+			`VerifiableURI hash mismatch: content hash ${computedHash} does not match verification data ${verificationData}`,
+		);
+	}
 
-  // 5. Parse JSON
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(jsonContent);
-  } catch {
-    throw new Error("Invalid JSON content");
-  }
+	// 5. Parse JSON
+	let parsed: unknown;
+	try {
+		parsed = JSON.parse(jsonContent);
+	} catch {
+		throw new Error("Invalid JSON content");
+	}
 
-  // 6. Validate against schema if provided
-  if (schema) {
-    const result = schema.safeParse(parsed);
-    if (!result.success) {
-      throw new Error(`Schema validation failed: ${result.error.message}`);
-    }
-    return { data: result.data, url };
-  }
+	// 6. Validate against schema if provided
+	if (schema) {
+		const result = schema.safeParse(parsed);
+		if (!result.success) {
+			throw new Error(`Schema validation failed: ${result.error.message}`);
+		}
+		return { data: result.data, url };
+	}
 
-  // 7. Return untyped (caller's responsibility to ensure type safety)
-  return { data: parsed as T, url };
+	// 7. Return untyped (caller's responsibility to ensure type safety)
+	return { data: parsed as T, url };
 }
 
 // ============================================================================
@@ -226,8 +233,8 @@ export function decodeVerifiableUri<T>(
  * ```
  */
 export function computeVerificationHash<T>(data: T): Hex {
-  const jsonString = JSON.stringify(data);
-  return keccak256(stringToHex(jsonString));
+	const jsonString = JSON.stringify(data);
+	return keccak256(stringToHex(jsonString));
 }
 
 /**
@@ -248,14 +255,14 @@ export function computeVerificationHash<T>(data: T): Hex {
  * ```
  */
 export function isVerifiableUri(value: Hex): boolean {
-  if (value.length < MIN_VERIFIABLE_URI_LENGTH) {
-    return false;
-  }
+	if (value.length < MIN_VERIFIABLE_URI_LENGTH) {
+		return false;
+	}
 
-  try {
-    const reservedPrefix = slice(value, 0, 2);
-    return reservedPrefix === RESERVED_PREFIX;
-  } catch {
-    return false;
-  }
+	try {
+		const reservedPrefix = slice(value, 0, 2);
+		return reservedPrefix === RESERVED_PREFIX;
+	} catch {
+		return false;
+	}
 }

@@ -11,10 +11,10 @@ import type { Image } from "./types";
  * Image size in pixels
  */
 export interface ImageSize {
-  /** Width in pixels */
-  width: number;
-  /** Height in pixels */
-  height: number;
+	/** Width in pixels */
+	width: number;
+	/** Height in pixels */
+	height: number;
 }
 
 /**
@@ -26,18 +26,18 @@ export interface ImageSize {
  * @returns The best matching image or undefined
  */
 export function findBestImage(
-  images: Image[] | undefined,
-  options?: Partial<ImageSize>,
+	images: Image[] | undefined,
+	options?: Partial<ImageSize>,
 ): Image | undefined {
-  if (!images || images.length === 0) {
-    return undefined;
-  }
+	if (!images || images.length === 0) {
+		return undefined;
+	}
 
-  if (options?.width != null && options?.height != null) {
-    return findClosestImage(images, options.width, options.height) ?? undefined;
-  }
+	if (options?.width != null && options?.height != null) {
+		return findClosestImage(images, options.width, options.height) ?? undefined;
+	}
 
-  return images[0];
+	return images[0];
 }
 
 /**
@@ -51,31 +51,29 @@ export function findBestImage(
  * @returns The closest image object or null if no images provided
  */
 export function findClosestImage(
-  images: Image[],
-  targetWidth: number,
-  targetHeight: number,
+	images: Image[],
+	targetWidth: number,
+	targetHeight: number,
 ): Image | null {
-  if (!images || images.length === 0) {
-    return null;
-  }
+	if (!images || images.length === 0) {
+		return null;
+	}
 
-  const calculateDistance = (width: number, height: number): number => {
-    return Math.sqrt(
-      Math.pow(width - targetWidth, 2) + Math.pow(height - targetHeight, 2),
-    );
-  };
+	const calculateDistance = (width: number, height: number): number => {
+		return Math.sqrt((width - targetWidth) ** 2 + (height - targetHeight) ** 2);
+	};
 
-  let closestImage: Image | null = null;
-  let minDistance = Infinity;
+	let closestImage: Image | null = null;
+	let minDistance = Infinity;
 
-  for (const image of images) {
-    const distance = calculateDistance(image.width, image.height);
+	for (const image of images) {
+		const distance = calculateDistance(image.width, image.height);
 
-    if (distance < minDistance) {
-      minDistance = distance;
-      closestImage = image;
-    }
-  }
+		if (distance < minDistance) {
+			minDistance = distance;
+			closestImage = image;
+		}
+	}
 
-  return closestImage;
+	return closestImage;
 }

@@ -7,9 +7,9 @@
  * @see LSP-30-MultiStorageURI.md for full specification
  */
 
-import { z } from 'zod';
+import { z } from "zod";
 
-import { LSP30_MIN_ENTRIES } from './constants';
+import { LSP30_MIN_ENTRIES } from "./constants";
 
 // ============================================================================
 // Backend-Specific Entry Schemas
@@ -20,9 +20,9 @@ import { LSP30_MIN_ENTRIES } from './constants';
  * Identified by a Content Identifier (CID)
  */
 export const lsp30IpfsEntrySchema = z.object({
-  backend: z.literal('ipfs'),
-  /** IPFS content identifier (CIDv0 or CIDv1) */
-  cid: z.string().min(1, 'CID is required'),
+	backend: z.literal("ipfs"),
+	/** IPFS content identifier (CIDv0 or CIDv1) */
+	cid: z.string().min(1, "CID is required"),
 });
 
 /**
@@ -30,13 +30,13 @@ export const lsp30IpfsEntrySchema = z.object({
  * Identified by bucket, key, and region
  */
 export const lsp30S3EntrySchema = z.object({
-  backend: z.literal('s3'),
-  /** S3 bucket name */
-  bucket: z.string().min(1, 'Bucket is required'),
-  /** S3 object key */
-  key: z.string().min(1, 'Key is required'),
-  /** AWS region (e.g., "us-east-1") */
-  region: z.string().min(1, 'Region is required'),
+	backend: z.literal("s3"),
+	/** S3 bucket name */
+	bucket: z.string().min(1, "Bucket is required"),
+	/** S3 object key */
+	key: z.string().min(1, "Key is required"),
+	/** AWS region (e.g., "us-east-1") */
+	region: z.string().min(1, "Region is required"),
 });
 
 /**
@@ -44,9 +44,9 @@ export const lsp30S3EntrySchema = z.object({
  * Identified by a Cascade action ID
  */
 export const lsp30LumeraEntrySchema = z.object({
-  backend: z.literal('lumera'),
-  /** Lumera/Pastel Cascade action ID */
-  actionId: z.string().min(1, 'Action ID is required'),
+	backend: z.literal("lumera"),
+	/** Lumera/Pastel Cascade action ID */
+	actionId: z.string().min(1, "Action ID is required"),
 });
 
 /**
@@ -54,9 +54,9 @@ export const lsp30LumeraEntrySchema = z.object({
  * Identified by a transaction ID
  */
 export const lsp30ArweaveEntrySchema = z.object({
-  backend: z.literal('arweave'),
-  /** Arweave transaction ID */
-  transactionId: z.string().min(1, 'Transaction ID is required'),
+	backend: z.literal("arweave"),
+	/** Arweave transaction ID */
+	transactionId: z.string().min(1, "Transaction ID is required"),
 });
 
 // ============================================================================
@@ -75,11 +75,11 @@ export const lsp30ArweaveEntrySchema = z.object({
  * const s3Entry = { backend: 's3', bucket: 'my-bucket', key: 'content/file.bin', region: 'us-east-1' };
  * ```
  */
-export const lsp30EntrySchema = z.discriminatedUnion('backend', [
-  lsp30IpfsEntrySchema,
-  lsp30S3EntrySchema,
-  lsp30LumeraEntrySchema,
-  lsp30ArweaveEntrySchema,
+export const lsp30EntrySchema = z.discriminatedUnion("backend", [
+	lsp30IpfsEntrySchema,
+	lsp30S3EntrySchema,
+	lsp30LumeraEntrySchema,
+	lsp30ArweaveEntrySchema,
 ]);
 
 // ============================================================================
@@ -93,11 +93,11 @@ export const lsp30EntrySchema = z.discriminatedUnion('backend', [
  * The entries array is unordered — resolvers select based on viewer preference.
  */
 export const lsp30EntriesSchema = z
-  .array(lsp30EntrySchema)
-  .min(
-    LSP30_MIN_ENTRIES,
-    'LSP30 requires at least 2 storage entries — use LSP2 VerifiableURI for single-backend content',
-  );
+	.array(lsp30EntrySchema)
+	.min(
+		LSP30_MIN_ENTRIES,
+		"LSP30 requires at least 2 storage entries — use LSP2 VerifiableURI for single-backend content",
+	);
 
 // ============================================================================
 // Full URI Data Schema
@@ -110,10 +110,10 @@ export const lsp30EntriesSchema = z
  * The hash covers the content bytes (identical across all backends), not the entries JSON.
  */
 export const lsp30UriDataSchema = z.object({
-  /** keccak256 hash of content bytes, 0x-prefixed 64-char hex string */
-  verificationHash: z
-    .string()
-    .regex(/^0x[0-9a-fA-F]{64}$/, 'Must be a 0x-prefixed 64-char hex hash'),
-  /** Storage backend entries (minimum 2) */
-  entries: lsp30EntriesSchema,
+	/** keccak256 hash of content bytes, 0x-prefixed 64-char hex string */
+	verificationHash: z
+		.string()
+		.regex(/^0x[0-9a-fA-F]{64}$/, "Must be a 0x-prefixed 64-char hex hash"),
+	/** Storage backend entries (minimum 2) */
+	entries: lsp30EntriesSchema,
 });
