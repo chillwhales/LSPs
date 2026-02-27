@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Phase 2 context gathered
-last_updated: "2026-02-27T14:08:17.157Z"
-last_activity: 2026-02-27 — Phase 1 verified complete (4/4 must-haves passed)
+status: in_progress
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-02-27T14:52:25Z"
+last_activity: 2026-02-27 — Completed 02-01 (Biome install & format)
 progress:
-  total_phases: 2
+  total_phases: 8
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 5
+  completed_plans: 4
 ---
 
 # Project State: LSPs
@@ -19,23 +19,23 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 1 verified complete. All shared configs consolidated in @chillwhales/config. Ready for Phase 2 planning.
+**Current Focus:** Phase 2 in progress. Biome installed and codebase formatted. Next: git hooks & commitlint (02-02).
 
 ## Current Position
 
-**Phase:** 1 of 8 (Build Hardening & Shared Configs)
-**Plan:** 3 of 3 in phase
-**Status:** Phase complete
-**Last activity:** 2026-02-27 — Phase 1 verified complete (4/4 must-haves passed)
+**Phase:** 2 of 8 (Code Quality — Biome & Git Hooks)
+**Plan:** 1 of 2 in phase
+**Status:** In progress
+**Last activity:** 2026-02-27 — Completed 02-01 (Biome install & format)
 
-**Progress:** █░░░░░░░ 1/8 phases (Phase 1: 3/3 plans)
+**Progress:** █▓░░░░░░ 2/8 phases (Phase 2: 1/2 plans)
 
 ## Phase Summary
 
 | # | Phase | Status |
 |---|-------|--------|
 | 1 | Build Hardening & Shared Configs | ✅ Complete (3/3 plans) |
-| 2 | Code Quality — Biome & Git Hooks | ⬚ Not Started |
+| 2 | Code Quality — Biome & Git Hooks | 🔄 In Progress (1/2 plans) |
 | 3 | Dependency & Monorepo Hygiene | ⬚ Not Started |
 | 4 | Testing & Coverage Infrastructure | ⬚ Not Started |
 | 5 | CI Pipeline | ⬚ Not Started |
@@ -47,7 +47,7 @@ progress:
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 3 |
+| Plans completed | 4 |
 | Plans with issues | 0 |
 | Requirements done | 4/31 |
 | Phases done | 1/8 |
@@ -70,11 +70,15 @@ progress:
 - tsconfig extends uses @chillwhales/config/tsconfig (exports map key), not tsconfig.base.json directly
 - Vitest 4.x test.projects used instead of deprecated vitest.workspace.ts
 - vitest added to root devDependencies for root-level test runner (pnpm strict isolation)
+- All Biome formatting defaults (tabs, 80 width, double quotes, trailing commas) — zero explicit overrides in biome.json
+- noExplicitAny disabled in test files — as any is standard pattern for type guard testing
+- Single root biome.json governs all packages — no per-package configs
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
 - Phase 8 (External Extraction): Must audit marketplace and lsp-indexer repos — needs phase research
 - Pre-existing: 10 test failures in @chillwhales/lsp29 (Zod schema: images field required but missing in fixtures)
+- Pre-existing: Vitest v4 configs fail to load on Node v20 (ESM compat issue) — tests only run on Node v24+
 
 ### Pending TODOs
 - None yet
@@ -84,10 +88,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-02-27T14:08:17.156Z
-**Stopped at:** Phase 2 context gathered
-**Resume file:** .planning/phases/02-code-quality-biome-git-hooks/02-CONTEXT.md
+**Last session:** 2026-02-27T14:52:25Z
+**Stopped at:** Completed 02-01-PLAN.md
+**Resume file:** None
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-02-27*
+*Last updated: 2026-02-27T14:52:25Z*
