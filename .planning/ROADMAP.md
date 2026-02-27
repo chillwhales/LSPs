@@ -29,6 +29,13 @@ Transform the @chillwhales/* monorepo from working-but-fragile code into publish
 3. Running `pnpm test` from root discovers and runs all package tests via a single root vitest config
 4. All shared dependency versions are declared once in `pnpm-workspace.yaml` catalogs and referenced via `catalog:` in each package.json
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Create @chillwhales/config package, pnpm catalogs, migrate all package.json
+- [ ] 01-02-PLAN.md — Replace build.config.ts with shared wrappers, fix warnings, enable failOnWarn
+- [ ] 01-03-PLAN.md — Replace vitest/tsconfig configs with shared wrappers, create root vitest config
+
 ---
 
 ### Phase 2: Code Quality — Biome & Git Hooks
