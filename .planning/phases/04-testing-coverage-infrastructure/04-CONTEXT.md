@@ -6,7 +6,7 @@
 <domain>
 ## Phase Boundary
 
-Test coverage is measured across all packages with enforced minimum thresholds. Running `pnpm test --coverage` produces per-package coverage reports. Packages that fall below the configured threshold cause a non-zero exit. Coverage output is CI-consumable for later Codecov integration (Phase 5). This phase sets up infrastructure and fixes existing test failures — it does NOT include writing new tests to achieve coverage targets.
+Test coverage is measured across all packages with enforced minimum thresholds. Running `pnpm test --coverage` produces a merged coverage report across all packages. If aggregate coverage falls below the configured threshold, the command exits non-zero. Coverage output is CI-consumable for later Codecov integration (Phase 5). This phase sets up infrastructure and fixes existing test failures — it does NOT include writing new tests to achieve coverage targets.
 
 </domain>
 
@@ -29,11 +29,11 @@ Test coverage is measured across all packages with enforced minimum thresholds. 
 - Three report formats generated simultaneously: text (terminal), lcov (CI/Codecov), HTML (local browsing)
 - Coverage output lives in `coverage/` at the repo root, gitignored
 - Two ways to run: `pnpm test --coverage` (flag) and `pnpm test:coverage` (dedicated script in root package.json)
-- Single-package coverage supported via `pnpm test:coverage --filter=<package>` — must be documented so developers know about it
+- Single-package coverage is run from the root via Vitest's project selection (e.g. `pnpm test:coverage -- --project=@chillwhales/<package>`) — must be documented so developers know about it
 
 ### Claude's Discretion
 - Vitest coverage configuration details (provider options, reporter config)
-- How single-package filtering is wired (vitest project filter vs pnpm workspace filter)
+- How single-package filtering is wired (Vitest project selection vs pnpm workspace filtering), as long as commands remain valid for the configured scripts
 - HTML report styling/options
 - Exact lcov output path within `coverage/`
 

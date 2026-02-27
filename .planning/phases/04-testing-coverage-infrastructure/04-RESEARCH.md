@@ -18,7 +18,7 @@ The lsp29 test failures are well-understood: all 10 fail because test fixtures a
 ### Locked Decisions
 - 80% threshold across all four metrics: lines, branches, functions, statements
 - Uniform threshold for all 8 packages — no per-package exceptions
-- Hard fail: `pnpm test --coverage` exits non-zero if any package drops below 80%
+- Hard fail: `pnpm test --coverage` exits non-zero if aggregate coverage drops below 80%
 - No temporary lower thresholds — packages that can't meet 80% today will fail until tests are written
 - Fix the 10 known test failures in @chillwhales/lsp29 (Zod schema: images field required but missing in fixtures)
 - Fix underlying bugs first, then fix test fixtures — bugs always take priority over test fixes
@@ -27,11 +27,11 @@ The lsp29 test failures are well-understood: all 10 fail because test fixtures a
 - Three report formats generated simultaneously: text (terminal), lcov (CI/Codecov), HTML (local browsing)
 - Coverage output lives in `coverage/` at the repo root, gitignored
 - Two ways to run: `pnpm test --coverage` (flag) and `pnpm test:coverage` (dedicated script in root package.json)
-- Single-package coverage supported via `pnpm test:coverage --filter=<package>` — must be documented so developers know about it
+- Single-package coverage is run from the root via Vitest's project selection (e.g. `pnpm test:coverage -- --project=@chillwhales/<package>`) — must be documented so developers know about it
 
 ### Claude's Discretion
 - Vitest coverage configuration details (provider options, reporter config)
-- How single-package filtering is wired (vitest project filter vs pnpm workspace filter)
+- How single-package filtering is wired (Vitest project selection vs pnpm workspace filtering), as long as commands remain valid for the configured scripts
 - HTML report styling/options
 - Exact lcov output path within `coverage/`
 
