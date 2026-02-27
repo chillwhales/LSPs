@@ -9,8 +9,8 @@
 		"./tsconfig": "./tsconfig.base.json"
 	},
 	"devDependencies": {
+		"typescript": "catalog:",
 		"unbuild": "catalog:",
-		"vitest": "catalog:",
-		"typescript": "catalog:"
+		"vitest": "catalog:"
 	}
 }
