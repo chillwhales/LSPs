@@ -49,7 +49,7 @@ progress:
 |--------|-------|
 | Plans completed | 7 |
 | Plans with issues | 0 |
-| Requirements done | 8/31 |
+| Requirements done | 12/31 |
 | Phases done | 3/8 |
 
 ## Accumulated Context
