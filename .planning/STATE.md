@@ -4,22 +4,22 @@
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 1 in progress — shared build config migrated, failOnWarn: true enforced, vitest config in progress.
+**Current Focus:** Phase 1 complete — all shared configs (build, test, tsconfig) consolidated in @chillwhales/config. Ready for Phase 2.
 
 ## Current Position
 
 **Phase:** 1 of 8 (Build Hardening & Shared Configs)
-**Plan:** 2 of 3 in phase
-**Status:** In progress
-**Last activity:** 2026-02-27 — Completed 01-02-PLAN.md (Shared Build Config Migration)
+**Plan:** 3 of 3 in phase
+**Status:** Phase complete
+**Last activity:** 2026-02-27 — Completed 01-03-PLAN.md (Shared Vitest Config & Tsconfig Migration)
 
-**Progress:** █░░░░░░░ 1/8 phases (Phase 1: 2/3 plans)
+**Progress:** █░░░░░░░ 1/8 phases (Phase 1: 3/3 plans)
 
 ## Phase Summary
 
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | Build Hardening & Shared Configs | 🔄 In Progress (2/3 plans) |
+| 1 | Build Hardening & Shared Configs | ✅ Complete (3/3 plans) |
 | 2 | Code Quality — Biome & Git Hooks | ⬚ Not Started |
 | 3 | Dependency & Monorepo Hygiene | ⬚ Not Started |
 | 4 | Testing & Coverage Infrastructure | ⬚ Not Started |
@@ -32,10 +32,10 @@
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 2 |
+| Plans completed | 3 |
 | Plans with issues | 0 |
-| Requirements done | 4/31 |
-| Phases done | 0/8 |
+| Requirements done | 6/31 |
+| Phases done | 1/8 |
 
 ## Accumulated Context
 
@@ -52,10 +52,14 @@
 - failOnWarn: true as createBuildConfig default — Plan 02 handles transition
 - No build warnings existed — failOnWarn: true transition was seamless (no fixes needed)
 - All 8 packages use identical thin wrapper pattern (no per-package overrides needed)
+- tsconfig extends uses @chillwhales/config/tsconfig (exports map key), not tsconfig.base.json directly
+- Vitest 4.x test.projects used instead of deprecated vitest.workspace.ts
+- vitest added to root devDependencies for root-level test runner (pnpm strict isolation)
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
 - Phase 8 (External Extraction): Must audit marketplace and lsp-indexer repos — needs phase research
+- Pre-existing: 10 test failures in @chillwhales/lsp29 (Zod schema: images field required but missing in fixtures)
 
 ### Pending TODOs
 - None yet
@@ -65,9 +69,9 @@
 
 ## Session Continuity
 
-**Last session:** 2026-02-27 — Completed 01-02-PLAN.md (Shared Build Config Migration)
-**Stopped at:** Completed 01-02-PLAN.md
-**Resume file:** .planning/phases/01-build-hardening-shared-configs/01-03-PLAN.md
+**Last session:** 2026-02-27 — Completed 01-03-PLAN.md (Shared Vitest Config & Tsconfig Migration)
+**Stopped at:** Phase 1 complete
+**Resume file:** None (Phase 2 planning needed)
 
 ---
 *State initialized: 2026-02-27*
