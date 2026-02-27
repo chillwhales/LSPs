@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in_progress
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-02-27T14:52:25Z"
-last_activity: 2026-02-27 — Completed 02-01 (Biome install & format)
+status: completed
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-02-27T15:01:48.839Z"
+last_activity: 2026-02-27 — Completed 02-02 (Git hooks & commitlint)
 progress:
-  total_phases: 8
-  completed_phases: 1
+  total_phases: 2
+  completed_phases: 2
   total_plans: 5
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # Project State: LSPs
@@ -19,23 +19,23 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 2 in progress. Biome installed and codebase formatted. Next: git hooks & commitlint (02-02).
+**Current Focus:** Phase 2 complete. Biome + git hooks + commitlint fully operational. Next: Phase 3 (Dependency & Monorepo Hygiene).
 
 ## Current Position
 
 **Phase:** 2 of 8 (Code Quality — Biome & Git Hooks)
-**Plan:** 1 of 2 in phase
-**Status:** In progress
-**Last activity:** 2026-02-27 — Completed 02-01 (Biome install & format)
+**Plan:** 2 of 2 in phase
+**Status:** Phase complete
+**Last activity:** 2026-02-27 — Completed 02-02 (Git hooks & commitlint)
 
-**Progress:** █▓░░░░░░ 2/8 phases (Phase 2: 1/2 plans)
+**Progress:** ██░░░░░░ 2/8 phases complete
 
 ## Phase Summary
 
 | # | Phase | Status |
 |---|-------|--------|
 | 1 | Build Hardening & Shared Configs | ✅ Complete (3/3 plans) |
-| 2 | Code Quality — Biome & Git Hooks | 🔄 In Progress (1/2 plans) |
+| 2 | Code Quality — Biome & Git Hooks | ✅ Complete (2/2 plans) |
 | 3 | Dependency & Monorepo Hygiene | ⬚ Not Started |
 | 4 | Testing & Coverage Infrastructure | ⬚ Not Started |
 | 5 | CI Pipeline | ⬚ Not Started |
@@ -47,10 +47,10 @@ progress:
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 4 |
+| Plans completed | 5 |
 | Plans with issues | 0 |
 | Requirements done | 4/31 |
-| Phases done | 1/8 |
+| Phases done | 2/8 |
 
 ## Accumulated Context
 
@@ -73,6 +73,9 @@ progress:
 - All Biome formatting defaults (tabs, 80 width, double quotes, trailing commas) — zero explicit overrides in biome.json
 - noExplicitAny disabled in test files — as any is standard pattern for type guard testing
 - Single root biome.json governs all packages — no per-package configs
+- simple-git-hooks over husky — simpler config, package.json-based, zero boilerplate
+- commitlint.config.mjs (not .js) — root lacks type:module so CJS default breaks ESM export
+- pnpm.onlyBuiltDependencies for simple-git-hooks — pnpm v10 strict build policy
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
@@ -88,10 +91,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-02-27T14:52:25Z
-**Stopped at:** Completed 02-01-PLAN.md
+**Last session:** 2026-02-27T15:01:48.838Z
+**Stopped at:** Completed 02-02-PLAN.md
 **Resume file:** None
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-02-27T14:52:25Z*
+*Last updated: 2026-02-27T14:59:58Z*
