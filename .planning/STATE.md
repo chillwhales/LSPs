@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-02-27T18:46:18Z"
-last_activity: 2026-02-27 — Completed 03-01 (Install & Configure Dependency Hygiene Tools)
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-02-27T18:52:09Z"
+last_activity: 2026-02-27 — Completed 03-02 (Run Hygiene Tools & Fix Violations)
 progress:
   total_phases: 8
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 7
-  completed_plans: 6
+  completed_plans: 7
 ---
 
 # Project State: LSPs
@@ -19,16 +19,16 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 3 in progress. Dependency hygiene tools installed and configured (Plan 01 complete). Next: Plan 02 (run tools and fix violations).
+**Current Focus:** Phase 3 complete. All dependency hygiene tools pass clean. Next: Phase 4 (Testing & Coverage Infrastructure).
 
 ## Current Position
 
 **Phase:** 3 of 8 (Dependency & Monorepo Hygiene)
-**Plan:** 1 of 2 in phase
-**Status:** In progress
-**Last activity:** 2026-02-27 — Completed 03-01 (Install & Configure Dependency Hygiene Tools)
+**Plan:** 2 of 2 in phase
+**Status:** Phase complete
+**Last activity:** 2026-02-27 — Completed 03-02 (Run Hygiene Tools & Fix Violations)
 
-**Progress:** ██░░░░░░ 2/8 phases complete (6/7 plans)
+**Progress:** ███░░░░░ 3/8 phases complete (7/7 plans)
 
 ## Phase Summary
 
@@ -36,7 +36,7 @@ progress:
 |---|-------|--------|
 | 1 | Build Hardening & Shared Configs | ✅ Complete (3/3 plans) |
 | 2 | Code Quality — Biome & Git Hooks | ✅ Complete (2/2 plans) |
-| 3 | Dependency & Monorepo Hygiene | 🔄 In Progress (1/2 plans) |
+| 3 | Dependency & Monorepo Hygiene | ✅ Complete (2/2 plans) |
 | 4 | Testing & Coverage Infrastructure | ⬚ Not Started |
 | 5 | CI Pipeline | ⬚ Not Started |
 | 6 | Package Metadata & Publish Readiness | ⬚ Not Started |
@@ -47,10 +47,10 @@ progress:
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 6 |
+| Plans completed | 7 |
 | Plans with issues | 0 |
 | Requirements done | 8/31 |
-| Phases done | 2/8 |
+| Phases done | 3/8 |
 
 ## Accumulated Context
 
@@ -80,6 +80,8 @@ progress:
 - Inter-package cycles only for madge — intra-package cycles are each package's internal concern
 - deps-graph.svg gitignored — on-demand developer visualization, not committed
 - knip: packages/config gets includeEntryExports (private), library packages don't (barrel exports are public API)
+- knip auto-detects entry points from package.json exports — redundant entries removed from knip.json
+- Zero unused deps/exports/files across all workspace packages — codebase was already clean
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
@@ -95,10 +97,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-02-27T18:46:18Z
-**Stopped at:** Completed 03-01-PLAN.md
+**Last session:** 2026-02-27T18:52:09Z
+**Stopped at:** Completed 03-02-PLAN.md
 **Resume file:** None
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-02-27T18:46:18Z*
+*Last updated: 2026-02-27T18:52:09Z*
