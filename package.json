@@ -12,7 +12,7 @@
 		"knip": "knip",
 		"sherif": "sherif",
 		"madge": "madge --circular --extensions ts --exclude '\\.test\\.ts$' --ts-config ./packages/config/tsconfig.base.json packages/*/src",
-		"deps:graph": "madge --image deps-graph.svg --extensions ts --ts-config ./packages/config/tsconfig.base.json packages/*/src",
+		"deps:graph": "pnpm madge --image deps-graph.svg",
 		"check": "pnpm check:lint && pnpm sherif && pnpm knip && pnpm madge",
 		"prepare": "simple-git-hooks"
 	},
