@@ -4,22 +4,22 @@
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 1 in progress — shared config package created, catalogs wired, now migrating build configs.
+**Current Focus:** Phase 1 in progress — shared build config migrated, failOnWarn: true enforced, vitest config in progress.
 
 ## Current Position
 
 **Phase:** 1 of 8 (Build Hardening & Shared Configs)
-**Plan:** 1 of 3 in phase
+**Plan:** 2 of 3 in phase
 **Status:** In progress
-**Last activity:** 2026-02-27 — Completed 01-01-PLAN.md (Config Package & Catalogs)
+**Last activity:** 2026-02-27 — Completed 01-02-PLAN.md (Shared Build Config Migration)
 
-**Progress:** █░░░░░░░ 1/8 phases (Phase 1: 1/3 plans)
+**Progress:** █░░░░░░░ 1/8 phases (Phase 1: 2/3 plans)
 
 ## Phase Summary
 
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | Build Hardening & Shared Configs | 🔄 In Progress (1/3 plans) |
+| 1 | Build Hardening & Shared Configs | 🔄 In Progress (2/3 plans) |
 | 2 | Code Quality — Biome & Git Hooks | ⬚ Not Started |
 | 3 | Dependency & Monorepo Hygiene | ⬚ Not Started |
 | 4 | Testing & Coverage Infrastructure | ⬚ Not Started |
@@ -32,9 +32,9 @@
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 1 |
+| Plans completed | 2 |
 | Plans with issues | 0 |
-| Requirements done | 2/31 |
+| Requirements done | 4/31 |
 | Phases done | 0/8 |
 
 ## Accumulated Context
@@ -50,6 +50,8 @@
 - Single default pnpm catalog (no named catalogs) — all 8 shared deps meet 2+ package threshold
 - tsconfig.base.json at config package root (extends resolves via filesystem, not Node exports)
 - failOnWarn: true as createBuildConfig default — Plan 02 handles transition
+- No build warnings existed — failOnWarn: true transition was seamless (no fixes needed)
+- All 8 packages use identical thin wrapper pattern (no per-package overrides needed)
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
@@ -63,9 +65,9 @@
 
 ## Session Continuity
 
-**Last session:** 2026-02-27 — Completed 01-01-PLAN.md (Config Package & Catalogs)
-**Stopped at:** Completed 01-01-PLAN.md
-**Resume file:** .planning/phases/01-build-hardening-shared-configs/01-02-PLAN.md
+**Last session:** 2026-02-27 — Completed 01-02-PLAN.md (Shared Build Config Migration)
+**Stopped at:** Completed 01-02-PLAN.md
+**Resume file:** .planning/phases/01-build-hardening-shared-configs/01-03-PLAN.md
 
 ---
 *State initialized: 2026-02-27*
