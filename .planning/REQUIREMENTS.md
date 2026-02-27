@@ -13,16 +13,16 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **BUILD-02**: All packages share a single test configuration source, eliminating duplicate vitest.config.ts files
 - [x] **BUILD-03**: Build process fails on warnings (failOnWarn: true) to surface hidden issues
 - [x] **BUILD-04**: Dependency versions are centralized via pnpm catalogs in pnpm-workspace.yaml
-- [ ] **BUILD-05**: Circular dependencies between packages are detected and reported
+- [x] **BUILD-05**: Circular dependencies between packages are detected and reported
 
 ### Code Quality
 
 - [x] **QUAL-01**: All packages are linted by Biome from a single root configuration
 - [x] **QUAL-02**: All packages are formatted by Biome from a single root configuration
 - [x] **QUAL-03**: Pre-commit hook runs biome check before every commit
-- [ ] **QUAL-04**: Unused dependencies and exports are detected via knip
-- [ ] **QUAL-05**: Monorepo package consistency is validated via sherif
-- [ ] **QUAL-06**: Only pnpm can be used as package manager (enforced via preinstall)
+- [x] **QUAL-04**: Unused dependencies and exports are detected via knip
+- [x] **QUAL-05**: Monorepo package consistency is validated via sherif
+- [x] **QUAL-06**: Only pnpm can be used as package manager (enforced via preinstall)
 - [x] **QUAL-07**: All commits follow conventional commit format, enforced via commitlint
 
 ### CI Pipeline
@@ -89,13 +89,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BUILD-02 | Phase 1 | Complete |
 | BUILD-03 | Phase 1 | Complete |
 | BUILD-04 | Phase 1 | Complete |
-| BUILD-05 | Phase 3 | Pending |
+| BUILD-05 | Phase 3 | Complete |
 | QUAL-01 | Phase 2 | Complete |
 | QUAL-02 | Phase 2 | Complete |
 | QUAL-03 | Phase 2 | Complete |
-| QUAL-04 | Phase 3 | Pending |
-| QUAL-05 | Phase 3 | Pending |
-| QUAL-06 | Phase 3 | Pending |
+| QUAL-04 | Phase 3 | Complete |
+| QUAL-05 | Phase 3 | Complete |
+| QUAL-06 | Phase 3 | Complete |
 | QUAL-07 | Phase 2 | Complete |
 | CI-01 | Phase 5 | Pending |
 | CI-02 | Phase 5 | Pending |
@@ -124,4 +124,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-27*
-*Last updated: 2026-02-27 — Phase 2 complete (QUAL-01, QUAL-02, QUAL-03, QUAL-07 done)*
+*Last updated: 2026-02-27 — Phase 3 complete (BUILD-05, QUAL-04, QUAL-05, QUAL-06 done)*

@@ -26,8 +26,8 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
-		"@chillwhales/utils": "workspace:*",
 		"@chillwhales/lsp2": "workspace:*",
+		"@chillwhales/utils": "workspace:*",
 		"zod": "catalog:"
 	},
 	"devDependencies": {

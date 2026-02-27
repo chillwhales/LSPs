@@ -26,8 +26,8 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
-		"@erc725/erc725.js": "catalog:",
 		"@chillwhales/utils": "workspace:*",
+		"@erc725/erc725.js": "catalog:",
 		"@lukso/lsp6-contracts": "catalog:",
 		"zod": "catalog:"
 	},
