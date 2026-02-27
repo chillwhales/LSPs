@@ -56,6 +56,12 @@ Plans:
 3. Attempting to commit with a non-conventional message (e.g., "fixed stuff") is rejected by the commit-msg hook
 4. A single `biome.json` at root governs all packages (no per-package biome configs)
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Biome configuration & codebase formatting (QUAL-01, QUAL-02)
+- [ ] 02-02-PLAN.md — Git hooks & commitlint enforcement (QUAL-03, QUAL-07)
+
 ---
 
 ### Phase 3: Dependency & Monorepo Hygiene
