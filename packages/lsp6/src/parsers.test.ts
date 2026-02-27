@@ -88,11 +88,11 @@ describe("parseCompactBytesArray", () => {
     // ERC725Y CompactBytesArray encoding:
     // [length (2 bytes big-endian)] [data bytes...]
     // Encode a 32-byte ERC725Y data key (typical for ERC725Y keys)
-    const dataKey = "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef";
+    const dataKey =
+      "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef";
     const dataKeyWithoutPrefix = dataKey.slice(2);
     // 0x0020 == 32 bytes
-    const compactBytesSingle =
-      ("0x0020" + dataKeyWithoutPrefix) as Hex;
+    const compactBytesSingle = ("0x0020" + dataKeyWithoutPrefix) as Hex;
 
     const result = parseCompactBytesArray(compactBytesSingle, TEST_ADDRESS);
 
@@ -105,8 +105,7 @@ describe("parseCompactBytesArray", () => {
     const firstEntry = "0014" + addressWithoutPrefix;
     // Second entry: valid 4-byte data
     const secondEntry = "0004" + "deadbeef";
-    const compactBytesMultiple =
-      ("0x" + firstEntry + secondEntry) as Hex;
+    const compactBytesMultiple = ("0x" + firstEntry + secondEntry) as Hex;
 
     const result = parseCompactBytesArray(compactBytesMultiple, TEST_ADDRESS);
 
@@ -116,10 +115,12 @@ describe("parseCompactBytesArray", () => {
   });
 
   it("decodes multiple valid entries from a compact bytes array", () => {
-    // Use proper ERC725Y data keys (32 bytes each) 
-    const dataKey1 = "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef";
-    const dataKey2 = "0x9876543210fedcba9876543210fedcba9876543210fedcba9876543210fedcba";
-    
+    // Use proper ERC725Y data keys (32 bytes each)
+    const dataKey1 =
+      "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef";
+    const dataKey2 =
+      "0x9876543210fedcba9876543210fedcba9876543210fedcba9876543210fedcba";
+
     // Encode both data keys
     const entry1 = "0020" + dataKey1.slice(2);
     const entry2 = "0020" + dataKey2.slice(2);
@@ -147,17 +148,16 @@ describe("parseAllowedCalls", () => {
     //
     // CompactBytesArray encodes each element as: uint16 length (in bytes) + raw bytes.
     // 32 bytes = 0x0020.
-    const encoded =
-      ("0x" +
-        "0020" +
-        // callTypes
-        "00000003" +
-        // address
-        "ffffffffffffffffffffffffffffffffffffffff" +
-        // interfaceId
-        "ffffffff" +
-        // functionSelector
-        "ffffffff") as Hex;
+    const encoded = ("0x" +
+      "0020" +
+      // callTypes
+      "00000003" +
+      // address
+      "ffffffffffffffffffffffffffffffffffffffff" +
+      // interfaceId
+      "ffffffff" +
+      // functionSelector
+      "ffffffff") as Hex;
 
     const result = parseAllowedCalls(encoded, TEST_ADDRESS);
 
@@ -173,14 +173,14 @@ describe("parseAllowedCalls", () => {
 
   it("parses multiple allowed call entries", () => {
     // Two tuples of 32 bytes each
-    const tuple1 = 
+    const tuple1 =
       "0020" + // length: 32 bytes
       "00000001" + // callTypes: CALL
       "1234567890abcdef1234567890abcdef12345678" + // specific address
       "aabbccdd" + // specific interface
       "11223344"; // specific function
 
-    const tuple2 = 
+    const tuple2 =
       "0020" + // length: 32 bytes
       "00000002" + // callTypes: STATICCALL
       "9876543210fedcba9876543210fedcba98765432" + // different address
@@ -192,7 +192,7 @@ describe("parseAllowedCalls", () => {
     const result = parseAllowedCalls(encoded, TEST_ADDRESS);
 
     expect(result).toHaveLength(2);
-    
+
     expect(result[0]).toEqual({
       callTypes: "0x00000001",
       address: "0x1234567890AbcdEF1234567890aBcdef12345678", // EIP-55 checksummed
@@ -201,90 +201,91 @@ describe("parseAllowedCalls", () => {
     });
 
     expect(result[1]).toEqual({
-      callTypes: "0x00000002", 
+      callTypes: "0x00000002",
       address: "0x9876543210FeDcba9876543210FEdCba98765432", // Actual EIP-55 checksummed output
       interfaceId: "0xffffffff",
       functionSelector: "0xffffffff",
     });
-});
-
-describe("permissionSchema", () => {
-  it("validates known LSP6 permission names", () => {
-    // Test some known permissions from @lukso/lsp6-contracts
-    const validPermissions = [
-      "CHANGEOWNER",
-      "ADDCONTROLLER", 
-      "EDITPERMISSIONS",
-      "ADDEXTENSIONS",
-      "CHANGEEXTENSIONS",
-      "ADDUNIVERSALRECEIVERDELEGATE",
-      "CHANGEUNIVERSALRECEIVERDELEGATE",
-      "REENTRANCY",
-      "SUPER_TRANSFERVALUE",
-      "TRANSFERVALUE",
-      "SUPER_CALL",
-      "CALL",
-      "SUPER_STATICCALL", 
-      "STATICCALL",
-      "SUPER_DELEGATECALL",
-      "DELEGATECALL",
-      "DEPLOY",
-      "SUPER_SETDATA",
-      "SETDATA",
-      "ENCRYPT",
-      "DECRYPT",
-      "SIGN",
-      "EXECUTE_RELAY_CALL",
-    ];
-
-    validPermissions.forEach(permission => {
-      const result = permissionSchema.safeParse(permission);
-      expect(result.success).toBe(true);
-      if (result.success) {
-        expect(result.data).toBe(permission);
-      }
-    });
   });
 
-  it("rejects invalid permission names", () => {
-    const invalidPermissions = [
-      "INVALID_PERMISSION",
-      "random_string",
-      "",
-      123,
-      null,
-      undefined,
-    ];
+  describe("permissionSchema", () => {
+    it("validates known LSP6 permission names", () => {
+      // Test some known permissions from @lukso/lsp6-contracts
+      const validPermissions = [
+        "CHANGEOWNER",
+        "ADDCONTROLLER",
+        "EDITPERMISSIONS",
+        "ADDEXTENSIONS",
+        "CHANGEEXTENSIONS",
+        "ADDUNIVERSALRECEIVERDELEGATE",
+        "CHANGEUNIVERSALRECEIVERDELEGATE",
+        "REENTRANCY",
+        "SUPER_TRANSFERVALUE",
+        "TRANSFERVALUE",
+        "SUPER_CALL",
+        "CALL",
+        "SUPER_STATICCALL",
+        "STATICCALL",
+        "SUPER_DELEGATECALL",
+        "DELEGATECALL",
+        "DEPLOY",
+        "SUPER_SETDATA",
+        "SETDATA",
+        "ENCRYPT",
+        "DECRYPT",
+        "SIGN",
+        "EXECUTE_RELAY_CALL",
+      ];
 
-    invalidPermissions.forEach(permission => {
-      const result = permissionSchema.safeParse(permission);
-      expect(result.success).toBe(false);
+      validPermissions.forEach((permission) => {
+        const result = permissionSchema.safeParse(permission);
+        expect(result.success).toBe(true);
+        if (result.success) {
+          expect(result.data).toBe(permission);
+        }
+      });
+    });
+
+    it("rejects invalid permission names", () => {
+      const invalidPermissions = [
+        "INVALID_PERMISSION",
+        "random_string",
+        "",
+        123,
+        null,
+        undefined,
+      ];
+
+      invalidPermissions.forEach((permission) => {
+        const result = permissionSchema.safeParse(permission);
+        expect(result.success).toBe(false);
+      });
+    });
+
+    it("includes all permissions from LSP6 contracts", () => {
+      // Ensure our schema includes all permissions from the contracts package
+      Object.keys(PERMISSIONS).forEach((permissionName) => {
+        const result = permissionSchema.safeParse(permissionName);
+        expect(result.success).toBe(true);
+      });
     });
   });
-
-  it("includes all permissions from LSP6 contracts", () => {
-    // Ensure our schema includes all permissions from the contracts package
-    Object.keys(PERMISSIONS).forEach(permissionName => {
-      const result = permissionSchema.safeParse(permissionName);
-      expect(result.success).toBe(true);
-    });
-  });
-});
 
   it("handles address normalization with getAddress", () => {
-    const encoded =
-      ("0x" +
-        "0020" +
-        "00000003" +
-        "1234567890abcdef1234567890abcdef12345678" + // lowercase address
-        "ffffffff" +
-        "ffffffff") as Hex;
+    const encoded = ("0x" +
+      "0020" +
+      "00000003" +
+      "1234567890abcdef1234567890abcdef12345678" + // lowercase address
+      "ffffffff" +
+      "ffffffff") as Hex;
 
     const result = parseAllowedCalls(encoded, TEST_ADDRESS);
 
     expect(result).toHaveLength(1);
     // getAddress should normalize to checksum case
-    expect(result[0].address).toBe("0x1234567890AbcdEF1234567890aBcdef12345678");
+    expect(result[0].address).toBe(
+      "0x1234567890AbcdEF1234567890aBcdef12345678",
+    );
   });
 
   it("handles malformed data gracefully", () => {
@@ -303,16 +304,17 @@ describe("permissionSchema", () => {
 
   it("handles invalid address in tuple gracefully", () => {
     // Create a tuple with an invalid address format
-    const invalidAddressTuple = 
+    const invalidAddressTuple =
       "0020" + // length: 32 bytes
       "00000001" + // callTypes: CALL
-      "invalid_address_format_here" + "0".repeat(20) + // invalid address (not 40 chars)
+      "invalid_address_format_here" +
+      "0".repeat(20) + // invalid address (not 40 chars)
       "aabbccdd" + // interface
       "11223344"; // function
 
     const encoded = ("0x" + invalidAddressTuple) as Hex;
     const result = parseAllowedCalls(encoded, TEST_ADDRESS);
-    
+
     // Should return empty array since the address is invalid
     expect(result).toEqual([]);
   });

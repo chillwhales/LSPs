@@ -26,6 +26,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@chillwhales/lsp2": "workspace:*",
     "zod": "^3.24.1"
   },
   "peerDependencies": {

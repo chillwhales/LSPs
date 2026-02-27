@@ -14,7 +14,9 @@ import {
 /**
  * Initialization struct for Universal Profile deployment via LSP23.
  */
-export type UniversalProfileInitStruct = z.infer<typeof universalProfileInitStructSchema>;
+export type UniversalProfileInitStruct = z.infer<
+  typeof universalProfileInitStructSchema
+>;
 
 /**
  * Initialization struct for Key Manager deployment via LSP23.

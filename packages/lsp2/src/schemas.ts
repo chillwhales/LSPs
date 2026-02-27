@@ -59,19 +59,30 @@ export const bytesSchema = z
 /**
  * Verification data schema for LSP2 ERC725YJSONSchema
  */
-export const verificationSchema = z.object({
-  data: bytes32Schema,
-  method: z.enum([
-    VERIFICATION_METHODS.HASH_KECCAK256_BYTES,
-    VERIFICATION_METHODS.HASH_KECCAK256_UTF8,
-  ]),
-});
+export const verificationSchema = z.discriminatedUnion("method", [
+  z.object({
+    data: bytes32Schema,
+    method: z.enum([
+      VERIFICATION_METHODS.HASH_KECCAK256_BYTES,
+      VERIFICATION_METHODS.HASH_KECCAK256_UTF8,
+    ]),
+  }),
+  z.object({
+    method: z.enum([VERIFICATION_METHODS.ECDSA]),
+    /** Signer address */
+    data: addressSchema,
+    /** URL where the signature can be retrieved */
+    source: z.string().url("Invalid value, not a URL"),
+  }),
+]);
 
 /**
  * Image metadata schema (LSP3/LSP4)
  */
 export const imageSchema = z.object({
-  url: z.string({ invalid_type_error: "Invalid value, not a string" }),
+  url: z
+    .string({ invalid_type_error: "Invalid value, not a string" })
+    .url("Invalid value, not a URL"),
   width: z.number({ invalid_type_error: "Invalid value, not a number" }),
   height: z.number({ invalid_type_error: "Invalid value, not a number" }),
   verification: verificationSchema,
@@ -81,7 +92,9 @@ export const imageSchema = z.object({
  * Asset metadata schema (LSP3/LSP4)
  */
 export const assetSchema = z.object({
-  url: z.string({ invalid_type_error: "Invalid value, not a string" }),
+  url: z
+    .string({ invalid_type_error: "Invalid value, not a string" })
+    .url("Invalid value, not a URL"),
   fileType: z.string({ invalid_type_error: "Invalid value, not a string" }),
   verification: verificationSchema,
 });

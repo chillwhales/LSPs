@@ -78,7 +78,32 @@ The [MultiStorageURI] stored in the array MUST point to a JSON file conforming t
     "title": "<string>",
     "description": "<string>",
     "revision": "<number>",
-    "createdAt": "<string>",
+    "images": [
+      [
+        {
+          "width": "number",
+          "height": "number",
+          "url": "string",
+          "verification": {
+            "method": "keccak256(bytes)",
+            "data": "string"
+          }
+        },
+        {
+          "width": "number",
+          "height": "number",
+          "url": "string",
+          "verification": {
+            "method": "ecdsa",
+            "data": "string",
+            "source": "string"
+          }
+        }
+      ],
+      [
+        // Additional image sets
+      ]
+    ],
     "file": {
       "type": "<string>",
       "name": "<string>",
@@ -96,7 +121,11 @@ The [MultiStorageURI] stored in the array MUST point to a JSON file conforming t
     "chunks": {
       "ipfs": { "cids": ["<string>"] },
       "lumera": { "actionIds": ["<string>"] },
-      "s3": { "keys": ["<string>"], "bucket": "<string>", "region": "<string>" },
+      "s3": {
+        "keys": ["<string>"],
+        "bucket": "<string>",
+        "region": "<string>"
+      },
       "arweave": { "transactionIds": ["<string>"] },
       "iv": "<string>",
       "totalSize": "<number>"
