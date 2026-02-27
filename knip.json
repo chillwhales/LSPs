@@ -3,15 +3,13 @@
 	"workspaces": {
 		".": {
 			"entry": [],
-			"project": [],
-			"ignoreDependencies": ["simple-git-hooks"]
+			"project": []
 		},
 		"packages/*": {
-			"entry": ["src/index.ts", "src/**/*.test.ts"],
+			"entry": ["src/**/*.test.ts"],
 			"project": ["src/**/*.ts"]
 		},
 		"packages/config": {
-			"entry": ["src/build.ts", "src/vitest.ts"],
 			"project": ["src/**/*.ts"],
 			"includeEntryExports": true
 		}
