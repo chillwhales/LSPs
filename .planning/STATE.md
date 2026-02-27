@@ -50,7 +50,7 @@ progress:
 | Plans completed | 9 |
 | Plans total | 9 |
 | Plans with issues | 0 |
-| Requirements done | 14/31 |
+| Requirements done | 16/31 |
 | Phases done | 4/8 |
 
 ## Accumulated Context
