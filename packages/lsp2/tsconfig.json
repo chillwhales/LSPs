@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "@chillwhales/config/tsconfig",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src"
