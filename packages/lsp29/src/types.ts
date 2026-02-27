@@ -8,7 +8,6 @@
  */
 
 import type { z } from "zod";
-
 import type {
 	LSP29_BACKENDS,
 	LSP29_METHODS,
@@ -43,12 +42,6 @@ export type LSP29Method = (typeof LSP29_METHODS)[number];
 
 /** Union type of supported storage backend identifiers */
 export type LSP29Backend = (typeof LSP29_BACKENDS)[number];
-
-/** UI metadata for an encryption access control method */
-export interface EncryptionMethodMetadata {
-	label: string;
-	description: string;
-}
 
 // ============================================================================
 // File Types

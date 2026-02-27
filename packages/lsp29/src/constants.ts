@@ -7,8 +7,6 @@
  * @see LSP-29-EncryptedAssets.md for full specification
  */
 
-import type { EncryptionMethodMetadata, LSP29Method } from "./types";
-
 // ============================================================================
 // LSP29 Data Keys
 // ============================================================================
@@ -93,10 +91,7 @@ export const LSP29_BACKENDS = ["ipfs", "s3", "lumera", "arweave"] as const;
  * Keyed by provider-agnostic method name (not the old compound `taco-*-v1` strings).
  * Used for displaying method information in the UI.
  */
-export const ENCRYPTION_METHOD_METADATA: Record<
-	LSP29Method,
-	EncryptionMethodMetadata
-> = {
+export const ENCRYPTION_METHOD_METADATA = {
 	"digital-asset-balance": {
 		label: "Digital Asset Balance",
 		description:
@@ -114,4 +109,4 @@ export const ENCRYPTION_METHOD_METADATA: Record<
 		label: "Time-Locked",
 		description: "Content unlocks after a specific date/time",
 	},
-};
+} as const;

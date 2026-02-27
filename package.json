@@ -11,8 +11,8 @@
 		"check:lint:fix": "biome check --write",
 		"knip": "knip",
 		"sherif": "sherif",
-		"madge": "node scripts/check-circular.mjs",
-		"deps:graph": "madge --image deps-graph.svg --extensions ts --ts-config ./packages/utils/tsconfig.json packages/*/src",
+		"madge": "madge --circular --extensions ts --exclude '\\.test\\.ts$' --ts-config ./packages/config/tsconfig.base.json packages/*/src",
+		"deps:graph": "madge --image deps-graph.svg --extensions ts --ts-config ./packages/config/tsconfig.base.json packages/*/src",
 		"check": "pnpm check:lint && pnpm sherif && pnpm knip && pnpm madge",
 		"prepare": "simple-git-hooks"
 	},
