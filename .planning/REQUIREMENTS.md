@@ -45,7 +45,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Package Metadata
 
 - [x] **PKG-01**: LICENSE file exists at root and is included in each published package
-- [ ] **PKG-02**: Each package has a README with description, install command, and basic usage example
+- [x] **PKG-02**: Each package has a README with description, install command, and basic usage example
 - [x] **PKG-03**: Each package.json has complete fields: files, engines, repository, keywords
 - [x] **PKG-04**: All viem-using packages correctly declare viem as a peer dependency
 
@@ -109,7 +109,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | REL-06 | Phase 7 | Pending |
 | REL-07 | Phase 7 | Pending |
 | PKG-01 | Phase 6 | Complete |
-| PKG-02 | Phase 6 | Pending |
+| PKG-02 | Phase 6 | Complete |
 | PKG-03 | Phase 6 | Complete |
 | PKG-04 | Phase 6 | Complete |
 | TEST-01 | Phase 4 | Complete |
