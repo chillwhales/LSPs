@@ -1,17 +1,20 @@
+# Codecov configuration
+# Docs: https://docs.codecov.com/docs/codecov-yaml
+
 coverage:
   status:
     project:
       default:
-        target: auto
-        threshold: 2%
+        target: auto       # compare against base commit's coverage
+        threshold: 2%      # allow up to 2% project coverage drop (refactoring, deleting well-covered code)
     patch:
       default:
-        target: 80%
+        target: 80%        # new/changed lines must have 80% coverage (per user decision)
 
 comment:
   layout: "condensed_header, diff, flags, files"
   behavior: default
-  require_changes: true
+  require_changes: true    # only comment on PR if coverage actually changed
 
 ignore:
-  - "packages/config/**"
+  - "packages/config/**"   # no testable code — only defineProject/defineBuildConfig wrappers
