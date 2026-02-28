@@ -14,6 +14,7 @@
 		"sherif": "sherif",
 		"madge": "madge --circular --extensions ts --exclude '\\.test\\.ts$' --ts-config ./packages/config/tsconfig.base.json packages/*/src",
 		"deps:graph": "pnpm madge --image deps-graph.svg",
+		"typecheck": "pnpm -r --filter './packages/*' --filter '!@chillwhales/config' exec tsc --noEmit",
 		"check": "pnpm check:lint && pnpm sherif && pnpm knip && pnpm madge",
 		"prepare": "simple-git-hooks"
 	},
@@ -22,6 +23,7 @@
 		"commit-msg": "npx commitlint --edit $1"
 	},
 	"devDependencies": {
+		"@arethetypeswrong/cli": "^0.18.2",
 		"@biomejs/biome": "^2.4.4",
 		"@commitlint/cli": "^20.4.2",
 		"@commitlint/config-conventional": "^20.4.2",
@@ -29,6 +31,7 @@
 		"knip": "^5.85.0",
 		"madge": "^8.0.0",
 		"only-allow": "^1.2.2",
+		"publint": "^0.3.17",
 		"sherif": "^1.10.0",
 		"simple-git-hooks": "^2.13.1",
 		"vitest": "catalog:"
@@ -43,6 +46,6 @@
 	},
 	"packageManager": "pnpm@10.30.2",
 	"engines": {
-		"node": ">=18"
+		"node": ">=22"
 	}
 }

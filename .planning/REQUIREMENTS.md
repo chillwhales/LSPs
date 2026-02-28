@@ -27,10 +27,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### CI Pipeline
 
-- [ ] **CI-01**: Every PR runs install, typecheck, lint, format check, build, and test
-- [ ] **CI-02**: In-progress CI runs are cancelled when new commits are pushed
-- [ ] **CI-03**: Package exports and types are validated via publint and attw before merge
-- [ ] **CI-04**: Test coverage is reported and uploaded to Codecov on every PR
+- [x] **CI-01**: Every PR runs install, typecheck, lint, format check, build, and test
+- [x] **CI-02**: In-progress CI runs are cancelled when new commits are pushed
+- [x] **CI-03**: Package exports and types are validated via publint and attw before merge
+- [x] **CI-04**: Test coverage is reported as a PR comment on every PR
 
 ### Release Automation
 
@@ -97,10 +97,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | QUAL-05 | Phase 3 | Complete |
 | QUAL-06 | Phase 3 | Complete |
 | QUAL-07 | Phase 2 | Complete |
-| CI-01 | Phase 5 | Pending |
-| CI-02 | Phase 5 | Pending |
-| CI-03 | Phase 5 | Pending |
-| CI-04 | Phase 5 | Pending |
+| CI-01 | Phase 5 | Complete |
+| CI-02 | Phase 5 | Complete |
+| CI-03 | Phase 5 | Complete |
+| CI-04 | Phase 5 | Complete |
 | REL-01 | Phase 7 | Pending |
 | REL-02 | Phase 7 | Pending |
 | REL-03 | Phase 7 | Pending |

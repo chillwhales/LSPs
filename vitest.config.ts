@@ -5,7 +5,7 @@ export default defineConfig({
 		projects: ["packages/*", "!packages/config"],
 		coverage: {
 			provider: "v8",
-			reporter: ["text", "lcov", "html"],
+			reporter: ["text", "json-summary", "json"],
 			reportsDirectory: "./coverage",
 			include: ["packages/*/src/**/*.ts"],
 			exclude: [

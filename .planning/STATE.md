@@ -3,14 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Completed 04-02-PLAN.md (coverage infrastructure)
-last_updated: "2026-02-27T22:17:00.000Z"
-last_activity: 2026-02-27 — Completed 04-02-PLAN.md
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-02-28T17:15:40.941Z"
+last_activity: 2026-02-28 — Completed 05-02-PLAN.md
 progress:
   total_phases: 8
-  completed_phases: 4
-  total_plans: 9
-  completed_plans: 9
+  completed_phases: 5
+  total_plans: 11
+  completed_plans: 11
+  percent: 62
 ---
 
 # Project State: LSPs
@@ -19,16 +20,16 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 4 complete. All 9 plans through Phase 4 done. Phase 5 (CI Pipeline) next.
+**Current Focus:** Phase 5 complete. 11 plans done. Ready for Phase 6 (Package Metadata & Publish Readiness).
 
 ## Current Position
 
-**Phase:** 4 of 8 (Testing & Coverage Infrastructure)
-**Plan:** 2 of 2 in phase (COMPLETE)
+**Phase:** 5 of 8 (CI Pipeline)
+**Plan:** 2 of 2 in phase (complete)
 **Status:** Phase complete
-**Last activity:** 2026-02-27 — Completed 04-02-PLAN.md
+**Last activity:** 2026-02-28 — Completed 05-02-PLAN.md
 
-**Progress:** █████░░░ 4/8 phases complete (9/9 plans)
+**Progress:** ██████░░░░ 5/8 phases (62%)
 
 ## Phase Summary
 
@@ -38,7 +39,7 @@ progress:
 | 2 | Code Quality — Biome & Git Hooks | ✅ Complete (2/2 plans) |
 | 3 | Dependency & Monorepo Hygiene | ✅ Complete (2/2 plans) |
 | 4 | Testing & Coverage Infrastructure | ✅ Complete (2/2 plans) |
-| 5 | CI Pipeline | ⬚ Not Started |
+| 5 | CI Pipeline | ✅ Complete (2/2 plans) |
 | 6 | Package Metadata & Publish Readiness | ⬚ Not Started |
 | 7 | Release Automation | ⬚ Not Started |
 | 8 | External Code Extraction | ⬚ Not Started |
@@ -47,11 +48,12 @@ progress:
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 9 |
-| Plans total | 9 |
+| Plans completed | 11 |
+| Plans total | 11 |
 | Plans with issues | 0 |
-| Requirements done | 16/31 |
-| Phases done | 4/8 |
+| Requirements done | 20/31 |
+| Phases done | 5/8 |
+| Phase 05 P02 | 2min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -84,6 +86,13 @@ progress:
 - knip auto-detects entry points from package.json exports — redundant entries removed from knip.json
 - Zero unused deps/exports/files across all workspace packages — codebase was already clean
 - packages/config excluded from coverage — no testable logic (only defineProject/defineBuildConfig wrappers)
+- typecheck script filters both root workspace and config package — root has no tsconfig, config has no src
+- publint --strict and attw --pack used in CI despite current warnings — Phase 6 fixes package metadata
+- codecov.yml in repo root with patch coverage 80%, project threshold 2%, ignore packages/config
+- Build artifacts passed via upload/download-artifact for CI Layer 3 jobs
+- Coverage uploaded from Node 24 only via conditional artifact upload in test matrix
+- publint --strict and attw --pack failures confirmed as FalseCJS type issues — Phase 6 scope
+- knip ignoreBinaries for tsc — runs via pnpm -r exec in package context, not root
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
@@ -99,10 +108,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-02-27T22:17:00.000Z
-**Stopped at:** Completed 04-02-PLAN.md (coverage infrastructure)
-**Resume with:** `/gsd-execute-phase 5` (CI Pipeline)
+**Last session:** 2026-02-28T17:12:36.152Z
+**Stopped at:** Completed 05-02-PLAN.md
+**Resume with:** Phase 6 planning (Package Metadata & Publish Readiness)
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-02-27T22:17:00Z*
+*Last updated: 2026-02-28T17:10:44Z*

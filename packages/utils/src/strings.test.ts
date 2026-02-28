@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isEqual } from "../dist";
+import { isEqual } from "./strings";
 
 describe("isHexEqual", () => {
 	it("returns true for matching hex (case-insensitive)", () => {
