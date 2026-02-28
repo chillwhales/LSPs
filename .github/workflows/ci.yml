@@ -31,7 +31,7 @@ jobs:
   # ═══════════════════════════════════════
   typecheck:
     name: Typecheck
-    needs: [install]
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,6 +41,10 @@ jobs:
           node-version: 24
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: packages
       - run: pnpm typecheck
 
   lint:
@@ -136,7 +140,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: .
+          path: packages
       - run: pnpm -r --filter './packages/*' --filter '!@chillwhales/config' exec publint --strict
       - run: pnpm -r --filter './packages/*' --filter '!@chillwhales/config' exec attw --pack .
 
@@ -158,7 +162,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: build-output
-          path: .
+          path: packages
       - run: pnpm test:coverage
       - uses: actions/upload-artifact@v4
         if: matrix.node-version == 24
