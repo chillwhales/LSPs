@@ -3,7 +3,8 @@
 	"workspaces": {
 		".": {
 			"entry": [],
-			"project": []
+			"project": [],
+			"ignoreBinaries": ["tsc"]
 		},
 		"packages/*": {
 			"entry": ["src/**/*.test.ts"],
