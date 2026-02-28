@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in_progress
-stopped_at: Phase 6 context gathered
-last_updated: "2026-02-28T18:58:23.930Z"
-last_activity: 2026-02-28 — Completed 05-02-PLAN.md
+status: completed
+stopped_at: Completed 06-02-PLAN.md
+last_updated: "2026-02-28T19:52:38.679Z"
+last_activity: 2026-02-28 — Completed 06-02-PLAN.md
 progress:
   total_phases: 8
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 13
-  completed_plans: 11
-  percent: 62
+  completed_plans: 13
+  percent: 75
 ---
 
 # Project State: LSPs
@@ -20,16 +20,16 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 5 complete. 11 plans done. Ready for Phase 6 (Package Metadata & Publish Readiness).
+**Current Focus:** Phase 6 complete. 13 plans done. All packages publish-ready with metadata, LICENSE, and README. Ready for Phase 7.
 
 ## Current Position
 
-**Phase:** 5 of 8 (CI Pipeline)
-**Plan:** 2 of 2 in phase (complete)
-**Status:** Phase complete
-**Last activity:** 2026-02-28 — Completed 05-02-PLAN.md
+**Phase:** 7 of 8 (Release Automation)
+**Plan:** 0 of ? in phase
+**Status:** Milestone complete
+**Last activity:** 2026-02-28 — Completed 06-02-PLAN.md
 
-**Progress:** ██████░░░░ 5/8 phases (62%)
+**Progress:** ███████░░░ 6/8 phases (75%)
 
 ## Phase Summary
 
@@ -40,7 +40,7 @@ progress:
 | 3 | Dependency & Monorepo Hygiene | ✅ Complete (2/2 plans) |
 | 4 | Testing & Coverage Infrastructure | ✅ Complete (2/2 plans) |
 | 5 | CI Pipeline | ✅ Complete (2/2 plans) |
-| 6 | Package Metadata & Publish Readiness | ⬚ Not Started |
+| 6 | Package Metadata & Publish Readiness | ✅ Complete (2/2 plans) |
 | 7 | Release Automation | ⬚ Not Started |
 | 8 | External Code Extraction | ⬚ Not Started |
 
@@ -48,12 +48,14 @@ progress:
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 11 |
-| Plans total | 11 |
+| Plans completed | 13 |
+| Plans total | 13 |
 | Plans with issues | 0 |
-| Requirements done | 20/31 |
-| Phases done | 5/8 |
+| Requirements done | 23/31 |
+| Phases done | 6/8 |
 | Phase 05 P02 | 2min | 2 tasks | 2 files |
+| Phase 06 P01 | 5min | 2 tasks | 12 files |
+| Phase 06 P02 | 2min | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -93,6 +95,9 @@ progress:
 - Coverage uploaded from Node 24 only via conditional artifact upload in test matrix
 - publint --strict and attw --pack failures confirmed as FalseCJS type issues — Phase 6 scope
 - knip ignoreBinaries for tsc — runs via pnpm -r exec in package context, not root
+- ESM-only build output — removed rollup.emitCJS, no CJS files generated
+- Removed main field from all packages — exports map takes precedence, main caused attw CJSResolvesToESM
+- attw --profile esm-only in CI — skips CJS resolution modes for ESM-only packages
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
@@ -108,9 +113,9 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-02-28T18:58:23.929Z
-**Stopped at:** Phase 6 context gathered
-**Resume with:** Phase 6 planning (Package Metadata & Publish Readiness)
+**Last session:** 2026-02-28T19:46:17Z
+**Stopped at:** Completed 06-02-PLAN.md
+**Resume with:** Plan Phase 7 (Release Automation)
 
 ---
 *State initialized: 2026-02-27*

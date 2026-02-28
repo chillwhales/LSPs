@@ -1,29 +1,47 @@
 {
 	"name": "@chillwhales/lsp6",
 	"version": "0.1.0",
+	"type": "module",
 	"description": "LSP6 Key Manager — permission schemas, key builders, and CompactBytesArray/AllowedCalls parsers",
 	"author": "b00ste",
 	"license": "MIT",
-	"main": "./dist/index.mjs",
-	"module": "./dist/index.mjs",
-	"types": "./dist/index.d.ts",
+	"types": "./dist/index.d.mts",
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.cjs"
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
 		}
 	},
 	"files": [
 		"dist",
-		"package.json"
+		"LICENSE",
+		"README.md"
 	],
+	"engines": {
+		"node": ">=22"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/chillwhales/LSPs.git",
+		"directory": "packages/lsp6"
+	},
+	"keywords": [
+		"chillwhales",
+		"lukso",
+		"lsp",
+		"lsp6",
+		"key-manager",
+		"permissions"
+	],
+	"sideEffects": false,
 	"scripts": {
 		"build": "unbuild",
 		"build:watch": "unbuild --watch",
 		"clean": "rm -rf dist",
 		"test": "vitest run",
-		"test:watch": "vitest"
+		"test:watch": "vitest",
+		"prepack": "cp ../../LICENSE .",
+		"postpack": "rm -f LICENSE"
 	},
 	"dependencies": {
 		"@chillwhales/utils": "workspace:*",

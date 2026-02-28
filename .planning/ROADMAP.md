@@ -154,8 +154,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Package metadata, ESM-only build, LICENSE, publint/attw fix (PKG-01, PKG-03, PKG-04)
-- [ ] 06-02-PLAN.md — Package READMEs with usage examples and final verification (PKG-02)
+- [x] 06-01-PLAN.md — Package metadata, ESM-only build, LICENSE, publint/attw fix (PKG-01, PKG-03, PKG-04)
+- [x] 06-02-PLAN.md — Package READMEs with usage examples and final verification (PKG-02)
 
 **Success Criteria:**
 1. Running `npm pack --dry-run` on any package shows LICENSE and README included in the tarball
@@ -214,11 +214,11 @@ Plans:
 | 2 | Code Quality — Biome & Git Hooks | QUAL-01, QUAL-02, QUAL-03, QUAL-07 | ✅ Complete (2026-02-27) |
 | 3 | Dependency & Monorepo Hygiene | BUILD-05, QUAL-04, QUAL-05, QUAL-06 | ✅ Complete (2026-02-27) |
 | 4 | Testing & Coverage Infrastructure | TEST-01, TEST-02 | ✅ Complete (2026-02-27) |
-| 5 | CI Pipeline | CI-01, CI-02, CI-03, CI-04 | 🔄 Planned (2 plans) |
-| 6 | Package Metadata & Publish Readiness | PKG-01, PKG-02, PKG-03, PKG-04 | ⬚ Not Started |
+| 5 | CI Pipeline | CI-01, CI-02, CI-03, CI-04 | ✅ Complete |
+| 6 | Package Metadata & Publish Readiness | PKG-01, PKG-02, PKG-03, PKG-04 | ✅ Complete (2026-02-28) |
 | 7 | Release Automation | REL-01, REL-02, REL-03, REL-04, REL-05, REL-06, REL-07 | ⬚ Not Started |
 | 8 | External Code Extraction | EXT-01, EXT-02 | ⬚ Not Started |
 
 ---
 *Roadmap created: 2026-02-27*
-*Last updated: 2026-02-27 — Phase 4 complete (coverage infrastructure: @vitest/coverage-v8, 80% thresholds, baseline 94%+)*
+*Last updated: 2026-02-28 — Phase 6 complete (ESM-only builds, package metadata, LICENSE, READMEs — all 8 packages publish-ready)*
