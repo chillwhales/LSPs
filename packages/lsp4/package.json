@@ -5,7 +5,6 @@
 	"description": "LSP4 Digital Asset Metadata — schemas, types, and utilities for LSP7/LSP8 token metadata on LUKSO",
 	"author": "b00ste",
 	"license": "MIT",
-	"main": "./dist/index.mjs",
 	"types": "./dist/index.d.mts",
 	"exports": {
 		".": {

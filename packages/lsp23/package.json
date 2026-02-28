@@ -5,7 +5,6 @@
 	"description": "LSP23 Linked Contracts Factory — deployment encoding utilities for Universal Profile creation on LUKSO",
 	"author": "b00ste",
 	"license": "MIT",
-	"main": "./dist/index.mjs",
 	"types": "./dist/index.d.mts",
 	"exports": {
 		".": {

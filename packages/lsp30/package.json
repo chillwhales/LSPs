@@ -5,7 +5,6 @@
 	"description": "LSP30 Multi-Storage URI standard — encode, decode, and resolve multi-backend content references",
 	"author": "b00ste",
 	"license": "MIT",
-	"main": "./dist/index.mjs",
 	"types": "./dist/index.d.mts",
 	"exports": {
 		".": {

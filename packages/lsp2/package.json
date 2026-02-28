@@ -5,7 +5,6 @@
 	"description": "LSP2 ERC725Y JSON Schema — shared primitives, VerifiableURI encoding/decoding, and image utilities",
 	"author": "b00ste",
 	"license": "MIT",
-	"main": "./dist/index.mjs",
 	"types": "./dist/index.d.mts",
 	"exports": {
 		".": {

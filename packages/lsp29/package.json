@@ -5,7 +5,6 @@
 	"description": "LSP29 Encrypted Assets standard — schemas, types, constants, and encode/decode utilities for encrypted content on Universal Profiles",
 	"author": "b00ste",
 	"license": "MIT",
-	"main": "./dist/index.mjs",
 	"types": "./dist/index.d.mts",
 	"exports": {
 		".": {

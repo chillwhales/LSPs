@@ -5,7 +5,6 @@
 	"description": "Shared utility functions for the @chillwhales LUKSO Standards Packages",
 	"author": "b00ste",
 	"license": "MIT",
-	"main": "./dist/index.mjs",
 	"types": "./dist/index.d.mts",
 	"exports": {
 		".": {
