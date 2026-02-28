@@ -17,7 +17,7 @@ const validAsset: LSP29EncryptedAsset = {
 		title: "Test Content",
 		description: "A test encrypted asset",
 		revision: 1,
-		createdAt: "2024-01-01T00:00:00.000Z",
+		images: [],
 		file: {
 			type: "image/png",
 			name: "test.png",

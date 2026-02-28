@@ -51,8 +51,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Testing & Coverage
 
-- [ ] **TEST-01**: Test coverage is measured via @vitest/coverage-v8
-- [ ] **TEST-02**: Minimum coverage thresholds are enforced (70-80%)
+- [x] **TEST-01**: Test coverage is measured via @vitest/coverage-v8
+- [x] **TEST-02**: Minimum coverage thresholds are enforced (70-80%)
 
 ### External Extraction
 
@@ -112,8 +112,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PKG-02 | Phase 6 | Pending |
 | PKG-03 | Phase 6 | Pending |
 | PKG-04 | Phase 6 | Pending |
-| TEST-01 | Phase 4 | Pending |
-| TEST-02 | Phase 4 | Pending |
+| TEST-01 | Phase 4 | Complete |
+| TEST-02 | Phase 4 | Complete |
 | EXT-01 | Phase 8 | Pending |
 | EXT-02 | Phase 8 | Pending |
 
@@ -124,4 +124,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-02-27*
-*Last updated: 2026-02-27 — Phase 3 complete (BUILD-05, QUAL-04, QUAL-05, QUAL-06 done)*
+*Last updated: 2026-02-27 — Phase 4 complete (TEST-01, TEST-02 done)*

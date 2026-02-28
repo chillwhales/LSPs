@@ -103,8 +103,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Fix lsp29 test failures (missing images field, stale createdAt in fixtures)
-- [ ] 04-02-PLAN.md — Configure @vitest/coverage-v8, wire scripts, capture baseline
+- [x] 04-01-PLAN.md — Fix lsp29 test failures (missing images field, stale createdAt in fixtures)
+- [x] 04-02-PLAN.md — Configure @vitest/coverage-v8, wire scripts, capture baseline
 
 **Success Criteria:**
 1. Running `pnpm test --coverage` produces a coverage report showing line, branch, function, and statement coverage per package
@@ -201,7 +201,7 @@ Plans:
 | 1 | Build Hardening & Shared Configs | BUILD-01, BUILD-02, BUILD-03, BUILD-04 | ✅ Complete |
 | 2 | Code Quality — Biome & Git Hooks | QUAL-01, QUAL-02, QUAL-03, QUAL-07 | ✅ Complete (2026-02-27) |
 | 3 | Dependency & Monorepo Hygiene | BUILD-05, QUAL-04, QUAL-05, QUAL-06 | ✅ Complete (2026-02-27) |
-| 4 | Testing & Coverage Infrastructure | TEST-01, TEST-02 | ⬚ Not Started |
+| 4 | Testing & Coverage Infrastructure | TEST-01, TEST-02 | ✅ Complete (2026-02-27) |
 | 5 | CI Pipeline | CI-01, CI-02, CI-03, CI-04 | ⬚ Not Started |
 | 6 | Package Metadata & Publish Readiness | PKG-01, PKG-02, PKG-03, PKG-04 | ⬚ Not Started |
 | 7 | Release Automation | REL-01, REL-02, REL-03, REL-04, REL-05, REL-06, REL-07 | ⬚ Not Started |
@@ -209,4 +209,4 @@ Plans:
 
 ---
 *Roadmap created: 2026-02-27*
-*Last updated: 2026-02-27 — Phase 3 complete (All hygiene tools pass clean)*
+*Last updated: 2026-02-27 — Phase 4 complete (coverage infrastructure: @vitest/coverage-v8, 80% thresholds, baseline 94%+)*

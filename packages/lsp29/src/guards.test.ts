@@ -17,7 +17,7 @@ const validAsset: LSP29EncryptedAsset = {
 		title: "Test Content",
 		description: "A test encrypted asset",
 		revision: 1,
-		createdAt: "2024-01-01T00:00:00.000Z",
+		images: [],
 		file: {
 			type: "image/png",
 			name: "test.png",
@@ -87,7 +87,6 @@ describe("isLsp29Asset", () => {
 				id: "test",
 				// missing title
 				revision: 1,
-				createdAt: "2024-01-01T00:00:00.000Z",
 				file: validAsset.LSP29EncryptedAsset.file,
 				encryption: validAsset.LSP29EncryptedAsset.encryption,
 				chunks: validAsset.LSP29EncryptedAsset.chunks,
@@ -138,16 +137,6 @@ describe("isLsp29Asset", () => {
 			},
 		};
 		expect(isLsp29Asset(invalidRevision)).toBe(false);
-	});
-
-	it("should return false for invalid createdAt", () => {
-		const invalidDate = {
-			LSP29EncryptedAsset: {
-				...validAsset.LSP29EncryptedAsset,
-				createdAt: "not-a-date",
-			},
-		};
-		expect(isLsp29Asset(invalidDate)).toBe(false);
 	});
 
 	it("should work with lsp8-ownership encryption", () => {
