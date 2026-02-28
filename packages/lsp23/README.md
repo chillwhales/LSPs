@@ -1,6 +1,6 @@
 # @chillwhales/lsp23
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 LSP23 Linked Contracts Factory — deployment encoding utilities for creating Universal Profiles on LUKSO via the LSP23 factory contract.
 
@@ -45,4 +45,4 @@ Types are exported and available in your editor via TypeScript IntelliSense.
 
 ## License
 
-[MIT](../../LICENSE)
+[MIT](./LICENSE)

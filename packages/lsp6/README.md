@@ -1,6 +1,6 @@
 # @chillwhales/lsp6
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 LSP6 Key Manager — permission key builders, CompactBytesArray parsers, and schemas for managing controller permissions on LUKSO Universal Profiles.
 
@@ -44,4 +44,4 @@ Types are exported and available in your editor via TypeScript IntelliSense.
 
 ## License
 
-[MIT](../../LICENSE)
+[MIT](./LICENSE)

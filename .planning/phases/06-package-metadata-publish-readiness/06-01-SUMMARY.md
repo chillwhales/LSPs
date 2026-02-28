@@ -20,7 +20,7 @@ affects: [07-release-automation, 08-external-code-extraction]
 # Tech tracking
 tech-stack:
   added: []
-  patterns: [ESM-only exports map, prepack LICENSE copy, attw cjs-resolves-to-esm ignore]
+  patterns: [ESM-only exports map, prepack LICENSE copy, attw --profile esm-only]
 
 key-files:
   created: [LICENSE]
@@ -28,7 +28,7 @@ key-files:
 
 key-decisions:
   - "Removed main field from all packages — exports map takes precedence in all modern Node versions"
-  - "Added --ignore-rules cjs-resolves-to-esm to attw CI command — expected behavior for ESM-only packages"
+  - "Used attw --profile esm-only in CI — skips CJS resolution modes for ESM-only packages"
   - "Used default condition (not import) in exports map — standard for ESM-only with type:module"
 
 patterns-established:
@@ -71,7 +71,7 @@ Each task was committed atomically:
 - `LICENSE` - MIT license text (2026 Chillwhales contributors)
 - `.gitignore` - Added packages/*/LICENSE exclusion
 - `packages/config/src/build.ts` - Removed rollup.emitCJS (ESM-only)
-- `.github/workflows/ci.yml` - Added --ignore-rules cjs-resolves-to-esm to attw
+- `.github/workflows/ci.yml` - Added --profile esm-only to attw
 - `packages/utils/package.json` - Full metadata, ESM-only exports, prepack/postpack
 - `packages/lsp2/package.json` - Full metadata, ESM-only exports, prepack/postpack
 - `packages/lsp3/package.json` - Full metadata, ESM-only exports, prepack/postpack
@@ -83,7 +83,7 @@ Each task was committed atomically:
 
 ## Decisions Made
 - Removed `main` field from all packages — with `type: module` and `exports` map, `main` is redundant and was causing attw's `cjs-resolves-to-esm` warning because it pointed to `.mjs` which CJS can't `require()`
-- Used `--ignore-rules cjs-resolves-to-esm` in CI attw command — this is expected and intentional behavior for ESM-only packages (CJS consumers need dynamic import)
+- Used `--profile esm-only` in CI attw command — skips CJS resolution modes entirely for ESM-only packages
 - Kept `default` condition in exports map rather than `import` — `default` is the standard catch-all for ESM-only packages with `type: module`
 
 ## Deviations from Plan
@@ -98,10 +98,10 @@ Each task was committed atomically:
 - **Verification:** attw --pack exits 0 for all packages
 - **Committed in:** 4e15ae5
 
-**2. [Rule 1 - Bug] Updated CI attw command with --ignore-rules cjs-resolves-to-esm**
+**2. [Rule 1 - Bug] Updated CI attw command with --profile esm-only**
 - **Found during:** Task 2 (publint/attw verification)
 - **Issue:** Even without `main` field, `declaration: "compatible"` generates `.d.ts` which attw uses for node16-CJS resolution, still triggering cjs-resolves-to-esm
-- **Fix:** Added `--ignore-rules cjs-resolves-to-esm` to CI attw command — this is expected behavior for ESM-only packages
+- **Fix:** Used `--profile esm-only` in CI attw command — skips CJS resolution modes entirely for ESM-only packages
 - **Files modified:** .github/workflows/ci.yml
 - **Verification:** All 8 packages pass attw --pack with zero errors
 - **Committed in:** 4e15ae5

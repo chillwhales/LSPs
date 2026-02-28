@@ -1,6 +1,6 @@
 # @chillwhales/lsp30
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 LSP30 Multi-Storage URI — encode, decode, and resolve multi-backend content references for redundant storage on LUKSO Universal Profiles.
 
@@ -50,4 +50,4 @@ Types are exported and available in your editor via TypeScript IntelliSense.
 
 ## License
 
-[MIT](../../LICENSE)
+[MIT](./LICENSE)

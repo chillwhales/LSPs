@@ -1,6 +1,6 @@
 # @chillwhales/lsp4
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 LSP4 Digital Asset Metadata — schemas, types, and utilities for reading and validating LSP7/LSP8 token metadata on LUKSO.
 
@@ -42,4 +42,4 @@ Types are exported and available in your editor via TypeScript IntelliSense.
 
 ## License
 
-[MIT](../../LICENSE)
+[MIT](./LICENSE)

@@ -7,7 +7,7 @@ stopped_at: Completed 06-02-PLAN.md
 last_updated: "2026-02-28T19:52:38.679Z"
 last_activity: 2026-02-28 — Completed 06-02-PLAN.md
 progress:
-  total_phases: 6
+  total_phases: 8
   completed_phases: 6
   total_plans: 13
   completed_plans: 13
@@ -97,7 +97,7 @@ progress:
 - knip ignoreBinaries for tsc — runs via pnpm -r exec in package context, not root
 - ESM-only build output — removed rollup.emitCJS, no CJS files generated
 - Removed main field from all packages — exports map takes precedence, main caused attw CJSResolvesToESM
-- attw --ignore-rules cjs-resolves-to-esm in CI — expected behavior for ESM-only packages
+- attw --profile esm-only in CI — skips CJS resolution modes for ESM-only packages
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research

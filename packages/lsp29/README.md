@@ -1,6 +1,6 @@
 # @chillwhales/lsp29
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 LSP29 Encrypted Assets — schemas, types, constants, and encode/decode utilities for storing and retrieving encrypted content on Universal Profiles.
 
@@ -34,6 +34,7 @@ const elementKey = computeLsp29ArrayIndexKey(0);
 // Use with getData() to retrieve the VerifiableURI at this index
 
 // Decode and validate LSP29 metadata JSON (e.g. fetched from IPFS)
+const jsonString = await fetch("ipfs://QmMetadata.../lsp29.json").then((r) => r.text());
 const metadata = decodeLsp29Metadata(jsonString);
 console.log(metadata.LSP29EncryptedAsset.title);
 console.log(metadata.LSP29EncryptedAsset.encryption.provider);
@@ -47,4 +48,4 @@ Types are exported and available in your editor via TypeScript IntelliSense.
 
 ## License
 
-[MIT](../../LICENSE)
+[MIT](./LICENSE)

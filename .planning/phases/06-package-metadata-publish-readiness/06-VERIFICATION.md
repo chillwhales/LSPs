@@ -20,7 +20,7 @@ re_verification: false
 | # | Truth | Status | Evidence |
 |---|-------|--------|----------|
 | 1 | publint --strict passes for all 8 publishable packages | ✓ VERIFIED | `publint v0.3.17` reports "All good!" for all 8 packages (utils, lsp2, lsp3, lsp4, lsp6, lsp23, lsp29, lsp30) |
-| 2 | attw --pack passes for all 8 publishable packages (no FalseCJS) | ✓ VERIFIED | `attw --pack --ignore-rules cjs-resolves-to-esm` shows 🟢 across all resolution modes (node10, node16-CJS, node16-ESM, bundler) for all 8 packages |
+| 2 | attw --pack passes for all 8 publishable packages (no FalseCJS) | ✓ VERIFIED | `attw --pack --profile esm-only` shows 🟢 across ESM and bundler resolution modes for all 8 packages |
 | 3 | Build output is ESM-only — no .cjs files in any package dist/ | ✓ VERIFIED | Every package dist/ contains only `index.mjs`, `index.d.ts`, `index.d.mts` — zero `.cjs` or `.d.cts` files |
 | 4 | Each package.json has type, engines, repository, keywords, sideEffects fields | ✓ VERIFIED | All 8 package.json files contain: `"type": "module"`, `"engines": {"node": ">=22"}`, `"repository"` with correct directory, `"keywords"` with base + package-specific, `"sideEffects": false` |
 | 5 | LICENSE file exists at repo root and can be copied into each package at pack time | ✓ VERIFIED | `LICENSE` exists with MIT text (2026 Chillwhales contributors). `packages/*/LICENSE` in `.gitignore`. `prepack`/`postpack` scripts in all packages. `npm pack --dry-run` confirms LICENSE in tarball (tested on lsp2, lsp30, utils) |

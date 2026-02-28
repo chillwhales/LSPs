@@ -1,6 +1,6 @@
 # @chillwhales/utils
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 Shared utility functions for the @chillwhales LUKSO Standards Packages. Provides case-insensitive string comparison and strict numeric string validation.
 
@@ -33,4 +33,4 @@ Types are exported and available in your editor via TypeScript IntelliSense.
 
 ## License
 
-[MIT](../../LICENSE)
+[MIT](./LICENSE)

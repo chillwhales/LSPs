@@ -1,6 +1,6 @@
 # @chillwhales/lsp3
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 LSP3 Universal Profile Metadata — schemas, types, and utilities for reading and validating profile metadata on LUKSO.
 
@@ -47,4 +47,4 @@ Types are exported and available in your editor via TypeScript IntelliSense.
 
 ## License
 
-[MIT](../../LICENSE)
+[MIT](./LICENSE)

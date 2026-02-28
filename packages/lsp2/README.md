@@ -1,6 +1,6 @@
 # @chillwhales/lsp2
 
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 LSP2 ERC725Y JSON Schema — shared primitives, VerifiableURI encoding/decoding, and image utilities for LUKSO dApps.
 
@@ -42,4 +42,4 @@ Types are exported and available in your editor via TypeScript IntelliSense.
 
 ## License
 
-[MIT](../../LICENSE)
+[MIT](./LICENSE)
