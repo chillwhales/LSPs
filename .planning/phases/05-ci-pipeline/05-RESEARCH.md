@@ -155,7 +155,7 @@ steps:
 - uses: actions/download-artifact@v4
   with:
     name: build-output
-    path: packages  # restores to packages/*/dist
+    path: .  # restores packages/*/dist at repo root
 ```
 
 **Gotcha:** `download-artifact` restores relative to the `path` you specify. The upload preserves directory structure from the repo root. When uploading `packages/*/dist`, you should download to the repo root (not `packages/`) so paths align correctly. Test this pattern carefully.
@@ -400,8 +400,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - uses: actions/download-artifact@v4
         with:
-          name: build-output
-          path: packages  # restores packages/*/dist
+           name: build-output
+           path: .  # restores packages/*/dist at repo root
       - run: pnpm -r --filter '!@chillwhales/config' exec publint --strict
       - run: pnpm -r --filter '!@chillwhales/config' exec attw --pack .
 
@@ -422,8 +422,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - uses: actions/download-artifact@v4
         with:
-          name: build-output
-          path: packages  # restores packages/*/dist
+           name: build-output
+           path: .  # restores packages/*/dist at repo root
       - run: pnpm test:coverage
 
   # ═══════════════════════════════════════
@@ -461,9 +461,9 @@ jobs:
     fail_ci_if_error: true
 ```
 
-**Approach B (matches user's 4-layer design):** Test job uploads coverage as artifact, separate codecov job downloads and uploads. This adds complexity for little benefit.
+**Approach B (matches user's 4-layer design):** Test job uploads coverage as artifact (Node 24 only, via `if: matrix.node-version == 24`), separate codecov job downloads and uploads to Codecov. Honors the user's locked 4-layer pipeline structure.
 
-**Recommendation:** Use Approach A — inline the Codecov upload in the test job with a matrix condition. It's simpler, avoids an extra artifact upload/download cycle, and the user's 4-layer design is about logical grouping, not strict job separation. The codecov job can be the conditional upload step within the Node 24 test matrix variant.
+**Recommendation:** Use Approach B — it matches the user's locked 4-layer design with a dedicated Layer 4 codecov job. The test job conditionally uploads the coverage artifact (Node 24 only), and the separate codecov job downloads it and sends to Codecov. The extra artifact step is minimal overhead and keeps the pipeline structure consistent with the agreed design.
 
 ### publint Per-Package Execution
 
