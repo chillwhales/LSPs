@@ -128,8 +128,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — Install publint/attw, add typecheck script, create CI workflow (CI-01, CI-02, CI-03)
-- [ ] 05-02-PLAN.md — Create codecov.yml config, validate all CI commands locally (CI-04)
+- [x] 05-01-PLAN.md — Install publint/attw, add typecheck script, create CI workflow (CI-01, CI-02, CI-03)
+- [x] 05-02-PLAN.md — Create codecov.yml config, validate all CI commands locally (CI-04)
 
 **Success Criteria:**
 1. Opening a PR triggers a GitHub Actions workflow that runs: install → typecheck → biome ci → build → publint+attw → test+coverage → codecov upload
@@ -150,6 +150,12 @@ Plans:
 - PKG-02: Each package has a README with description, install command, and basic usage example
 - PKG-03: Each package.json has complete fields: files, engines, repository, keywords
 - PKG-04: All viem-using packages correctly declare viem as a peer dependency
+
+**Plans:** 2 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Package metadata, ESM-only build, LICENSE, publint/attw fix (PKG-01, PKG-03, PKG-04)
+- [ ] 06-02-PLAN.md — Package READMEs with usage examples and final verification (PKG-02)
 
 **Success Criteria:**
 1. Running `npm pack --dry-run` on any package shows LICENSE and README included in the tarball
