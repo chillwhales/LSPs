@@ -180,6 +180,7 @@ jobs:
     if: always() && needs.test.result == 'success' && github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       pull-requests: write
     steps:
       - uses: actions/checkout@v4

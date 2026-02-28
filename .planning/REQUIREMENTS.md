@@ -30,7 +30,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **CI-01**: Every PR runs install, typecheck, lint, format check, build, and test
 - [x] **CI-02**: In-progress CI runs are cancelled when new commits are pushed
 - [x] **CI-03**: Package exports and types are validated via publint and attw before merge
-- [x] **CI-04**: Test coverage is reported and uploaded to Codecov on every PR
+- [x] **CI-04**: Test coverage is reported as a PR comment on every PR
 
 ### Release Automation
 
