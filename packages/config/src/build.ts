@@ -11,9 +11,6 @@ export function createBuildConfig(
 		declaration: "compatible",
 		clean: true,
 		failOnWarn: true,
-		rollup: {
-			emitCJS: true,
-		},
 		...overrides,
 	});
 }
