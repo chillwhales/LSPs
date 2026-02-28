@@ -142,7 +142,7 @@ jobs:
           name: build-output
           path: packages
       - run: pnpm -r --filter './packages/*' --filter '!@chillwhales/config' exec publint --strict
-      - run: pnpm -r --filter './packages/*' --filter '!@chillwhales/config' exec attw --pack . --ignore-rules cjs-resolves-to-esm
+      - run: pnpm -r --filter './packages/*' --filter '!@chillwhales/config' exec attw --pack . --profile esm-only
 
   test:
     name: Test (Node ${{ matrix.node-version }})
