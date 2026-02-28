@@ -180,6 +180,12 @@ Plans:
 - REL-06: PR-based snapshot releases are available via pkg-pr-new
 - REL-07: GitHub Releases are created when packages are published
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — Changesets configuration + GitHub Actions release workflow (REL-01, REL-02, REL-03, REL-04, REL-05, REL-07)
+- [ ] 07-02-PLAN.md — PR preview snapshot releases + integration validation (REL-06)
+
 **Success Criteria:**
 1. Adding a changeset file, merging to main, and merging the resulting version PR publishes the affected packages to npm with correct versions
 2. Each published package has a CHANGELOG.md entry linking to the PR that introduced the change
