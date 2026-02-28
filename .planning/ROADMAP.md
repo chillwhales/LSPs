@@ -190,7 +190,7 @@ Plans:
 1. Adding a changeset file, merging to main, and merging the resulting version PR publishes the affected packages to npm with correct versions
 2. Each published package has a CHANGELOG.md entry linking to the PR that introduced the change
 3. Running `npx changeset status` shows independent version tracking (packages can be at different versions)
-4. Commenting a trigger on a PR (or pushing to it) creates a snapshot release installable via a temporary npm URL
+4. Pushing to a PR creates snapshot releases of changed packages, installable via pkg.pr.new URLs posted as a PR comment
 5. After packages are published, corresponding GitHub Releases appear with changelogs
 
 ---

@@ -154,7 +154,7 @@ jobs:
     permissions:
       contents: write      # Create GitHub Releases + push version PR commits
       pull-requests: write  # Create/update version PR
-      id-token: write       # npm provenance (optional, recommended)
+      # id-token: write     # npm provenance — optional, NOT part of Phase 7 baseline plan
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -240,7 +240,6 @@ on:
       - main
 
 # No NPM_TOKEN needed — pkg-pr-new doesn't publish to npm
-permissions: {}
 
 jobs:
   preview:
@@ -251,6 +250,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history needed for pnpm --filter "...[origin/main]"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -267,8 +268,23 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Build changed packages
+        run: pnpm --filter="...[origin/main]" --filter="!@chillwhales/config" build
+
+      - name: Detect changed packages
+        id: changed
+        run: |
+          CHANGED=$(pnpm --filter="...[origin/main]" --filter="!@chillwhales/config" exec -- node -e "process.stdout.write(process.cwd())" | tr '\n' ' ' | xargs -n1 realpath --relative-to=. | sed "s|^|'./|;s|$|'|" | tr '\n' ' ')
+          echo "packages=$CHANGED" >> "$GITHUB_OUTPUT"
+          if [ -z "$CHANGED" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Publish preview packages
-        run: pnpx pkg-pr-new publish './packages/utils' './packages/lsp2' './packages/lsp3' './packages/lsp4' './packages/lsp6' './packages/lsp23' './packages/lsp29' './packages/lsp30' --compact --comment=update --packageManager=pnpm
+        if: steps.changed.outputs.skip != 'true'
+        run: pnpx pkg-pr-new publish ${{ steps.changed.outputs.packages }} --compact --comment=update --packageManager=pnpm
 ```
 
 **Key details:**
@@ -278,28 +294,17 @@ jobs:
 | **Trigger** | `pull_request` on `main` — fires on every push to a PR |
 | **Fork security** | `if: github.event.pull_request.head.repo.full_name == github.repository` blocks fork PRs from getting snapshot builds. This prevents untrusted code from running in the workflow context. |
 | **No npm token** | pkg-pr-new uses its own CDN, not npm. No secrets needed. |
-| **Package list** | Explicitly list all 8 public packages. `./packages/config` is excluded (it's private). Using `'./packages/*'` would also work but would include config — using explicit paths is safer. Alternatively, use a glob and let pkg-pr-new skip private packages (it respects `private: true`). |
+| **Only changed packages** | `pnpm --filter="...[origin/main]"` detects packages that changed since main. `--filter="!@chillwhales/config"` excludes the private config package. Only those packages are built and passed to pkg-pr-new. Requires `fetch-depth: 0` on checkout for full git history. |
 | **`--compact`** | Generates short URLs like `https://pkg.pr.new/@chillwhales/utils@abc1234` using npm metadata. Requires `repository` field in package.json (already present). |
 | **`--comment=update`** | Posts one comment on the PR and updates it on subsequent pushes (not a new comment per push). |
 | **`--packageManager=pnpm`** | Shows `pnpm add` instead of `npm i` in PR comments. |
-| **Only changed packages** | pkg-pr-new publishes all packages you point it at. To only snapshot changed packages, you'd need a filter. However, since builds are fast and the cost is minimal, publishing all 8 on every PR push is acceptable. The PR comment shows all install URLs — consumers pick what they need. If filtering is desired, use `pnpm --filter="...[origin/main]"` to detect changed packages and dynamically build the list. |
 
-**Alternative: use glob pattern (simpler, relies on `private: true`):**
-
-```yaml
-- run: pnpx pkg-pr-new publish './packages/*' --compact --comment=update --packageManager=pnpm
-```
-
-pkg-pr-new respects `private: true` in package.json, so `@chillwhales/config` would be skipped automatically. This is simpler to maintain.
-
-**PR comment example:**
+**PR comment example (only changed packages shown):**
 
 ```
 📦 Preview packages are ready!
 
-pnpm add https://pkg.pr.new/@chillwhales/utils@abc1234
 pnpm add https://pkg.pr.new/@chillwhales/lsp2@abc1234
-pnpm add https://pkg.pr.new/@chillwhales/lsp3@abc1234
 ...
 ```
 
@@ -408,18 +413,25 @@ The `pre-commit` hook runs Biome check. This does NOT run in CI (GitHub Actions 
 
 ### With knip
 
-After adding `@changesets/cli` and `@changesets/changelog-github` as devDependencies, knip should recognize them. The changeset bin and changelog module are referenced in `.changeset/config.json`, which knip may not parse. If knip reports them as unused, add to `knip.json`:
+After adding `@changesets/cli` and `@changesets/changelog-github` as devDependencies, knip should recognize them. The changeset bin and changelog module are referenced in `.changeset/config.json`, which knip may not parse. If knip reports them as unused, add `ignoreDependencies` to the existing root workspace entry in `knip.json` (preserve the existing `workspaces` structure):
 
 ```json
 {
-  ".": {
-    "ignoreDependencies": [
-      "@changesets/cli",
-      "@changesets/changelog-github"
-    ]
+  "workspaces": {
+    ".": {
+      "entry": [],
+      "project": [],
+      "ignoreBinaries": ["tsc"],
+      "ignoreDependencies": [
+        "@changesets/cli",
+        "@changesets/changelog-github"
+      ]
+    }
   }
 }
 ```
+
+Only add the `ignoreDependencies` key — do not replace or remove existing fields.
 
 ## Common Pitfalls
 
