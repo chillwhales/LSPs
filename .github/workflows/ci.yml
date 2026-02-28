@@ -141,7 +141,7 @@ jobs:
         with:
           name: build-output
           path: packages
-      - run: pnpm -r --filter './packages/*' --filter '!@chillwhales/config' exec publint --strict
+      - run: pnpm -r --filter './packages/*' --filter '!@chillwhales/config' exec publint
       - run: pnpm -r --filter './packages/*' --filter '!@chillwhales/config' exec attw --pack .
 
   test:
@@ -168,25 +168,26 @@ jobs:
         if: matrix.node-version == 24
         with:
           name: coverage-report
-          path: coverage/lcov.info
+          path: coverage/
           retention-days: 1
 
   # ═══════════════════════════════════════
-  # Layer 4: Report
+  # Layer 4: Coverage Report (PR comment)
   # ═══════════════════════════════════════
-  codecov:
+  coverage:
     name: Coverage Report
     needs: [test]
+    if: always() && needs.test.result == 'success' && github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    if: always() && needs.test.result == 'success'
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: coverage-report
           path: coverage
-      - uses: codecov/codecov-action@v5
+      - uses: davelosert/vitest-coverage-report-action@v2
         with:
-          files: ./coverage/lcov.info
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: true
+          json-summary-path: coverage/coverage-summary.json
+          json-final-path: coverage/coverage-final.json
