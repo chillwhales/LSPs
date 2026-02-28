@@ -125,6 +125,12 @@ Plans:
 - CI-03: Package exports and types are validated via publint and attw before merge
 - CI-04: Test coverage is reported and uploaded to Codecov on every PR
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — Install publint/attw, add typecheck script, create CI workflow (CI-01, CI-02, CI-03)
+- [ ] 05-02-PLAN.md — Create codecov.yml config, validate all CI commands locally (CI-04)
+
 **Success Criteria:**
 1. Opening a PR triggers a GitHub Actions workflow that runs: install → typecheck → biome ci → build → publint+attw → test+coverage → codecov upload
 2. Pushing a new commit to a PR with a running workflow cancels the previous run
@@ -202,7 +208,7 @@ Plans:
 | 2 | Code Quality — Biome & Git Hooks | QUAL-01, QUAL-02, QUAL-03, QUAL-07 | ✅ Complete (2026-02-27) |
 | 3 | Dependency & Monorepo Hygiene | BUILD-05, QUAL-04, QUAL-05, QUAL-06 | ✅ Complete (2026-02-27) |
 | 4 | Testing & Coverage Infrastructure | TEST-01, TEST-02 | ✅ Complete (2026-02-27) |
-| 5 | CI Pipeline | CI-01, CI-02, CI-03, CI-04 | ⬚ Not Started |
+| 5 | CI Pipeline | CI-01, CI-02, CI-03, CI-04 | 🔄 Planned (2 plans) |
 | 6 | Package Metadata & Publish Readiness | PKG-01, PKG-02, PKG-03, PKG-04 | ⬚ Not Started |
 | 7 | Release Automation | REL-01, REL-02, REL-03, REL-04, REL-05, REL-06, REL-07 | ⬚ Not Started |
 | 8 | External Code Extraction | EXT-01, EXT-02 | ⬚ Not Started |
