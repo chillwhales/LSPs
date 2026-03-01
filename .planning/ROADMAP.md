@@ -195,6 +195,27 @@ Plans:
 
 ---
 
+### Phase 07.1: Rename lsp30 to lsp31, copy LICENSE to all packages, remove prepack/postpack LICENSE scripts (INSERTED)
+
+**Goal:** Package @chillwhales/lsp30 is renamed to @chillwhales/lsp31 with all exports updated, LICENSE files are permanently committed in every package directory, and dynamic prepack/postpack LICENSE copy scripts are removed.
+
+**Dependencies:** Phase 7 (release automation must exist before package identity changes)
+
+**Requirements:**
+- RENAME-01: lsp30 package fully renamed to lsp31 (directory, package.json, all source code exports, tests, spec, documentation)
+- LICENSE-01: LICENSE file permanently exists in each publishable package directory (committed to git)
+- LICENSE-02: prepack/postpack LICENSE copy scripts removed from all package.json files
+
+**Success Criteria:**
+1. `@chillwhales/lsp31` builds, all tests pass, no `lsp30` remnants in source
+2. Every publishable package has a committed LICENSE file
+3. No package.json contains prepack or postpack scripts
+
+**Plans:** 1 plan
+
+Plans:
+- [ ] 07.1-01-PLAN.md — Rename lsp30→lsp31, copy LICENSE to packages, remove prepack/postpack scripts (RENAME-01, LICENSE-01, LICENSE-02)
+
 ### Phase 8: External Code Extraction
 
 **Goal:** Reusable utilities from chillwhales/marketplace and chillwhales/lsp-indexer live in the monorepo and those repos consume the published packages.
@@ -223,6 +244,7 @@ Plans:
 | 5 | CI Pipeline | CI-01, CI-02, CI-03, CI-04 | ✅ Complete |
 | 6 | Package Metadata & Publish Readiness | PKG-01, PKG-02, PKG-03, PKG-04 | ✅ Complete (2026-02-28) |
 | 7 | Release Automation | REL-01, REL-02, REL-03, REL-04, REL-05, REL-06, REL-07 | ⬚ Not Started |
+| 07.1 | Rename lsp30→lsp31, LICENSE to packages, remove prepack/postpack | RENAME-01, LICENSE-01, LICENSE-02 | ⬚ Not Started (INSERTED) |
 | 8 | External Code Extraction | EXT-01, EXT-02 | ⬚ Not Started |
 
 ---

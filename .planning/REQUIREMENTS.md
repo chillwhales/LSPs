@@ -54,6 +54,12 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **TEST-01**: Test coverage is measured via @vitest/coverage-v8
 - [x] **TEST-02**: Minimum coverage thresholds are enforced (70-80%)
 
+### Rename & LICENSE (Phase 07.1 — Inserted)
+
+- [ ] **RENAME-01**: lsp30 package fully renamed to lsp31 (directory, package.json, all source code exports, tests, spec, documentation)
+- [ ] **LICENSE-01**: LICENSE file permanently exists in each publishable package directory (committed to git)
+- [ ] **LICENSE-02**: prepack/postpack LICENSE copy scripts removed from all package.json files
+
 ### External Extraction
 
 - [ ] **EXT-01**: Reusable utilities from chillwhales/marketplace are identified and extracted into this monorepo
@@ -114,14 +120,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PKG-04 | Phase 6 | Complete |
 | TEST-01 | Phase 4 | Complete |
 | TEST-02 | Phase 4 | Complete |
+| RENAME-01 | Phase 07.1 | Pending |
+| LICENSE-01 | Phase 07.1 | Pending |
+| LICENSE-02 | Phase 07.1 | Pending |
 | EXT-01 | Phase 8 | Pending |
 | EXT-02 | Phase 8 | Pending |
 
 **Coverage:**
-- v1 requirements: 31 total
-- Mapped to phases: 31 ✓
+- v1 requirements: 34 total
+- Mapped to phases: 34 ✓
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-27*
-*Last updated: 2026-02-27 — Phase 4 complete (TEST-01, TEST-02 done)*
+*Last updated: 2026-03-01 — Added RENAME-01, LICENSE-01, LICENSE-02 for Phase 07.1*
