@@ -226,6 +226,13 @@ Plans:
 - EXT-01: Reusable utilities from chillwhales/marketplace are identified and extracted
 - EXT-02: Reusable utilities from chillwhales/lsp-indexer are identified and extracted
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 08-01-PLAN.md — Extract marketplace general utilities into @chillwhales/utils (EXT-01)
+- [ ] 08-02-PLAN.md — Extract marketplace LSP-specific code into existing @chillwhales/lsp2, lsp4, lsp6 (EXT-01)
+- [ ] 08-03-PLAN.md — Create @chillwhales/lsp1 + @chillwhales/erc725, lsp-indexer investigation, full integration (EXT-01, EXT-02)
+
 **Success Criteria:**
 1. Utilities previously duplicated in marketplace are now importable from `@chillwhales/*` packages on npm
 2. Utilities previously duplicated in lsp-indexer are now importable from `@chillwhales/*` packages on npm
