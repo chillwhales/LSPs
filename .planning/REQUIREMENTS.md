@@ -34,13 +34,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Release Automation
 
-- [ ] **REL-01**: Changesets is configured for independent versioning of all packages
-- [ ] **REL-02**: Changelogs are auto-generated per package with GitHub PR attribution
-- [ ] **REL-03**: Scoped packages are configured for public npm access
-- [ ] **REL-04**: After a PR merges to main, a version PR is automatically created or updated
-- [ ] **REL-05**: When the version PR merges, changed packages are automatically published to npm
+- [x] **REL-01**: Changesets is configured for independent versioning of all packages
+- [x] **REL-02**: Changelogs are auto-generated per package with GitHub PR attribution
+- [x] **REL-03**: Scoped packages are configured for public npm access
+- [x] **REL-04**: After a PR merges to main, a version PR is automatically created or updated
+- [x] **REL-05**: When the version PR merges, changed packages are automatically published to npm
 - [ ] **REL-06**: PR-based snapshot releases are available via pkg-pr-new
-- [ ] **REL-07**: GitHub Releases are created when packages are published
+- [x] **REL-07**: GitHub Releases are created when packages are published
 
 ### Package Metadata
 
@@ -101,13 +101,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CI-02 | Phase 5 | Complete |
 | CI-03 | Phase 5 | Complete |
 | CI-04 | Phase 5 | Complete |
-| REL-01 | Phase 7 | Pending |
-| REL-02 | Phase 7 | Pending |
-| REL-03 | Phase 7 | Pending |
-| REL-04 | Phase 7 | Pending |
-| REL-05 | Phase 7 | Pending |
+| REL-01 | Phase 7 | Complete |
+| REL-02 | Phase 7 | Complete |
+| REL-03 | Phase 7 | Complete |
+| REL-04 | Phase 7 | Complete |
+| REL-05 | Phase 7 | Complete |
 | REL-06 | Phase 7 | Pending |
-| REL-07 | Phase 7 | Pending |
+| REL-07 | Phase 7 | Complete |
 | PKG-01 | Phase 6 | Complete |
 | PKG-02 | Phase 6 | Complete |
 | PKG-03 | Phase 6 | Complete |

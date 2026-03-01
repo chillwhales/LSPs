@@ -4,14 +4,14 @@ milestone: v1.0
 milestone_name: milestone
 status: completed
 stopped_at: Phase 7 context gathered
-last_updated: "2026-02-28T20:51:47.137Z"
+last_updated: "2026-03-01T09:31:18.297Z"
 last_activity: 2026-02-28 — Completed 06-02-PLAN.md
 progress:
-  total_phases: 8
+  total_phases: 7
   completed_phases: 6
-  total_plans: 13
-  completed_plans: 13
-  percent: 75
+  total_plans: 15
+  completed_plans: 14
+  percent: 93
 ---
 
 # Project State: LSPs
@@ -20,16 +20,16 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 6 complete. 13 plans done. All packages publish-ready with metadata, LICENSE, and README. Ready for Phase 7.
+**Current Focus:** Phase 7 in progress. 14 plans done. Changesets configured, release workflow created. Ready for Plan 07-02.
 
 ## Current Position
 
 **Phase:** 7 of 8 (Release Automation)
-**Plan:** 0 of ? in phase
-**Status:** Milestone complete
-**Last activity:** 2026-02-28 — Completed 06-02-PLAN.md
+**Plan:** 1 of 2 in phase
+**Status:** In progress
+**Last activity:** 2026-03-01 — Completed 07-01-PLAN.md
 
-**Progress:** ███████░░░ 6/8 phases (75%)
+**Progress:** [█████████░] 93%
 
 ## Phase Summary
 
@@ -41,21 +41,22 @@ progress:
 | 4 | Testing & Coverage Infrastructure | ✅ Complete (2/2 plans) |
 | 5 | CI Pipeline | ✅ Complete (2/2 plans) |
 | 6 | Package Metadata & Publish Readiness | ✅ Complete (2/2 plans) |
-| 7 | Release Automation | ⬚ Not Started |
+| 7 | Release Automation | 🔄 In Progress (1/2 plans) |
 | 8 | External Code Extraction | ⬚ Not Started |
 
 ## Performance Metrics
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 13 |
-| Plans total | 13 |
+| Plans completed | 14 |
+| Plans total | 15 |
 | Plans with issues | 0 |
 | Requirements done | 23/31 |
 | Phases done | 6/8 |
 | Phase 05 P02 | 2min | 2 tasks | 2 files |
 | Phase 06 P01 | 5min | 2 tasks | 12 files |
 | Phase 06 P02 | 2min | 2 tasks | 8 files |
+| Phase 07 P01 | 2min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -98,6 +99,10 @@ progress:
 - ESM-only build output — removed rollup.emitCJS, no CJS files generated
 - Removed main field from all packages — exports map takes precedence, main caused attw CJSResolvesToESM
 - attw --profile esm-only in CI — skips CJS resolution modes for ESM-only packages
+- @changesets/changelog-github for PR-attributed changelogs with author credit
+- cancel-in-progress: false on release workflow — partial publish is dangerous, retry is recovery
+- privatePackages { version: false, tag: false } to skip @chillwhales/config
+- Build step before changesets/action so dist/ artifacts exist for publish
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
@@ -113,10 +118,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-02-28T20:51:47.132Z
-**Stopped at:** Phase 7 context gathered
-**Resume with:** Plan Phase 7 (Release Automation)
+**Last session:** 2026-03-01T09:30:22Z
+**Stopped at:** Completed 07-01-PLAN.md
+**Resume with:** Execute 07-02-PLAN.md (pkg-pr-new snapshot releases)
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-02-28T20:51:47Z*
+*Last updated: 2026-03-01T09:30:22Z*
