@@ -31,20 +31,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build changed packages
-        run: pnpm --filter="...[origin/main]" --filter="!@chillwhales/config" build
-
-      - name: Detect changed packages
-        id: changed
-        run: |
-          CHANGED=$(pnpm --filter="...[origin/main]" --filter="!@chillwhales/config" exec -- node -e "process.stdout.write(process.cwd())" | tr '\n' ' ' | xargs -n1 realpath --relative-to=. | sed "s|^|'./|;s|$|'|" | tr '\n' ' ')
-          echo "packages=$CHANGED" >> "$GITHUB_OUTPUT"
-          if [ -z "$CHANGED" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
+      - name: Build packages
+        run: pnpm build
 
       - name: Publish preview packages
-        if: steps.changed.outputs.skip != 'true'
-        run: pnpx pkg-pr-new publish ${{ steps.changed.outputs.packages }} --compact --comment=update --packageManager=pnpm
+        run: pnpx pkg-pr-new publish './packages/utils' './packages/lsp2' './packages/lsp3' './packages/lsp4' './packages/lsp6' './packages/lsp23' './packages/lsp29' './packages/lsp30' --compact --comment=update --packageManager=pnpm
