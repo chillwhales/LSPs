@@ -231,7 +231,7 @@ Plans:
 Plans:
 - [x] 08-01-PLAN.md — Extract marketplace general utilities into @chillwhales/utils (EXT-01)
 - [x] 08-02-PLAN.md — Extract marketplace LSP-specific code into existing @chillwhales/lsp2, lsp4, lsp6 (EXT-01)
-- [ ] 08-03-PLAN.md — Create @chillwhales/lsp1 + @chillwhales/erc725, lsp-indexer investigation, full integration (EXT-01, EXT-02)
+- [x] 08-03-PLAN.md — Create @chillwhales/lsp1 + @chillwhales/erc725, lsp-indexer investigation, full integration (EXT-01, EXT-02)
 
 **Success Criteria:**
 1. General utilities from marketplace are extracted into `@chillwhales/utils` and build/test cleanly
@@ -253,8 +253,8 @@ Plans:
 | 6 | Package Metadata & Publish Readiness | PKG-01, PKG-02, PKG-03, PKG-04 | ✅ Complete (2026-02-28) |
 | 7 | Release Automation | REL-01, REL-02, REL-03, REL-04, REL-05, REL-06, REL-07 | ⬚ Not Started |
 | 07.1 | 1/1 | Complete    | 2026-03-01 |
-| 8 | External Code Extraction | EXT-01, EXT-02 | 🔄 In Progress (2/3) |
+| 8 | External Code Extraction | EXT-01, EXT-02 | ✅ Complete (2026-03-01) |
 
 ---
 *Roadmap created: 2026-02-27*
-*Last updated: 2026-03-01 — Phase 8 Plan 2 complete (LSP-specific extraction: lsp2, lsp4, lsp6 enriched from marketplace)*
+*Last updated: 2026-03-01 — Phase 8 complete (3/3 plans: utils extraction, LSP-specific extraction, lsp1+erc725+integration)*
