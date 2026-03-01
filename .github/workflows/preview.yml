@@ -1,0 +1,50 @@
+name: Preview Release
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  preview:
+    # Security: only run on internal branches, not forks
+    # Forks could run malicious code — no npm tokens are used here but
+    # pkg-pr-new posts comments via GitHub App which requires trust
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    name: Publish Preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history needed for pnpm --filter "...[origin/main]"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build changed packages
+        run: pnpm --filter="...[origin/main]" --filter="!@chillwhales/config" build
+
+      - name: Detect changed packages
+        id: changed
+        run: |
+          CHANGED=$(pnpm --filter="...[origin/main]" --filter="!@chillwhales/config" exec -- node -e "process.stdout.write(process.cwd())" | tr '\n' ' ' | xargs -n1 realpath --relative-to=. | sed "s|^|'./|;s|$|'|" | tr '\n' ' ')
+          echo "packages=$CHANGED" >> "$GITHUB_OUTPUT"
+          if [ -z "$CHANGED" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish preview packages
+        if: steps.changed.outputs.skip != 'true'
+        run: pnpx pkg-pr-new publish ${{ steps.changed.outputs.packages }} --compact --comment=update --packageManager=pnpm
