@@ -4,14 +4,14 @@ milestone: v1.0
 milestone_name: milestone
 status: completed
 stopped_at: Phase 7 context gathered
-last_updated: "2026-03-01T09:31:18.297Z"
-last_activity: 2026-02-28 — Completed 06-02-PLAN.md
+last_updated: "2026-03-01T09:35:37Z"
+last_activity: 2026-03-01 — Completed 07-02-PLAN.md
 progress:
-  total_phases: 7
-  completed_phases: 6
+  total_phases: 8
+  completed_phases: 7
   total_plans: 15
-  completed_plans: 14
-  percent: 93
+  completed_plans: 15
+  percent: 100
 ---
 
 # Project State: LSPs
@@ -20,16 +20,16 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 7 in progress. 14 plans done. Changesets configured, release workflow created. Ready for Plan 07-02.
+**Current Focus:** Phase 7 complete. 15 plans done. Full release automation stack ready (changesets + release workflow + preview snapshots). Ready for Phase 8.
 
 ## Current Position
 
 **Phase:** 7 of 8 (Release Automation)
-**Plan:** 1 of 2 in phase
-**Status:** In progress
-**Last activity:** 2026-03-01 — Completed 07-01-PLAN.md
+**Plan:** 2 of 2 in phase ✅
+**Status:** Phase 7 complete
+**Last activity:** 2026-03-01 — Completed 07-02-PLAN.md
 
-**Progress:** [█████████░] 93%
+**Progress:** [██████████] 100%
 
 ## Phase Summary
 
@@ -41,22 +41,23 @@ progress:
 | 4 | Testing & Coverage Infrastructure | ✅ Complete (2/2 plans) |
 | 5 | CI Pipeline | ✅ Complete (2/2 plans) |
 | 6 | Package Metadata & Publish Readiness | ✅ Complete (2/2 plans) |
-| 7 | Release Automation | 🔄 In Progress (1/2 plans) |
+| 7 | Release Automation | ✅ Complete (2/2 plans) |
 | 8 | External Code Extraction | ⬚ Not Started |
 
 ## Performance Metrics
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 14 |
+| Plans completed | 15 |
 | Plans total | 15 |
 | Plans with issues | 0 |
-| Requirements done | 23/31 |
-| Phases done | 6/8 |
+| Requirements done | 24/31 |
+| Phases done | 7/8 |
 | Phase 05 P02 | 2min | 2 tasks | 2 files |
 | Phase 06 P01 | 5min | 2 tasks | 12 files |
 | Phase 06 P02 | 2min | 2 tasks | 8 files |
 | Phase 07 P01 | 2min | 2 tasks | 5 files |
+| Phase 07 P02 | 2min | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -103,6 +104,8 @@ progress:
 - cancel-in-progress: false on release workflow — partial publish is dangerous, retry is recovery
 - privatePackages { version: false, tag: false } to skip @chillwhales/config
 - Build step before changesets/action so dist/ artifacts exist for publish
+- pkg-pr-new with --compact --comment=update --packageManager=pnpm for clean PR preview comments
+- Fork guard (head.repo.full_name == github.repository) blocks external PRs from snapshot access
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
@@ -118,10 +121,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-03-01T09:30:22Z
-**Stopped at:** Completed 07-01-PLAN.md
-**Resume with:** Execute 07-02-PLAN.md (pkg-pr-new snapshot releases)
+**Last session:** 2026-03-01T09:35:37Z
+**Stopped at:** Completed 07-02-PLAN.md — Phase 7 complete
+**Resume with:** Plan Phase 8 (External Code Extraction)
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-03-01T09:30:22Z*
+*Last updated: 2026-03-01T09:35:37Z*

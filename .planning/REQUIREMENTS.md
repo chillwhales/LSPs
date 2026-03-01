@@ -39,7 +39,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **REL-03**: Scoped packages are configured for public npm access
 - [x] **REL-04**: After a PR merges to main, a version PR is automatically created or updated
 - [x] **REL-05**: When the version PR merges, changed packages are automatically published to npm
-- [ ] **REL-06**: PR-based snapshot releases are available via pkg-pr-new
+- [x] **REL-06**: PR-based snapshot releases are available via pkg-pr-new
 - [x] **REL-07**: GitHub Releases are created when packages are published
 
 ### Package Metadata
@@ -106,7 +106,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | REL-03 | Phase 7 | Complete |
 | REL-04 | Phase 7 | Complete |
 | REL-05 | Phase 7 | Complete |
-| REL-06 | Phase 7 | Pending |
+| REL-06 | Phase 7 | Complete |
 | REL-07 | Phase 7 | Complete |
 | PKG-01 | Phase 6 | Complete |
 | PKG-02 | Phase 6 | Complete |
