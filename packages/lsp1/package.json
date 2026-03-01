@@ -1,8 +1,8 @@
 {
-	"name": "@chillwhales/utils",
-	"version": "0.1.1",
+	"name": "@chillwhales/lsp1",
+	"version": "0.1.0",
 	"type": "module",
-	"description": "Shared utility functions for the @chillwhales LUKSO Standards Packages",
+	"description": "LSP1 UniversalReceiver — event constants, typeId definitions, and notification type guards for LUKSO Universal Profiles",
 	"author": "b00ste",
 	"license": "MIT",
 	"types": "./dist/index.d.mts",
@@ -23,14 +23,15 @@
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/chillwhales/LSPs.git",
-		"directory": "packages/utils"
+		"directory": "packages/lsp1"
 	},
 	"keywords": [
 		"chillwhales",
 		"lukso",
 		"lsp",
-		"utility",
-		"helpers"
+		"lsp1",
+		"universal-receiver",
+		"notifications"
 	],
 	"sideEffects": false,
 	"scripts": {
@@ -39,6 +40,9 @@
 		"clean": "rm -rf dist",
 		"test": "vitest run",
 		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"zod": "catalog:"
 	},
 	"peerDependencies": {
 		"viem": "catalog:"

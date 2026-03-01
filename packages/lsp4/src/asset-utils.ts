@@ -4,8 +4,8 @@
  * Pure functions for working with LSP4 digital asset metadata (LSP7/LSP8).
  */
 
-import type { Image } from "@chillwhales/lsp2";
-import type { LSP4Metadata } from "./types";
+import { findBestImage, type Image, type ImageSize } from "@chillwhales/lsp2";
+import type { LSP4Metadata, NftMetadata } from "./types";
 
 /**
  * Gets the best image URL from pre-extracted LSP4 Image objects.
@@ -55,4 +55,114 @@ export function getImageUrl(options: {
  */
 export function getAssetDisplayName(metadata: LSP4Metadata): string {
 	return metadata.name || "Digital Asset";
+}
+
+// ============================================================================
+// Extended Asset Utilities (extracted from chillwhales/marketplace)
+// ============================================================================
+
+/**
+ * Extract avatar image URL from Digital Asset metadata.
+ * Prefers icon, falls back to images. Optionally finds the closest image
+ * to target dimensions.
+ *
+ * @param metadata - Digital Asset (LSP7/LSP8) metadata
+ * @param parseUrl - Function to parse/transform the URL (e.g., IPFS gateway resolution)
+ * @param options - Optional target dimensions `{ width, height }`
+ * @returns Parsed URL or undefined if no image found
+ *
+ * @example
+ * ```typescript
+ * // Get first available image (prefers icon)
+ * getAssetImageUrl(asset, parseIpfsUrl)
+ *
+ * // Get image closest to 128×128
+ * getAssetImageUrl(asset, parseIpfsUrl, { width: 128, height: 128 })
+ * ```
+ */
+export function getAssetImageUrl(
+	metadata: LSP4Metadata,
+	parseUrl: (url: string) => string,
+	options?: Partial<ImageSize>,
+): string | undefined {
+	const icon = findBestImage(metadata.icon, options);
+	if (icon?.url) {
+		return parseUrl(icon.url);
+	}
+
+	const allImages = metadata.images?.flat();
+	const image = findBestImage(allImages, options);
+	if (image?.url) {
+		return parseUrl(image.url);
+	}
+
+	return undefined;
+}
+
+/**
+ * Extract avatar image URL from NFT metadata.
+ * Prefers images (usually more detailed), falls back to icon.
+ * Optionally finds the closest image to target dimensions.
+ *
+ * @param metadata - NFT (LSP8 token) metadata
+ * @param parseUrl - Function to parse/transform the URL (e.g., IPFS gateway resolution)
+ * @param options - Optional target dimensions `{ width, height }`
+ * @returns Parsed URL or undefined if no image found
+ *
+ * @example
+ * ```typescript
+ * // Get first available image (prefers full images)
+ * getNftImageUrl(nft, parseIpfsUrl)
+ *
+ * // Get image closest to 256×256
+ * getNftImageUrl(nft, parseIpfsUrl, { width: 256, height: 256 })
+ * ```
+ */
+export function getNftImageUrl(
+	metadata: LSP4Metadata,
+	parseUrl: (url: string) => string,
+	options?: Partial<ImageSize>,
+): string | undefined {
+	const allImages = metadata.images?.flat();
+	const image = findBestImage(allImages, options);
+	if (image?.url) {
+		return parseUrl(image.url);
+	}
+
+	const icon = findBestImage(metadata.icon, options);
+	if (icon?.url) {
+		return parseUrl(icon.url);
+	}
+
+	return undefined;
+}
+
+/**
+ * Get display name for NFT (LSP8 token).
+ * Includes token ID formatting (e.g., "TokenName #123").
+ *
+ * @param metadata - NFT metadata with optional token info
+ * @returns Display name string, possibly with token ID suffix
+ *
+ * @example
+ * ```typescript
+ * getNftDisplayName({ tokenName: "CoolCats", tokenIdFormat: "NUMBER", formattedTokenId: "42" })
+ * // => "CoolCats #42"
+ *
+ * getNftDisplayName({ tokenName: "Art" })
+ * // => "Art"
+ * ```
+ */
+export function getNftDisplayName(metadata: NftMetadata): string {
+	const baseName = metadata.tokenName || "NFT";
+
+	if (metadata.tokenIdFormat === "NUMBER" && metadata.formattedTokenId) {
+		return `${baseName} #${metadata.formattedTokenId}`;
+	}
+
+	if (metadata.formattedTokenId) {
+		return `${baseName} ${metadata.formattedTokenId}`;
+	}
+
+	return baseName;
 }
