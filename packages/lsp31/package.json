@@ -1,6 +1,6 @@
 {
 	"name": "@chillwhales/lsp31",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"description": "LSP31 Multi-Storage URI standard — encode, decode, and resolve multi-backend content references",
 	"author": "b00ste",
