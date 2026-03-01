@@ -1,6 +1,6 @@
 {
 	"name": "@chillwhales/lsp4",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"description": "LSP4 Digital Asset Metadata — schemas, types, and utilities for LSP7/LSP8 token metadata on LUKSO",
 	"author": "b00ste",

@@ -1,6 +1,6 @@
 {
 	"name": "@chillwhales/lsp23",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"description": "LSP23 Linked Contracts Factory — deployment encoding utilities for Universal Profile creation on LUKSO",
 	"author": "b00ste",
