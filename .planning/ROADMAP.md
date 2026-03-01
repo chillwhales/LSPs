@@ -234,9 +234,10 @@ Plans:
 - [ ] 08-03-PLAN.md — Create @chillwhales/lsp1 + @chillwhales/erc725, lsp-indexer investigation, full integration (EXT-01, EXT-02)
 
 **Success Criteria:**
-1. Utilities previously duplicated in marketplace are now importable from `@chillwhales/*` packages on npm
-2. Utilities previously duplicated in lsp-indexer are now importable from `@chillwhales/*` packages on npm
-3. Both marketplace and lsp-indexer repos have PRs replacing local utilities with `@chillwhales/*` imports, and their tests pass
+1. General utilities from marketplace are extracted into `@chillwhales/utils` and build/test cleanly
+2. LSP-specific utilities from marketplace are merged into their respective `@chillwhales/lspX` packages
+3. `@chillwhales/lsp1` and `@chillwhales/erc725` packages exist with lsp-indexer-derived utilities
+4. All 11 packages build with zero warnings, all tests pass, `pnpm check` passes
 
 ---
 

@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Phase 8 context gathered
-last_updated: "2026-03-01T16:15:09.956Z"
-last_activity: 2026-03-01 — Completed 07.1-01-PLAN.md
+status: in_progress
+stopped_at: Phase 8 planned
+last_updated: "2026-03-01T17:00:00.000Z"
+last_activity: 2026-03-01 — Phase 8 planned (3 plans created)
 progress:
   total_phases: 9
   completed_phases: 8
-  total_plans: 16
+  total_plans: 19
   completed_plans: 16
-  percent: 100
+  percent: 84
 ---
 
 # Project State: LSPs
@@ -20,16 +20,16 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 7.1 complete. 16 plans done. LSP30 renamed to LSP31, LICENSE in all packages, prepack/postpack removed.
+**Current Focus:** Phase 8 planned. 16/19 plans done. External code extraction from marketplace and lsp-indexer into monorepo packages.
 
 ## Current Position
 
-**Phase:** 7.1 (Rename LSP30→LSP31, LICENSE, remove prepack/postpack)
-**Plan:** 1 of 1 in phase ✅
-**Status:** Milestone complete
-**Last activity:** 2026-03-01 — Completed 07.1-01-PLAN.md
+**Phase:** 8 (External Code Extraction)
+**Plan:** 0 of 3 in phase
+**Status:** Planned — ready for execution
+**Last activity:** 2026-03-01 — Phase 8 planned (3 plans created)
 
-**Progress:** [██████████] 100%
+**Progress:** [████████░░] 84%
 
 ## Phase Summary
 
@@ -50,7 +50,7 @@ progress:
 | Metric | Value |
 |--------|-------|
 | Plans completed | 16 |
-| Plans total | 16 |
+| Plans total | 19 |
 | Plans with issues | 0 |
 | Requirements done | 24/31 |
 | Phases done | 7.1/8 |
@@ -125,10 +125,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-03-01T16:15:09.955Z
-**Stopped at:** Phase 8 context gathered
-**Resume with:** Plan Phase 8 (External Code Extraction)
+**Last session:** 2026-03-01T17:00:00.000Z
+**Stopped at:** Phase 8 planned
+**Resume with:** Execute Phase 8 (External Code Extraction)
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-03-01T11:56:41Z*
+*Last updated: 2026-03-01T17:00:00Z*
