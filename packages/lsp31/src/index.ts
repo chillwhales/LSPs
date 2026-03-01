@@ -1,10 +1,10 @@
 /**
- * @chillwhales/lsp30
+ * @chillwhales/lsp31
  *
- * LSP30 Multi-Storage URI Standard
+ * LSP31 Multi-Storage URI Standard
  * Encode, decode, and resolve multi-backend content references.
  *
- * @see LSP-30-MultiStorageURI.md for full specification
+ * @see LSP-31-MultiStorageURI.md for full specification
  */
 
 export * from "./constants";

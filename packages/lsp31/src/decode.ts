@@ -1,28 +1,28 @@
 /**
- * LSP30 Multi-Storage URI Decoding
+ * LSP31 Multi-Storage URI Decoding
  *
- * Parses and verifies LSP30 on-chain hex values back into structured data.
+ * Parses and verifies LSP31 on-chain hex values back into structured data.
  * Mirrors the LSP2 parseVerifiableUri/decodeVerifiableUri pattern.
  *
- * @see LSP-30-MultiStorageURI.md for full specification
+ * @see LSP-31-MultiStorageURI.md for full specification
  */
 
 import { type Hex, hexToString, keccak256, slice } from "viem";
 
 import {
 	KECCAK256_BYTES_METHOD_ID,
-	LSP30_RESERVED_PREFIX,
-	MIN_LSP30_URI_LENGTH,
+	LSP31_RESERVED_PREFIX,
+	MIN_LSP31_URI_LENGTH,
 } from "./constants";
-import { lsp30EntriesSchema } from "./schemas";
-import type { Lsp30Entry, ParsedLsp30Uri } from "./types";
+import { lsp31EntriesSchema } from "./schemas";
+import type { Lsp31Entry, ParsedLsp31Uri } from "./types";
 
 // ============================================================================
 // Parsing Functions
 // ============================================================================
 
 /**
- * Parses an LSP30 Multi-Storage URI hex value into its components.
+ * Parses an LSP31 Multi-Storage URI hex value into its components.
  *
  * Format: 0x + reserved (2 bytes) + method (4 bytes) + length (2 bytes) + hash (N bytes) + entries JSON
  *
@@ -32,23 +32,23 @@ import type { Lsp30Entry, ParsedLsp30Uri } from "./types";
  *
  * @example
  * ```typescript
- * const { verificationMethod, verificationData, entries } = parseLsp30Uri(rawValue);
+ * const { verificationMethod, verificationData, entries } = parseLsp31Uri(rawValue);
  * entries.forEach(entry => console.log(entry.backend));
  * ```
  */
-export function parseLsp30Uri(value: Hex): ParsedLsp30Uri {
+export function parseLsp31Uri(value: Hex): ParsedLsp31Uri {
 	// Check minimum length
-	if (value.length < MIN_LSP30_URI_LENGTH) {
+	if (value.length < MIN_LSP31_URI_LENGTH) {
 		throw new Error(
-			`Invalid LSP30 URI: value too short (${value.length} chars, minimum ${MIN_LSP30_URI_LENGTH})`,
+			`Invalid LSP31 URI: value too short (${value.length} chars, minimum ${MIN_LSP31_URI_LENGTH})`,
 		);
 	}
 
 	// Validate reserved prefix at bytes 0-1
 	const reservedPrefix = slice(value, 0, 2);
-	if (reservedPrefix !== LSP30_RESERVED_PREFIX) {
+	if (reservedPrefix !== LSP31_RESERVED_PREFIX) {
 		throw new Error(
-			`Invalid LSP30 URI: expected prefix ${LSP30_RESERVED_PREFIX}, got ${reservedPrefix}`,
+			`Invalid LSP31 URI: expected prefix ${LSP31_RESERVED_PREFIX}, got ${reservedPrefix}`,
 		);
 	}
 
@@ -64,13 +64,13 @@ export function parseLsp30Uri(value: Hex): ParsedLsp30Uri {
 
 	// Extract remaining bytes → entries JSON
 	const entriesHex = slice(value, 8 + hashLength);
-	let entries: Lsp30Entry[];
+	let entries: Lsp31Entry[];
 
 	try {
 		const entriesJson = hexToString(entriesHex);
 		entries = JSON.parse(entriesJson);
 	} catch {
-		throw new Error("Invalid LSP30 URI: entries portion contains invalid JSON");
+		throw new Error("Invalid LSP31 URI: entries portion contains invalid JSON");
 	}
 
 	return {
@@ -85,7 +85,7 @@ export function parseLsp30Uri(value: Hex): ParsedLsp30Uri {
 // ============================================================================
 
 /**
- * Decodes and verifies an LSP30 Multi-Storage URI against its content bytes.
+ * Decodes and verifies an LSP31 Multi-Storage URI against its content bytes.
  *
  * 1. Parses the URI structure
  * 2. Verifies the verification method is keccak256(bytes)
@@ -100,15 +100,15 @@ export function parseLsp30Uri(value: Hex): ParsedLsp30Uri {
  * @example
  * ```typescript
  * const contentBytes = await fetchFromBackend(entry);
- * const { entries, verificationData } = decodeLsp30Uri(rawValue, contentBytes);
+ * const { entries, verificationData } = decodeLsp31Uri(rawValue, contentBytes);
  * ```
  */
-export function decodeLsp30Uri(
+export function decodeLsp31Uri(
 	value: Hex,
 	content: Uint8Array,
-): { entries: Lsp30Entry[]; verificationData: Hex } {
+): { entries: Lsp31Entry[]; verificationData: Hex } {
 	// 1. Parse the URI structure
-	const parsed = parseLsp30Uri(value);
+	const parsed = parseLsp31Uri(value);
 
 	// 2. Verify verification method
 	if (parsed.verificationMethod !== KECCAK256_BYTES_METHOD_ID) {
@@ -121,12 +121,12 @@ export function decodeLsp30Uri(
 	const computedHash = keccak256(content);
 	if (computedHash.toLowerCase() !== parsed.verificationData.toLowerCase()) {
 		throw new Error(
-			`LSP30 hash mismatch: content hash ${computedHash} does not match verification data ${parsed.verificationData}`,
+			`LSP31 hash mismatch: content hash ${computedHash} does not match verification data ${parsed.verificationData}`,
 		);
 	}
 
 	// 4. Validate entries through Zod schema
-	const validatedEntries = lsp30EntriesSchema.parse(parsed.entries);
+	const validatedEntries = lsp31EntriesSchema.parse(parsed.entries);
 
 	return {
 		entries: validatedEntries,

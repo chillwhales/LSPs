@@ -1,8 +1,8 @@
 import { type Hex, keccak256, stringToHex } from "viem";
 import { describe, expect, it } from "vitest";
 
-import { decodeLsp30Uri, parseLsp30Uri } from "./decode";
-import { computeContentHash, encodeLsp30Uri } from "./encode";
+import { decodeLsp31Uri, parseLsp31Uri } from "./decode";
+import { computeContentHash, encodeLsp31Uri } from "./encode";
 
 // ============================================================================
 // Test Data
@@ -25,15 +25,15 @@ const testContent = new Uint8Array([72, 101, 108, 108, 111]); // "Hello"
 const testContentHash = keccak256(testContent);
 
 // Pre-encode for reuse in tests
-const validEncoded = encodeLsp30Uri(testEntries, testContentHash);
+const validEncoded = encodeLsp31Uri(testEntries, testContentHash);
 
 // ============================================================================
-// parseLsp30Uri Tests
+// parseLsp31Uri Tests
 // ============================================================================
 
-describe("parseLsp30Uri", () => {
+describe("parseLsp31Uri", () => {
 	it("should extract verificationMethod, verificationData, and entries from valid encoded hex", () => {
-		const parsed = parseLsp30Uri(validEncoded);
+		const parsed = parseLsp31Uri(validEncoded);
 
 		expect(parsed.verificationMethod).toBe("0x8019f9b1");
 		expect(parsed.verificationData.toLowerCase()).toBe(
@@ -43,31 +43,31 @@ describe("parseLsp30Uri", () => {
 	});
 
 	it("should throw on value too short", () => {
-		const shortValue = "0x00308019f9b10020" as Hex;
+		const shortValue = "0x00318019f9b10020" as Hex;
 
-		expect(() => parseLsp30Uri(shortValue)).toThrow(Error);
-		expect(() => parseLsp30Uri(shortValue)).toThrow(/too short/);
+		expect(() => parseLsp31Uri(shortValue)).toThrow(Error);
+		expect(() => parseLsp31Uri(shortValue)).toThrow(/too short/);
 	});
 
-	it("should throw on wrong prefix (0x0000 = LSP2, not LSP30)", () => {
+	it("should throw on wrong prefix (0x0000 = LSP2, not LSP31)", () => {
 		// Build an LSP2-prefixed value that is long enough
 		const lsp2Prefix =
 			"0x00008019f9b100200000000000000000000000000000000000000000000000000000000000000000697066733a2f2f516d54657374" as Hex;
 
-		expect(() => parseLsp30Uri(lsp2Prefix)).toThrow(Error);
-		expect(() => parseLsp30Uri(lsp2Prefix)).toThrow(/prefix/);
+		expect(() => parseLsp31Uri(lsp2Prefix)).toThrow(Error);
+		expect(() => parseLsp31Uri(lsp2Prefix)).toThrow(/prefix/);
 	});
 
 	it("should throw on invalid JSON in entries portion", () => {
 		// Manually construct a value with valid header but garbage after the hash
 		const invalidJsonHex = stringToHex("not valid json {{{");
-		const manualValue = ("0x0030" +
+		const manualValue = ("0x0031" +
 			"8019f9b1" +
 			"0020" +
 			"0000000000000000000000000000000000000000000000000000000000000000" +
 			invalidJsonHex.slice(2)) as Hex; // strip '0x' prefix
 
-		expect(() => parseLsp30Uri(manualValue)).toThrow(Error);
+		expect(() => parseLsp31Uri(manualValue)).toThrow(Error);
 	});
 
 	it("should return correct entry objects with backend-specific fields preserved", () => {
@@ -83,8 +83,8 @@ describe("parseLsp30Uri", () => {
 			{ backend: "arweave" as const, transactionId: "tx-abc" },
 		];
 		const hash = keccak256(new Uint8Array([1]));
-		const encoded = encodeLsp30Uri(entriesWithAll, hash);
-		const parsed = parseLsp30Uri(encoded);
+		const encoded = encodeLsp31Uri(entriesWithAll, hash);
+		const parsed = parseLsp31Uri(encoded);
 
 		expect(parsed.entries).toEqual(entriesWithAll);
 		expect(parsed.entries[0]).toHaveProperty("cid", "QmSpecificCid");
@@ -95,12 +95,12 @@ describe("parseLsp30Uri", () => {
 });
 
 // ============================================================================
-// decodeLsp30Uri Tests
+// decodeLsp31Uri Tests
 // ============================================================================
 
-describe("decodeLsp30Uri", () => {
+describe("decodeLsp31Uri", () => {
 	it("should verify hash matches content bytes and return validated entries", () => {
-		const result = decodeLsp30Uri(validEncoded, testContent);
+		const result = decodeLsp31Uri(validEncoded, testContent);
 
 		expect(result.entries).toEqual(testEntries);
 		expect(result.verificationData.toLowerCase()).toBe(
@@ -111,8 +111,8 @@ describe("decodeLsp30Uri", () => {
 	it("should throw on hash mismatch (tampered content)", () => {
 		const tamperedContent = new Uint8Array([1, 2, 3, 4, 5]); // Different from testContent
 
-		expect(() => decodeLsp30Uri(validEncoded, tamperedContent)).toThrow(Error);
-		expect(() => decodeLsp30Uri(validEncoded, tamperedContent)).toThrow(
+		expect(() => decodeLsp31Uri(validEncoded, tamperedContent)).toThrow(Error);
+		expect(() => decodeLsp31Uri(validEncoded, tamperedContent)).toThrow(
 			/hash mismatch/,
 		);
 	});
@@ -123,13 +123,13 @@ describe("decodeLsp30Uri", () => {
 		const invalidEntriesHex = stringToHex(JSON.stringify(invalidEntries));
 		const contentForHash = new Uint8Array([99]);
 		const contentHash = keccak256(contentForHash);
-		const crafted = ("0x0030" +
+		const crafted = ("0x0031" +
 			"8019f9b1" +
 			"0020" +
 			contentHash.slice(2) +
 			invalidEntriesHex.slice(2)) as Hex;
 
-		expect(() => decodeLsp30Uri(crafted, contentForHash)).toThrow(Error);
+		expect(() => decodeLsp31Uri(crafted, contentForHash)).toThrow(Error);
 	});
 });
 
@@ -151,8 +151,8 @@ describe("round-trip", () => {
 		const content = new Uint8Array([10, 20, 30]);
 		const hash = computeContentHash(content);
 
-		const encoded = encodeLsp30Uri(entries, hash);
-		const parsed = parseLsp30Uri(encoded);
+		const encoded = encodeLsp31Uri(entries, hash);
+		const parsed = parseLsp31Uri(encoded);
 
 		expect(parsed.entries).toEqual(entries);
 		expect(parsed.verificationMethod).toBe("0x8019f9b1");
@@ -167,8 +167,8 @@ describe("round-trip", () => {
 		const content = new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8]);
 		const hash = computeContentHash(content);
 
-		const encoded = encodeLsp30Uri(entries, hash);
-		const decoded = decodeLsp30Uri(encoded, content);
+		const encoded = encodeLsp31Uri(entries, hash);
+		const decoded = decodeLsp31Uri(encoded, content);
 
 		expect(decoded.entries).toEqual(entries);
 	});
@@ -192,9 +192,9 @@ describe("round-trip", () => {
 		for (let i = 0; i < 256; i++) content[i] = i;
 		const hash = computeContentHash(content);
 
-		const encoded = encodeLsp30Uri(entries, hash);
-		const parsed = parseLsp30Uri(encoded);
-		const decoded = decodeLsp30Uri(encoded, content);
+		const encoded = encodeLsp31Uri(entries, hash);
+		const parsed = parseLsp31Uri(encoded);
+		const decoded = decodeLsp31Uri(encoded, content);
 
 		expect(parsed.entries).toEqual(entries);
 		expect(decoded.entries).toEqual(entries);

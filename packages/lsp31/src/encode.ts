@@ -1,10 +1,10 @@
 /**
- * LSP30 Multi-Storage URI Encoding
+ * LSP31 Multi-Storage URI Encoding
  *
- * Encodes multi-storage entries into the LSP30 on-chain format:
- * 0x0030 + method (4) + hashLength (2) + hash (32) + toUtf8Hex(JSON.stringify(entries))
+ * Encodes multi-storage entries into the LSP31 on-chain format:
+ * 0x0031 + method (4) + hashLength (2) + hash (32) + toUtf8Hex(JSON.stringify(entries))
  *
- * @see LSP-30-MultiStorageURI.md for full specification
+ * @see LSP-31-MultiStorageURI.md for full specification
  */
 
 import { concat, type Hex, keccak256, stringToHex } from "viem";
@@ -12,10 +12,10 @@ import { concat, type Hex, keccak256, stringToHex } from "viem";
 import {
 	HASH_LENGTH_PREFIX,
 	KECCAK256_BYTES_METHOD_ID,
-	LSP30_RESERVED_PREFIX,
+	LSP31_RESERVED_PREFIX,
 } from "./constants";
-import { lsp30EntriesSchema } from "./schemas";
-import type { Lsp30Entry } from "./types";
+import { lsp31EntriesSchema } from "./schemas";
+import type { Lsp31Entry } from "./types";
 
 // ============================================================================
 // Encoding Functions
@@ -31,7 +31,7 @@ import type { Lsp30Entry } from "./types";
  * ```typescript
  * const contentBytes = new Uint8Array([...]);
  * const hash = computeContentHash(contentBytes);
- * const encoded = encodeLsp30Uri(entries, hash);
+ * const encoded = encodeLsp31Uri(entries, hash);
  * ```
  */
 export function computeContentHash(content: Uint8Array): Hex {
@@ -39,10 +39,10 @@ export function computeContentHash(content: Uint8Array): Hex {
 }
 
 /**
- * Encodes storage entries and a pre-computed verification hash into the LSP30 on-chain format.
+ * Encodes storage entries and a pre-computed verification hash into the LSP31 on-chain format.
  *
  * The output is a hex string with the layout:
- * - 2 bytes: reserved prefix (0x0030)
+ * - 2 bytes: reserved prefix (0x0031)
  * - 4 bytes: verification method ID (0x8019f9b1, keccak256(bytes))
  * - 2 bytes: hash length (0x0020 = 32 bytes)
  * - 32 bytes: content verification hash
@@ -50,7 +50,7 @@ export function computeContentHash(content: Uint8Array): Hex {
  *
  * @param entries - Array of storage backend entries (minimum 2)
  * @param verificationHash - Pre-computed keccak256 hash of the content bytes (0x + 64 hex chars)
- * @returns Hex-encoded LSP30 URI value
+ * @returns Hex-encoded LSP31 URI value
  * @throws Error if entries fail validation or hash format is invalid
  *
  * @example
@@ -60,15 +60,15 @@ export function computeContentHash(content: Uint8Array): Hex {
  *   { backend: 's3', bucket: 'my-bucket', key: 'file.bin', region: 'us-east-1' },
  * ];
  * const hash = computeContentHash(contentBytes);
- * const encoded = encodeLsp30Uri(entries, hash);
+ * const encoded = encodeLsp31Uri(entries, hash);
  * ```
  */
-export function encodeLsp30Uri(
-	entries: Lsp30Entry[],
+export function encodeLsp31Uri(
+	entries: Lsp31Entry[],
 	verificationHash: Hex,
 ): Hex {
 	// Validate entries (defense-in-depth — enforces min 2 + backend-specific fields)
-	lsp30EntriesSchema.parse(entries);
+	lsp31EntriesSchema.parse(entries);
 
 	// Validate hash format: 0x + 64 hex chars = 66 chars total, all hex
 	if (
@@ -84,7 +84,7 @@ export function encodeLsp30Uri(
 	const entriesHex = stringToHex(JSON.stringify(entries));
 
 	return concat([
-		LSP30_RESERVED_PREFIX,
+		LSP31_RESERVED_PREFIX,
 		KECCAK256_BYTES_METHOD_ID,
 		HASH_LENGTH_PREFIX,
 		verificationHash,

@@ -1,5 +1,5 @@
 ---
-lip: 30
+lip: 31
 title: Multi-Storage URI
 author: b00ste
 discussions-to:
@@ -15,7 +15,7 @@ A value type for encoding references to content stored across multiple storage b
 
 ## Abstract
 
-LSP30 defines a **MultiStorageURI** value type for [ERC725Y] smart contracts. While [LSP2] [VerifiableURI] points to a single URL, MultiStorageURI points to the same content replicated across multiple storage backends, each identified by backend-specific fields. A single verification hash confirms that all backends store identical content bytes.
+LSP31 defines a **MultiStorageURI** value type for [ERC725Y] smart contracts. While [LSP2] [VerifiableURI] points to a single URL, MultiStorageURI points to the same content replicated across multiple storage backends, each identified by backend-specific fields. A single verification hash confirms that all backends store identical content bytes.
 
 ## Specification
 
@@ -24,14 +24,14 @@ LSP30 defines a **MultiStorageURI** value type for [ERC725Y] smart contracts. Wh
 A MultiStorageURI consists of bytes sliced into the same header structure as [VerifiableURI], followed by a JSON-encoded entries array instead of a single URL:
 
 ```
-0x0030           00000000       0000          0000...0000          0000...
+0x0031           00000000       0000          0000...0000          0000...
 
 ^                ^              ^             ^                    ^
 MultiStorageURI  Verification   Verification  Verification         Encoded entries
 identifier       method         data length   data                 (JSON array)
 ```
 
-- **MultiStorageURI identifier**: MUST be `bytes2(0x0030)`: `0030`
+- **MultiStorageURI identifier**: MUST be `bytes2(0x0031)`: `0031`
 
 - **Verification method**: Same as [VerifiableURI]. The first 4 bytes of the hash of the method name: `bytes4(keccak256('methodName'))`.
 
@@ -46,7 +46,7 @@ identifier       method         data length   data                 (JSON array)
 Applications can distinguish MultiStorageURI from [VerifiableURI] by examining the first 2 bytes:
 
 - `0x0000` → [VerifiableURI] (single URL)
-- `0x0030` → MultiStorageURI (multiple backend entries)
+- `0x0031` → MultiStorageURI (multiple backend entries)
 
 #### Entries JSON Schema
 
@@ -97,7 +97,7 @@ const entries = JSON.stringify([
 
 // final result (to be stored on chain)
 const multiStorageURI = concat([
-  '0x0030', // MultiStorageURI identifier
+  '0x0031', // MultiStorageURI identifier
   verificationMethod, // first 4 bytes of keccak256('keccak256(bytes)')
   verificationDataLength, // 2 bytes: length of verification data
   hash, // 32 bytes: keccak256 of content
@@ -112,7 +112,7 @@ import { hexToNumber, hexToString, slice } from 'viem'
 
 const data = /* value read from ERC725Y getData() */
 
-const identifier = slice(data, 0, 2)          // 0x0030
+const identifier = slice(data, 0, 2)          // 0x0031
 const verificationMethod = slice(data, 2, 6)  // 4 bytes
 const verificationDataLength = hexToNumber(slice(data, 6, 8)) // 2 bytes → number
 const verificationData = slice(data, 8, 8 + verificationDataLength)
