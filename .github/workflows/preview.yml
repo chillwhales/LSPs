@@ -35,4 +35,4 @@ jobs:
         run: pnpm build
 
       - name: Publish preview packages
-        run: pnpx pkg-pr-new publish './packages/utils' './packages/lsp2' './packages/lsp3' './packages/lsp4' './packages/lsp6' './packages/lsp23' './packages/lsp29' './packages/lsp30' --compact --comment=update --packageManager=pnpm
+        run: pnpx pkg-pr-new publish './packages/*' --compact --comment=update --packageManager=pnpm
