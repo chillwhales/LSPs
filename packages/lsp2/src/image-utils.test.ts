@@ -9,7 +9,16 @@
 
 import { describe, expect, it } from "vitest";
 import { VERIFICATION_METHODS } from "./constants";
-import { findBestImage, findClosestImage } from "./image-utils";
+import {
+	findBestImage,
+	findBiggestImage,
+	findClosestImage,
+	findClosestImageByArea,
+	findClosestImageByAspectRatio,
+	findOptimalImage,
+	findSmallestImage,
+	getPreviewImageUrl,
+} from "./image-utils";
 import type { Image } from "./types";
 
 // ============================================================================
@@ -181,5 +190,188 @@ describe("findClosestImage", () => {
 		// Target: 700x700 (square) should be closest to 707x707
 		const result = findClosestImage(aspectRatioImages, 700, 700);
 		expect(result?.url).toBe("square.png");
+	});
+});
+
+// ============================================================================
+// findSmallestImage Tests
+// ============================================================================
+
+describe("findSmallestImage", () => {
+	it("should return null for empty arrays", () => {
+		expect(findSmallestImage([])).toBeNull();
+	});
+
+	it("should return the single image for single-item arrays", () => {
+		const result = findSmallestImage(singleImage);
+		expect(result).toBe(singleImage[0]);
+	});
+
+	it("should find the smallest image by area", () => {
+		// Areas: 100*100=10000, 500*300=150000, 1920*1080=2073600
+		const result = findSmallestImage(sampleImages);
+		expect(result?.url).toBe("small.png");
+	});
+
+	it("should handle images with same area", () => {
+		const sameArea: Image[] = [
+			createImage(200, 50, "wide.png"), // area = 10000
+			createImage(100, 100, "square.png"), // area = 10000
+		];
+		// Should return the first one found with the smallest area
+		const result = findSmallestImage(sameArea);
+		expect(result).not.toBeNull();
+	});
+});
+
+// ============================================================================
+// findBiggestImage Tests
+// ============================================================================
+
+describe("findBiggestImage", () => {
+	it("should return null for empty arrays", () => {
+		expect(findBiggestImage([])).toBeNull();
+	});
+
+	it("should return the single image for single-item arrays", () => {
+		const result = findBiggestImage(singleImage);
+		expect(result).toBe(singleImage[0]);
+	});
+
+	it("should find the biggest image by area", () => {
+		const result = findBiggestImage(sampleImages);
+		expect(result?.url).toBe("xlarge.png");
+	});
+});
+
+// ============================================================================
+// findOptimalImage Tests
+// ============================================================================
+
+describe("findOptimalImage", () => {
+	it("should return null for empty arrays", () => {
+		expect(findOptimalImage([], 100, 100)).toBeNull();
+	});
+
+	it("should return null for null/undefined input", () => {
+		expect(findOptimalImage(null as unknown as Image[], 100, 100)).toBeNull();
+	});
+
+	it("should return smallest image >= target", () => {
+		// Target 200x200: 500x300 and 1920x1080 and 4000x3000 all qualify
+		// Smallest qualifying is 500x300 (area 150000)
+		const result = findOptimalImage(sampleImages, 200, 200);
+		expect(result?.url).toBe("medium.png");
+	});
+
+	it("should fall back to biggest when none large enough", () => {
+		// Target 5000x5000: none qualify
+		const result = findOptimalImage(sampleImages, 5000, 5000);
+		expect(result?.url).toBe("xlarge.png");
+	});
+
+	it("should handle exact match", () => {
+		const result = findOptimalImage(sampleImages, 100, 100);
+		expect(result?.url).toBe("small.png");
+	});
+});
+
+// ============================================================================
+// findClosestImageByArea Tests
+// ============================================================================
+
+describe("findClosestImageByArea", () => {
+	it("should return null for empty arrays", () => {
+		expect(findClosestImageByArea([], 100, 100)).toBeNull();
+	});
+
+	it("should return closest image by area difference", () => {
+		// Target 500x300 = area 150000
+		// Areas: 10000, 150000, 2073600, 12000000
+		// Closest is 150000 (exact match)
+		const result = findClosestImageByArea(sampleImages, 500, 300);
+		expect(result?.url).toBe("medium.png");
+	});
+
+	it("should work with non-matching target", () => {
+		// Target 400x250 = area 100000
+		// Distances: |10000-100000|=90000, |150000-100000|=50000
+		const result = findClosestImageByArea(sampleImages, 400, 250);
+		expect(result?.url).toBe("medium.png");
+	});
+});
+
+// ============================================================================
+// findClosestImageByAspectRatio Tests
+// ============================================================================
+
+describe("findClosestImageByAspectRatio", () => {
+	it("should return null for empty arrays", () => {
+		expect(findClosestImageByAspectRatio([], 100, 100)).toBeNull();
+	});
+
+	it("should find image with best combined match", () => {
+		const images: Image[] = [
+			createImage(1000, 500, "wide.png"), // ratio 2.0
+			createImage(500, 500, "square.png"), // ratio 1.0
+			createImage(800, 600, "standard.png"), // ratio 1.33
+		];
+
+		// Target 1920x1080 = ratio 1.78, area 2073600
+		// wide: ratioDiff 0.22, areaDiff 1573600 → 0.22*0.3+1573600*0.7
+		// square: ratioDiff 0.78, areaDiff 1823600 → ...
+		// standard: ratioDiff 0.44, areaDiff 1593600 → ...
+		const result = findClosestImageByAspectRatio(images, 1920, 1080);
+		expect(result).not.toBeNull();
+	});
+
+	it("should prefer images matching both ratio and area", () => {
+		const images: Image[] = [
+			createImage(1920, 1080, "match.png"),
+			createImage(100, 100, "tiny.png"),
+		];
+
+		const result = findClosestImageByAspectRatio(images, 1920, 1080);
+		expect(result?.url).toBe("match.png");
+	});
+});
+
+// ============================================================================
+// getPreviewImageUrl Tests
+// ============================================================================
+
+describe("getPreviewImageUrl", () => {
+	const parseUrl = (url: string) => url.replace("ipfs://", "https://gateway/");
+
+	it("should return null for undefined input", () => {
+		expect(getPreviewImageUrl(undefined, parseUrl)).toBeNull();
+	});
+
+	it("should return null for empty outer array", () => {
+		expect(getPreviewImageUrl([], parseUrl)).toBeNull();
+	});
+
+	it("should return null for empty inner array", () => {
+		expect(getPreviewImageUrl([[]], parseUrl)).toBeNull();
+	});
+
+	it("should return first image URL parsed", () => {
+		const images = [
+			[
+				createImage(100, 100, "ipfs://Qm123"),
+				createImage(200, 200, "ipfs://Qm456"),
+			],
+		];
+		const result = getPreviewImageUrl(images, parseUrl);
+		expect(result).toBe("https://gateway/Qm123");
+	});
+
+	it("should use first group only", () => {
+		const images = [
+			[createImage(100, 100, "ipfs://first")],
+			[createImage(200, 200, "ipfs://second")],
+		];
+		const result = getPreviewImageUrl(images, parseUrl);
+		expect(result).toBe("https://gateway/first");
 	});
 });
