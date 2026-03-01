@@ -12,7 +12,7 @@ TypeScript implementations of [LUKSO Standard Proposals (LSPs)](https://docs.luk
 | [@chillwhales/lsp6](./packages/lsp6)   | Key Manager — permissions, key builders, parsers                                 |
 | [@chillwhales/lsp23](./packages/lsp23) | Linked Contracts Factory — deployment encoding                                   |
 | [@chillwhales/lsp29](./packages/lsp29) | Encrypted Assets — schemas, types, and encode/decode utilities                   |
-| [@chillwhales/lsp30](./packages/lsp30) | Multi-Storage URI — encode, decode, and resolve multi-backend content references |
+| [@chillwhales/lsp31](./packages/lsp31) | Multi-Storage URI — encode, decode, and resolve multi-backend content references |
 | [@chillwhales/utils](./packages/utils) | Multi-Storage URI — encode, decode, and resolve multi-backend content references |
 
 ## Development

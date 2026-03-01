@@ -40,9 +40,7 @@
 		"build:watch": "unbuild --watch",
 		"clean": "rm -rf dist",
 		"test": "vitest run",
-		"test:watch": "vitest",
-		"prepack": "cp ../../LICENSE .",
-		"postpack": "rm -f LICENSE"
+		"test:watch": "vitest"
 	},
 	"dependencies": {
 		"@chillwhales/lsp2": "workspace:*",

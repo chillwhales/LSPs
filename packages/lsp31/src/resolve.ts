@@ -1,13 +1,13 @@
 /**
- * LSP30 Multi-Storage URI Resolver
+ * LSP31 Multi-Storage URI Resolver
  *
  * Pure functions for selecting preferred storage backends and deriving access URLs.
  * No actual fetching — that's the app layer's responsibility.
  *
- * @see LSP-30-MultiStorageURI.md for full specification
+ * @see LSP-31-MultiStorageURI.md for full specification
  */
 
-import type { Lsp30Backend, Lsp30Entry } from "./types";
+import type { Lsp31Backend, Lsp31Entry } from "./types";
 
 // ============================================================================
 // Backend Selection
@@ -38,9 +38,9 @@ import type { Lsp30Backend, Lsp30Entry } from "./types";
  * ```
  */
 export function selectBackend(
-	entries: Lsp30Entry[],
-	preference?: Lsp30Backend | Lsp30Backend[],
-): Lsp30Entry[] {
+	entries: Lsp31Entry[],
+	preference?: Lsp31Backend | Lsp31Backend[],
+): Lsp31Entry[] {
 	// No preference or empty array → return copy in original order
 	if (!preference || (Array.isArray(preference) && preference.length === 0)) {
 		return [...entries];
@@ -51,7 +51,7 @@ export function selectBackend(
 
 	// Track which entries have been placed by their index
 	const placed = new Set<number>();
-	const result: Lsp30Entry[] = [];
+	const result: Lsp31Entry[] = [];
 
 	// Add entries in preference order
 	for (const pref of prefs) {
@@ -95,7 +95,7 @@ export function selectBackend(
  * // 'https://b.s3.r.amazonaws.com/k'
  * ```
  */
-export function resolveUrl(entry: Lsp30Entry): string {
+export function resolveUrl(entry: Lsp31Entry): string {
 	switch (entry.backend) {
 		case "ipfs":
 			return `ipfs://${entry.cid}`;
@@ -109,7 +109,7 @@ export function resolveUrl(entry: Lsp30Entry): string {
 			// Exhaustive check — TypeScript will error if a backend is added without handling
 			const _exhaustive: never = entry;
 			throw new Error(
-				`Unknown backend: ${(_exhaustive as Lsp30Entry).backend}`,
+				`Unknown backend: ${(_exhaustive as Lsp31Entry).backend}`,
 			);
 		}
 	}

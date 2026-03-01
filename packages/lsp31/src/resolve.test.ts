@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 
 import { resolveUrl, selectBackend } from "./resolve";
-import type { Lsp30Entry } from "./types";
+import type { Lsp31Entry } from "./types";
 
 // ============================================================================
 // Test Data
 // ============================================================================
 
-const allEntries: Lsp30Entry[] = [
+const allEntries: Lsp31Entry[] = [
 	{ backend: "ipfs", cid: "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG" },
 	{
 		backend: "s3",
@@ -42,7 +42,7 @@ describe("selectBackend", () => {
 
 	it("should return all entries in original order when string preference has no match", () => {
 		// Only ipfs and s3 entries, preference for arweave
-		const entries: Lsp30Entry[] = [
+		const entries: Lsp31Entry[] = [
 			{ backend: "ipfs", cid: "QmTest" },
 			{ backend: "s3", bucket: "b", key: "k", region: "r" },
 		];
@@ -73,7 +73,7 @@ describe("selectBackend", () => {
 	});
 
 	it("should skip missing backends in preference and include present ones in order", () => {
-		const entries: Lsp30Entry[] = [
+		const entries: Lsp31Entry[] = [
 			{ backend: "ipfs", cid: "QmTest" },
 			{ backend: "s3", bucket: "b", key: "k", region: "r" },
 		];
@@ -90,7 +90,7 @@ describe("selectBackend", () => {
 	});
 
 	it("should never drop entries — output always has same length as input", () => {
-		const testCases: [Lsp30Entry[], Parameters<typeof selectBackend>[1]][] = [
+		const testCases: [Lsp31Entry[], Parameters<typeof selectBackend>[1]][] = [
 			[allEntries, undefined],
 			[allEntries, "ipfs"],
 			[allEntries, "arweave"],
@@ -111,7 +111,7 @@ describe("selectBackend", () => {
 	});
 
 	it("should handle two entries of same backend type", () => {
-		const dupes: Lsp30Entry[] = [
+		const dupes: Lsp31Entry[] = [
 			{ backend: "ipfs", cid: "QmFirst" },
 			{ backend: "ipfs", cid: "QmSecond" },
 			{ backend: "s3", bucket: "b", key: "k", region: "r" },
@@ -136,7 +136,7 @@ describe("selectBackend", () => {
 
 describe("resolveUrl", () => {
 	it("should return ipfs:// protocol URL for IPFS entry", () => {
-		const entry: Lsp30Entry = {
+		const entry: Lsp31Entry = {
 			backend: "ipfs",
 			cid: "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG",
 		};
@@ -145,7 +145,7 @@ describe("resolveUrl", () => {
 	});
 
 	it("should return virtual-hosted S3 URL for S3 entry", () => {
-		const entry: Lsp30Entry = {
+		const entry: Lsp31Entry = {
 			backend: "s3",
 			bucket: "my-bucket",
 			key: "content/file.bin",
@@ -158,7 +158,7 @@ describe("resolveUrl", () => {
 	});
 
 	it("should URL-encode special characters in S3 keys", () => {
-		const entry: Lsp30Entry = {
+		const entry: Lsp31Entry = {
 			backend: "s3",
 			bucket: "my-bucket",
 			key: "path/to/my file (1).bin",
@@ -171,13 +171,13 @@ describe("resolveUrl", () => {
 	});
 
 	it("should return lumera:// protocol URL for Lumera entry", () => {
-		const entry: Lsp30Entry = { backend: "lumera", actionId: "action-123" };
+		const entry: Lsp31Entry = { backend: "lumera", actionId: "action-123" };
 		const url = resolveUrl(entry);
 		expect(url).toBe("lumera://action-123");
 	});
 
 	it("should return arweave.net gateway URL for Arweave entry", () => {
-		const entry: Lsp30Entry = {
+		const entry: Lsp31Entry = {
 			backend: "arweave",
 			transactionId: "ABCDEF123456",
 		};
@@ -186,7 +186,7 @@ describe("resolveUrl", () => {
 	});
 
 	it("should handle S3 keys with nested paths", () => {
-		const entry: Lsp30Entry = {
+		const entry: Lsp31Entry = {
 			backend: "s3",
 			bucket: "prod",
 			key: "encrypted/2024/q1/data.bin",
@@ -199,7 +199,7 @@ describe("resolveUrl", () => {
 	});
 
 	it("should handle CIDv1 base32 IPFS CIDs", () => {
-		const entry: Lsp30Entry = {
+		const entry: Lsp31Entry = {
 			backend: "ipfs",
 			cid: "bafybeigdyrzt5sfp7udm7hu76uh7y26nf3efuylqabf3oclgtqy55fbzdi",
 		};

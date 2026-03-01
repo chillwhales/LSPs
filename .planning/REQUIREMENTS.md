@@ -56,9 +56,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Rename & LICENSE (Phase 07.1 — Inserted)
 
-- [ ] **RENAME-01**: lsp30 package fully renamed to lsp31 (directory, package.json, all source code exports, tests, spec, documentation)
-- [ ] **LICENSE-01**: LICENSE file permanently exists in each publishable package directory (committed to git)
-- [ ] **LICENSE-02**: prepack/postpack LICENSE copy scripts removed from all package.json files
+- [x] **RENAME-01**: lsp30 package fully renamed to lsp31 (directory, package.json, all source code exports, tests, spec, documentation)
+- [x] **LICENSE-01**: LICENSE file permanently exists in each publishable package directory (committed to git)
+- [x] **LICENSE-02**: prepack/postpack LICENSE copy scripts removed from all package.json files
 
 ### External Extraction
 
@@ -120,9 +120,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PKG-04 | Phase 6 | Complete |
 | TEST-01 | Phase 4 | Complete |
 | TEST-02 | Phase 4 | Complete |
-| RENAME-01 | Phase 07.1 | Pending |
-| LICENSE-01 | Phase 07.1 | Pending |
-| LICENSE-02 | Phase 07.1 | Pending |
+| RENAME-01 | Phase 07.1 | Complete |
+| LICENSE-01 | Phase 07.1 | Complete |
+| LICENSE-02 | Phase 07.1 | Complete |
 | EXT-01 | Phase 8 | Pending |
 | EXT-02 | Phase 8 | Pending |
 

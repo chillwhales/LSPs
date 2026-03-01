@@ -1,15 +1,15 @@
 /**
- * LSP30 Multi-Storage URI Zod Schemas
+ * LSP31 Multi-Storage URI Zod Schemas
  *
  * Validates multi-storage entries with a discriminated union on the `backend` field.
  * Four backend types: ipfs, s3, lumera, arweave — each with backend-specific identifier fields.
  *
- * @see LSP-30-MultiStorageURI.md for full specification
+ * @see LSP-31-MultiStorageURI.md for full specification
  */
 
 import { z } from "zod";
 
-import { LSP30_MIN_ENTRIES } from "./constants";
+import { LSP31_MIN_ENTRIES } from "./constants";
 
 // ============================================================================
 // Backend-Specific Entry Schemas
@@ -19,7 +19,7 @@ import { LSP30_MIN_ENTRIES } from "./constants";
  * IPFS storage entry
  * Identified by a Content Identifier (CID)
  */
-export const lsp30IpfsEntrySchema = z.object({
+export const lsp31IpfsEntrySchema = z.object({
 	backend: z.literal("ipfs"),
 	/** IPFS content identifier (CIDv0 or CIDv1) */
 	cid: z.string().min(1, "CID is required"),
@@ -29,7 +29,7 @@ export const lsp30IpfsEntrySchema = z.object({
  * S3 storage entry
  * Identified by bucket, key, and region
  */
-export const lsp30S3EntrySchema = z.object({
+export const lsp31S3EntrySchema = z.object({
 	backend: z.literal("s3"),
 	/** S3 bucket name */
 	bucket: z.string().min(1, "Bucket is required"),
@@ -43,7 +43,7 @@ export const lsp30S3EntrySchema = z.object({
  * Lumera/Pastel Cascade storage entry
  * Identified by a Cascade action ID
  */
-export const lsp30LumeraEntrySchema = z.object({
+export const lsp31LumeraEntrySchema = z.object({
 	backend: z.literal("lumera"),
 	/** Lumera/Pastel Cascade action ID */
 	actionId: z.string().min(1, "Action ID is required"),
@@ -53,7 +53,7 @@ export const lsp30LumeraEntrySchema = z.object({
  * Arweave storage entry
  * Identified by a transaction ID
  */
-export const lsp30ArweaveEntrySchema = z.object({
+export const lsp31ArweaveEntrySchema = z.object({
 	backend: z.literal("arweave"),
 	/** Arweave transaction ID */
 	transactionId: z.string().min(1, "Transaction ID is required"),
@@ -64,7 +64,7 @@ export const lsp30ArweaveEntrySchema = z.object({
 // ============================================================================
 
 /**
- * LSP30 entry schema — discriminated union on `backend` field
+ * LSP31 entry schema — discriminated union on `backend` field
  *
  * Each entry represents a single storage backend with its backend-specific identifiers.
  * The `backend` field determines which additional fields are required.
@@ -75,11 +75,11 @@ export const lsp30ArweaveEntrySchema = z.object({
  * const s3Entry = { backend: 's3', bucket: 'my-bucket', key: 'content/file.bin', region: 'us-east-1' };
  * ```
  */
-export const lsp30EntrySchema = z.discriminatedUnion("backend", [
-	lsp30IpfsEntrySchema,
-	lsp30S3EntrySchema,
-	lsp30LumeraEntrySchema,
-	lsp30ArweaveEntrySchema,
+export const lsp31EntrySchema = z.discriminatedUnion("backend", [
+	lsp31IpfsEntrySchema,
+	lsp31S3EntrySchema,
+	lsp31LumeraEntrySchema,
+	lsp31ArweaveEntrySchema,
 ]);
 
 // ============================================================================
@@ -87,16 +87,16 @@ export const lsp30EntrySchema = z.discriminatedUnion("backend", [
 // ============================================================================
 
 /**
- * LSP30 entries array — minimum 2 entries required
+ * LSP31 entries array — minimum 2 entries required
  *
  * Single-backend content should use LSP2 VerifiableURI instead.
  * The entries array is unordered — resolvers select based on viewer preference.
  */
-export const lsp30EntriesSchema = z
-	.array(lsp30EntrySchema)
+export const lsp31EntriesSchema = z
+	.array(lsp31EntrySchema)
 	.min(
-		LSP30_MIN_ENTRIES,
-		"LSP30 requires at least 2 storage entries — use LSP2 VerifiableURI for single-backend content",
+		LSP31_MIN_ENTRIES,
+		"LSP31 requires at least 2 storage entries — use LSP2 VerifiableURI for single-backend content",
 	);
 
 // ============================================================================
@@ -104,16 +104,16 @@ export const lsp30EntriesSchema = z
 // ============================================================================
 
 /**
- * LSP30 URI data schema — input for encoding an LSP30 multi-storage URI
+ * LSP31 URI data schema — input for encoding an LSP31 multi-storage URI
  *
  * Contains the pre-computed content verification hash and the entries array.
  * The hash covers the content bytes (identical across all backends), not the entries JSON.
  */
-export const lsp30UriDataSchema = z.object({
+export const lsp31UriDataSchema = z.object({
 	/** keccak256 hash of content bytes, 0x-prefixed 64-char hex string */
 	verificationHash: z
 		.string()
 		.regex(/^0x[0-9a-fA-F]{64}$/, "Must be a 0x-prefixed 64-char hex hash"),
 	/** Storage backend entries (minimum 2) */
-	entries: lsp30EntriesSchema,
+	entries: lsp31EntriesSchema,
 });

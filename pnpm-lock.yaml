@@ -190,7 +190,7 @@ importers:
         specifier: 'catalog:'
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
-  packages/lsp30:
+  packages/lsp31:
     dependencies:
       zod:
         specifier: 'catalog:'
