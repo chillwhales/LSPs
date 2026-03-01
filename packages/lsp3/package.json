@@ -1,6 +1,6 @@
 {
 	"name": "@chillwhales/lsp3",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"description": "LSP3 Universal Profile Metadata — schemas, types, and utilities for profile metadata on LUKSO",
 	"author": "b00ste",

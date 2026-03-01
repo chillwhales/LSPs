@@ -1,6 +1,6 @@
 {
 	"name": "@chillwhales/utils",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"description": "Shared utility functions for the @chillwhales LUKSO Standards Packages",
 	"author": "b00ste",
