@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Phase 8 planned
-last_updated: "2026-03-01T17:00:00.000Z"
-last_activity: 2026-03-01 — Phase 8 planned (3 plans created)
+stopped_at: Completed 08-02-PLAN.md
+last_updated: "2026-03-01T18:45:29.000Z"
+last_activity: 2026-03-01 — Completed 08-02 LSP-specific extraction (lsp2, lsp4, lsp6)
 progress:
   total_phases: 9
   completed_phases: 8
   total_plans: 19
-  completed_plans: 16
-  percent: 84
+  completed_plans: 18
+  percent: 94
 ---
 
 # Project State: LSPs
@@ -20,16 +20,16 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 8 planned. 16/19 plans done. External code extraction from marketplace and lsp-indexer into monorepo packages.
+**Current Focus:** Phase 8 in progress. 18/19 plans done. External code extraction from marketplace and lsp-indexer into monorepo packages.
 
 ## Current Position
 
 **Phase:** 8 (External Code Extraction)
-**Plan:** 0 of 3 in phase
-**Status:** Planned — ready for execution
-**Last activity:** 2026-03-01 — Phase 8 planned (3 plans created)
+**Plan:** 2 of 3 in phase
+**Status:** In Progress — Plan 03 remaining
+**Last activity:** 2026-03-01 — Completed 08-02 LSP-specific extraction
 
-**Progress:** [████████░░] 84%
+**Progress:** [█████████░] 94%
 
 ## Phase Summary
 
@@ -43,16 +43,16 @@ progress:
 | 6 | Package Metadata & Publish Readiness | ✅ Complete (2/2 plans) |
 | 7 | Release Automation | ✅ Complete (2/2 plans) |
 | 7.1 | Rename LSP30→LSP31, LICENSE, Scripts | ✅ Complete (1/1 plans) |
-| 8 | External Code Extraction | ⬚ Not Started |
+| 8 | External Code Extraction | 🔄 In Progress (2/3 plans) |
 
 ## Performance Metrics
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 16 |
+| Plans completed | 18 |
 | Plans total | 19 |
 | Plans with issues | 0 |
-| Requirements done | 24/31 |
+| Requirements done | 25/31 |
 | Phases done | 7.1/8 |
 | Phase 05 P02 | 2min | 2 tasks | 2 files |
 | Phase 06 P01 | 5min | 2 tasks | 12 files |
@@ -60,6 +60,7 @@ progress:
 | Phase 07 P01 | 2min | 2 tasks | 5 files |
 | Phase 07 P02 | 2min | 2 tasks | 1 files |
 | Phase 07.1 P01 | 7min | 2 tasks | 37 files |
+| Phase 08 P02 | 7min | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -110,6 +111,10 @@ progress:
 - Fork guard (head.repo.full_name == github.repository) blocks external PRs from snapshot access
 - Reserved prefix changed from 0x0030 to 0x0031 to match LSP31 standard number
 - LICENSE committed permanently in all packages instead of dynamic copy at pack time
+- LSP17 prefix inlined as constant instead of adding @lukso/lsp17contractextension-contracts dep
+- getData uses inline minimal ERC725Y ABI instead of importing full universalprofile-contracts ABI
+- NftMetadata extends LSP4Metadata with optional token fields instead of separate type
+- LSP26 noted as candidate for future @chillwhales/lsp26 package (4 functions from marketplace)
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
@@ -125,10 +130,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-03-01T17:00:00.000Z
-**Stopped at:** Phase 8 planned
-**Resume with:** Execute Phase 8 (External Code Extraction)
+**Last session:** 2026-03-01T18:45:29.000Z
+**Stopped at:** Completed 08-02-PLAN.md
+**Resume with:** Execute 08-03-PLAN.md (lsp1, erc725, integration)
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-03-01T17:00:00Z*
+*Last updated: 2026-03-01T18:45:29Z*
