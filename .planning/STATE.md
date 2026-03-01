@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 07-02-PLAN.md — Phase 7 complete
-last_updated: "2026-03-01T09:40:21.501Z"
-last_activity: 2026-03-01 — Completed 07-02-PLAN.md
+stopped_at: Completed 07.1-01-PLAN.md — Phase 7.1 complete
+last_updated: "2026-03-01T11:58:44.101Z"
+last_activity: 2026-03-01 — Completed 07.1-01-PLAN.md
 progress:
-  total_phases: 7
-  completed_phases: 7
-  total_plans: 15
-  completed_plans: 15
+  total_phases: 8
+  completed_phases: 8
+  total_plans: 16
+  completed_plans: 16
   percent: 100
 ---
 
@@ -20,14 +20,14 @@ progress:
 
 **Core Value:** Every @chillwhales/* package installs cleanly, works in any JS/TS environment (ESM and CJS), and ships with correct types — consumers never think about compatibility.
 
-**Current Focus:** Phase 7 complete. 15 plans done. Full release automation stack ready (changesets + release workflow + preview snapshots). Ready for Phase 8.
+**Current Focus:** Phase 7.1 complete. 16 plans done. LSP30 renamed to LSP31, LICENSE in all packages, prepack/postpack removed.
 
 ## Current Position
 
-**Phase:** 7 of 8 (Release Automation)
-**Plan:** 2 of 2 in phase ✅
-**Status:** Milestone complete
-**Last activity:** 2026-03-01 — Completed 07-02-PLAN.md
+**Phase:** 7.1 (Rename LSP30→LSP31, LICENSE, remove prepack/postpack)
+**Plan:** 1 of 1 in phase ✅
+**Status:** Phase 7.1 complete
+**Last activity:** 2026-03-01 — Completed 07.1-01-PLAN.md
 
 **Progress:** [██████████] 100%
 
@@ -42,22 +42,24 @@ progress:
 | 5 | CI Pipeline | ✅ Complete (2/2 plans) |
 | 6 | Package Metadata & Publish Readiness | ✅ Complete (2/2 plans) |
 | 7 | Release Automation | ✅ Complete (2/2 plans) |
+| 7.1 | Rename LSP30→LSP31, LICENSE, Scripts | ✅ Complete (1/1 plans) |
 | 8 | External Code Extraction | ⬚ Not Started |
 
 ## Performance Metrics
 
 | Metric | Value |
 |--------|-------|
-| Plans completed | 15 |
-| Plans total | 15 |
+| Plans completed | 16 |
+| Plans total | 16 |
 | Plans with issues | 0 |
 | Requirements done | 24/31 |
-| Phases done | 7/8 |
+| Phases done | 7.1/8 |
 | Phase 05 P02 | 2min | 2 tasks | 2 files |
 | Phase 06 P01 | 5min | 2 tasks | 12 files |
 | Phase 06 P02 | 2min | 2 tasks | 8 files |
 | Phase 07 P01 | 2min | 2 tasks | 5 files |
 | Phase 07 P02 | 2min | 2 tasks | 1 files |
+| Phase 07.1 P01 | 7min | 2 tasks | 37 files |
 
 ## Accumulated Context
 
@@ -106,6 +108,8 @@ progress:
 - Build step before changesets/action so dist/ artifacts exist for publish
 - pkg-pr-new with --compact --comment=update --packageManager=pnpm for clean PR preview comments
 - Fork guard (head.repo.full_name == github.repository) blocks external PRs from snapshot access
+- Reserved prefix changed from 0x0030 to 0x0031 to match LSP31 standard number
+- LICENSE committed permanently in all packages instead of dynamic copy at pack time
 
 ### Research Flags
 - Phase 7 (Release Automation): npm scope claim, NPM_TOKEN setup, first-publish dry-run — needs phase research
@@ -121,10 +125,10 @@ progress:
 
 ## Session Continuity
 
-**Last session:** 2026-03-01T09:35:37Z
-**Stopped at:** Completed 07-02-PLAN.md — Phase 7 complete
+**Last session:** 2026-03-01T11:58:44.100Z
+**Stopped at:** Completed 07.1-01-PLAN.md — Phase 7.1 complete
 **Resume with:** Plan Phase 8 (External Code Extraction)
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-03-01T09:35:37Z*
+*Last updated: 2026-03-01T11:56:41Z*
