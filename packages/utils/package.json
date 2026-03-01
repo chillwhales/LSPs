@@ -40,10 +40,14 @@
 		"test": "vitest run",
 		"test:watch": "vitest"
 	},
+	"peerDependencies": {
+		"viem": "catalog:"
+	},
 	"devDependencies": {
 		"@chillwhales/config": "workspace:*",
 		"typescript": "catalog:",
 		"unbuild": "catalog:",
+		"viem": "catalog:",
 		"vitest": "catalog:"
 	},
 	"packageManager": "pnpm@10.30.2"
