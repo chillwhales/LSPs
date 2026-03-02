@@ -1,11 +1,9 @@
+import { LSP0_TYPE_IDS } from "@lukso/lsp0-contracts";
+import { LSP7_TYPE_IDS } from "@lukso/lsp7-contracts";
+import { LSP8_TYPE_IDS } from "@lukso/lsp8-contracts";
+import { LSP14_TYPE_IDS } from "@lukso/lsp14-contracts";
 import { describe, expect, it } from "vitest";
-import {
-	ALL_TYPE_IDS,
-	LSP0_TYPE_IDS,
-	LSP7_TYPE_IDS,
-	LSP8_TYPE_IDS,
-	LSP14_TYPE_IDS,
-} from "./constants";
+import { ALL_TYPE_IDS } from "./constants";
 import {
 	isLsp1TypeId,
 	isOwnershipNotification,

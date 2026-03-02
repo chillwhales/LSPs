@@ -62,26 +62,3 @@ export const TYPE_ID_NAMES = Object.keys(ALL_TYPE_IDS) as [
 export const BUILT_IN_TYPE_IDS: ReadonlyArray<
 	readonly [name: string, hex: string]
 > = Object.entries(ALL_TYPE_IDS);
-
-// ---------------------------------------------------------------------------
-// Re-exports — per-LSP access
-// ---------------------------------------------------------------------------
-
-export {
-	LSP0_TYPE_IDS,
-	LSP7_TYPE_IDS,
-	LSP8_TYPE_IDS,
-	LSP9_TYPE_IDS,
-	LSP14_TYPE_IDS,
-	LSP26_TYPE_IDS,
-};
-
-/**
- * UniversalReceiver event signature.
- *
- * Event: UniversalReceiver(address from, uint256 value, bytes32 typeId, bytes receivedData, bytes returnedValue)
- *
- * This is the event emitted by LSP0 ERC725Account contracts.
- */
-export const UNIVERSAL_RECEIVER_EVENT_SIGNATURE =
-	"UniversalReceiver(address,uint256,bytes32,bytes,bytes)";
