@@ -1,16 +1,16 @@
 /**
- * ERC725Y / LSP17 Read Utilities
+ * LSP17 Extension Key Utilities
  *
- * Functions for building LSP17 extension data keys, reading ERC725Y data
- * from contracts, and hex comparison helpers.
+ * Functions for building and parsing LSP17 extension data keys.
+ * These are LSP17-specific utilities that belong in the LSP6 package
+ * (LSP6 Key Manager manages LSP17 extensions on Universal Profiles).
  *
- * Extracted from chillwhales/marketplace — only genuinely new functions
- * that don't overlap with existing key-builders.ts / parsers.ts.
+ * General ERC725Y utilities (getData, encoding/decoding) are in @chillwhales/erc725.
  *
  * @see https://docs.lukso.tech/standards/generic-standards/lsp17-contract-extension
  */
 
-import { type Address, concat, type Hex, padHex, slice } from "viem";
+import { concat, type Hex, padHex, slice } from "viem";
 
 /**
  * Well-known LSP17 extension data key prefix (12 bytes).
@@ -48,7 +48,7 @@ export function buildLsp17ExtensionKey(selector: Hex): Hex {
 /**
  * Extract the 4-byte function selector from an LSP17 extension data key.
  *
- * The selector occupies bytes 12–16 of the 32-byte key.
+ * The selector occupies bytes 12-16 of the 32-byte key.
  *
  * @param key - A 32-byte LSP17 extension data key
  * @returns The 4-byte function selector
@@ -82,128 +82,4 @@ export function extractLsp17ExtensionKeys(dataKeys: Hex[]): Hex[] {
 	return dataKeys.filter((dataKey) =>
 		dataKey.startsWith(LSP17_EXTENSION_PREFIX),
 	);
-}
-
-/**
- * Case-insensitive hex string comparison.
- *
- * @param a - First hex value
- * @param b - Second hex value
- * @returns `true` if the hex values are equal (case-insensitive)
- *
- * @example
- * ```typescript
- * isHexEqual("0xAbC", "0xabc"); // true
- * isHexEqual("0x1234", "0x5678"); // false
- * ```
- */
-export function isHexEqual(a: Hex, b: Hex): boolean {
-	return a.toLowerCase() === b.toLowerCase();
-}
-
-/**
- * Read ERC725Y data from a contract.
- *
- * Supports both single key and batch key reads. Uses the Universal Profile ABI
- * which includes the ERC725Y `getData` / `getDataBatch` functions.
- *
- * @param client - Viem PublicClient instance
- * @param contractAddress - The ERC725Y contract address
- * @param dataKey - Single data key to read
- * @returns The data value (empty `"0x"` if not set)
- * @throws If the contract read fails
- *
- * @example
- * ```typescript
- * // Single key read
- * const value = await getData(client, "0x1234...", "0xabcd...");
- *
- * // Batch read
- * const values = await getData(client, "0x1234...", ["0xabcd...", "0xefgh..."]);
- * ```
- */
-export async function getData(
-	client: {
-		readContract: (args: {
-			address: Address;
-			abi: readonly Record<string, unknown>[];
-			functionName: string;
-			args: readonly unknown[];
-		}) => Promise<unknown>;
-	},
-	contractAddress: Address,
-	dataKey: Hex,
-): Promise<Hex>;
-export async function getData(
-	client: {
-		readContract: (args: {
-			address: Address;
-			abi: readonly Record<string, unknown>[];
-			functionName: string;
-			args: readonly unknown[];
-		}) => Promise<unknown>;
-	},
-	contractAddress: Address,
-	dataKeys: Hex[],
-): Promise<Hex[]>;
-export async function getData(
-	client: {
-		readContract: (args: {
-			address: Address;
-			abi: readonly Record<string, unknown>[];
-			functionName: string;
-			args: readonly unknown[];
-		}) => Promise<unknown>;
-	},
-	contractAddress: Address,
-	dataKeyOrKeys: Hex | Hex[],
-): Promise<Hex | Hex[]> {
-	/** Minimal ERC725Y ABI for getData/getDataBatch */
-	const erc725yAbi = [
-		{
-			type: "function",
-			name: "getData",
-			inputs: [{ type: "bytes32", name: "dataKey" }],
-			outputs: [{ type: "bytes", name: "" }],
-			stateMutability: "view",
-		},
-		{
-			type: "function",
-			name: "getDataBatch",
-			inputs: [{ type: "bytes32[]", name: "dataKeys" }],
-			outputs: [{ type: "bytes[]", name: "" }],
-			stateMutability: "view",
-		},
-	] as const;
-
-	try {
-		if (Array.isArray(dataKeyOrKeys)) {
-			if (dataKeyOrKeys.length === 0) return [];
-
-			const result = await client.readContract({
-				address: contractAddress,
-				abi: erc725yAbi,
-				functionName: "getDataBatch",
-				args: [dataKeyOrKeys],
-			});
-
-			return [...(result as Hex[])];
-		}
-
-		const result = await client.readContract({
-			address: contractAddress,
-			abi: erc725yAbi,
-			functionName: "getData",
-			args: [dataKeyOrKeys],
-		});
-
-		return result as Hex;
-	} catch (error) {
-		const keyInfo = Array.isArray(dataKeyOrKeys)
-			? `${dataKeyOrKeys.length} data keys`
-			: `data key ${dataKeyOrKeys}`;
-		throw new Error(
-			`Failed to read ${keyInfo}: ${error instanceof Error ? error.message : String(error)}`,
-		);
-	}
 }

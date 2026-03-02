@@ -12,3 +12,6 @@ export type ERC725YKeyType =
 	| "Array"
 	| "Mapping"
 	| "MappingWithGrouping";
+
+/** Re-export ERC725YReader interface for consumers */
+export type { ERC725YReader } from "./reader";

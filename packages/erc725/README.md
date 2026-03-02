@@ -2,7 +2,7 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-ERC725Y data-key building, array key computation, and contract storage reading utilities.
+ERC725Y utilities — wraps `@erc725/erc725.js` with viem-typed interfaces for key name ↔ data key mapping, data encoding/decoding, permissions, and on-chain storage reading.
 
 ## Install
 
@@ -18,33 +18,65 @@ pnpm add @chillwhales/erc725
 
 ## Usage
 
+### Key Name ↔ Data Key
+
 ```typescript
-import {
-  computeSingletonKey,
-  computeArrayKey,
-  computeArrayElementKey,
-  computeMappingKey,
-  extractArrayIndex,
-} from "@chillwhales/erc725";
+import { encodeKeyName, decodeMappingKey } from "@chillwhales/erc725";
 
-// Compute a Singleton key
-const lsp3ProfileKey = computeSingletonKey("LSP3Profile");
-// 0x5ef83ad9559033e6e941db7d7c495acdce616347d28e90c7ce47cbfcfcad3bc5
+// Singleton key
+const lsp3Key = encodeKeyName("LSP3Profile");
+// "0x5ef83ad9559033e6e941db7d7c495acdce616347d28e90c7ce47cbfcfcad3bc5"
 
-// Compute an Array length key
-const receivedAssetsKey = computeArrayKey("LSP5ReceivedAssets[]");
+// Array element key
+const element5 = encodeKeyName("LSP5ReceivedAssets[]", [5]);
 
-// Compute an Array element key (index 0)
-const firstAssetKey = computeArrayElementKey("LSP5ReceivedAssets[]", 0);
+// Mapping key with address
+const mapKey = encodeKeyName("LSP5ReceivedAssetsMap:<address>", [
+  "0xcAfEcAfECAfECaFeCaFecaFecaFECafECafeCaFe",
+]);
 
-// Compute a Mapping key with an address
-const mappingKey = computeMappingKey(
-  "LSP5ReceivedAssetsMap",
-  "0x1234567890abcdef1234567890abcdef12345678",
+// Decode a mapping key back to its dynamic parts
+const parts = decodeMappingKey(mapKey, "LSP5ReceivedAssetsMap:<address>");
+```
+
+### Data Encoding / Decoding
+
+```typescript
+import { encodeData, decodeData, encodePermissions } from "@chillwhales/erc725";
+import LSP6Schemas from "@erc725/erc725.js/schemas/LSP6KeyManager.json";
+
+const encoded = encodeData(
+  [
+    {
+      keyName: "AddressPermissions:Permissions:<address>",
+      dynamicKeyParts: ["0x1234..."],
+      value: encodePermissions({ CALL: true, SETDATA: true }),
+    },
+  ],
+  LSP6Schemas,
 );
+// { keys: ["0x4b80742d..."], values: ["0x0000..."] }
+```
 
-// Extract array index from element key (roundtrip)
-const index = extractArrayIndex(firstAssetKey); // 0n
+### On-Chain Reading (viem)
+
+```typescript
+import { createPublicClient, http } from "viem";
+import { lukso } from "viem/chains";
+import { getData, encodeKeyName } from "@chillwhales/erc725";
+
+const client = createPublicClient({ chain: lukso, transport: http() });
+const value = await getData(client, "0x1234...", encodeKeyName("LSP3Profile"));
+```
+
+### Array Key Utilities
+
+```typescript
+import { extractArrayPrefix, extractArrayIndex, encodeKeyName } from "@chillwhales/erc725";
+
+const elementKey = encodeKeyName("LSP5ReceivedAssets[]", [42]);
+const prefix = extractArrayPrefix(elementKey); // First 16 bytes
+const index = extractArrayIndex(elementKey); // 42n
 ```
 
 ## API

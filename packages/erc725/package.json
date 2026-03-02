@@ -42,6 +42,7 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
+		"@erc725/erc725.js": "catalog:",
 		"zod": "catalog:"
 	},
 	"peerDependencies": {
