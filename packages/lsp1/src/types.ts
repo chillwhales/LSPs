@@ -1,6 +1,31 @@
-import type { Hex } from "viem";
+/**
+ * Type definitions for LSP1 UniversalReceiver type IDs.
+ *
+ * @module
+ */
+
 import type { z } from "zod";
+import type { ALL_TYPE_IDS } from "./constants";
 import type { universalReceiverEventSchema } from "./schemas";
+
+// ---------------------------------------------------------------------------
+// TypeIdName — union of built-in names + extensible string
+// ---------------------------------------------------------------------------
+
+/**
+ * Union type of all built-in LUKSO LSP1 type ID names.
+ *
+ * Derived from the keys of {@link ALL_TYPE_IDS}. Provides autocomplete in
+ * TypeScript for filter fields while still accepting arbitrary strings via
+ * `(string & {})` widening.
+ *
+ * @example
+ * ```ts
+ * const name: TypeIdName = 'LSP7Tokens_SenderNotification'; // autocomplete works
+ * const custom: TypeIdName = 'SomeOtherTypeId'; // also valid (string & {})
+ * ```
+ */
+export type TypeIdName = keyof typeof ALL_TYPE_IDS | (string & {});
 
 /** Parsed UniversalReceiver event data */
 export type UniversalReceiverEvent = z.infer<
@@ -9,7 +34,7 @@ export type UniversalReceiverEvent = z.infer<
 
 /** Mapping of typeId to a human-readable notification name */
 export interface TypeIdMapping {
-	typeId: Hex;
+	typeId: string;
 	name: string;
 	description: string;
 }

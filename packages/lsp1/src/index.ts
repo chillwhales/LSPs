@@ -1,13 +1,22 @@
 /**
- * @chillwhales/lsp1
+ * @chillwhales/lsp1 — LSP1 UniversalReceiver type ID registry.
  *
- * LSP1 UniversalReceiver Standard
- * Event constants, typeId definitions, and notification type guards.
+ * A self-contained read-only registry mapping bytes32 LSP1 type ID hashes
+ * to human-readable names. Derived from official `@lukso/lsp*-contracts`
+ * packages (LSP0, LSP7, LSP8, LSP9, LSP14, LSP26).
  *
- * @see https://docs.lukso.tech/standards/universal-profile/lsp1-universal-receiver
+ * ```ts
+ * import { resolveTypeIdName, resolveTypeIdHex } from '@chillwhales/lsp1';
+ *
+ * resolveTypeIdName('0x429ac7a0...'); // → 'LSP7Tokens_SenderNotification'
+ * resolveTypeIdHex('LSP7Tokens_SenderNotification'); // → '0x429ac7a0...'
+ * ```
+ *
+ * @module
  */
 
 export * from "./constants";
 export * from "./guards";
+export * from "./registry";
 export * from "./schemas";
 export * from "./types";

@@ -2,7 +2,7 @@
 	"name": "@chillwhales/lsp1",
 	"version": "0.1.0",
 	"type": "module",
-	"description": "LSP1 UniversalReceiver — event constants, typeId definitions, and notification type guards for LUKSO Universal Profiles",
+	"description": "LSP1 UniversalReceiver — type ID registry with bidirectional lookup, sourced from official @lukso contract packages",
 	"author": "b00ste",
 	"license": "MIT",
 	"types": "./dist/index.d.mts",
@@ -31,7 +31,8 @@
 		"lsp",
 		"lsp1",
 		"universal-receiver",
-		"notifications"
+		"notifications",
+		"type-id"
 	],
 	"sideEffects": false,
 	"scripts": {
@@ -42,16 +43,18 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
+		"@lukso/lsp0-contracts": "catalog:",
+		"@lukso/lsp14-contracts": "catalog:",
+		"@lukso/lsp26-contracts": "catalog:",
+		"@lukso/lsp7-contracts": "catalog:",
+		"@lukso/lsp8-contracts": "catalog:",
+		"@lukso/lsp9-contracts": "catalog:",
 		"zod": "catalog:"
-	},
-	"peerDependencies": {
-		"viem": "catalog:"
 	},
 	"devDependencies": {
 		"@chillwhales/config": "workspace:*",
 		"typescript": "catalog:",
 		"unbuild": "catalog:",
-		"viem": "catalog:",
 		"vitest": "catalog:"
 	},
 	"packageManager": "pnpm@10.30.2"
