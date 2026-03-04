@@ -48,6 +48,7 @@
 	},
 	"devDependencies": {
 		"@chillwhales/config": "workspace:*",
+		"@types/node": "^25.3.3",
 		"typescript": "catalog:",
 		"unbuild": "catalog:",
 		"viem": "catalog:",
