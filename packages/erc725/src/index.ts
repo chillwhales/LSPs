@@ -8,7 +8,7 @@
  * @see https://docs.lukso.tech/standards/universal-profile/lsp2-json-schema
  */
 
-export * from "./data-keys";
-export * from "./reader";
+export * from "./constants";
+export * from "./registry";
 export * from "./schemas";
 export * from "./types";

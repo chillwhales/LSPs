@@ -7,8 +7,8 @@
  * @see https://docs.lukso.tech/standards/universal-profile/lsp6-key-manager
  */
 
-import { decodeData } from "@chillwhales/erc725";
 import { isEqual } from "@chillwhales/utils";
+import ERC725 from "@erc725/erc725.js";
 import LSP6Schemas from "@erc725/erc725.js/schemas/LSP6KeyManager.json";
 import { type Address, getAddress, type Hex, isHex } from "viem";
 import type { AllowedCall } from "./types";
@@ -30,16 +30,14 @@ import type { AllowedCall } from "./types";
  */
 export function parseCompactBytesArray(data: Hex, address: Address): Hex[] {
 	try {
-		const decoded = decodeData(
-			[
-				{
-					keyName: "AddressPermissions:AllowedERC725YDataKeys:<address>",
-					dynamicKeyParts: address,
-					value: data,
-				},
-			],
-			LSP6Schemas,
-		);
+		const erc725 = new ERC725(LSP6Schemas);
+		const decoded = erc725.decodeData([
+			{
+				keyName: "AddressPermissions:AllowedERC725YDataKeys:<address>",
+				dynamicKeyParts: address,
+				value: data,
+			},
+		]);
 
 		if (!decoded[0]) return [];
 
@@ -75,16 +73,14 @@ export function parseCompactBytesArray(data: Hex, address: Address): Hex[] {
  */
 export function parseAllowedCalls(data: Hex, address: Address): AllowedCall[] {
 	try {
-		const decoded = decodeData(
-			[
-				{
-					keyName: "AddressPermissions:AllowedCalls:<address>",
-					dynamicKeyParts: address,
-					value: data,
-				},
-			],
-			LSP6Schemas,
-		);
+		const erc725 = new ERC725(LSP6Schemas);
+		const decoded = erc725.decodeData([
+			{
+				keyName: "AddressPermissions:AllowedCalls:<address>",
+				dynamicKeyParts: address,
+				value: data,
+			},
+		]);
 
 		if (!decoded || !decoded[0] || !decoded[0].value) return [];
 

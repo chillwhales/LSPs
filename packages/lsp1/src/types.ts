@@ -6,11 +6,7 @@
 
 import type { z } from "zod";
 import type { ALL_TYPE_IDS } from "./constants";
-import type { universalReceiverEventSchema } from "./schemas";
-
-// ---------------------------------------------------------------------------
-// TypeIdName — union of built-in names + extensible string
-// ---------------------------------------------------------------------------
+import type { TypeIdNameSchema } from "./schemas";
 
 /**
  * Union type of all built-in LUKSO LSP1 type ID names.
@@ -25,16 +21,4 @@ import type { universalReceiverEventSchema } from "./schemas";
  * const custom: TypeIdName = 'SomeOtherTypeId'; // also valid (string & {})
  * ```
  */
-export type TypeIdName = keyof typeof ALL_TYPE_IDS | (string & {});
-
-/** Parsed UniversalReceiver event data */
-export type UniversalReceiverEvent = z.infer<
-	typeof universalReceiverEventSchema
->;
-
-/** Mapping of typeId to a human-readable notification name */
-export interface TypeIdMapping {
-	typeId: string;
-	name: string;
-	description: string;
-}
+export type TypeIdName = z.infer<typeof TypeIdNameSchema>;

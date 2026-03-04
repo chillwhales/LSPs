@@ -1,17 +1,4 @@
-import type { Hex } from "viem";
+import type z from "zod";
+import type { DataKeyNameSchema } from "./schemas";
 
-/** ERC725Y key-value pair */
-export interface ERC725YKeyValue {
-	key: Hex;
-	value: Hex;
-}
-
-/** ERC725Y key type classifications from LSP2 */
-export type ERC725YKeyType =
-	| "Singleton"
-	| "Array"
-	| "Mapping"
-	| "MappingWithGrouping";
-
-/** Re-export ERC725YReader interface for consumers */
-export type { ERC725YReader } from "./reader";
+export type DataKeyName = z.infer<typeof DataKeyNameSchema>;

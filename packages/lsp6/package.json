@@ -42,7 +42,6 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
-		"@chillwhales/erc725": "workspace:*",
 		"@chillwhales/utils": "workspace:*",
 		"@erc725/erc725.js": "catalog:",
 		"@lukso/lsp6-contracts": "catalog:",

@@ -7,7 +7,7 @@
  * @see https://docs.lukso.tech/standards/smart-contracts/lsp23-linked-contracts-factory
  */
 
-import { encodeData, encodePermissions } from "@chillwhales/erc725";
+import ERC725 from "@erc725/erc725.js";
 import LSP1UniversalReceiverDelegateSchemas from "@erc725/erc725.js/schemas/LSP1UniversalReceiverDelegate.json";
 import LSP6KeyManagerSchemas from "@erc725/erc725.js/schemas/LSP6KeyManager.json";
 import { universalProfileInitAbi } from "@lukso/universalprofile-contracts/abi";
@@ -81,58 +81,57 @@ export function generateDeployParams({
 		...LSP1UniversalReceiverDelegateSchemas,
 	];
 
+	const erc725 = new ERC725(schemas);
+
 	// create the permissions data keys
-	const setDataKeysAndValues = encodeData(
-		[
-			{
-				keyName: "LSP1UniversalReceiverDelegate",
-				value: UNIVERSAL_RECEIVER_ADDRESS,
-			}, // Universal Receiver data key and value
-			{
-				keyName: "AddressPermissions:Permissions:<address>",
-				dynamicKeyParts: [UNIVERSAL_RECEIVER_ADDRESS],
-				value: encodePermissions({
-					REENTRANCY: true,
-					SUPER_SETDATA: true,
-				}),
-			}, // Universal Receiver Delegate permissions data key and value
-			{
-				keyName: "AddressPermissions:Permissions:<address>",
-				dynamicKeyParts: [controllerAddress],
-				value: encodePermissions({
-					CHANGEOWNER: true,
-					ADDCONTROLLER: true,
-					EDITPERMISSIONS: true,
-					ADDEXTENSIONS: true,
-					CHANGEEXTENSIONS: true,
-					ADDUNIVERSALRECEIVERDELEGATE: true,
-					CHANGEUNIVERSALRECEIVERDELEGATE: true,
-					REENTRANCY: false,
-					SUPER_TRANSFERVALUE: true,
-					TRANSFERVALUE: true,
-					SUPER_CALL: true,
-					CALL: true,
-					SUPER_STATICCALL: true,
-					STATICCALL: true,
-					SUPER_DELEGATECALL: false,
-					DELEGATECALL: false,
-					DEPLOY: true,
-					SUPER_SETDATA: true,
-					SETDATA: true,
-					ENCRYPT: true,
-					DECRYPT: true,
-					SIGN: true,
-					EXECUTE_RELAY_CALL: true,
-				}), // Main Controller permissions data key and value
-			},
-			// Address Permissions array length = 2, and the controller addresses at each index
-			{
-				keyName: "AddressPermissions[]",
-				value: [UNIVERSAL_RECEIVER_ADDRESS, controllerAddress],
-			},
-		],
-		schemas,
-	);
+	const setDataKeysAndValues = erc725.encodeData([
+		{
+			keyName: "LSP1UniversalReceiverDelegate",
+			value: UNIVERSAL_RECEIVER_ADDRESS,
+		}, // Universal Receiver data key and value
+		{
+			keyName: "AddressPermissions:Permissions:<address>",
+			dynamicKeyParts: [UNIVERSAL_RECEIVER_ADDRESS],
+			value: ERC725.encodePermissions({
+				REENTRANCY: true,
+				SUPER_SETDATA: true,
+			}),
+		}, // Universal Receiver Delegate permissions data key and value
+		{
+			keyName: "AddressPermissions:Permissions:<address>",
+			dynamicKeyParts: [controllerAddress],
+			value: ERC725.encodePermissions({
+				CHANGEOWNER: true,
+				ADDCONTROLLER: true,
+				EDITPERMISSIONS: true,
+				ADDEXTENSIONS: true,
+				CHANGEEXTENSIONS: true,
+				ADDUNIVERSALRECEIVERDELEGATE: true,
+				CHANGEUNIVERSALRECEIVERDELEGATE: true,
+				REENTRANCY: false,
+				SUPER_TRANSFERVALUE: true,
+				TRANSFERVALUE: true,
+				SUPER_CALL: true,
+				CALL: true,
+				SUPER_STATICCALL: true,
+				STATICCALL: true,
+				SUPER_DELEGATECALL: false,
+				DELEGATECALL: false,
+				DEPLOY: true,
+				SUPER_SETDATA: true,
+				SETDATA: true,
+				ENCRYPT: true,
+				DECRYPT: true,
+				SIGN: true,
+				EXECUTE_RELAY_CALL: true,
+			}), // Main Controller permissions data key and value
+		},
+		// Address Permissions array length = 2, and the controller addresses at each index
+		{
+			keyName: "AddressPermissions[]",
+			value: [UNIVERSAL_RECEIVER_ADDRESS, controllerAddress],
+		},
+	]);
 
 	const keys = setDataKeysAndValues.keys.filter((value) => isHex(value));
 	const values = setDataKeysAndValues.values.filter((value) => isHex(value));
