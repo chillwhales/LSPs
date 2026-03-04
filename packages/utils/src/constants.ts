@@ -94,28 +94,3 @@ export const ASSET_MIME_TYPES = [
 	...IMAGE_MIME_TYPES,
 	...DOCUMENT_MIME_TYPES,
 ] as const;
-
-// ============================================================================
-// File Upload Constants
-// ============================================================================
-
-/**
- * Standard image sizes for responsive images
- */
-export const IMAGE_SIZES = [180, 320, 640, 1024] as const;
-
-/**
- * Maximum file size for image uploads: 5MB
- */
-export const IMAGE_FILE_MAX_SIZE = 5 * 1024 * 1024;
-
-/**
- * Maximum file size for asset uploads: 100MB
- */
-export const ASSET_FILE_MAX_SIZE = 100 * 1024 * 1024;
-
-/**
- * UUID pattern string for use in regex construction
- */
-export const UUID_PATTERN =
-	"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
