@@ -1,0 +1,49 @@
+{
+	"name": "@chillwhales/lsp8",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "LSP8 Identifiable Digital Asset — deployment addresses for LSP8MintableInit implementation contracts",
+	"author": "b00ste",
+	"license": "MIT",
+	"types": "./dist/index.d.mts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"files": [
+		"dist",
+		"LICENSE",
+		"README.md"
+	],
+	"engines": {
+		"node": ">=22"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/chillwhales/LSPs.git",
+		"directory": "packages/lsp8"
+	},
+	"keywords": [
+		"chillwhales",
+		"lukso",
+		"lsp",
+		"lsp8"
+	],
+	"sideEffects": false,
+	"scripts": {
+		"build": "unbuild",
+		"build:watch": "unbuild --watch",
+		"clean": "rm -rf dist",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"devDependencies": {
+		"@chillwhales/config": "workspace:*",
+		"typescript": "catalog:",
+		"unbuild": "catalog:",
+		"vitest": "catalog:"
+	},
+	"packageManager": "pnpm@10.30.2"
+}

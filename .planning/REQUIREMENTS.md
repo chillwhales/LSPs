@@ -62,8 +62,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### External Extraction
 
-- [ ] **EXT-01**: Reusable utilities from chillwhales/marketplace are identified and extracted into this monorepo
-- [ ] **EXT-02**: Reusable utilities from chillwhales/lsp-indexer are identified and extracted into this monorepo
+- [x] **EXT-01**: Reusable utilities from chillwhales/marketplace are identified and extracted into this monorepo
+- [x] **EXT-02**: Reusable utilities from chillwhales/lsp-indexer are identified and extracted into this monorepo
 
 ## v2 Requirements
 
@@ -123,8 +123,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | RENAME-01 | Phase 07.1 | Complete |
 | LICENSE-01 | Phase 07.1 | Complete |
 | LICENSE-02 | Phase 07.1 | Complete |
-| EXT-01 | Phase 8 | Pending |
-| EXT-02 | Phase 8 | Pending |
+| EXT-01 | Phase 8 | Complete |
+| EXT-02 | Phase 8 | Complete |
 
 **Coverage:**
 - v1 requirements: 34 total

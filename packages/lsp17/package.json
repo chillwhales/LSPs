@@ -1,0 +1,54 @@
+{
+	"name": "@chillwhales/lsp17",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "LSP17 Contract Extension — extension key builders, selector extraction, and interface constants",
+	"author": "b00ste",
+	"license": "MIT",
+	"types": "./dist/index.d.mts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"files": [
+		"dist",
+		"LICENSE",
+		"README.md"
+	],
+	"engines": {
+		"node": ">=22"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/chillwhales/LSPs.git",
+		"directory": "packages/lsp17"
+	},
+	"keywords": [
+		"chillwhales",
+		"lukso",
+		"lsp",
+		"lsp17",
+		"contract-extension"
+	],
+	"sideEffects": false,
+	"scripts": {
+		"build": "unbuild",
+		"build:watch": "unbuild --watch",
+		"clean": "rm -rf dist",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"@erc725/erc725.js": "catalog:",
+		"@lukso/lsp17contractextension-contracts": "catalog:"
+	},
+	"devDependencies": {
+		"@chillwhales/config": "workspace:*",
+		"typescript": "catalog:",
+		"unbuild": "catalog:",
+		"vitest": "catalog:"
+	},
+	"packageManager": "pnpm@10.30.2"
+}

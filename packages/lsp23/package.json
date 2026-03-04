@@ -43,7 +43,10 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
+		"@chillwhales/lsp1": "workspace:*",
 		"@chillwhales/lsp2": "workspace:*",
+		"@chillwhales/lsp6": "workspace:*",
+		"@chillwhales/up": "workspace:*",
 		"@erc725/erc725.js": "catalog:",
 		"@lukso/universalprofile-contracts": "catalog:",
 		"zod": "catalog:"

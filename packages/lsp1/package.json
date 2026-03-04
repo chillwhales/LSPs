@@ -1,0 +1,61 @@
+{
+	"name": "@chillwhales/lsp1",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "LSP1 UniversalReceiver — type ID registry with bidirectional lookup, sourced from official @lukso contract packages",
+	"author": "b00ste",
+	"license": "MIT",
+	"types": "./dist/index.d.mts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"files": [
+		"dist",
+		"LICENSE",
+		"README.md"
+	],
+	"engines": {
+		"node": ">=22"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/chillwhales/LSPs.git",
+		"directory": "packages/lsp1"
+	},
+	"keywords": [
+		"chillwhales",
+		"lukso",
+		"lsp",
+		"lsp1",
+		"universal-receiver",
+		"notifications",
+		"type-id"
+	],
+	"sideEffects": false,
+	"scripts": {
+		"build": "unbuild",
+		"build:watch": "unbuild --watch",
+		"clean": "rm -rf dist",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"@lukso/lsp0-contracts": "catalog:",
+		"@lukso/lsp14-contracts": "catalog:",
+		"@lukso/lsp26-contracts": "catalog:",
+		"@lukso/lsp7-contracts": "catalog:",
+		"@lukso/lsp8-contracts": "catalog:",
+		"@lukso/lsp9-contracts": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@chillwhales/config": "workspace:*",
+		"typescript": "catalog:",
+		"unbuild": "catalog:",
+		"vitest": "catalog:"
+	},
+	"packageManager": "pnpm@10.30.2"
+}

@@ -2,7 +2,8 @@
 	"extends": "@chillwhales/config/tsconfig",
 	"compilerOptions": {
 		"outDir": "./dist",
-		"rootDir": "./src"
+		"rootDir": "./src",
+		"lib": ["ES2022", "DOM"]
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "dist", "**/*.test.ts"]

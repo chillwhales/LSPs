@@ -7,8 +7,8 @@
  * @see https://docs.lukso.tech/standards/smart-contracts/lsp23-linked-contracts-factory
  */
 
-export * from "./constants";
 export * from "./deploy";
+export * from "./deployments";
 export * from "./guards";
 export * from "./schemas";
 export * from "./types";

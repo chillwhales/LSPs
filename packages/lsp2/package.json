@@ -2,7 +2,7 @@
 	"name": "@chillwhales/lsp2",
 	"version": "0.1.1",
 	"type": "module",
-	"description": "LSP2 ERC725Y JSON Schema — shared primitives, VerifiableURI encoding/decoding, and image utilities",
+	"description": "LSP2 ERC725Y JSON Schema — shared primitives, VerifiableURI encoding/decoding",
 	"author": "b00ste",
 	"license": "MIT",
 	"types": "./dist/index.d.mts",

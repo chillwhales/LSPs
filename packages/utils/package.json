@@ -40,10 +40,18 @@
 		"test": "vitest run",
 		"test:watch": "vitest"
 	},
+	"dependencies": {
+		"@chillwhales/lsp2": "workspace:*"
+	},
+	"peerDependencies": {
+		"viem": "catalog:"
+	},
 	"devDependencies": {
 		"@chillwhales/config": "workspace:*",
+		"@types/node": "^25.3.3",
 		"typescript": "catalog:",
 		"unbuild": "catalog:",
+		"viem": "catalog:",
 		"vitest": "catalog:"
 	},
 	"packageManager": "pnpm@10.30.2"

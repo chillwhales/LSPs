@@ -9,7 +9,46 @@ catalogs:
     '@erc725/erc725.js':
       specifier: ^0.28.2
       version: 0.28.2
+    '@lukso/lsp0-contracts':
+      specifier: ^0.15.5
+      version: 0.15.5
+    '@lukso/lsp1-contracts':
+      specifier: ^0.15.5
+      version: 0.15.5
+    '@lukso/lsp10-contracts':
+      specifier: ^0.15.4
+      version: 0.15.4
+    '@lukso/lsp12-contracts':
+      specifier: ^0.15.4
+      version: 0.15.4
+    '@lukso/lsp14-contracts':
+      specifier: ^0.15.5
+      version: 0.15.5
+    '@lukso/lsp17contractextension-contracts':
+      specifier: ^0.16.7
+      version: 0.16.7
+    '@lukso/lsp26-contracts':
+      specifier: ^0.1.7
+      version: 0.1.7
+    '@lukso/lsp3-contracts':
+      specifier: ^0.16.6
+      version: 0.16.6
+    '@lukso/lsp4-contracts':
+      specifier: ^0.16.7
+      version: 0.16.7
+    '@lukso/lsp5-contracts':
+      specifier: ^0.15.4
+      version: 0.15.4
     '@lukso/lsp6-contracts':
+      specifier: ^0.15.5
+      version: 0.15.5
+    '@lukso/lsp7-contracts':
+      specifier: ^0.16.8
+      version: 0.16.8
+    '@lukso/lsp8-contracts':
+      specifier: ^0.16.7
+      version: 0.16.7
+    '@lukso/lsp9-contracts':
       specifier: ^0.15.5
       version: 0.15.5
     '@lukso/universalprofile-contracts':
@@ -46,19 +85,19 @@ importers:
         version: 0.5.2
       '@changesets/cli':
         specifier: ^2.29.8
-        version: 2.29.8(@types/node@25.3.1)
+        version: 2.29.8(@types/node@25.3.3)
       '@commitlint/cli':
         specifier: ^20.4.2
-        version: 20.4.2(@types/node@25.3.1)(typescript@5.9.3)
+        version: 20.4.2(@types/node@25.3.3)(typescript@5.9.3)
       '@commitlint/config-conventional':
         specifier: ^20.4.2
         version: 20.4.2
       '@vitest/coverage-v8':
         specifier: ^4.0.18
-        version: 4.0.18(vitest@4.0.18(@types/node@25.3.1)(jiti@2.6.1))
+        version: 4.0.18(vitest@4.0.18(@types/node@25.3.3)(jiti@2.6.1))
       knip:
         specifier: ^5.85.0
-        version: 5.85.0(@types/node@25.3.1)(typescript@5.9.3)
+        version: 5.85.0(@types/node@25.3.3)(typescript@5.9.3)
       madge:
         specifier: ^8.0.0
         version: 8.0.0(typescript@5.9.3)
@@ -76,7 +115,7 @@ importers:
         version: 2.13.1
       vitest:
         specifier: 'catalog:'
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
   packages/config:
     devDependencies:
@@ -88,7 +127,115 @@ importers:
         version: 3.6.1(typescript@5.9.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
+
+  packages/erc725:
+    dependencies:
+      '@lukso/lsp1-contracts':
+        specifier: 'catalog:'
+        version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp10-contracts':
+        specifier: 'catalog:'
+        version: 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp12-contracts':
+        specifier: 'catalog:'
+        version: 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp17contractextension-contracts':
+        specifier: 'catalog:'
+        version: 0.16.7
+      '@lukso/lsp3-contracts':
+        specifier: 'catalog:'
+        version: 0.16.6(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp4-contracts':
+        specifier: 'catalog:'
+        version: 0.16.7(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp5-contracts':
+        specifier: 'catalog:'
+        version: 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp6-contracts':
+        specifier: 'catalog:'
+        version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp8-contracts':
+        specifier: 'catalog:'
+        version: 0.16.7(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp9-contracts':
+        specifier: 'catalog:'
+        version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      zod:
+        specifier: 'catalog:'
+        version: 3.25.76
+    devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      unbuild:
+        specifier: 'catalog:'
+        version: 3.6.1(typescript@5.9.3)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
+
+  packages/lsp1:
+    dependencies:
+      '@lukso/lsp0-contracts':
+        specifier: 'catalog:'
+        version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp14-contracts':
+        specifier: 'catalog:'
+        version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp26-contracts':
+        specifier: 'catalog:'
+        version: 0.1.7(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp7-contracts':
+        specifier: 'catalog:'
+        version: 0.16.8(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp8-contracts':
+        specifier: 'catalog:'
+        version: 0.16.7(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp9-contracts':
+        specifier: 'catalog:'
+        version: 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      zod:
+        specifier: 'catalog:'
+        version: 3.25.76
+    devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      unbuild:
+        specifier: 'catalog:'
+        version: 3.6.1(typescript@5.9.3)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
+
+  packages/lsp17:
+    dependencies:
+      '@erc725/erc725.js':
+        specifier: 'catalog:'
+        version: 0.28.2(typescript@5.9.3)
+      '@lukso/lsp17contractextension-contracts':
+        specifier: 'catalog:'
+        version: 0.16.7
+    devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      unbuild:
+        specifier: 'catalog:'
+        version: 3.6.1(typescript@5.9.3)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
   packages/lsp2:
     dependencies:
@@ -110,13 +257,22 @@ importers:
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
         specifier: 'catalog:'
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
   packages/lsp23:
     dependencies:
+      '@chillwhales/lsp1':
+        specifier: workspace:*
+        version: link:../lsp1
       '@chillwhales/lsp2':
         specifier: workspace:*
         version: link:../lsp2
+      '@chillwhales/lsp6':
+        specifier: workspace:*
+        version: link:../lsp6
+      '@chillwhales/up':
+        specifier: workspace:*
+        version: link:../up
       '@erc725/erc725.js':
         specifier: 'catalog:'
         version: 0.28.2(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
@@ -141,7 +297,22 @@ importers:
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
         specifier: 'catalog:'
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
+
+  packages/lsp26:
+    devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      unbuild:
+        specifier: 'catalog:'
+        version: 3.6.1(typescript@5.9.3)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
   packages/lsp29:
     dependencies:
@@ -166,13 +337,16 @@ importers:
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
         specifier: 'catalog:'
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
   packages/lsp3:
     dependencies:
       '@chillwhales/lsp2':
         specifier: workspace:*
         version: link:../lsp2
+      '@chillwhales/utils':
+        specifier: workspace:*
+        version: link:../utils
       zod:
         specifier: 'catalog:'
         version: 3.25.76
@@ -188,7 +362,7 @@ importers:
         version: 3.6.1(typescript@5.9.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
   packages/lsp31:
     dependencies:
@@ -210,7 +384,7 @@ importers:
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
         specifier: 'catalog:'
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
   packages/lsp4:
     dependencies:
@@ -235,7 +409,7 @@ importers:
         version: 3.6.1(typescript@5.9.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
   packages/lsp6:
     dependencies:
@@ -266,9 +440,9 @@ importers:
         version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@3.25.76)
       vitest:
         specifier: 'catalog:'
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
-  packages/utils:
+  packages/lsp7:
     devDependencies:
       '@chillwhales/config':
         specifier: workspace:*
@@ -281,7 +455,62 @@ importers:
         version: 3.6.1(typescript@5.9.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
+
+  packages/lsp8:
+    devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      unbuild:
+        specifier: 'catalog:'
+        version: 3.6.1(typescript@5.9.3)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
+
+  packages/up:
+    devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      unbuild:
+        specifier: 'catalog:'
+        version: 3.6.1(typescript@5.9.3)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
+
+  packages/utils:
+    dependencies:
+      '@chillwhales/lsp2':
+        specifier: workspace:*
+        version: link:../lsp2
+    devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/node':
+        specifier: ^25.3.3
+        version: 25.3.3
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      unbuild:
+        specifier: 'catalog:'
+        version: 3.6.1(typescript@5.9.3)
+      viem:
+        specifier: 'catalog:'
+        version: 2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.3.6)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
 packages:
 
@@ -600,8 +829,14 @@ packages:
   '@erc725/erc725.js@0.28.2':
     resolution: {integrity: sha512-KALjQbGkZKEx6J404xt3J9KNZZgyp9ZzhZeYbieWrLtQPA5bWz5yJYIZj+aMCntEpdXudKXVDA/MdEiNF9s58g==}
 
+  '@erc725/smart-contracts@6.0.0':
+    resolution: {integrity: sha512-6okutGGL9xbg/MSgAof2FU1UcSNE/z3p9TORlROVGaM3gi1A6FQQ7fDqtBYkPtvHureX8yS9gP7xPt3PRbP43Q==}
+
   '@erc725/smart-contracts@7.0.0':
     resolution: {integrity: sha512-O/Ki+0JqRStPUHXjdU4JhDUzncLdC33c0xjTRiwWwBYbxL77LlWaPfG96fWp2hF2kdR0zNYvcsnZZds+uj2QMg==}
+
+  '@erc725/smart-contracts@8.0.0':
+    resolution: {integrity: sha512-dMYUbnay5sTb2u1Z4BcJdcZylciJw09W//CtCAfLu11BVqjbMdsekwZHFPDWrz5Lna/5uVx0rI4GklVRORdK5g==}
 
   '@esbuild/aix-ppc64@0.25.12':
     resolution: {integrity: sha512-Hhmwd6CInZ3dwpuGTF8fJG6yoWmsToE+vYgD4nytZVxcu1ulHpUQRAB1UJ8+N1Am3Mz4+xOByoQoSZf4D+CpkA==}
@@ -1015,11 +1250,20 @@ packages:
   '@lukso/lsp1-contracts@0.15.5':
     resolution: {integrity: sha512-w9FNsgaVUzai8ibNDntJlKSwof09WfjrplpYF3kSTMmmX3m3Y7Tuem9JpqR3vz7+oCJdWK8zUH1hHTjg/2Ve6Q==}
 
+  '@lukso/lsp10-contracts@0.15.4':
+    resolution: {integrity: sha512-f+XMOAryKTnJr6gBh0JUvF4ykik70lBwvWB+x0rvlcrdhb4p4tfAZ6iKHIIQFFlZWFpV8D5hSk6wOKLls1OUHw==}
+
+  '@lukso/lsp12-contracts@0.15.4':
+    resolution: {integrity: sha512-6cEr0dzokJmk/xiiJTQnlcUDYa03bz9wFGH6cRKgtozMnqch6HMoU6KY44iSgXaZcKG8/XqKNxoe0rzLF2DNVg==}
+
   '@lukso/lsp14-contracts@0.15.5':
     resolution: {integrity: sha512-x4QXBMHvINXQ3JfsJT19tozivDXdZvFhly9x/TdcAwll/k4nky+EKRJ4Z3Jj7nhGi/mgZmUZosCzq3379fbdtg==}
 
   '@lukso/lsp17contractextension-contracts@0.15.0':
     resolution: {integrity: sha512-fwLrXi1jyiw6DlP6mt+NTweSxyPI3KaKk5UN9OwuT5KbaC7Upm50TFuA/IX+V4gY8/iVdr6uhy7nLg1+LQpSAw==}
+
+  '@lukso/lsp17contractextension-contracts@0.16.7':
+    resolution: {integrity: sha512-xX48f0vXDlxOhyIRi3oTtXHiTLtTAcQWvXRbKz41zhtzyPnKz7V42rP/x39crso61nxppyfCnLidBbAbU6wFIw==}
 
   '@lukso/lsp2-contracts@0.15.4':
     resolution: {integrity: sha512-gYdy5QyN9VOWHLbA2DdFQpliv1IzBp4hUiw9uJoym7ltZSmMSZfEO34z70jqQiRfW3H4CZlbKI2YGbeh/rwUNw==}
@@ -1030,11 +1274,32 @@ packages:
   '@lukso/lsp25-contracts@0.15.5':
     resolution: {integrity: sha512-pCQ5GmiMuDgPnkNWM5iT97C+zHQ8qAI7xyoUVOJ8Qf2BMQg5XFrqOE0u7j+lBt2HNp9MiZ5waWKvqysTv1pgEw==}
 
+  '@lukso/lsp26-contracts@0.1.7':
+    resolution: {integrity: sha512-sfBYNu3kC/hT4z/ELHkBpLeCS/K5MTUgDj345pEV4ZaP0phazLBOlruq2IvEapqj61Da0bE4OQVhDNbZTYaorg==}
+
   '@lukso/lsp3-contracts@0.15.0':
     resolution: {integrity: sha512-GgL9Ys9HvCuRCJ2/XB6abAwHBCE+LYMPY5vcHnZ67U7cgVgy9sc7z9VDTcBwZygsKUMuNrrnph4MC0G90rALjg==}
 
+  '@lukso/lsp3-contracts@0.16.6':
+    resolution: {integrity: sha512-63fMWrPkNs4wAehv1nz3cOjN8WzbixL/eOBgxAKqIOHQiQ8vly/q9kjZY2CPjOTwNayh3HONA2kKcCijGl7Kbg==}
+
+  '@lukso/lsp4-contracts@0.16.7':
+    resolution: {integrity: sha512-UL8mjKVftTRGTAYIH98YABW2P9CABaqBdkTwWQn1cIFE+iycRzv7zwg33xuKysxjWfaG4jincSasKIRMVY6aqQ==}
+
+  '@lukso/lsp5-contracts@0.15.4':
+    resolution: {integrity: sha512-89c2JlXFJqTW887DhqM45fGTKop18YoVcBTDl7GgFjXUH114k4Vzu0qbGvAb7r+qx5Xbh1baPuMW/0tiL3ileg==}
+
   '@lukso/lsp6-contracts@0.15.5':
     resolution: {integrity: sha512-nD6Fs62XBYvtoGVDDGZoUPL32+my2ErjGhrw2+jSl/O9IC96E/hgtP70CcBYUMUu7HCivQQR+ORlBcSSqyauZA==}
+
+  '@lukso/lsp7-contracts@0.16.8':
+    resolution: {integrity: sha512-LH6AJCeR3Bl1H8yDcJBtGkohPeO6Jj3bX7A3+NQylRk3OEIF+8U40+poa72ehMNBIjgA0JB1iFoO7/S9xRzldA==}
+
+  '@lukso/lsp8-contracts@0.16.7':
+    resolution: {integrity: sha512-fSNQOdTcVhIbbG2agvqU/nUvIgBlZJzyf27v1iQt3+fwYsrK4K7qIHp/eY94HdBs/60R2bfVM6iPGZTHHb+opQ==}
+
+  '@lukso/lsp9-contracts@0.15.5':
+    resolution: {integrity: sha512-7k3MUpJ8CrvLmrlFS8UdNKHwhutmGwsubj6FKrvMMVMEy5roCHpnC031+AwUyudhQlmczULuXn1zcNIYw6gbpQ==}
 
   '@lukso/universalprofile-contracts@0.15.5':
     resolution: {integrity: sha512-8JfML8yewIPzq3qUOkUc7W8Bfj2l4jl3xRBNQL78YzKIsopO05Se2Clzx/D+eTXtFaDOWyKGcKlRKjQg8R/nYw==}
@@ -1489,6 +1754,9 @@ packages:
 
   '@types/node@25.3.1':
     resolution: {integrity: sha512-hj9YIJimBCipHVfHKRMnvmHg+wfhKc0o4mTtXh9pKBjC8TLJzz0nzGmLi5UJsYAUgSvXFHgb0V2oY10DUFtImw==}
+
+  '@types/node@25.3.3':
+    resolution: {integrity: sha512-DpzbrH7wIcBaJibpKo9nnSQL0MTRdnWttGyE5haGwK86xgMOkFLp7vEyfQPGLOJh5wNYiJ3V9PmUMDhV9u8kkQ==}
 
   '@types/pbkdf2@3.1.2':
     resolution: {integrity: sha512-uRwJqmiXmh9++aSu1VNEn3iIxWOhd8AHXNSdlaLfdAAdSTY9jYVeGWnzejM3dvrkbqE3/hyQkQQ29IFATEGlew==}
@@ -5082,7 +5350,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@changesets/cli@2.29.8(@types/node@25.3.1)':
+  '@changesets/cli@2.29.8(@types/node@25.3.3)':
     dependencies:
       '@changesets/apply-release-plan': 7.0.14
       '@changesets/assemble-release-plan': 6.0.9
@@ -5098,7 +5366,7 @@ snapshots:
       '@changesets/should-skip-package': 0.1.2
       '@changesets/types': 6.1.0
       '@changesets/write': 0.4.0
-      '@inquirer/external-editor': 1.0.3(@types/node@25.3.1)
+      '@inquirer/external-editor': 1.0.3(@types/node@25.3.3)
       '@manypkg/get-packages': 1.1.3
       ansi-colors: 4.1.3
       ci-info: 3.9.0
@@ -5207,11 +5475,11 @@ snapshots:
   '@colors/colors@1.5.0':
     optional: true
 
-  '@commitlint/cli@20.4.2(@types/node@25.3.1)(typescript@5.9.3)':
+  '@commitlint/cli@20.4.2(@types/node@25.3.3)(typescript@5.9.3)':
     dependencies:
       '@commitlint/format': 20.4.0
       '@commitlint/lint': 20.4.2
-      '@commitlint/load': 20.4.0(@types/node@25.3.1)(typescript@5.9.3)
+      '@commitlint/load': 20.4.0(@types/node@25.3.3)(typescript@5.9.3)
       '@commitlint/read': 20.4.0
       '@commitlint/types': 20.4.0
       tinyexec: 1.0.2
@@ -5258,14 +5526,14 @@ snapshots:
       '@commitlint/rules': 20.4.2
       '@commitlint/types': 20.4.0
 
-  '@commitlint/load@20.4.0(@types/node@25.3.1)(typescript@5.9.3)':
+  '@commitlint/load@20.4.0(@types/node@25.3.3)(typescript@5.9.3)':
     dependencies:
       '@commitlint/config-validator': 20.4.0
       '@commitlint/execute-rule': 20.0.0
       '@commitlint/resolve-extends': 20.4.0
       '@commitlint/types': 20.4.0
       cosmiconfig: 9.0.0(typescript@5.9.3)
-      cosmiconfig-typescript-loader: 6.2.0(@types/node@25.3.1)(cosmiconfig@9.0.0(typescript@5.9.3))(typescript@5.9.3)
+      cosmiconfig-typescript-loader: 6.2.0(@types/node@25.3.3)(cosmiconfig@9.0.0(typescript@5.9.3))(typescript@5.9.3)
       is-plain-obj: 4.1.0
       lodash.mergewith: 4.6.2
       picocolors: 1.1.1
@@ -5348,7 +5616,42 @@ snapshots:
       - utf-8-validate
       - zod
 
+  '@erc725/erc725.js@0.28.2(typescript@5.9.3)':
+    dependencies:
+      cross-fetch: 4.1.0
+      viem: 2.46.3(typescript@5.9.3)
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - typescript
+      - utf-8-validate
+      - zod
+
+  '@erc725/smart-contracts@6.0.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@openzeppelin/contracts': 4.9.6
+      '@openzeppelin/contracts-upgradeable': 4.9.6
+      solidity-bytes-utils: 0.8.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
   '@erc725/smart-contracts@7.0.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@openzeppelin/contracts': 4.9.6
+      '@openzeppelin/contracts-upgradeable': 4.9.6
+      solidity-bytes-utils: 0.8.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
+  '@erc725/smart-contracts@8.0.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
     dependencies:
       '@openzeppelin/contracts': 4.9.6
       '@openzeppelin/contracts-upgradeable': 4.9.6
@@ -5659,12 +5962,12 @@ snapshots:
       '@ethersproject/properties': 5.8.0
       '@ethersproject/strings': 5.8.0
 
-  '@inquirer/external-editor@1.0.3(@types/node@25.3.1)':
+  '@inquirer/external-editor@1.0.3(@types/node@25.3.3)':
     dependencies:
       chardet: 2.1.1
       iconv-lite: 0.7.2
     optionalDependencies:
-      '@types/node': 25.3.1
+      '@types/node': 25.3.3
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
@@ -5716,6 +6019,27 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@lukso/lsp10-contracts@0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@erc725/smart-contracts': 6.0.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp2-contracts': 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
+  '@lukso/lsp12-contracts@0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@lukso/lsp2-contracts': 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
   '@lukso/lsp14-contracts@0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
     dependencies:
       '@erc725/smart-contracts': 7.0.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
@@ -5738,6 +6062,10 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@lukso/lsp17contractextension-contracts@0.16.7':
+    dependencies:
+      '@openzeppelin/contracts': 4.9.6
+
   '@lukso/lsp2-contracts@0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
     dependencies:
       '@erc725/smart-contracts': 7.0.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
@@ -5755,8 +6083,52 @@ snapshots:
     dependencies:
       '@openzeppelin/contracts': 4.9.6
 
+  '@lukso/lsp26-contracts@0.1.7(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@lukso/lsp0-contracts': 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp1-contracts': 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@openzeppelin/contracts': 4.9.6
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
   '@lukso/lsp3-contracts@0.15.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
     dependencies:
+      '@lukso/lsp2-contracts': 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
+  '@lukso/lsp3-contracts@0.16.6(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@lukso/lsp2-contracts': 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
+  '@lukso/lsp4-contracts@0.16.7(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@erc725/smart-contracts-v8': '@erc725/smart-contracts@8.0.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)'
+      '@lukso/lsp2-contracts': 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
+  '@lukso/lsp5-contracts@0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@erc725/smart-contracts': 7.0.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
       '@lukso/lsp2-contracts': 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - '@babel/core'
@@ -5774,6 +6146,47 @@ snapshots:
       '@lukso/lsp2-contracts': 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
       '@lukso/lsp20-contracts': 0.15.5
       '@lukso/lsp25-contracts': 0.15.5
+      '@openzeppelin/contracts': 4.9.6
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
+  '@lukso/lsp7-contracts@0.16.8(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@lukso/lsp1-contracts': 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp17contractextension-contracts': 0.16.7
+      '@lukso/lsp2-contracts': 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp4-contracts': 0.16.7(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@openzeppelin/contracts': 4.9.6
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
+  '@lukso/lsp8-contracts@0.16.7(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@lukso/lsp1-contracts': 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp17contractextension-contracts': 0.16.7
+      '@lukso/lsp2-contracts': 0.15.4(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp4-contracts': 0.16.7(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@openzeppelin/contracts': 4.9.6
+    transitivePeerDependencies:
+      - '@babel/core'
+      - bufferutil
+      - encoding
+      - supports-color
+      - utf-8-validate
+
+  '@lukso/lsp9-contracts@0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@erc725/smart-contracts': 7.0.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp1-contracts': 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      '@lukso/lsp6-contracts': 0.15.5(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
       '@openzeppelin/contracts': 4.9.6
     transitivePeerDependencies:
       - '@babel/core'
@@ -6167,6 +6580,10 @@ snapshots:
     dependencies:
       undici-types: 7.18.2
 
+  '@types/node@25.3.3':
+    dependencies:
+      undici-types: 7.18.2
+
   '@types/pbkdf2@3.1.2':
     dependencies:
       '@types/node': 25.3.1
@@ -6227,7 +6644,7 @@ snapshots:
       '@typescript-eslint/types': 8.56.1
       eslint-visitor-keys: 5.0.1
 
-  '@vitest/coverage-v8@4.0.18(vitest@4.0.18(@types/node@25.3.1)(jiti@2.6.1))':
+  '@vitest/coverage-v8@4.0.18(vitest@4.0.18(@types/node@25.3.3)(jiti@2.6.1))':
     dependencies:
       '@bcoe/v8-coverage': 1.0.2
       '@vitest/utils': 4.0.18
@@ -6239,7 +6656,7 @@ snapshots:
       obug: 2.1.1
       std-env: 3.10.0
       tinyrainbow: 3.0.3
-      vitest: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+      vitest: 4.0.18(@types/node@25.3.3)(jiti@2.6.1)
 
   '@vitest/expect@4.0.18':
     dependencies:
@@ -6250,13 +6667,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.0.3
 
-  '@vitest/mocker@4.0.18(vite@7.3.1(@types/node@25.3.1)(jiti@2.6.1))':
+  '@vitest/mocker@4.0.18(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1))':
     dependencies:
       '@vitest/spy': 4.0.18
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.1(@types/node@25.3.1)(jiti@2.6.1)
+      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)
 
   '@vitest/pretty-format@4.0.18':
     dependencies:
@@ -6316,6 +6733,11 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
       zod: 3.25.76
+
+  abitype@1.2.3(typescript@5.9.3)(zod@4.3.6):
+    optionalDependencies:
+      typescript: 5.9.3
+      zod: 4.3.6
 
   abortcontroller-polyfill@1.7.8: {}
 
@@ -6772,9 +7194,9 @@ snapshots:
       object-assign: 4.1.1
       vary: 1.1.2
 
-  cosmiconfig-typescript-loader@6.2.0(@types/node@25.3.1)(cosmiconfig@9.0.0(typescript@5.9.3))(typescript@5.9.3):
+  cosmiconfig-typescript-loader@6.2.0(@types/node@25.3.3)(cosmiconfig@9.0.0(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
-      '@types/node': 25.3.1
+      '@types/node': 25.3.3
       cosmiconfig: 9.0.0(typescript@5.9.3)
       jiti: 2.6.1
       typescript: 5.9.3
@@ -7964,7 +8386,7 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  isows@1.0.7(ws@8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)):
+  isows@1.0.7(ws@8.18.3):
     dependencies:
       ws: 8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)
 
@@ -8071,10 +8493,10 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  knip@5.85.0(@types/node@25.3.1)(typescript@5.9.3):
+  knip@5.85.0(@types/node@25.3.3)(typescript@5.9.3):
     dependencies:
       '@nodelib/fs.walk': 1.2.8
-      '@types/node': 25.3.1
+      '@types/node': 25.3.3
       fast-glob: 3.3.3
       formatly: 0.3.0
       jiti: 2.6.1
@@ -8477,6 +8899,21 @@ snapshots:
       '@scure/bip32': 1.7.0
       '@scure/bip39': 1.6.0
       abitype: 1.2.3(typescript@5.9.3)(zod@3.25.76)
+      eventemitter3: 5.0.1
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - zod
+
+  ox@0.12.4(typescript@5.9.3)(zod@4.3.6):
+    dependencies:
+      '@adraffy/ens-normalize': 1.11.1
+      '@noble/ciphers': 1.3.0
+      '@noble/curves': 1.9.1
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
+      abitype: 1.2.3(typescript@5.9.3)(zod@4.3.6)
       eventemitter3: 5.0.1
     optionalDependencies:
       typescript: 5.9.3
@@ -9584,7 +10021,7 @@ snapshots:
       '@scure/bip32': 1.7.0
       '@scure/bip39': 1.6.0
       abitype: 1.2.3(typescript@5.9.3)(zod@3.25.76)
-      isows: 1.0.7(ws@8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10))
+      isows: 1.0.7(ws@8.18.3)
       ox: 0.12.4(typescript@5.9.3)(zod@3.25.76)
       ws: 8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)
     optionalDependencies:
@@ -9594,7 +10031,41 @@ snapshots:
       - utf-8-validate
       - zod
 
-  vite@7.3.1(@types/node@25.3.1)(jiti@2.6.1):
+  viem@2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.3.6):
+    dependencies:
+      '@noble/curves': 1.9.1
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
+      abitype: 1.2.3(typescript@5.9.3)(zod@4.3.6)
+      isows: 1.0.7(ws@8.18.3)
+      ox: 0.12.4(typescript@5.9.3)(zod@4.3.6)
+      ws: 8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+
+  viem@2.46.3(typescript@5.9.3):
+    dependencies:
+      '@noble/curves': 1.9.1
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
+      abitype: 1.2.3(typescript@5.9.3)(zod@3.25.76)
+      isows: 1.0.7(ws@8.18.3)
+      ox: 0.12.4(typescript@5.9.3)(zod@3.25.76)
+      ws: 8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+
+  vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1):
     dependencies:
       esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.3)
@@ -9603,14 +10074,14 @@ snapshots:
       rollup: 4.59.0
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 25.3.1
+      '@types/node': 25.3.3
       fsevents: 2.3.3
       jiti: 2.6.1
 
-  vitest@4.0.18(@types/node@25.3.1)(jiti@2.6.1):
+  vitest@4.0.18(@types/node@25.3.3)(jiti@2.6.1):
     dependencies:
       '@vitest/expect': 4.0.18
-      '@vitest/mocker': 4.0.18(vite@7.3.1(@types/node@25.3.1)(jiti@2.6.1))
+      '@vitest/mocker': 4.0.18(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1))
       '@vitest/pretty-format': 4.0.18
       '@vitest/runner': 4.0.18
       '@vitest/snapshot': 4.0.18
@@ -9627,10 +10098,10 @@ snapshots:
       tinyexec: 1.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
-      vite: 7.3.1(@types/node@25.3.1)(jiti@2.6.1)
+      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 25.3.1
+      '@types/node': 25.3.3
     transitivePeerDependencies:
       - jiti
       - less

@@ -30,16 +30,14 @@ import type { AllowedCall } from "./types";
  */
 export function parseCompactBytesArray(data: Hex, address: Address): Hex[] {
 	try {
-		const decoded = ERC725.decodeData(
-			[
-				{
-					keyName: "AddressPermissions:AllowedERC725YDataKeys:<address>",
-					dynamicKeyParts: address,
-					value: data,
-				},
-			],
-			LSP6Schemas,
-		);
+		const erc725 = new ERC725(LSP6Schemas);
+		const decoded = erc725.decodeData([
+			{
+				keyName: "AddressPermissions:AllowedERC725YDataKeys:<address>",
+				dynamicKeyParts: address,
+				value: data,
+			},
+		]);
 
 		if (!decoded[0]) return [];
 
@@ -75,16 +73,14 @@ export function parseCompactBytesArray(data: Hex, address: Address): Hex[] {
  */
 export function parseAllowedCalls(data: Hex, address: Address): AllowedCall[] {
 	try {
-		const decoded = ERC725.decodeData(
-			[
-				{
-					keyName: "AddressPermissions:AllowedCalls:<address>",
-					dynamicKeyParts: address,
-					value: data,
-				},
-			],
-			LSP6Schemas,
-		);
+		const erc725 = new ERC725(LSP6Schemas);
+		const decoded = erc725.decodeData([
+			{
+				keyName: "AddressPermissions:AllowedCalls:<address>",
+				dynamicKeyParts: address,
+				value: data,
+			},
+		]);
 
 		if (!decoded || !decoded[0] || !decoded[0].value) return [];
 

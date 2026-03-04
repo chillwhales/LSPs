@@ -1,7 +1,8 @@
+import { LSP6_KEY_MANAGER_INIT } from "@chillwhales/lsp6";
+import { UP_INIT } from "@chillwhales/up";
 import { isHex } from "viem";
 import { describe, expect, it } from "vitest";
 
-import { IMPLEMENTATIONS } from "./constants";
 import { generateDeployParams } from "./deploy";
 
 const VALID_SALT = `0x${"00".repeat(32)}`;
@@ -28,7 +29,7 @@ describe("generateDeployParams", () => {
 		expect(result.universalProfileInitStruct.fundingAmount).toBe(BigInt(0));
 	});
 
-	it("universalProfileInitStruct.implementationContract matches IMPLEMENTATIONS.UNIVERSAL_PROFILE", () => {
+	it("universalProfileInitStruct.implementationContract matches UP_INIT v0.14.0", () => {
 		const result = generateDeployParams({
 			salt: VALID_SALT,
 			controllerAddress: VALID_CONTROLLER,
@@ -36,7 +37,7 @@ describe("generateDeployParams", () => {
 
 		expect(
 			result.universalProfileInitStruct.implementationContract.toLowerCase(),
-		).toBe(IMPLEMENTATIONS.UNIVERSAL_PROFILE.toLowerCase());
+		).toBe(UP_INIT["0.14.0"].address.toLowerCase());
 	});
 
 	it("keyManagerInitStruct.addPrimaryContractAddress is true", () => {
@@ -48,7 +49,7 @@ describe("generateDeployParams", () => {
 		expect(result.keyManagerInitStruct.addPrimaryContractAddress).toBe(true);
 	});
 
-	it("keyManagerInitStruct.implementationContract matches IMPLEMENTATIONS.LSP6_KEY_MANAGER", () => {
+	it("keyManagerInitStruct.implementationContract matches LSP6_KEY_MANAGER_INIT v0.14.0", () => {
 		const result = generateDeployParams({
 			salt: VALID_SALT,
 			controllerAddress: VALID_CONTROLLER,
@@ -56,7 +57,7 @@ describe("generateDeployParams", () => {
 
 		expect(
 			result.keyManagerInitStruct.implementationContract.toLowerCase(),
-		).toBe(IMPLEMENTATIONS.LSP6_KEY_MANAGER.toLowerCase());
+		).toBe(LSP6_KEY_MANAGER_INIT["0.14.0"].address.toLowerCase());
 	});
 
 	it("initializeEncodedBytes is valid hex string", () => {

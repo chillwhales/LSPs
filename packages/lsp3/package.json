@@ -43,6 +43,7 @@
 	},
 	"dependencies": {
 		"@chillwhales/lsp2": "workspace:*",
+		"@chillwhales/utils": "workspace:*",
 		"zod": "catalog:"
 	},
 	"devDependencies": {

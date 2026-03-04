@@ -1,0 +1,64 @@
+{
+	"name": "@chillwhales/erc725",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "ERC725Y data key registry — bidirectional name/hex lookup for LUKSO LSP data keys",
+	"author": "b00ste",
+	"license": "MIT",
+	"types": "./dist/index.d.mts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"files": [
+		"dist",
+		"LICENSE",
+		"README.md"
+	],
+	"engines": {
+		"node": ">=22"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/chillwhales/LSPs.git",
+		"directory": "packages/erc725"
+	},
+	"keywords": [
+		"chillwhales",
+		"lukso",
+		"erc725",
+		"erc725y",
+		"data-keys",
+		"storage"
+	],
+	"sideEffects": false,
+	"scripts": {
+		"build": "unbuild",
+		"build:watch": "unbuild --watch",
+		"clean": "rm -rf dist",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"@lukso/lsp1-contracts": "catalog:",
+		"@lukso/lsp10-contracts": "catalog:",
+		"@lukso/lsp12-contracts": "catalog:",
+		"@lukso/lsp17contractextension-contracts": "catalog:",
+		"@lukso/lsp3-contracts": "catalog:",
+		"@lukso/lsp4-contracts": "catalog:",
+		"@lukso/lsp5-contracts": "catalog:",
+		"@lukso/lsp6-contracts": "catalog:",
+		"@lukso/lsp8-contracts": "catalog:",
+		"@lukso/lsp9-contracts": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@chillwhales/config": "workspace:*",
+		"typescript": "catalog:",
+		"unbuild": "catalog:",
+		"vitest": "catalog:"
+	},
+	"packageManager": "pnpm@10.30.2"
+}
