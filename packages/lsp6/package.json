@@ -1,6 +1,6 @@
 {
 	"name": "@chillwhales/lsp6",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"type": "module",
 	"description": "LSP6 Key Manager — permission schemas, key builders, and CompactBytesArray/AllowedCalls parsers",
 	"author": "b00ste",

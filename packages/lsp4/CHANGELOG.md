@@ -1,5 +1,17 @@
 # @chillwhales/lsp4
 
+## 0.2.0
+
+### Minor Changes
+
+- [#34](https://github.com/chillwhales/LSPs/pull/34) [`9011682`](https://github.com/chillwhales/LSPs/commit/9011682cf8ed1bc7b7e31b6c29e5239c397524d8) Thanks [@b00ste](https://github.com/b00ste)! - Add asset and NFT helpers: `getAssetImageUrl`, `getNftImageUrl`, `getNftDisplayName` and `NftMetadata` type
+
+### Patch Changes
+
+- Updated dependencies [[`9011682`](https://github.com/chillwhales/LSPs/commit/9011682cf8ed1bc7b7e31b6c29e5239c397524d8), [`9011682`](https://github.com/chillwhales/LSPs/commit/9011682cf8ed1bc7b7e31b6c29e5239c397524d8)]:
+  - @chillwhales/lsp2@0.2.0
+  - @chillwhales/utils@0.2.0
+
 ## 0.1.1
 
 ### Patch Changes
