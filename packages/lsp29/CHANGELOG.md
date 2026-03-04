@@ -1,5 +1,12 @@
 # @chillwhales/lsp29
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`9011682`](https://github.com/chillwhales/LSPs/commit/9011682cf8ed1bc7b7e31b6c29e5239c397524d8)]:
+  - @chillwhales/lsp2@0.2.0
+
 ## 0.1.1
 
 ### Patch Changes
