@@ -9,6 +9,9 @@
 
 import { type Hex, hexToBigInt, toHex } from "viem";
 
+/** Maximum value for a uint128: 2^128 - 1 */
+const UINT128_MAX = 2n ** 128n - 1n;
+
 /**
  * Parse a uint128 value from hex
  *
@@ -17,6 +20,7 @@ import { type Hex, hexToBigInt, toHex } from "viem";
  *
  * @param value - Hex-encoded uint128
  * @returns Parsed bigint
+ * @throws {RangeError} If the parsed value exceeds uint128 max (2^128 - 1)
  *
  * @example
  * ```typescript
@@ -26,7 +30,13 @@ import { type Hex, hexToBigInt, toHex } from "viem";
  */
 export function parseUint128(value: Hex): bigint {
 	if (!value || value === "0x" || value === "0x0") return BigInt(0);
-	return hexToBigInt(value);
+	const result = hexToBigInt(value);
+	if (result > UINT128_MAX) {
+		throw new RangeError(
+			`Value ${result} exceeds uint128 max (${UINT128_MAX})`,
+		);
+	}
+	return result;
 }
 
 /**
@@ -35,8 +45,9 @@ export function parseUint128(value: Hex): bigint {
  * Used for encoding ERC725Y array lengths and mapping indices which are
  * stored as uint128 (16 bytes).
  *
- * @param value - Number to encode
+ * @param value - Number to encode (must be non-negative and fit in uint128)
  * @returns Hex-encoded uint128 (16 bytes)
+ * @throws {RangeError} If the value is negative or exceeds uint128 max (2^128 - 1)
  *
  * @example
  * ```typescript
@@ -45,5 +56,14 @@ export function parseUint128(value: Hex): bigint {
  * ```
  */
 export function encodeUint128(value: number | bigint | string): Hex {
-	return toHex(BigInt(value), { size: 16 });
+	const bigValue = BigInt(value);
+	if (bigValue < 0n) {
+		throw new RangeError("Value must be non-negative for uint128 encoding");
+	}
+	if (bigValue > UINT128_MAX) {
+		throw new RangeError(
+			`Value ${bigValue} exceeds uint128 max (${UINT128_MAX})`,
+		);
+	}
+	return toHex(bigValue, { size: 16 });
 }

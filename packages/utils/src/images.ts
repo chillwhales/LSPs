@@ -25,10 +25,10 @@ export interface ImageSize {
  * @param options - Optional target dimensions
  * @returns The best matching image or undefined
  */
-export function findBestImage(
-	images: Image[] | undefined,
+export function findBestImage<T extends Image>(
+	images: T[] | undefined,
 	options?: Partial<ImageSize>,
-): Image | undefined {
+): T | undefined {
 	if (!images || images.length === 0) {
 		return undefined;
 	}
@@ -50,11 +50,11 @@ export function findBestImage(
  * @param targetHeight - Target height
  * @returns The closest image object or null if no images provided
  */
-export function findClosestImage(
-	images: Image[],
+export function findClosestImage<T extends Image>(
+	images: T[],
 	targetWidth: number,
 	targetHeight: number,
-): Image | null {
+): T | null {
 	if (!images || images.length === 0) {
 		return null;
 	}
@@ -63,7 +63,7 @@ export function findClosestImage(
 		return Math.sqrt((width - targetWidth) ** 2 + (height - targetHeight) ** 2);
 	};
 
-	let closestImage: Image | null = null;
+	let closestImage: T | null = null;
 	let minDistance = Infinity;
 
 	for (const image of images) {
@@ -90,7 +90,7 @@ export function findClosestImage(
  * // Returns the image with the smallest width × height
  * ```
  */
-export function findSmallestImage(images: Image[]): Image | null {
+export function findSmallestImage<T extends Image>(images: T[]): T | null {
 	if (images.length === 0) return null;
 	if (images.length === 1) return images[0];
 
@@ -120,7 +120,7 @@ export function findSmallestImage(images: Image[]): Image | null {
  * // Returns the image with the largest width × height
  * ```
  */
-export function findBiggestImage(images: Image[]): Image | null {
+export function findBiggestImage<T extends Image>(images: T[]): T | null {
 	if (images.length === 0) return null;
 	if (images.length === 1) return images[0];
 
@@ -154,18 +154,18 @@ export function findBiggestImage(images: Image[]): Image | null {
  * const img = findClosestImageByArea(images, 800, 600);
  * ```
  */
-export function findClosestImageByArea(
-	images: Image[],
+export function findClosestImageByArea<T extends Image>(
+	images: T[],
 	targetWidth: number,
 	targetHeight: number,
-): Image | null {
+): T | null {
 	if (!images || images.length === 0) {
 		return null;
 	}
 
 	const targetArea = targetWidth * targetHeight;
 
-	let closestImage: Image | null = null;
+	let closestImage: T | null = null;
 	let minDistance = Infinity;
 
 	for (const image of images) {
@@ -197,11 +197,11 @@ export function findClosestImageByArea(
  * const img = findOptimalImage(images, 256, 256);
  * ```
  */
-export function findOptimalImage(
-	images: Image[],
+export function findOptimalImage<T extends Image>(
+	images: T[],
 	targetWidth: number,
 	targetHeight: number,
-): Image | null {
+): T | null {
 	if (!images || images.length === 0) {
 		return null;
 	}
@@ -233,18 +233,18 @@ export function findOptimalImage(
  * const img = findClosestImageByAspectRatio(images, 1920, 1080);
  * ```
  */
-export function findClosestImageByAspectRatio(
-	images: Image[],
+export function findClosestImageByAspectRatio<T extends Image>(
+	images: T[],
 	targetWidth: number,
 	targetHeight: number,
-): Image | null {
+): T | null {
 	if (!images || images.length === 0) {
 		return null;
 	}
 
 	const targetRatio = targetWidth / targetHeight;
 
-	let closestImage: Image | null = null;
+	let closestImage: T | null = null;
 	let minDistance = Infinity;
 
 	for (const image of images) {

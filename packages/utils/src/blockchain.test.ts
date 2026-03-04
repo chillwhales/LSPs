@@ -52,6 +52,34 @@ describe("blockchain utilities", () => {
 		});
 	});
 
+	describe("encodeUint128 validation", () => {
+		it("should throw RangeError for values exceeding uint128 max", () => {
+			const tooLarge = 2n ** 128n;
+			expect(() => encodeUint128(tooLarge)).toThrow(RangeError);
+		});
+
+		it("should throw RangeError for negative values", () => {
+			expect(() => encodeUint128(-1n)).toThrow(RangeError);
+			expect(() => encodeUint128(-1)).toThrow(RangeError);
+		});
+
+		it("should accept number type input", () => {
+			expect(encodeUint128(42)).toBe("0x0000000000000000000000000000002a");
+		});
+
+		it("should accept string type input", () => {
+			expect(encodeUint128("255")).toBe("0x000000000000000000000000000000ff");
+		});
+	});
+
+	describe("parseUint128 validation", () => {
+		it("should throw RangeError for values exceeding uint128 max", () => {
+			const uint256Max =
+				"0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
+			expect(() => parseUint128(uint256Max)).toThrow(RangeError);
+		});
+	});
+
 	describe("round trip", () => {
 		it("should encode and parse back to same value", () => {
 			const values = [0n, 1n, 255n, 123456789n, 2n ** 64n, 2n ** 128n - 1n];

@@ -10,11 +10,9 @@ import {
 	isHexString,
 	isInRange,
 	isValidEmail,
-	isValidEthereumAddress,
-	isValidIpfsUrl,
 	isValidUrl,
 	matchesPattern,
-	sanitizeHtml,
+	stripHtmlTags,
 	validateMaxLength,
 	validateRequired,
 } from "./validation";
@@ -42,29 +40,6 @@ describe("validation utilities", () => {
 		it("should reject invalid URLs", () => {
 			expect(isValidUrl("not a url")).toBe(false);
 			expect(isValidUrl("")).toBe(false);
-		});
-	});
-
-	describe("isValidIpfsUrl", () => {
-		it("should validate IPFS URLs", () => {
-			expect(isValidIpfsUrl("ipfs://QmTest")).toBe(true);
-		});
-
-		it("should reject non-IPFS URLs", () => {
-			expect(isValidIpfsUrl("https://example.com")).toBe(false);
-		});
-	});
-
-	describe("isValidEthereumAddress", () => {
-		it("should validate correct addresses", () => {
-			expect(
-				isValidEthereumAddress("0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed"),
-			).toBe(true);
-		});
-
-		it("should reject invalid addresses", () => {
-			expect(isValidEthereumAddress("0x123")).toBe(false);
-			expect(isValidEthereumAddress("not an address")).toBe(false);
 		});
 	});
 
@@ -178,21 +153,21 @@ describe("validation utilities", () => {
 		});
 	});
 
-	describe("sanitizeHtml", () => {
+	describe("stripHtmlTags", () => {
 		it("should remove script tags", () => {
 			const dirty = '<div>Hello<script>alert("xss")</script></div>';
-			const clean = sanitizeHtml(dirty);
+			const clean = stripHtmlTags(dirty);
 			expect(clean).not.toContain("<script>");
 			expect(clean).toContain("Hello");
 		});
 
 		it("should strip all HTML tags", () => {
-			expect(sanitizeHtml("<b>Bold</b> text")).toBe("Bold text");
+			expect(stripHtmlTags("<b>Bold</b> text")).toBe("Bold text");
 		});
 
 		it("should handle empty input", () => {
-			expect(sanitizeHtml("")).toBe("");
-			expect(sanitizeHtml(null as any)).toBe("");
+			expect(stripHtmlTags("")).toBe("");
+			expect(stripHtmlTags(null as any)).toBe("");
 		});
 	});
 });

@@ -5,8 +5,6 @@
  * Used for input validation, data quality checks, and sanitization.
  */
 
-import { isAddress } from "viem";
-
 /**
  * Check if a value is empty
  *
@@ -88,44 +86,6 @@ export function isValidEmail(str: string): boolean {
 	if (!str || typeof str !== "string") return false;
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	return emailRegex.test(str);
-}
-
-/**
- * Check if a string is a valid IPFS URL
- *
- * Matches both ipfs:// protocol and gateway URLs.
- *
- * @param str - String to validate
- * @returns true if valid IPFS URL
- *
- * @example
- * ```typescript
- * isValidIpfsUrl('ipfs://QmXyz...') // true
- * isValidIpfsUrl('https://example.com') // false
- * ```
- */
-export function isValidIpfsUrl(str: string): boolean {
-	if (!str || typeof str !== "string") return false;
-	return str.startsWith("ipfs://") || str.includes("/ipfs/");
-}
-
-/**
- * Check if a string is a valid Ethereum/LUKSO address
- *
- * Uses viem's isAddress for proper validation.
- *
- * @param str - String to validate
- * @returns true if valid address
- *
- * @example
- * ```typescript
- * isValidEthereumAddress('0x1234567890abcdef1234567890abcdef12345678') // true
- * isValidEthereumAddress('0xinvalid') // false
- * ```
- */
-export function isValidEthereumAddress(str: string): boolean {
-	if (!str || typeof str !== "string") return false;
-	return isAddress(str);
 }
 
 /**
@@ -225,18 +185,21 @@ export function validateRequired<T>(
 }
 
 /**
- * Sanitize a string by removing HTML tags
+ * Strip HTML tags from a string
  *
- * @param str - String to sanitize
- * @returns Sanitized string
+ * Note: This uses a simple regex and is NOT suitable for XSS prevention.
+ * For security-critical sanitization, use a dedicated library like DOMPurify.
+ *
+ * @param str - String to strip tags from
+ * @returns String with HTML tags removed
  *
  * @example
  * ```typescript
- * sanitizeHtml('<script>alert("xss")</script>Hello') // 'Hello'
- * sanitizeHtml('<b>Bold</b> text') // 'Bold text'
+ * stripHtmlTags('<script>alert("xss")</script>Hello') // 'Hello'
+ * stripHtmlTags('<b>Bold</b> text') // 'Bold text'
  * ```
  */
-export function sanitizeHtml(str: string): string {
+export function stripHtmlTags(str: string): string {
 	if (!str || typeof str !== "string") return "";
 	return str.replace(/<[^>]*>/g, "");
 }

@@ -1,12 +1,21 @@
 /**
  * Numbers Utility Tests
  *
- * Tests for numeric validation utility functions.
- * Validates the isNumeric function for various input types and edge cases.
+ * Tests for number formatting, parsing, validation, and manipulation utilities.
  */
 
 import { describe, expect, it } from "vitest";
-import { isNumeric } from "./numbers";
+import {
+	clamp,
+	formatCompactNumber,
+	formatNumber,
+	formatPercentage,
+	isNumeric,
+	isPositiveNumber,
+	parseNumber,
+	randomNumber,
+	round,
+} from "./numbers";
 
 describe("isNumeric", () => {
 	describe("valid numeric strings", () => {
@@ -422,5 +431,246 @@ describe("isNumeric", () => {
 				expect(isNumeric(number)).toBe(true);
 			}
 		});
+	});
+});
+
+describe("formatNumber", () => {
+	it("should format numbers with US locale by default", () => {
+		expect(formatNumber(1234567.89)).toBe("1,234,567.89");
+		expect(formatNumber(1000)).toBe("1,000");
+		expect(formatNumber(0)).toBe("0");
+	});
+
+	it("should format with custom locale", () => {
+		expect(formatNumber(1234567.89, "de-DE")).toBe("1.234.567,89");
+	});
+
+	it("should accept Intl.NumberFormat options", () => {
+		expect(
+			formatNumber(1234.5, "en-US", {
+				style: "currency",
+				currency: "USD",
+			}),
+		).toBe("$1,234.50");
+	});
+
+	it("should handle negative numbers", () => {
+		expect(formatNumber(-1234)).toBe("-1,234");
+	});
+
+	it("should handle small numbers without separators", () => {
+		expect(formatNumber(999)).toBe("999");
+		expect(formatNumber(42)).toBe("42");
+	});
+});
+
+describe("formatPercentage", () => {
+	it("should format decimal as percentage with 2 decimals by default", () => {
+		expect(formatPercentage(0.5)).toBe("50.00%");
+		expect(formatPercentage(1)).toBe("100.00%");
+		expect(formatPercentage(0)).toBe("0.00%");
+	});
+
+	it("should respect custom decimal places", () => {
+		expect(formatPercentage(0.1234, 1)).toBe("12.3%");
+		expect(formatPercentage(0.1234, 0)).toBe("12%");
+		expect(formatPercentage(0.1234, 4)).toBe("12.3400%");
+	});
+
+	it("should handle values over 100%", () => {
+		expect(formatPercentage(1.5)).toBe("150.00%");
+	});
+
+	it("should handle negative values", () => {
+		expect(formatPercentage(-0.25)).toBe("-25.00%");
+	});
+
+	it("should handle very small values", () => {
+		expect(formatPercentage(0.001, 1)).toBe("0.1%");
+	});
+});
+
+describe("formatCompactNumber", () => {
+	it("should return plain string for numbers under 1000", () => {
+		expect(formatCompactNumber(0)).toBe("0");
+		expect(formatCompactNumber(999)).toBe("999");
+		expect(formatCompactNumber(42)).toBe("42");
+	});
+
+	it("should format thousands as K", () => {
+		expect(formatCompactNumber(1234)).toBe("1.2K");
+		expect(formatCompactNumber(1000)).toBe("1.0K");
+		expect(formatCompactNumber(9999)).toBe("10.0K");
+	});
+
+	it("should format millions as M", () => {
+		expect(formatCompactNumber(1234567)).toBe("1.2M");
+		expect(formatCompactNumber(1000000)).toBe("1.0M");
+	});
+
+	it("should format billions as B", () => {
+		expect(formatCompactNumber(1234567890)).toBe("1.2B");
+	});
+
+	it("should format trillions as T", () => {
+		expect(formatCompactNumber(1234567890000)).toBe("1.2T");
+	});
+
+	it("should respect custom decimal places", () => {
+		expect(formatCompactNumber(1234, 2)).toBe("1.23K");
+		expect(formatCompactNumber(1234, 0)).toBe("1K");
+	});
+});
+
+describe("parseNumber", () => {
+	it("should parse valid number strings", () => {
+		expect(parseNumber("123.45")).toBe(123.45);
+		expect(parseNumber("42")).toBe(42);
+		expect(parseNumber("-10")).toBe(-10);
+		expect(parseNumber("0")).toBe(0);
+	});
+
+	it("should return 0 as default fallback for invalid strings", () => {
+		expect(parseNumber("invalid")).toBe(0);
+		expect(parseNumber("")).toBe(0);
+		expect(parseNumber("abc")).toBe(0);
+	});
+
+	it("should return custom fallback for invalid strings", () => {
+		expect(parseNumber("invalid", -1)).toBe(-1);
+		expect(parseNumber("", 999)).toBe(999);
+	});
+
+	it("should parse partial numeric strings (parseFloat behavior)", () => {
+		// parseFloat parses leading numeric portion
+		expect(parseNumber("123abc")).toBe(123);
+		expect(parseNumber("3.14xyz")).toBe(3.14);
+	});
+});
+
+describe("isPositiveNumber", () => {
+	it("should return true for positive numbers", () => {
+		expect(isPositiveNumber(1)).toBe(true);
+		expect(isPositiveNumber(42)).toBe(true);
+		expect(isPositiveNumber(0.001)).toBe(true);
+		expect(isPositiveNumber(Number.MAX_SAFE_INTEGER)).toBe(true);
+	});
+
+	it("should return false for zero", () => {
+		expect(isPositiveNumber(0)).toBe(false);
+	});
+
+	it("should return false for negative numbers", () => {
+		expect(isPositiveNumber(-1)).toBe(false);
+		expect(isPositiveNumber(-0.001)).toBe(false);
+	});
+
+	it("should return false for non-finite numbers", () => {
+		expect(isPositiveNumber(Number.NaN)).toBe(false);
+		expect(isPositiveNumber(Number.POSITIVE_INFINITY)).toBe(false);
+	});
+
+	it("should return false for non-number types", () => {
+		expect(isPositiveNumber("42")).toBe(false);
+		expect(isPositiveNumber(null)).toBe(false);
+		expect(isPositiveNumber(undefined)).toBe(false);
+		expect(isPositiveNumber(true)).toBe(false);
+		expect(isPositiveNumber({})).toBe(false);
+	});
+});
+
+describe("clamp", () => {
+	it("should return value when within range", () => {
+		expect(clamp(5, 0, 10)).toBe(5);
+		expect(clamp(0, 0, 10)).toBe(0);
+		expect(clamp(10, 0, 10)).toBe(10);
+	});
+
+	it("should clamp to min when below range", () => {
+		expect(clamp(-5, 0, 10)).toBe(0);
+		expect(clamp(-100, 0, 10)).toBe(0);
+	});
+
+	it("should clamp to max when above range", () => {
+		expect(clamp(15, 0, 10)).toBe(10);
+		expect(clamp(100, 0, 10)).toBe(10);
+	});
+
+	it("should work with negative ranges", () => {
+		expect(clamp(0, -10, -1)).toBe(-1);
+		expect(clamp(-20, -10, -1)).toBe(-10);
+		expect(clamp(-5, -10, -1)).toBe(-5);
+	});
+
+	it("should work with floating point numbers", () => {
+		expect(clamp(0.5, 0, 1)).toBe(0.5);
+		expect(clamp(1.5, 0, 1)).toBe(1);
+		expect(clamp(-0.5, 0, 1)).toBe(0);
+	});
+});
+
+describe("round", () => {
+	it("should round to 2 decimal places by default", () => {
+		expect(round(1.2345)).toBe(1.23);
+		expect(round(1.235)).toBe(1.24);
+		expect(round(1.2)).toBe(1.2);
+	});
+
+	it("should round to specified decimal places", () => {
+		expect(round(1.2345, 0)).toBe(1);
+		expect(round(1.2345, 1)).toBe(1.2);
+		expect(round(1.2345, 3)).toBe(1.235);
+	});
+
+	it("should handle whole numbers", () => {
+		expect(round(5, 2)).toBe(5);
+		expect(round(5, 0)).toBe(5);
+	});
+
+	it("should handle negative numbers", () => {
+		expect(round(-1.2345, 2)).toBe(-1.23);
+		expect(round(-1.235, 2)).toBe(-1.24);
+	});
+
+	it("should handle zero decimals", () => {
+		expect(round(1.6, 0)).toBe(2);
+		expect(round(1.4, 0)).toBe(1);
+	});
+});
+
+describe("randomNumber", () => {
+	it("should return a number within range (inclusive)", () => {
+		for (let i = 0; i < 100; i++) {
+			const result = randomNumber(1, 10);
+			expect(result).toBeGreaterThanOrEqual(1);
+			expect(result).toBeLessThanOrEqual(10);
+		}
+	});
+
+	it("should return an integer", () => {
+		for (let i = 0; i < 100; i++) {
+			const result = randomNumber(1, 100);
+			expect(Number.isInteger(result)).toBe(true);
+		}
+	});
+
+	it("should handle same min and max", () => {
+		expect(randomNumber(5, 5)).toBe(5);
+	});
+
+	it("should handle negative ranges", () => {
+		for (let i = 0; i < 100; i++) {
+			const result = randomNumber(-10, -1);
+			expect(result).toBeGreaterThanOrEqual(-10);
+			expect(result).toBeLessThanOrEqual(-1);
+		}
+	});
+
+	it("should handle zero in range", () => {
+		for (let i = 0; i < 100; i++) {
+			const result = randomNumber(-5, 5);
+			expect(result).toBeGreaterThanOrEqual(-5);
+			expect(result).toBeLessThanOrEqual(5);
+		}
 	});
 });

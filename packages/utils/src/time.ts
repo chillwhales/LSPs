@@ -205,6 +205,9 @@ export function formatTime(seconds: number): string {
  * Format duration in seconds to human-readable string
  *
  * @param seconds - Duration in seconds
+ * @param options - Formatting options
+ * @param options.includeDays - Whether to break out days (default: false, rolls into hours)
+ * @param options.includeSeconds - Whether to include seconds (default: true)
  * @returns Formatted duration string
  *
  * @example
@@ -212,21 +215,31 @@ export function formatTime(seconds: number): string {
  * formatDuration(3661) // "1 hour, 1 minute, 1 second"
  * formatDuration(90) // "1 minute, 30 seconds"
  * formatDuration(30) // "30 seconds"
+ * formatDuration(90061, { includeDays: true }) // "1 day, 1 hour, 1 minute, 1 second"
+ * formatDuration(3661, { includeSeconds: false }) // "1 hour, 1 minute"
  * ```
  */
-export function formatDuration(seconds: number): string {
-	const hours = Math.floor(seconds / 3600);
-	const minutes = Math.floor((seconds % 3600) / 60);
-	const secs = Math.floor(seconds % 60);
+export function formatDuration(
+	seconds: number,
+	options?: { includeDays?: boolean; includeSeconds?: boolean },
+): string {
+	const { includeDays = false, includeSeconds = true } = options ?? {};
+
+	const days = includeDays ? Math.floor(seconds / 86400) : 0;
+	const remainingAfterDays = includeDays ? seconds % 86400 : seconds;
+	const hours = Math.floor(remainingAfterDays / 3600);
+	const minutes = Math.floor((remainingAfterDays % 3600) / 60);
+	const secs = Math.floor(remainingAfterDays % 60);
 
 	const parts: string[] = [];
+	if (days > 0) parts.push(`${days} ${days === 1 ? "day" : "days"}`);
 	if (hours > 0) parts.push(`${hours} ${hours === 1 ? "hour" : "hours"}`);
 	if (minutes > 0)
 		parts.push(`${minutes} ${minutes === 1 ? "minute" : "minutes"}`);
-	if (secs > 0 || parts.length === 0)
+	if (includeSeconds && (secs > 0 || parts.length === 0))
 		parts.push(`${secs} ${secs === 1 ? "second" : "seconds"}`);
 
-	return parts.join(", ");
+	return parts.join(", ") || "0 seconds";
 }
 
 /**
@@ -299,6 +312,8 @@ export function formatUnlockDate(timestamp: number): string {
  * @param includeSeconds - Whether to include seconds in output (typically when < 24h)
  * @returns Formatted countdown string (e.g., "2 days, 15 hours, 30 minutes")
  *
+ * @deprecated Use `formatDuration(seconds, { includeDays: true, includeSeconds })` instead
+ *
  * @example
  * ```typescript
  * formatCountdown(90061, false) // "1 day, 1 hour, 1 minute"
@@ -310,25 +325,8 @@ export function formatCountdown(
 	remainingSeconds: number,
 	includeSeconds: boolean,
 ): string {
-	const days = Math.floor(remainingSeconds / 86400);
-	const hours = Math.floor((remainingSeconds % 86400) / 3600);
-	const minutes = Math.floor((remainingSeconds % 3600) / 60);
-	const seconds = Math.floor(remainingSeconds % 60);
-
-	const parts: string[] = [];
-
-	if (days > 0) {
-		parts.push(`${days} ${days === 1 ? "day" : "days"}`);
-	}
-	if (hours > 0) {
-		parts.push(`${hours} ${hours === 1 ? "hour" : "hours"}`);
-	}
-	if (minutes > 0) {
-		parts.push(`${minutes} ${minutes === 1 ? "minute" : "minutes"}`);
-	}
-	if (includeSeconds && seconds >= 0) {
-		parts.push(`${seconds} ${seconds === 1 ? "second" : "seconds"}`);
-	}
-
-	return parts.join(", ") || "0 seconds";
+	return formatDuration(remainingSeconds, {
+		includeDays: true,
+		includeSeconds,
+	});
 }

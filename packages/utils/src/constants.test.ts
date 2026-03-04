@@ -4,17 +4,13 @@
 
 import { describe, expect, it } from "vitest";
 import {
-	ASSET_FILE_MAX_SIZE,
 	ASSET_MIME_TYPES,
 	AUDIO_MIME_TYPES,
 	DEAD_ADDRESS,
 	DOCUMENT_MIME_TYPES,
-	IMAGE_FILE_MAX_SIZE,
 	IMAGE_MIME_TYPES,
-	IMAGE_SIZES,
 	IPFS_GATEWAY,
 	MULTICALL3_ADDRESS,
-	UUID_PATTERN,
 	VIDEO_MIME_TYPES,
 } from "./constants";
 
@@ -58,29 +54,6 @@ describe("constants", () => {
 					IMAGE_MIME_TYPES.length +
 					DOCUMENT_MIME_TYPES.length,
 			);
-		});
-	});
-
-	describe("upload limits", () => {
-		it("should export image file max size (5MB)", () => {
-			expect(IMAGE_FILE_MAX_SIZE).toBe(5 * 1024 * 1024);
-		});
-
-		it("should export asset file max size (100MB)", () => {
-			expect(ASSET_FILE_MAX_SIZE).toBe(100 * 1024 * 1024);
-		});
-
-		it("should export image sizes", () => {
-			expect(IMAGE_SIZES).toContain(180);
-			expect(IMAGE_SIZES).toContain(1024);
-		});
-	});
-
-	describe("patterns", () => {
-		it("should export UUID pattern", () => {
-			const regex = new RegExp(`^${UUID_PATTERN}$`);
-			expect(regex.test("550e8400-e29b-41d4-a716-446655440000")).toBe(true);
-			expect(regex.test("not-a-uuid")).toBe(false);
 		});
 	});
 });
