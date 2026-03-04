@@ -4,7 +4,8 @@
  * Pure functions for working with LSP4 digital asset metadata (LSP7/LSP8).
  */
 
-import { findBestImage, type Image, type ImageSize } from "@chillwhales/lsp2";
+import type { Image } from "@chillwhales/lsp2";
+import { findBestImage, type ImageSize } from "@chillwhales/utils";
 import type { LSP4Metadata, NftMetadata } from "./types";
 
 /**

@@ -40,6 +40,9 @@
 		"test": "vitest run",
 		"test:watch": "vitest"
 	},
+	"dependencies": {
+		"@chillwhales/lsp2": "workspace:*"
+	},
 	"peerDependencies": {
 		"viem": "catalog:"
 	},

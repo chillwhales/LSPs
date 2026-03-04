@@ -16,6 +16,7 @@
  */
 
 export * from "./constants";
+export * from "./deployments";
 export * from "./guards";
 export * from "./registry";
 export * from "./schemas";

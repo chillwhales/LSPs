@@ -4,7 +4,7 @@
  * Pure functions for working with LSP3 profile metadata.
  */
 
-import { findBestImage, type ImageSize } from "@chillwhales/lsp2";
+import { findBestImage, type ImageSize } from "@chillwhales/utils";
 import type { LSP3Profile } from "./types";
 
 /**

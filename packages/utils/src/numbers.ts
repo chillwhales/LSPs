@@ -140,28 +140,6 @@ export function isPositiveNumber(value: unknown): value is number {
 }
 
 /**
- * Check if a value is a non-negative number (>= 0)
- *
- * @param value - Value to check
- * @returns true if non-negative number
- *
- * @example
- * ```typescript
- * isNonNegativeNumber(0) // true
- * isNonNegativeNumber(123) // true
- * isNonNegativeNumber(-123) // false
- * ```
- */
-export function isNonNegativeNumber(value: unknown): value is number {
-	return (
-		typeof value === "number" &&
-		value >= 0 &&
-		!Number.isNaN(value) &&
-		Number.isFinite(value)
-	);
-}
-
-/**
  * Clamp a number between min and max values
  *
  * @param num - Number to clamp

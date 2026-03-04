@@ -2,106 +2,174 @@
  * Image Utility Functions
  *
  * Pure functions for working with image arrays and finding optimal images.
- * These are general-purpose image selection utilities that work with any
- * image array containing width, height, and url.
- *
- * Note: `findBestImage` and `findClosestImage` live in @chillwhales/lsp2
- * as they are tied to LSP2 Image types. The functions here provide
- * additional image selection strategies.
+ * Consolidated from @chillwhales/lsp2 image-utils and utils/images.
  */
 
+import type { Image, ImagesMatrix } from "@chillwhales/lsp2";
+
 /**
- * Minimal image type for image utility functions
+ * Image size in pixels
  */
-export interface ImageEntry {
-	/** Image width in pixels */
+export interface ImageSize {
+	/** Width in pixels */
 	width: number;
-	/** Image height in pixels */
+	/** Height in pixels */
 	height: number;
-	/** Image URL */
-	url: string;
 }
 
 /**
- * Find the smallest image by area
+ * Find the best matching image from an array based on target dimensions.
+ * If no dimensions provided, returns the first image.
  *
- * @param images - Array of images
- * @returns Smallest image or null
- *
- * @example
- * ```typescript
- * const images = [
- *   { url: 'a.png', width: 100, height: 100 },
- *   { url: 'b.png', width: 50, height: 50 },
- * ];
- * findSmallestImage(images) // { url: 'b.png', width: 50, height: 50 }
- * ```
+ * @param images - Array of images with url, width, height
+ * @param options - Optional target dimensions
+ * @returns The best matching image or undefined
  */
-export function findSmallestImage<T extends ImageEntry>(images: T[]): T | null {
-	if (images.length === 0) return null;
-	if (images.length === 1) return images[0];
+export function findBestImage(
+	images: Image[] | undefined,
+	options?: Partial<ImageSize>,
+): Image | undefined {
+	if (!images || images.length === 0) {
+		return undefined;
+	}
 
-	return [...images].sort((a, b) => a.width * a.height - b.width * b.height)[0];
+	if (options?.width != null && options?.height != null) {
+		return findClosestImage(images, options.width, options.height) ?? undefined;
+	}
+
+	return images[0];
 }
 
 /**
- * Find the biggest image by area
+ * Finds the image closest to the target resolution
  *
- * @param images - Array of images
- * @returns Biggest image or null
+ * Uses Euclidean distance in resolution space.
  *
- * @example
- * ```typescript
- * const images = [
- *   { url: 'a.png', width: 100, height: 100 },
- *   { url: 'b.png', width: 50, height: 50 },
- * ];
- * findBiggestImage(images) // { url: 'a.png', width: 100, height: 100 }
- * ```
- */
-export function findBiggestImage<T extends ImageEntry>(images: T[]): T | null {
-	if (images.length === 0) return null;
-	if (images.length === 1) return images[0];
-
-	return [...images].sort((a, b) => b.width * b.height - a.width * a.height)[0];
-}
-
-/**
- * Find image closest to target using area difference as distance metric
- *
- * This might be more appropriate for some use cases where aspect ratio is less important.
- *
- * @param images - Array of images
+ * @param images - Array of image objects
  * @param targetWidth - Target width
  * @param targetHeight - Target height
- * @returns Closest image or null
+ * @returns The closest image object or null if no images provided
+ */
+export function findClosestImage(
+	images: Image[],
+	targetWidth: number,
+	targetHeight: number,
+): Image | null {
+	if (!images || images.length === 0) {
+		return null;
+	}
+
+	const calculateDistance = (width: number, height: number): number => {
+		return Math.sqrt((width - targetWidth) ** 2 + (height - targetHeight) ** 2);
+	};
+
+	let closestImage: Image | null = null;
+	let minDistance = Infinity;
+
+	for (const image of images) {
+		const distance = calculateDistance(image.width, image.height);
+
+		if (distance < minDistance) {
+			minDistance = distance;
+			closestImage = image;
+		}
+	}
+
+	return closestImage;
+}
+
+/**
+ * Find the smallest image by area (width × height)
+ *
+ * @param images - Array of images to search
+ * @returns The smallest image by area, or null if array is empty
  *
  * @example
  * ```typescript
- * const images = [
- *   { url: 'a.png', width: 100, height: 100 },
- *   { url: 'b.png', width: 200, height: 200 },
- * ];
- * findClosestImageByArea(images, 150, 150) // { url: 'a.png', ... }
+ * const smallest = findSmallestImage(metadata.images.flat());
+ * // Returns the image with the smallest width × height
  * ```
  */
-export function findClosestImageByArea<T extends ImageEntry>(
-	images: T[],
+export function findSmallestImage(images: Image[]): Image | null {
+	if (images.length === 0) return null;
+	if (images.length === 1) return images[0];
+
+	let smallest = images[0];
+	let smallestArea = smallest.width * smallest.height;
+
+	for (let i = 1; i < images.length; i++) {
+		const area = images[i].width * images[i].height;
+		if (area < smallestArea) {
+			smallest = images[i];
+			smallestArea = area;
+		}
+	}
+
+	return smallest;
+}
+
+/**
+ * Find the biggest image by area (width × height)
+ *
+ * @param images - Array of images to search
+ * @returns The biggest image by area, or null if array is empty
+ *
+ * @example
+ * ```typescript
+ * const biggest = findBiggestImage(metadata.images.flat());
+ * // Returns the image with the largest width × height
+ * ```
+ */
+export function findBiggestImage(images: Image[]): Image | null {
+	if (images.length === 0) return null;
+	if (images.length === 1) return images[0];
+
+	let biggest = images[0];
+	let biggestArea = biggest.width * biggest.height;
+
+	for (let i = 1; i < images.length; i++) {
+		const area = images[i].width * images[i].height;
+		if (area > biggestArea) {
+			biggest = images[i];
+			biggestArea = area;
+		}
+	}
+
+	return biggest;
+}
+
+/**
+ * Find image closest to target using area difference as the distance metric.
+ *
+ * This may be more appropriate than Euclidean distance when aspect ratio
+ * is less important than total pixel count.
+ *
+ * @param images - Array of images to search
+ * @param targetWidth - Target width
+ * @param targetHeight - Target height
+ * @returns The closest image by area, or null if array is empty
+ *
+ * @example
+ * ```typescript
+ * const img = findClosestImageByArea(images, 800, 600);
+ * ```
+ */
+export function findClosestImageByArea(
+	images: Image[],
 	targetWidth: number,
 	targetHeight: number,
-): T | null {
+): Image | null {
 	if (!images || images.length === 0) {
 		return null;
 	}
 
 	const targetArea = targetWidth * targetHeight;
 
-	let closestImage: T | null = null;
+	let closestImage: Image | null = null;
 	let minDistance = Infinity;
 
 	for (const image of images) {
-		const area = image.width * image.height;
-		const distance = Math.abs(area - targetArea);
+		const distance = Math.abs(image.width * image.height - targetArea);
 
 		if (distance < minDistance) {
 			minDistance = distance;
@@ -116,26 +184,24 @@ export function findClosestImageByArea<T extends ImageEntry>(
  * Find the smallest image that is at least as large as the target dimensions.
  * Falls back to the biggest available image if none meet the minimum size.
  *
- * @param images - Array of images
+ * Useful when you need a "good enough" image that won't be upscaled.
+ *
+ * @param images - Array of images to search
  * @param targetWidth - Minimum required width
  * @param targetHeight - Minimum required height
- * @returns Best fitting image or null
+ * @returns The optimal image, or null if array is empty
  *
  * @example
  * ```typescript
- * const images = [
- *   { url: 'a.png', width: 100, height: 100 },
- *   { url: 'b.png', width: 200, height: 200 },
- *   { url: 'c.png', width: 400, height: 400 },
- * ];
- * findOptimalImage(images, 150, 150) // { url: 'b.png', ... }
+ * // Get smallest image that's at least 256×256
+ * const img = findOptimalImage(images, 256, 256);
  * ```
  */
-export function findOptimalImage<T extends ImageEntry>(
-	images: T[],
+export function findOptimalImage(
+	images: Image[],
 	targetWidth: number,
 	targetHeight: number,
-): T | null {
+): Image | null {
 	if (!images || images.length === 0) {
 		return null;
 	}
@@ -152,37 +218,33 @@ export function findOptimalImage<T extends ImageEntry>(
 }
 
 /**
- * Find image closest to target considering aspect ratio
+ * Find image closest to target using a weighted combination of
+ * aspect ratio difference and area difference.
  *
- * Uses weighted combination of aspect ratio difference and area difference.
+ * Weights: 30% aspect ratio match, 70% area match.
  *
- * @param images - Array of images
+ * @param images - Array of images to search
  * @param targetWidth - Target width
  * @param targetHeight - Target height
- * @returns Closest image or null
+ * @returns The closest image by aspect ratio + area, or null if array is empty
  *
  * @example
  * ```typescript
- * const images = [
- *   { url: 'a.png', width: 160, height: 90 },   // 16:9
- *   { url: 'b.png', width: 100, height: 100 },   // 1:1
- * ];
- * findClosestImageByAspectRatio(images, 320, 180)
- * // { url: 'a.png', ... } (matches 16:9 ratio)
+ * const img = findClosestImageByAspectRatio(images, 1920, 1080);
  * ```
  */
-export function findClosestImageByAspectRatio<T extends ImageEntry>(
-	images: T[],
+export function findClosestImageByAspectRatio(
+	images: Image[],
 	targetWidth: number,
 	targetHeight: number,
-): T | null {
+): Image | null {
 	if (!images || images.length === 0) {
 		return null;
 	}
 
 	const targetRatio = targetWidth / targetHeight;
 
-	let closestImage: T | null = null;
+	let closestImage: Image | null = null;
 	let minDistance = Infinity;
 
 	for (const image of images) {
@@ -200,4 +262,32 @@ export function findClosestImageByAspectRatio<T extends ImageEntry>(
 	}
 
 	return closestImage;
+}
+
+/**
+ * Get the first preview image URL from a nested images matrix.
+ *
+ * Takes the first image from the first group in a nested array (e.g., from
+ * LSP4 `images` field which is `Image[][]`).
+ *
+ * @param images - Nested array of images (e.g., `metadata.images`)
+ * @param parseUrl - Function to parse/transform the URL (e.g., IPFS gateway resolution)
+ * @returns Parsed URL string or null if no valid image found
+ *
+ * @example
+ * ```typescript
+ * const url = getPreviewImageUrl(metadata.images, parseIpfsUrl);
+ * if (url) {
+ *   return <Image src={url} alt="Preview" />;
+ * }
+ * ```
+ */
+export function getPreviewImageUrl(
+	images: ImagesMatrix | undefined,
+	parseUrl: (url: string) => string,
+): string | null {
+	if (!images || images.length === 0 || images[0].length === 0) {
+		return null;
+	}
+	return parseUrl(images[0][0].url);
 }

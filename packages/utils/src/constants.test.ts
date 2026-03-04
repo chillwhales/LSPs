@@ -7,17 +7,13 @@ import {
 	ASSET_FILE_MAX_SIZE,
 	ASSET_MIME_TYPES,
 	AUDIO_MIME_TYPES,
-	CHAIN_ID,
 	DEAD_ADDRESS,
 	DOCUMENT_MIME_TYPES,
 	IMAGE_FILE_MAX_SIZE,
 	IMAGE_MIME_TYPES,
 	IMAGE_SIZES,
-	IMPLEMENTATIONS,
 	IPFS_GATEWAY,
-	LSP23_FACTORY_ADDRESS,
 	MULTICALL3_ADDRESS,
-	RPC_URL,
 	UUID_PATTERN,
 	VIDEO_MIME_TYPES,
 } from "./constants";
@@ -27,24 +23,10 @@ describe("constants", () => {
 		it("should export valid addresses", () => {
 			expect(DEAD_ADDRESS).toMatch(/^0x[0-9a-fA-F]{40}$/);
 			expect(MULTICALL3_ADDRESS).toMatch(/^0x[0-9a-fA-F]{40}$/);
-			expect(LSP23_FACTORY_ADDRESS).toMatch(/^0x[0-9a-fA-F]{40}$/);
-		});
-
-		it("should export implementation addresses", () => {
-			expect(IMPLEMENTATIONS.UNIVERSAL_PROFILE).toMatch(/^0x[0-9a-fA-F]{40}$/);
-			expect(IMPLEMENTATIONS.LSP6_KEY_MANAGER).toMatch(/^0x[0-9a-fA-F]{40}$/);
 		});
 	});
 
 	describe("network config", () => {
-		it("should export LUKSO mainnet chain ID", () => {
-			expect(CHAIN_ID).toBe(42);
-		});
-
-		it("should export RPC URL", () => {
-			expect(RPC_URL).toContain("lukso");
-		});
-
 		it("should export IPFS gateway", () => {
 			expect(IPFS_GATEWAY).toContain("ipfs");
 		});

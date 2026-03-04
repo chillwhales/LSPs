@@ -1,8 +1,8 @@
 {
-	"name": "@chillwhales/lsp23",
-	"version": "0.1.1",
+	"name": "@chillwhales/lsp7",
+	"version": "0.1.0",
 	"type": "module",
-	"description": "LSP23 Linked Contracts Factory — deployment encoding utilities for Universal Profile creation on LUKSO",
+	"description": "LSP7 Digital Asset — deployment addresses for LSP7MintableInit implementation contracts",
 	"author": "b00ste",
 	"license": "MIT",
 	"types": "./dist/index.d.mts",
@@ -23,16 +23,13 @@
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/chillwhales/LSPs.git",
-		"directory": "packages/lsp23"
+		"directory": "packages/lsp7"
 	},
 	"keywords": [
 		"chillwhales",
 		"lukso",
 		"lsp",
-		"lsp23",
-		"linked-contracts",
-		"universal-profile",
-		"deployment"
+		"lsp7"
 	],
 	"sideEffects": false,
 	"scripts": {
@@ -42,23 +39,10 @@
 		"test": "vitest run",
 		"test:watch": "vitest"
 	},
-	"dependencies": {
-		"@chillwhales/lsp1": "workspace:*",
-		"@chillwhales/lsp2": "workspace:*",
-		"@chillwhales/lsp6": "workspace:*",
-		"@chillwhales/up": "workspace:*",
-		"@erc725/erc725.js": "catalog:",
-		"@lukso/universalprofile-contracts": "catalog:",
-		"zod": "catalog:"
-	},
-	"peerDependencies": {
-		"viem": "catalog:"
-	},
 	"devDependencies": {
 		"@chillwhales/config": "workspace:*",
 		"typescript": "catalog:",
 		"unbuild": "catalog:",
-		"viem": "catalog:",
 		"vitest": "catalog:"
 	},
 	"packageManager": "pnpm@10.30.2"

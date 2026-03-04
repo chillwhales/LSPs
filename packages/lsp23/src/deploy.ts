@@ -7,6 +7,9 @@
  * @see https://docs.lukso.tech/standards/smart-contracts/lsp23-linked-contracts-factory
  */
 
+import { LSP1_UNIVERSAL_RECEIVER_DELEGATE } from "@chillwhales/lsp1";
+import { LSP6_KEY_MANAGER_INIT } from "@chillwhales/lsp6";
+import { UP_INIT } from "@chillwhales/up";
 import ERC725 from "@erc725/erc725.js";
 import LSP1UniversalReceiverDelegateSchemas from "@erc725/erc725.js/schemas/LSP1UniversalReceiverDelegate.json";
 import LSP6KeyManagerSchemas from "@erc725/erc725.js/schemas/LSP6KeyManager.json";
@@ -21,11 +24,7 @@ import {
 	toHex,
 } from "viem";
 
-import {
-	IMPLEMENTATIONS,
-	LSP23_POST_DEPLOYMENT_MODULE,
-	UNIVERSAL_RECEIVER_ADDRESS,
-} from "./constants";
+import { UP_INIT_POST_DEPLOYMENT_MODULE } from "./deployments";
 import type { DeployParams } from "./types";
 
 /**
@@ -58,17 +57,17 @@ export function generateDeployParams({
 	const universalProfileInitStruct = {
 		salt,
 		fundingAmount: BigInt(0),
-		implementationContract: getAddress(IMPLEMENTATIONS.UNIVERSAL_PROFILE),
+		implementationContract: getAddress(UP_INIT["0.14.0"].address),
 		initializationCalldata: encodeFunctionData({
 			abi: universalProfileInitAbi,
 			functionName: "initialize",
-			args: [getAddress(LSP23_POST_DEPLOYMENT_MODULE)],
+			args: [getAddress(UP_INIT_POST_DEPLOYMENT_MODULE.address)],
 		}),
 	};
 
 	const keyManagerInitStruct = {
 		fundingAmount: BigInt(0),
-		implementationContract: getAddress(IMPLEMENTATIONS.LSP6_KEY_MANAGER),
+		implementationContract: getAddress(LSP6_KEY_MANAGER_INIT["0.14.0"].address),
 		addPrimaryContractAddress: true,
 		initializationCalldata: toFunctionSelector(
 			"function initialize(address target)",
@@ -87,11 +86,11 @@ export function generateDeployParams({
 	const setDataKeysAndValues = erc725.encodeData([
 		{
 			keyName: "LSP1UniversalReceiverDelegate",
-			value: UNIVERSAL_RECEIVER_ADDRESS,
+			value: LSP1_UNIVERSAL_RECEIVER_DELEGATE["0.14.0"].address,
 		}, // Universal Receiver data key and value
 		{
 			keyName: "AddressPermissions:Permissions:<address>",
-			dynamicKeyParts: [UNIVERSAL_RECEIVER_ADDRESS],
+			dynamicKeyParts: [LSP1_UNIVERSAL_RECEIVER_DELEGATE["0.14.0"].address],
 			value: ERC725.encodePermissions({
 				REENTRANCY: true,
 				SUPER_SETDATA: true,
@@ -129,7 +128,10 @@ export function generateDeployParams({
 		// Address Permissions array length = 2, and the controller addresses at each index
 		{
 			keyName: "AddressPermissions[]",
-			value: [UNIVERSAL_RECEIVER_ADDRESS, controllerAddress],
+			value: [
+				LSP1_UNIVERSAL_RECEIVER_DELEGATE["0.14.0"].address,
+				controllerAddress,
+			],
 		},
 	]);
 
