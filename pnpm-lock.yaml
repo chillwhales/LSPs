@@ -215,6 +215,28 @@ importers:
         specifier: 'catalog:'
         version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
 
+  packages/lsp17:
+    dependencies:
+      '@erc725/erc725.js':
+        specifier: 'catalog:'
+        version: 0.28.2(typescript@5.9.3)
+      '@lukso/lsp17contractextension-contracts':
+        specifier: 'catalog:'
+        version: 0.16.7
+    devDependencies:
+      '@chillwhales/config':
+        specifier: workspace:*
+        version: link:../config
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      unbuild:
+        specifier: 'catalog:'
+        version: 3.6.1(typescript@5.9.3)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@types/node@25.3.1)(jiti@2.6.1)
+
   packages/lsp2:
     dependencies:
       zod:
@@ -5512,6 +5534,17 @@ snapshots:
       - utf-8-validate
       - zod
 
+  '@erc725/erc725.js@0.28.2(typescript@5.9.3)':
+    dependencies:
+      cross-fetch: 4.1.0
+      viem: 2.46.3(typescript@5.9.3)
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - typescript
+      - utf-8-validate
+      - zod
+
   '@erc725/smart-contracts@6.0.0(@babel/core@7.29.0)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
     dependencies:
       '@openzeppelin/contracts': 4.9.6
@@ -9913,6 +9946,23 @@ snapshots:
       - zod
 
   viem@2.46.3(bufferutil@4.1.0)(typescript@5.9.3)(utf-8-validate@5.0.10)(zod@4.3.6):
+    dependencies:
+      '@noble/curves': 1.9.1
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
+      abitype: 1.2.3(typescript@5.9.3)(zod@4.3.6)
+      isows: 1.0.7(ws@8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10))
+      ox: 0.12.4(typescript@5.9.3)(zod@4.3.6)
+      ws: 8.18.3(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+    optionalDependencies:
+      typescript: 5.9.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+
+  viem@2.46.3(typescript@5.9.3):
     dependencies:
       '@noble/curves': 1.9.1
       '@noble/hashes': 1.8.0
