@@ -25,6 +25,10 @@
 		"url": "git+https://github.com/chillwhales/LSPs.git",
 		"directory": "packages/erc725"
 	},
+	"homepage": "https://github.com/chillwhales/LSPs/tree/main/packages/erc725",
+	"bugs": {
+		"url": "https://github.com/chillwhales/LSPs/issues"
+	},
 	"keywords": [
 		"chillwhales",
 		"lukso",

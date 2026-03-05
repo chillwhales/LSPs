@@ -2,6 +2,22 @@
 	"name": "@chillwhales/lsps",
 	"private": true,
 	"description": "LUKSO Standards Packages — TypeScript implementations of LSP standards",
+	"license": "MIT",
+	"author": "b00ste",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/chillwhales/LSPs.git"
+	},
+	"bugs": {
+		"url": "https://github.com/chillwhales/LSPs/issues"
+	},
+	"keywords": [
+		"lukso",
+		"lsp",
+		"typescript",
+		"blockchain",
+		"chillwhales"
+	],
 	"scripts": {
 		"build": "pnpm -r build",
 		"changeset": "changeset",
