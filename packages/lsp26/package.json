@@ -25,6 +25,10 @@
 		"url": "git+https://github.com/chillwhales/LSPs.git",
 		"directory": "packages/lsp26"
 	},
+	"homepage": "https://github.com/chillwhales/LSPs/tree/main/packages/lsp26",
+	"bugs": {
+		"url": "https://github.com/chillwhales/LSPs/issues"
+	},
 	"keywords": [
 		"chillwhales",
 		"lukso",
