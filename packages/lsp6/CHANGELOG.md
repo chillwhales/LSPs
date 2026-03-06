@@ -1,5 +1,12 @@
 # @chillwhales/lsp6
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [[`761c288`](https://github.com/chillwhales/LSPs/commit/761c288c83353ad529221f628bf53b4b8bc97202)]:
+  - @chillwhales/utils@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

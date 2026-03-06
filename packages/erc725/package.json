@@ -1,6 +1,6 @@
 {
 	"name": "@chillwhales/erc725",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"description": "ERC725Y data key registry — bidirectional name/hex lookup for LUKSO LSP data keys",
 	"author": "b00ste",
