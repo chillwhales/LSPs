@@ -23,29 +23,25 @@ import { LSP29_METHODS, LSP29_PROVIDERS } from "./constants";
 export const lsp29FileSchema = z.object({
 	/** MIME type of the original file (e.g., "video/mp4") */
 	type: z.string({
-		required_error: "File type is required",
-		invalid_type_error: "File type must be a string",
+		error: "File type must be a string",
 	}),
 	/** Original filename */
 	name: z.string({
-		required_error: "File name is required",
-		invalid_type_error: "File name must be a string",
+		error: "File name must be a string",
 	}),
 	/** Original file size in bytes (before encryption) */
 	size: z.number({
-		required_error: "File size is required",
-		invalid_type_error: "File size must be a number",
+		error: "File size must be a number",
 	}),
 	/** Unix timestamp (ms) of file's last modification */
 	lastModified: z
 		.number({
-			invalid_type_error: "File lastModified must be a number",
+			error: "File lastModified must be a number",
 		})
 		.optional(),
 	/** Hash of the original file content (SHA-256, hex) */
 	hash: z.string({
-		required_error: "File hash is required",
-		invalid_type_error: "File hash must be a string",
+		error: "File hash must be a string",
 	}),
 });
 
@@ -241,7 +237,7 @@ export const lsp29EncryptionSchema = z
 		/** Provider-native condition object (stored as-is for external interop) */
 		condition: z.unknown(),
 		/** Provider-specific encrypted key data */
-		encryptedKey: z.record(z.unknown()),
+		encryptedKey: z.record(z.string(), z.unknown()),
 	})
 	.refine((data) => data.method === data.params.method, {
 		message: "encryption.method must match encryption.params.method",
@@ -264,25 +260,22 @@ export const lsp29EncryptedAssetInnerSchema = z.object({
 	version: z.literal("2.0.0"),
 	/** Unique content identifier chosen by creator */
 	id: z.string({
-		required_error: "ID is required",
-		invalid_type_error: "ID must be a string",
+		error: "ID must be a string",
 	}),
 	/** Human-readable title for the content */
 	title: z.string({
-		required_error: "Title is required",
-		invalid_type_error: "Title must be a string",
+		error: "Title must be a string",
 	}),
 	/** Human-readable description of the content */
 	description: z
 		.string({
-			invalid_type_error: "Description must be a string",
+			error: "Description must be a string",
 		})
 		.optional(),
 	/** Version number starting at 1, incremented for each update */
 	revision: z
 		.number({
-			required_error: "Revision is required",
-			invalid_type_error: "Revision must be a number",
+			error: "Revision must be a number",
 		})
 		.int("Revision must be an integer")
 		.positive("Revision must be positive"),

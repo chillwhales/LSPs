@@ -21,16 +21,16 @@ import { z } from "zod";
 export const lsp3ProfileSchema = z.object({
 	name: z
 		.string({
-			invalid_type_error: "Name must be a string",
+			error: "Name must be a string",
 		})
 		.nullable(),
 	description: z
 		.string({
-			invalid_type_error: "Description must be a string",
+			error: "Description must be a string",
 		})
 		.nullable(),
 	tags: z.array(tagSchema, {
-		invalid_type_error: "Invalid value, not an array",
+		error: "Invalid value, not an array",
 	}),
 	links: z.array(linkSchema),
 	avatar: z.array(assetSchema),

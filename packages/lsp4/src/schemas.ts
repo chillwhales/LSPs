@@ -16,20 +16,20 @@ import { z } from "zod";
  */
 export const attributesSchema = z.discriminatedUnion("type", [
 	z.object({
-		key: z.string({ invalid_type_error: "Invalid value, not a string" }),
-		value: z.string({ invalid_type_error: "Invalid value, not a string" }),
+		key: z.string({ error: "Invalid value, not a string" }),
+		value: z.string({ error: "Invalid value, not a string" }),
 		type: z.literal("string"),
 	}),
 	z.object({
-		key: z.string({ invalid_type_error: "Invalid value, not a string" }),
+		key: z.string({ error: "Invalid value, not a string" }),
 		value: z
-			.string({ required_error: "Value required" })
+			.string({ error: "Value required" })
 			.refine(isNumeric, "Invalid value, not a number"),
 		type: z.literal("number"),
 	}),
 	z.object({
-		key: z.string({ invalid_type_error: "Invalid value, not a string" }),
-		value: z.boolean({ invalid_type_error: "Invalid value, not a boolean" }),
+		key: z.string({ error: "Invalid value, not a string" }),
+		value: z.boolean({ error: "Invalid value, not a boolean" }),
 		type: z.literal("boolean"),
 	}),
 ]);
@@ -41,17 +41,17 @@ export const attributesSchema = z.discriminatedUnion("type", [
 export const lsp4MetadataSchema = z.object({
 	name: z
 		.string({
-			invalid_type_error: "Name must be a string",
+			error: "Name must be a string",
 		})
 		.nullable(),
 	description: z
 		.string({
-			invalid_type_error: "Description must be a string",
+			error: "Description must be a string",
 		})
 		.nullable(),
 	category: z
 		.string({
-			invalid_type_error: "Category must be a string",
+			error: "Category must be a string",
 		})
 		.nullable(),
 	links: z.array(linkSchema),
