@@ -1,6 +1,6 @@
 {
 	"name": "@chillwhales/lsp2",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"type": "module",
 	"description": "LSP2 ERC725Y JSON Schema — shared primitives, VerifiableURI encoding/decoding",
 	"author": "b00ste",

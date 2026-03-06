@@ -1,6 +1,6 @@
 {
 	"name": "@chillwhales/lsp1",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "module",
 	"description": "LSP1 UniversalReceiver — type ID registry with bidirectional lookup, sourced from official @lukso contract packages",
 	"author": "b00ste",

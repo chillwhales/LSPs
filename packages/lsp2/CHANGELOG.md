@@ -1,5 +1,11 @@
 # @chillwhales/lsp2
 
+## 0.2.1
+
+### Patch Changes
+
+- [#38](https://github.com/chillwhales/LSPs/pull/38) [`761c288`](https://github.com/chillwhales/LSPs/commit/761c288c83353ad529221f628bf53b4b8bc97202) Thanks [@b00ste](https://github.com/b00ste)! - Update all dependencies to latest versions. Migrate schemas from zod v3 to zod v4 API.
+
 ## 0.2.0
 
 ### Minor Changes
