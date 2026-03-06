@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-03-05)
 
 **Milestone:** v1.0 MVP — SHIPPED
 **Status:** Archived and tagged
-**Last activity:** 2026-03-05 — Milestone v1.0 complete
+**Last activity:** 2026-03-06 — Completed quick task 1: Update all dependency versions to latest
 
 **Progress:** [██████████] 100%
 
@@ -59,6 +59,12 @@ See: .planning/PROJECT.md (updated 2026-03-05)
 
 ### Known Blockers
 - None
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 1 | Update all dependency versions to latest | 2026-03-06 | a8ad882 | [1-update-all-dependency-versions-to-latest](./quick/1-update-all-dependency-versions-to-latest/) |
 
 ## Session Continuity
 
