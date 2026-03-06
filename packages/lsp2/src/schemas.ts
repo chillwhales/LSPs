@@ -30,7 +30,7 @@ const BYTES_REGEX = /^0x[0-9a-fA-F]*$/;
  */
 export const addressSchema = z
 	.string({
-		invalid_type_error: "Invalid value, not a string",
+		error: "Invalid value, not a string",
 	})
 	.regex(EVM_ADDRESS_REGEX, "Invalid value, not an Address");
 
@@ -39,7 +39,7 @@ export const addressSchema = z
  */
 export const bytes32Schema = z
 	.string({
-		invalid_type_error: "Invalid value, not a string",
+		error: "Invalid value, not a string",
 	})
 	.regex(BYTES32_REGEX, "Invalid value, not 32 bytes hex");
 
@@ -48,7 +48,7 @@ export const bytes32Schema = z
  */
 export const bytesSchema = z
 	.string({
-		invalid_type_error: "Invalid value, not a string",
+		error: "Invalid value, not a string",
 	})
 	.regex(BYTES_REGEX, "Invalid value, not hex");
 
@@ -81,10 +81,10 @@ export const verificationSchema = z.discriminatedUnion("method", [
  */
 export const imageSchema = z.object({
 	url: z
-		.string({ invalid_type_error: "Invalid value, not a string" })
+		.string({ error: "Invalid value, not a string" })
 		.url("Invalid value, not a URL"),
-	width: z.number({ invalid_type_error: "Invalid value, not a number" }),
-	height: z.number({ invalid_type_error: "Invalid value, not a number" }),
+	width: z.number({ error: "Invalid value, not a number" }),
+	height: z.number({ error: "Invalid value, not a number" }),
 	verification: verificationSchema,
 });
 
@@ -93,9 +93,9 @@ export const imageSchema = z.object({
  */
 export const assetSchema = z.object({
 	url: z
-		.string({ invalid_type_error: "Invalid value, not a string" })
+		.string({ error: "Invalid value, not a string" })
 		.url("Invalid value, not a URL"),
-	fileType: z.string({ invalid_type_error: "Invalid value, not a string" }),
+	fileType: z.string({ error: "Invalid value, not a string" }),
 	verification: verificationSchema,
 });
 
@@ -103,9 +103,9 @@ export const assetSchema = z.object({
  * Link schema (LSP3/LSP4)
  */
 export const linkSchema = z.object({
-	title: z.string({ invalid_type_error: "Invalid value, not a string" }),
+	title: z.string({ error: "Invalid value, not a string" }),
 	url: z
-		.string({ invalid_type_error: "Invalid value, not a string" })
+		.string({ error: "Invalid value, not a string" })
 		.url("Invalid value, not a URL"),
 });
 
@@ -113,5 +113,5 @@ export const linkSchema = z.object({
  * Tag schema (LSP3/LSP4)
  */
 export const tagSchema = z.string({
-	invalid_type_error: "Invalid value, not a string",
+	error: "Invalid value, not a string",
 });

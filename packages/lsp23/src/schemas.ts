@@ -21,7 +21,7 @@ const saltSchema = bytes32Schema;
 export const universalProfileInitStructSchema = z.object({
 	salt: saltSchema,
 	fundingAmount: z.bigint({
-		invalid_type_error: "Funding amount must be a bigint",
+		error: "Funding amount must be a bigint",
 	}),
 	implementationContract: addressSchema,
 	initializationCalldata: bytesSchema,
@@ -32,11 +32,11 @@ export const universalProfileInitStructSchema = z.object({
  */
 export const keyManagerInitStructSchema = z.object({
 	fundingAmount: z.bigint({
-		invalid_type_error: "Funding amount must be a bigint",
+		error: "Funding amount must be a bigint",
 	}),
 	implementationContract: addressSchema,
 	addPrimaryContractAddress: z.boolean({
-		invalid_type_error: "addPrimaryContractAddress must be a boolean",
+		error: "addPrimaryContractAddress must be a boolean",
 	}),
 	initializationCalldata: bytesSchema,
 	extraInitializationParams: bytesSchema,
