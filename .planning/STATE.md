@@ -4,8 +4,8 @@ milestone: v1.0
 milestone_name: MVP
 status: shipped
 stopped_at: Milestone v1.0 archived
-last_updated: "2026-03-05"
-last_activity: 2026-03-05 — Milestone v1.0 archived and tagged
+last_updated: "2026-03-06"
+last_activity: 2026-03-06 — Quick task 1: updated all dependency versions to latest
 progress:
   total_phases: 9
   completed_phases: 9
@@ -49,6 +49,7 @@ See: .planning/PROJECT.md (updated 2026-03-05)
 
 ### Key Decisions
 (Full log in PROJECT.md Key Decisions table)
+- 2026-03-06: Updated zod from v3 to v4 (major version); migrated schema error APIs accordingly
 
 ### Research Flags
 - Pre-existing: Vitest v4 configs fail to load on Node v20 (ESM compat issue) — tests only run on Node v24+
@@ -61,10 +62,10 @@ See: .planning/PROJECT.md (updated 2026-03-05)
 
 ## Session Continuity
 
-**Last session:** 2026-03-05
-**Stopped at:** Milestone v1.0 archived
+**Last session:** 2026-03-06
+**Stopped at:** Completed quick-1-01-PLAN.md (dependency updates)
 **Resume with:** `/gsd-new-milestone` to define v1.1 scope
 
 ---
 *State initialized: 2026-02-27*
-*Last updated: 2026-03-05 — v1.0 shipped*
+*Last updated: 2026-03-06 — Quick task 1 complete*
