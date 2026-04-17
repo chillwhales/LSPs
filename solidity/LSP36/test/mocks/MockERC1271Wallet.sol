@@ -32,13 +32,13 @@ contract MockERC1271Wallet is IERC1271 {
         } else if (mode == MockMode.REVERTING) {
             revert("MockERC1271Wallet: forced revert");
         } else {
-            // GAS_BURNER: consume >50k gas then return magic
-            uint256 i;
+            // GAS_BURNER: fixed 800 iterations of keccak256 (~120k gas), exceeds 50k cap
             bytes32 sink;
-            while (gasleft() > 1000) {
+            for (uint256 i; i < 800;) {
                 sink = keccak256(abi.encode(sink, i));
                 unchecked { ++i; }
             }
+            if (sink == bytes32(0)) revert("unreachable");
             return _EIP1271_MAGIC;
         }
     }

@@ -6,6 +6,7 @@ import {SignedAuthorization} from "../src/ILSP36SignatureVerification.sol";
 import {LSP36SignatureVerification} from "../src/LSP36SignatureVerification.sol";
 import {SIGNED_AUTHORIZATION_TYPEHASH} from "../src/LSP36Constants.sol";
 import {MessageHashUtils} from "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
+import {MockERC1271Wallet, MockMode} from "./mocks/MockERC1271Wallet.sol";
 
 bytes32 constant _EIP712_DOMAIN_TYPEHASH =
     keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)");
@@ -247,5 +248,208 @@ contract LSP36SignatureVerificationTest is Test {
             abi.encode(_EIP712_DOMAIN_TYPEHASH, _NAME_HASH, _VERSION_HASH, block.chainid, address(this))
         );
         assertEq(actual, expected);
+    }
+
+    // ── EIP-1271 helpers ──
+
+    function _buildERC1271Auth(
+        uint256 privateKey,
+        address walletAddr
+    ) internal view returns (SignedAuthorization memory auth, bytes memory signature) {
+        bytes32[] memory paramValues = new bytes32[](0);
+
+        auth = SignedAuthorization({
+            signer: walletAddr,
+            target: address(this),
+            selector: bytes4(0xdeadbeef),
+            paramValues: paramValues,
+            paramWildcards: 0,
+            paramDynamicMask: 0,
+            valueIsWildcard: false,
+            value: 0,
+            signatureId: bytes32(uint256(1)),
+            validAfter: 0,
+            validBefore: type(uint48).max,
+            nonce: 0
+        });
+
+        bytes32 structHash = harness.computeStructHash(auth);
+        bytes32 domainSep = harness.computeDomainSeparator(address(this));
+        bytes32 digest = MessageHashUtils.toTypedDataHash(domainSep, structHash);
+
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(privateKey, digest);
+        signature = abi.encodePacked(r, s, v);
+    }
+
+    // 11. EIP-1271 valid
+    function test_verifySignature_ERC1271_valid() public {
+        uint256 pk = 0xA11CE;
+        address signer = vm.addr(pk);
+        MockERC1271Wallet wallet = new MockERC1271Wallet(MockMode.VALID, signer);
+        (SignedAuthorization memory auth, bytes memory sig) = _buildERC1271Auth(pk, address(wallet));
+        assertTrue(harness.verifySignature(auth, sig, address(this)));
+    }
+
+    // 12. EIP-1271 invalid magic
+    function test_verifySignature_ERC1271_invalidMagic() public {
+        uint256 pk = 0xA11CE;
+        address signer = vm.addr(pk);
+        MockERC1271Wallet wallet = new MockERC1271Wallet(MockMode.INVALID, signer);
+        (SignedAuthorization memory auth, bytes memory sig) = _buildERC1271Auth(pk, address(wallet));
+        assertFalse(harness.verifySignature(auth, sig, address(this)));
+    }
+
+    // 13. EIP-1271 reverts → returns false
+    function test_verifySignature_ERC1271_reverts() public {
+        uint256 pk = 0xA11CE;
+        address signer = vm.addr(pk);
+        MockERC1271Wallet wallet = new MockERC1271Wallet(MockMode.REVERTING, signer);
+        (SignedAuthorization memory auth, bytes memory sig) = _buildERC1271Auth(pk, address(wallet));
+        assertFalse(harness.verifySignature(auth, sig, address(this)));
+    }
+
+    // 14. EIP-1271 gas cap — burns >50k gas, returns false
+    function test_verifySignature_ERC1271_gasCap() public {
+        uint256 pk = 0xA11CE;
+        address signer = vm.addr(pk);
+        MockERC1271Wallet wallet = new MockERC1271Wallet(MockMode.GAS_BURNER, signer);
+        (SignedAuthorization memory auth, bytes memory sig) = _buildERC1271Auth(pk, address(wallet));
+        assertFalse(harness.verifySignature(auth, sig, address(this)));
+    }
+
+    // 15. EIP-1271 wrong magic value (0xdeadbeef)
+    function test_verifySignature_ERC1271_wrongMagicValue() public {
+        uint256 pk = 0xA11CE;
+        WrongMagicWallet wallet = new WrongMagicWallet();
+        (SignedAuthorization memory auth, bytes memory sig) = _buildERC1271Auth(pk, address(wallet));
+        assertFalse(harness.verifySignature(auth, sig, address(this)));
+    }
+
+    // ── Dynamic param matching ──
+
+    // 16. Dynamic bytes param
+    function test_verifyParams_dynamicBytes() public view {
+        bytes4 sel = bytes4(0xaabbccdd);
+        bytes memory dynData = hex"deadbeef0102030405";
+
+        bytes32[] memory paramValues = new bytes32[](1);
+        paramValues[0] = keccak256(dynData);
+
+        bytes memory callData = abi.encodeWithSelector(sel, dynData);
+        assertTrue(harness.verifyParams(paramValues, 0, 1, callData));
+
+        bytes memory badData = hex"deadbeef0102030406";
+        bytes memory badCallData = abi.encodeWithSelector(sel, badData);
+        assertFalse(harness.verifyParams(paramValues, 0, 1, badCallData));
+    }
+
+    // 17. Dynamic string param
+    function test_verifyParams_dynamicString() public view {
+        bytes4 sel = bytes4(0xaabbccdd);
+        string memory dynStr = "hello world";
+
+        bytes32[] memory paramValues = new bytes32[](1);
+        paramValues[0] = keccak256(bytes(dynStr));
+
+        bytes memory callData = abi.encodeWithSelector(sel, dynStr);
+        assertTrue(harness.verifyParams(paramValues, 0, 1, callData));
+
+        string memory badStr = "hello worlD";
+        bytes memory badCallData = abi.encodeWithSelector(sel, badStr);
+        assertFalse(harness.verifyParams(paramValues, 0, 1, badCallData));
+    }
+
+    // 18. Fuzz dynamic wildcard
+    function testFuzz_verifyParams_dynamicWildcard(bytes calldata dynamicData) public view {
+        bytes4 sel = bytes4(0xaabbccdd);
+
+        bytes32[] memory paramValues = new bytes32[](1);
+        paramValues[0] = keccak256(dynamicData);
+
+        bytes memory callData = abi.encodeWithSelector(sel, dynamicData);
+        assertTrue(harness.verifyParams(paramValues, 0, 1, callData));
+    }
+
+    // ── Systematic all-failure-modes-return-false ──
+
+    // 19. Every failure mode returns false, never reverts
+    function test_allFailureModesReturnFalse() public {
+        uint256 pk = 0xA11CE;
+        uint256 pk2 = 0xB0B;
+
+        // (a) Bad signature (random bytes)
+        {
+            (SignedAuthorization memory auth,) = _buildAndSign(pk);
+            bytes memory badSig = hex"0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ff";
+            assertFalse(harness.verifySignature(auth, badSig, address(this)));
+        }
+
+        // (b) Wrong signer
+        {
+            (SignedAuthorization memory auth, bytes memory sig) = _buildAndSign(pk);
+            auth.signer = vm.addr(pk2);
+            assertFalse(harness.verifySignature(auth, sig, address(this)));
+        }
+
+        // (c) Expired authorization
+        {
+            vm.warp(1000);
+            assertFalse(harness.verifyTimeBounds(0, 500));
+        }
+
+        // (d) Not-yet-valid authorization
+        {
+            vm.warp(100);
+            assertFalse(harness.verifyTimeBounds(500, type(uint48).max));
+        }
+
+        // (e) Target mismatch
+        {
+            assertFalse(harness.verifyTarget(address(0x1), address(0x2)));
+        }
+
+        // (f) Param mismatch (non-wildcarded param differs)
+        {
+            bytes32[] memory paramValues = new bytes32[](1);
+            paramValues[0] = bytes32(uint256(42));
+            bytes memory callData = abi.encodePacked(bytes4(0xaabbccdd), bytes32(uint256(99)));
+            assertFalse(harness.verifyParams(paramValues, 0, 0, callData));
+        }
+
+        // (g) Value mismatch
+        {
+            assertFalse(harness.verifyValue(false, 100, 200));
+        }
+
+        // (h) Malformed calldata (too short for declared params)
+        {
+            bytes32[] memory paramValues = new bytes32[](2);
+            paramValues[0] = bytes32(uint256(1));
+            paramValues[1] = bytes32(uint256(2));
+            bytes memory shortCallData = abi.encodePacked(bytes4(0xaabbccdd), bytes32(uint256(1)));
+            assertFalse(harness.verifyParams(paramValues, 0, 0, shortCallData));
+        }
+
+        // (i) EIP-1271 contract that reverts → returns false
+        {
+            address signer = vm.addr(pk);
+            MockERC1271Wallet wallet = new MockERC1271Wallet(MockMode.REVERTING, signer);
+            (SignedAuthorization memory auth, bytes memory sig) = _buildERC1271Auth(pk, address(wallet));
+            assertFalse(harness.verifySignature(auth, sig, address(this)));
+        }
+
+        // (j) EIP-1271 contract that returns wrong magic → returns false
+        {
+            address signer = vm.addr(pk);
+            MockERC1271Wallet wallet = new MockERC1271Wallet(MockMode.INVALID, signer);
+            (SignedAuthorization memory auth, bytes memory sig) = _buildERC1271Auth(pk, address(wallet));
+            assertFalse(harness.verifySignature(auth, sig, address(this)));
+        }
+    }
+}
+
+contract WrongMagicWallet {
+    function isValidSignature(bytes32, bytes calldata) external pure returns (bytes4) {
+        return bytes4(0xdeadbeef);
     }
 }
