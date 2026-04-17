@@ -12,3 +12,7 @@ deps-graph.svg
 .planning/
 .mcp.json
 .bg-shell/
+.pi/
+.claude/
+.agents/
+skills-lock.json

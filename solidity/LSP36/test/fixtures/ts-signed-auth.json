@@ -1,0 +1,22 @@
+{
+	"auth": {
+		"signer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+		"target": "0x1111111111111111111111111111111111111111",
+		"selector": "0x12345678",
+		"paramValues": [
+			"0x0665f44a4da125a2f1a50cbd00bde7e6e7cca1cda3e00882eec698c6cb07379f"
+		],
+		"paramWildcards": "0",
+		"paramDynamicMask": "0",
+		"valueIsWildcard": false,
+		"value": "1000000000000000000",
+		"signatureId": "0x3a382cca93d7250cf8829f29b822d27255350e30315dd9dd7bfb4892d5a7d820",
+		"validAfter": "0",
+		"validBefore": "281474976710655",
+		"nonce": "0"
+	},
+	"signature": "0x676fee018c9c363e2c093da6120d15329ec095326e6028340f6351c178e8cae76c2884c4620922cbc4e688d48b27dd7809a58de83112f0f39c9e89526349e3b11b",
+	"digest": "0xe978d17a7fcc7b22810c24493469002790d0d6834e73553e43ed76128f36ab83",
+	"chainId": 31337,
+	"verifyingContract": "0x2222222222222222222222222222222222222222"
+}
