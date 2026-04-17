@@ -23,7 +23,7 @@ function buildDomainAndMessage(params: {
 		types: LSP36_EIP712_TYPES,
 		primaryType: LSP36_PRIMARY_TYPE,
 		message: { ...params.auth },
-	} as const;
+	};
 }
 
 export async function verifyAuthorization(params: {

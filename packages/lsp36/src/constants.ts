@@ -39,4 +39,4 @@ export const LSP36_EIP712_TYPES = {
 		{ name: "validBefore", type: "uint48" },
 		{ name: "nonce", type: "uint256" },
 	],
-} as const;
+};
