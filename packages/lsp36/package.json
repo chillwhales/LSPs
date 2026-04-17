@@ -1,0 +1,62 @@
+{
+	"name": "@chillwhales/lsp36",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "LSP36 Signed Authorizations — schemas, types, constants, and signing utilities for delegated execution on Universal Profiles",
+	"author": "b00ste",
+	"license": "MIT",
+	"types": "./dist/index.d.mts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"files": [
+		"dist",
+		"LICENSE",
+		"README.md"
+	],
+	"engines": {
+		"node": ">=22"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/chillwhales/LSPs.git",
+		"directory": "packages/lsp36"
+	},
+	"homepage": "https://github.com/chillwhales/LSPs/tree/main/packages/lsp36",
+	"bugs": {
+		"url": "https://github.com/chillwhales/LSPs/issues"
+	},
+	"keywords": [
+		"chillwhales",
+		"lukso",
+		"lsp",
+		"lsp36",
+		"signed-authorizations",
+		"eip712"
+	],
+	"sideEffects": false,
+	"scripts": {
+		"build": "unbuild",
+		"build:watch": "unbuild --watch",
+		"clean": "rm -rf dist",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"dependencies": {
+		"zod": "catalog:"
+	},
+	"peerDependencies": {
+		"viem": "catalog:"
+	},
+	"devDependencies": {
+		"@chillwhales/config": "workspace:*",
+		"typescript": "catalog:",
+		"unbuild": "catalog:",
+		"viem": "catalog:",
+		"vitest": "catalog:"
+	},
+	"packageManager": "pnpm@10.30.2"
+}
