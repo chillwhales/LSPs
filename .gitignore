@@ -15,3 +15,4 @@ deps-graph.svg
 .pi/
 .claude/
 .agents/
+skills-lock.json
