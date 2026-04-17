@@ -5,3 +5,10 @@ coverage/
 *.tsbuildinfo
 .DS_Store
 deps-graph.svg
+
+# ── GSD / tooling ──
+.gsd/
+.gsd-id
+.planning/
+.mcp.json
+.bg-shell/
