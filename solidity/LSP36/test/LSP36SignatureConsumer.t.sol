@@ -332,6 +332,27 @@ contract LSP36SignatureConsumerTest is Test {
     }
 
     // =========================================================================
+    // Consumer-level error selector tests (gap coverage)
+    // =========================================================================
+
+    function test_fullVerification_invalidSignature_reverts() public {
+        (SignedAuthorization memory auth,) = _buildAndSignFull(signerKey);
+        bytes memory badSig = new bytes(65);
+
+        vm.expectRevert(abi.encodeWithSelector(LSP36InvalidSignature.selector));
+        consumer.executeFullVerification(address(0xBEEF), 1 ether, auth, badSig);
+    }
+
+    function test_fullVerification_targetMismatch_reverts() public {
+        SignedAuthorization memory auth = _buildAuth(signerKey, MockConsumer.executeFullVerification.selector);
+        auth.target = address(0xDEAD);
+        bytes memory sig = _sign(signerKey, _computeDigest(auth));
+
+        vm.expectRevert(abi.encodeWithSelector(LSP36TargetMismatch.selector, address(0xDEAD), address(consumer)));
+        consumer.executeFullVerification(address(0xBEEF), 1 ether, auth, sig);
+    }
+
+    // =========================================================================
     // Boolean API (R016)
     // =========================================================================
 
