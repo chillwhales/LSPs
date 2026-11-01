@@ -1,8 +1,45 @@
 # LUKSO Standards Packages
 
-TypeScript implementations of [LUKSO Standard Proposals (LSPs)](https://docs.lukso.tech/standards/introduction).
+TypeScript schemas, encoders, data-key utilities and deployment helpers for
+[LUKSO Standard Proposals (LSPs)](https://docs.lukso.tech/standards/introduction),
+published as individual `@chillwhales/*` packages.
+
+## Install and use
+
+Choose the package for the standard you need. For example, validate Universal Profile metadata
+with `@chillwhales/lsp3`:
+
+```bash
+pnpm add @chillwhales/lsp3
+```
+
+```typescript
+import { lsp3ProfileSchema } from "@chillwhales/lsp3";
+
+const profile = lsp3ProfileSchema.parse({
+  name: "Alice",
+  description: "Builder on LUKSO",
+  tags: [],
+  links: [],
+  avatar: [],
+  profileImage: [],
+  backgroundImage: [],
+});
+```
+
+The example validates the profile metadata object after it has been fetched and decoded.
+It does not fetch on-chain data. See the [LSP3 package guide](./packages/lsp3/README.md)
+for its schema and display helpers.
+
+Packages use ESM imports. The LSP3 package declares Node.js 22 or newer; check each package's
+manifest for its runtime requirements. Node.js 22 or newer is also required for repository development.
 
 ## Packages
+
+The catalog distinguishes metadata validation/encoding, key and type-ID registries, and
+deployment-address helpers. Each package directory contains its source and manifest; package
+guides provide usage examples where available. The private root and config workspaces are not
+consumer packages.
 
 | Package                                  | Description                                                                      |
 | ---------------------------------------- | -------------------------------------------------------------------------------- |
@@ -24,12 +61,28 @@ TypeScript implementations of [LUKSO Standard Proposals (LSPs)](https://docs.luk
 
 ## Development
 
+Use the pnpm version pinned in [package.json](./package.json), and preserve the committed lockfile.
+
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm build
+pnpm check
+pnpm typecheck
 pnpm test
 ```
 
+`pnpm check` runs Biome, workspace consistency, unused-code and circular-dependency checks.
+`pnpm test:coverage` runs the tests with coverage.
+
+## Versioning and contributions
+
+Packages are versioned independently with [Changesets](./.changeset/README.md). When changing a
+consumer-facing API, add a changeset with `pnpm changeset` describing the affected packages and
+the appropriate version bump. Consult each package's changelog for its release history.
+
+Bug reports and pull requests are welcome. Include a focused reproduction or example and update
+the relevant package guide when behavior changes.
+
 ## License
 
-MIT
+[MIT](./LICENSE)
